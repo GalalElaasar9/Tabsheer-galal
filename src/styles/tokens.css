@@ -1,0 +1,115 @@
+/* Design tokens. Solid colors only (no gradients), tuned for projectors in light and dark. */
+:root {
+  --bg: #f6f7fb;
+  --board: #f3f4f8;
+  --board-dot: #c9cfdd;
+  --surface: #ffffff;
+  --surface-2: #eef1f8;
+  --text: #141a2e;
+  --muted: #5a6380;
+  --border: #dfe4ef;
+
+  --primary: #5546d6;
+  --primary-soft: #ebe8ff;
+  --safe: #0d8f6a;
+  --safe-soft: #dcf5ec;
+  --danger: #d4344a;
+  --danger-soft: #fde6ea;
+  --warn: #b26b00;
+  --warn-soft: #fff0d4;
+  --info: #1b6fd1;
+  --info-soft: #e1eeff;
+  --pink: #c2357f;
+  --pink-soft: #fde4f1;
+
+  /* Pen colors (annotations) */
+  --pen-ink: #141a2e;
+  --pen-red: #e03131;
+  --pen-blue: #1971c2;
+  --pen-green: #2f9e44;
+  --pen-orange: #e8590c;
+  --pen-purple: #6741d9;
+  --pen-pink: #c2255c;
+  --pen-yellow: #f5c400;
+
+  /* Sticky notes stay pastel with dark text in both themes */
+  --note-ink: #fff3bf;
+  --note-red: #ffe3e3;
+  --note-blue: #d0ebff;
+  --note-green: #d3f9d8;
+  --note-orange: #ffe8cc;
+  --note-purple: #e5dbff;
+  --note-pink: #ffdeeb;
+  --note-yellow: #fff3bf;
+
+  /* Fills inside drawn shapes: pastel on the whiteboard, deep tints on the dark board */
+  --tint-ink: #eef1f8;
+  --tint-red: #ffe3e3;
+  --tint-blue: #d0ebff;
+  --tint-green: #d3f9d8;
+  --tint-orange: #ffe8cc;
+  --tint-purple: #e5dbff;
+  --tint-pink: #ffdeeb;
+  --tint-yellow: #fff3bf;
+
+  --shadow: 0 12px 32px -18px rgba(20, 26, 46, .35);
+  --shadow-ui: 0 6px 24px -8px rgba(20, 26, 46, .28);
+  --font: 'Cairo', system-ui, sans-serif;
+}
+
+:root.dark {
+  --bg: #0f1220;
+  --board: #0d1020;
+  --board-dot: #2a3152;
+  --surface: #171b30;
+  --surface-2: #1f2440;
+  --text: #ecefff;
+  --muted: #a1a9c9;
+  --border: #2c3358;
+
+  --primary: #9a8fff;
+  --primary-soft: #28225a;
+  --safe: #3fd3a2;
+  --safe-soft: #113a30;
+  --danger: #ff6b7f;
+  --danger-soft: #45182a;
+  --warn: #ffbe4d;
+  --warn-soft: #3d2c0d;
+  --info: #6fb0ff;
+  --info-soft: #14284a;
+  --pink: #ff7cc0;
+  --pink-soft: #431c36;
+
+  --pen-ink: #ecefff;
+  --pen-red: #ff6b6b;
+  --pen-blue: #4dabf7;
+  --pen-green: #51cf66;
+  --pen-orange: #ff922b;
+  --pen-purple: #9775fa;
+  --pen-pink: #f783ac;
+  --pen-yellow: #ffd43b;
+
+  --tint-ink: #262b45;
+  --tint-red: #4a1d24;
+  --tint-blue: #14284a;
+  --tint-green: #113a30;
+  --tint-orange: #3d2a12;
+  --tint-purple: #28225a;
+  --tint-pink: #431c36;
+  --tint-yellow: #3d340d;
+
+  --shadow: 0 12px 32px -18px rgba(0, 0, 0, .8);
+  --shadow-ui: 0 8px 28px -8px rgba(0, 0, 0, .7);
+}
+
+html, body, #root { height: 100%; }
+html { font-size: 16px; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }

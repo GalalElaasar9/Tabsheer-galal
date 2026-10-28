@@ -1,0 +1,85 @@
+/* Hand-drawn board scenes: marker strokes trace themselves, words write right to left. */
+:root { --hand: 'Caveat', 'Aref Ruqaa', 'Cairo', sans-serif; }
+
+.frame-body.bare { padding: 0; display: block; }
+.scene { position: absolute; inset: 0; }
+.sk { position: absolute; inset: 0; pointer-events: none; }
+.sk-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.sk-svg path { stroke-linecap: round; stroke-linejoin: round; }
+
+.hand {
+  position: absolute;
+  font-family: var(--hand);
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.hand.sk-center, .sk-in .hand { white-space: normal; }
+.sk-clean { position: absolute; font-family: var(--font); font-weight: 800; line-height: 1.5; }
+.sk-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6px 10px;
+}
+.sk-emoji { position: absolute; transform: translate(-50%, -50%); line-height: 1; }
+.sk-num { transform: translate(-50%, -52%); font-size: 30px; line-height: 1; }
+.sk-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 18px;
+  color: #222;
+  white-space: normal;
+  box-shadow: 0 12px 22px -14px rgba(0, 0, 0, .6);
+}
+.sk-note b { color: #c92a2a; }
+.sk-in { position: absolute; overflow: hidden; font-family: var(--hand); font-weight: 700; color: var(--pen-ink); line-height: 1.35; }
+.sk-url {
+  position: absolute;
+  transform: translateY(-50%);
+  direction: ltr;
+  font-family: 'Caveat', var(--font);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.sk-place { position: absolute; pointer-events: auto; }
+.sk-row { left: 0; right: 0; display: flex; justify-content: center; transform: translateY(-50%); direction: ltr; font-family: 'Caveat', var(--hand); }
+.sk-in .row { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1.5px dashed var(--border); }
+.sk-input { display: inline-block; width: 7em; height: 1.2em; vertical-align: middle; border: 2px solid currentColor; border-radius: 4px; }
+.sk-btn { display: inline-block; padding: 0 .5em; border: 2px solid currentColor; border-radius: 8px; }
+.sk-pop { display: inline-block; margin-top: 6px; padding: 2px 10px; border-radius: 8px; background: var(--danger-soft); color: var(--pen-red); }
+.sk-code { direction: ltr; text-align: left; font-family: 'Caveat', var(--hand); font-size: 26px; line-height: 1.35; }
+.sk-code .tag { color: var(--pen-blue); }
+.sk-code .ph { color: var(--pen-pink); }
+
+/* Revealing: draw strokes, write words */
+.sk.frag:not(.shown) { transform: none; }
+.sk.frag.shown path.dash { opacity: 0; animation: sk-fade .6s ease forwards; }
+.sk.frag.shown path:not(.fill):not(.dash) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sk-draw .8s ease-out forwards;
+}
+.sk.frag.shown path.fill { opacity: 0; animation: sk-fade .5s ease forwards; }
+.sk.frag.shown .hand,
+.sk.frag.shown .sk-clean,
+.sk.frag.shown .sk-in,
+.sk.frag.shown .sk-url { animation: sk-write .75s ease-out both; animation-delay: calc(var(--d, 0s) + .2s); }
+.sk.frag.shown .sk-emoji { animation: sk-pop .45s cubic-bezier(.3, 1.6, .5, 1) both; animation-delay: calc(var(--d, 0s) + .15s); }
+.sk.frag.shown .sk-note { animation: sk-stick .45s cubic-bezier(.3, 1.5, .5, 1) both; animation-delay: var(--d, 0s); }
+.sk.frag.shown .sk-place { animation: fadeUp .4s ease both; animation-delay: var(--d, 0s); }
+@keyframes sk-draw { to { stroke-dashoffset: 0; } }
+@keyframes sk-fade { to { opacity: 1; } }
+@keyframes sk-write { from { clip-path: inset(-20% -10% -20% 100%); } to { clip-path: inset(-20% -10% -20% -10%); } }
+@keyframes sk-pop { from { transform: translate(-50%, -50%) scale(0); } to { transform: translate(-50%, -50%) scale(1); } }
+@keyframes sk-stick { from { opacity: 0; scale: 1.15; } to { opacity: 1; scale: 1; } }
+
+/* Interactive frames get the same handwriting for titles */
+.frame .title { font-family: var(--hand); font-weight: 700; font-size: 2.9rem; line-height: 1.3; }
+.frame .eyebrow { font-family: var(--font); }

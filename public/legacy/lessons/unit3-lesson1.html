@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تطور الويب · The Evolution of the Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="../assets/deck.css">
+  <link rel="stylesheet" href="../assets/lesson-kit.css">
+  <link rel="stylesheet" href="unit3-lesson1.css">
+</head>
+<body>
+<div class="deck">
+  <div class="progress"><i></i></div>
+
+  <main class="stage">
+
+<!-- ============================ المقدمة ============================ -->
+
+    <section class="slide" data-section="المقدمة" data-title="الغلاف">
+      <div class="slide-inner text-center">
+        <span class="eyebrow">الصف الثاني الثانوي · بكالوريا</span>
+        <p class="mt-8 text-xl font-extrabold muted">Unit 3: <span class="hl">The Web</span> · Lesson 1</p>
+        <h1 class="title-xl mt-2">تطور الويب</h1>
+        <p class="text-2xl font-black muted mt-1 ltr">The Evolution of the Web</p>
+        <div class="cover-icons mt-10">
+          <div class="cover-ico">📄<span>HTML</span></div>
+          <div class="cover-ico">🗄️<span>Database</span></div>
+          <div class="cover-ico">⚙️<span>Backend</span></div>
+          <div class="cover-ico">🖱️<span>JavaScript</span></div>
+          <div class="cover-ico">🔌<span>API</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="أهداف الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 أهداف التعلم</span>
+        <h2 class="title">في آخر الدرس هتقدر تشرح:</h2>
+        <div class="grid md:grid-cols-2 gap-x-6 gap-y-2 mt-4 text-lg font-bold">
+          <p class="frag"><span class="num">1</span> الـ Web إيه، وظهر ليه؟</p>
+          <p class="frag"><span class="num">2</span> المتصفح بيطلب الصفحة ويعرضها إزاي؟</p>
+          <p class="frag"><span class="num">3</span> يعني إيه <span class="en">Static Web Page</span>؟</p>
+          <p class="frag"><span class="num">4</span> ليه محتاجين <span class="en">Database</span>؟</p>
+          <p class="frag"><span class="num">5</span> دور الـ <span class="en">Backend</span> في الطلبات والبيانات.</p>
+          <p class="frag"><span class="num">6</span> قالب HTML واحد يعرض بيانات مختلفة إزاي؟</p>
+          <p class="frag"><span class="num">7</span> دور <span class="en">JavaScript</span> في التفاعل.</p>
+          <p class="frag"><span class="num">8</span> نجيب بيانات من غير ما نحمّل الصفحة كلها.</p>
+          <p class="frag"><span class="num">9</span> يعني إيه <span class="en">API</span> (فكرة مبدئية).</p>
+          <p class="frag"><span class="num">10</span> الفرق بين <span class="en">Web Page</span> و<span class="en">Web App</span>.</p>
+        </div>
+        <div class="def mt-5 frag" style="border-right-color: var(--pink)">
+          <span class="def-label" style="color: var(--pink)">❓ السؤال الرئيسي</span>
+          إزاي الويب اتطوّر من <b>صفحة HTML ثابتة</b> لـ <b>تطبيق</b> بيعرض لكل مستخدم بياناته ويتفاعل معاه؟
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="خريطة الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🗺️ خريطة الرحلة</span>
+        <h2 class="title">كل محطة بتحل مشكلة المحطة اللي قبلها</h2>
+        <ol class="roadmap mt-6">
+          <li><span class="num">1</span><b>بداية الويب</b></li>
+          <li><span class="num">2</span><b>الصفحة الثابتة بتشتغل إزاي؟</b></li>
+          <li><span class="num">3</span><b>مشكلة المحتوى المتغير</b></li>
+          <li><span class="num">4</span><b>قواعد البيانات</b></li>
+          <li><span class="num">5</span><b>الـ Backend والصفحات الديناميكية</b></li>
+          <li><span class="num">6</span><b>JavaScript والتفاعل</b></li>
+          <li><span class="num">7</span><b>بيانات من غير تحميل الصفحة كلها</b></li>
+          <li><span class="num">8</span><b>تمهيد للـ API</b></li>
+          <li><span class="num">9</span><b>Web Page ولا Web App؟</b></li>
+          <li><span class="num">10</span><b>الخلاصة والتقييم</b></li>
+        </ol>
+      </div>
+    </section>
+
+<!-- ===================== ١) بداية الويب ===================== -->
+
+    <section class="slide" data-section="١ · بداية الويب" data-title="المشكلة سنة 1989">
+      <div class="slide-inner">
+        <span class="eyebrow">📜 سنة 1989 · CERN</span><span class="goal">🎯 تعرف الويب ظهر ليه</span>
+        <h2 class="title">المشكلة: معلومات كتير… ومفيش طريقة سهلة توصلها</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag">
+            <div class="big-emoji">🏢</div>
+            <p class="h3 mt-2">المكان: معمل CERN في سويسرا</p>
+            <p class="text-lg">آلاف الباحثين من دول مختلفة، كل واحد عنده مستندات على <b>جهاز مختلف</b> وبنظام مختلف.</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <div class="big-emoji">🧩</div>
+            <p class="h3 mt-2 hl-danger">النتيجة</p>
+            <p class="text-lg">علشان توصل لمعلومة لازم تعرف هي على أنهي جهاز، وتستخدم برنامج مخصوص. <b>المعلومات موجودة بس متفرقة.</b></p>
+          </div>
+        </div>
+        <div class="callout c-primary mt-5 frag">
+          <span class="ico">👨‍🔬</span>
+          <div class="text-lg"><b>Tim Berners-Lee</b>، عالم بريطاني بيشتغل في CERN، قدّم سنة 1989 اقتراح: نظام يربط المستندات ببعض عن طريق <b>روابط</b>، مهما كان الجهاز اللي عليه المستند.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · بداية الويب" data-title="الفكرة: مستندات مربوطة بروابط">
+      <div class="slide-inner">
+        <span class="eyebrow">💡 الفكرة</span>
+        <h2 class="title">الويب = مستندات مربوطة ببعض بروابط</h2>
+        <div class="def mt-4">
+          <span class="def-label">World Wide Web</span>
+          نظام لنشر المستندات والوصول ليها عبر الإنترنت، والمستندات فيه مربوطة ببعض بـ <b>روابط (Hyperlinks)</b>.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag">
+            <p class="h3">🔗 الربط</p>
+            <p class="text-lg">تضغط على رابط في مستند ← يفتح مستند تاني، حتى لو على جهاز في بلد تانية.</p>
+          </div>
+          <div class="card frag">
+            <p class="h3">📤 تبادل المعلومات</p>
+            <p class="text-lg">أي حد ينشر مستند مرة واحدة ← أي حد عنده متصفح يقدر يوصله.</p>
+          </div>
+        </div>
+        <div class="callout c-warn mt-4 frag">
+          <span class="ico">⚠️</span>
+          <div class="text-lg"><b>الويب مش هو الإنترنت.</b> الإنترنت هو الشبكة اللي بتوصّل الأجهزة (موجودة قبل الويب). الويب خدمة شغالة <b>فوق</b> الإنترنت، زي ما الإيميل خدمة تانية فوقها.</div>
+        </div>
+        <p class="mt-4 text-lg font-bold muted frag">📅 سنة 1990 اشتغل أول Web Server وأول متصفح، وسنة 1991 الويب بقى متاح للناس برّه CERN.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · بداية الويب" data-title="المكونات الخمسة">
+      <div class="slide-inner">
+        <span class="eyebrow">🧱 المكونات</span>
+        <h2 class="title">علشان صفحة تتطلب وتتعرض، محتاجين ٥ حاجات</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>المكوّن</th><th>دوره</th><th>سؤال بيجاوب عليه</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">🖥️ Web Browser</td><td>برنامج عند المستخدم <b>بيطلب</b> الصفحة و<b>يعرضها</b></td><td>مين بيطلب ويعرض؟</td></tr>
+            <tr class="frag"><td class="rowhead">🗄️ Web Server</td><td>جهاز/برنامج <b>بيخزّن</b> الصفحات و<b>يبعتها</b> لما تتطلب</td><td>مين عنده الصفحة؟</td></tr>
+            <tr class="frag"><td class="rowhead">📍 URL</td><td><b>عنوان</b> فريد لكل مورد (صفحة، صورة…)</td><td>الصفحة فين بالظبط؟</td></tr>
+            <tr class="frag"><td class="rowhead">📨 HTTP</td><td><b>بروتوكول</b>: قواعد الطلب والرد بين المتصفح والسيرفر</td><td>نتكلم مع بعض إزاي؟</td></tr>
+            <tr class="frag"><td class="rowhead">📄 HTML</td><td><b>لغة</b> بتوصف محتوى الصفحة وبنيتها (عنوان، فقرة، رابط…)</td><td>الصفحة نفسها مكتوبة إزاي؟</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · بداية الويب" data-title="العلاقة بين المكونات">
+      <div class="slide-inner">
+        <span class="eyebrow">🔗 إزاي بيشتغلوا مع بعض</span>
+        <h2 class="title">جملة واحدة تربط الخمسة</h2>
+        <div class="card mt-5">
+          <div class="flow">
+            <div class="actor"><div class="avatar">🖥️</div>Web Browser</div>
+            <div class="grid gap-3">
+              <div class="link"><span class="msg">طلب HTTP لـ URL ←</span></div>
+              <div class="link"><span class="msg res">→ ملف HTML في رد HTTP</span></div>
+            </div>
+            <div class="actor"><div class="avatar">🗄️</div>Web Server</div>
+          </div>
+        </div>
+        <div class="def mt-5 frag">
+          الـ <b>Browser</b> بيستخدم <b>HTTP</b> علشان يطلب المورد اللي عنوانه <b>URL</b> من الـ <b>Web Server</b>، والسيرفر يرد بملف <b>HTML</b> يعرضه المتصفح.
+        </div>
+        <div class="card mt-4 frag">
+          <p class="h3">📍 تشريح URL</p>
+          <p class="mono text-xl mt-2 text-center"><span class="hl-info">https://</span><span class="hl-warn">www.univ.example</span><span class="hl-pink">/about.html</span></p>
+          <div class="grid grid-cols-3 gap-2 mt-2 text-center font-bold" dir="ltr">
+            <span class="pill pill-info justify-center">البروتوكول</span>
+            <span class="pill pill-warn justify-center">اسم السيرفر</span>
+            <span class="pill pill-primary justify-center">المورد المطلوب</span>
+          </div>
+          <p class="muted text-sm mt-2 text-center">(<span class="en">https</span> = النسخة المؤمّنة من HTTP)</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · بداية الويب" data-title="✋ تأكد من فهمك (١)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">قبل ما نكمل…</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-1"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٢) الصفحة الثابتة ===================== -->
+
+    <section class="slide" data-section="٢ · الصفحة الثابتة" data-title="مثال: صفحة عن الجامعة">
+      <div class="slide-inner">
+        <span class="eyebrow">📄 مثال</span><span class="goal">🎯 تتبّع رحلة الطلب والرد</span>
+        <h2 class="title">صفحة "عن الجامعة"</h2>
+        <p class="lead">ملف HTML واحد محفوظ على السيرفر، محتواه واحد لكل الزوار.</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-4 items-start">
+          <div class="frag">
+            <p class="font-extrabold mb-1">📂 الملف على السيرفر: <span class="en">about.html</span></p>
+<div class="code"><span class="tag">&lt;h1&gt;</span>جامعة المستقبل<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;p&gt;</span>تأسست سنة 2005 وفيها 6 كليات<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;a href="contact.html"&gt;</span>تواصل معنا<span class="tag">&lt;/a&gt;</span></div>
+          </div>
+          <div class="browser frag">
+            <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><div class="addr">www.univ.example/about.html</div></div>
+            <div class="browser-body mini-page">
+              <h4>جامعة المستقبل</h4>
+              <p>تأسست سنة 2005 وفيها 6 كليات.</p>
+              <p class="hl-info underline">تواصل معنا</p>
+            </div>
+          </div>
+        </div>
+        <p class="mt-3 text-lg font-bold frag">السؤال: إيه اللي حصل بين ما كتبت العنوان… وما الصفحة ظهرت؟ 👇</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · الصفحة الثابتة" data-title="دورة الطلب والاستجابة">
+      <div class="slide-inner">
+        <span class="eyebrow">🔄 Request / Response Lifecycle</span>
+        <h2 class="title">رحلة الصفحة خطوة بخطوة</h2>
+        <div class="card mt-3 stepper" data-steps="5">
+          <div class="flow">
+            <div>
+              <div class="actor" data-states="0:off 1:on 3:off 5:on"><div class="avatar">🖥️</div>Browser</div>
+              <div class="actor-note" data-only="1">⌨️ كتبت URL أو ضغطت رابط</div>
+              <div class="actor-note" data-only="5">🧠 حلّل HTML وعرضه</div>
+            </div>
+            <div class="link">
+              <span class="msg" data-only="2">طلب HTTP: <span class="en">/about.html</span> ←</span>
+              <span class="msg res" data-only="4">→ رد HTTP: ملف HTML</span>
+            </div>
+            <div>
+              <div class="actor" data-states="0:off 3:on 5:off"><div class="avatar">🗄️</div>Web Server</div>
+              <div class="actor-note" data-only="3">📂 لقى <span class="en">about.html</span></div>
+            </div>
+          </div>
+          <div class="browser mt-3">
+            <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div>
+              <div class="addr"><span data-at="1">www.univ.example/about.html</span></div></div>
+            <div class="browser-body mini-page">
+              <div class="loading" data-only="0">صفحة فاضية</div>
+              <div class="loading" data-only="1,2,3,4">⏳ مستني الرد…</div>
+              <div data-only="5"><h4>جامعة المستقبل</h4><p>تأسست سنة 2005 وفيها 6 كليات.</p><p class="hl-info underline">تواصل معنا</p></div>
+            </div>
+          </div>
+          <div class="caption mt-3">
+            <span data-only="0">اضغط التالي ونمشي الرحلة 👇</span>
+            <span data-only="1"><b>١.</b> المستخدم يكتب العنوان أو يضغط على رابط.</span>
+            <span data-only="2"><b>٢.</b> المتصفح يبعت <b>طلب HTTP</b> للسيرفر صاحب العنوان.</span>
+            <span data-only="3"><b>٣.</b> السيرفر يستقبل الطلب ويحدد <b>المورد المطلوب</b> من المسار.</span>
+            <span data-only="4"><b>٤.</b> السيرفر يبعت <b>ملف HTML</b> في الرد.</span>
+            <span data-only="5"><b>٥.</b> المتصفح <b>يحلّل</b> HTML ويبني منه تمثيل للمستند، وبعدين <b>يعرضه</b>.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · الصفحة الثابتة" data-title="دور السيرفر ودور المتصفح">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ مين بيعمل إيه؟</span>
+        <h2 class="title">السيرفر <span class="hl">بيبعت</span>… والمتصفح <span class="hl">بيفهم ويعرض</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag" style="border-top: .3rem solid var(--warn)">
+            <p class="h3">🗄️ Web Server</p>
+            <ul class="list mt-2 text-lg">
+              <li>يستقبل الطلب.</li>
+              <li>يحدد المورد المطلوب.</li>
+              <li>يبعته كما هو في الرد.</li>
+            </ul>
+            <p class="muted mt-2">ميهموش الصفحة شكلها إيه على الشاشة.</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--info)">
+            <p class="h3">🖥️ Web Browser</p>
+            <ul class="list mt-2 text-lg">
+              <li>يقرا HTML ويحلّله.</li>
+              <li>يبني منه تمثيل داخلي للمستند.</li>
+              <li>يرسم المحتوى على الشاشة.</li>
+            </ul>
+            <p class="muted mt-2">لو الصفحة محتاجة صور أو ملفات تانية، يبعت لها طلبات إضافية.</p>
+          </div>
+        </div>
+        <div class="callout c-info mt-5 frag">
+          <span class="ico">💡</span>
+          <div class="text-lg">السيرفر بيبعت <b>نص HTML</b>، مش "صورة للصفحة". المتصفح هو اللي بيحوّل النص ده لصفحة تقدر تشوفها.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · الصفحة الثابتة" data-title="يعني إيه Static Web Page؟">
+      <div class="slide-inner">
+        <span class="eyebrow">📌 مصطلح</span>
+        <h2 class="title"><span class="en">Static Web Page</span> · صفحة ثابتة</h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          صفحة محتواها <b>متجهز مسبقًا</b> في ملف، والسيرفر بيبعت <b>نفس الملف</b> لكل اللي يطلبه، من غير ما يولّد المحتوى من بيانات المستخدم أو من قاعدة بيانات وقت الطلب.
+        </div>
+        <div class="callout c-warn mt-5 frag">
+          <span class="ico">⚠️</span>
+          <div class="text-lg">"ثابتة" <b>مش معناها</b> "مفيهاش أي تفاعل". ممكن صفحة ثابتة يكون فيها زرار يفتح قائمة أو صورة بتتحرك. الكلمة بتوصف <b>طريقة تجهيز المحتوى على السيرفر</b>.</div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          <div class="card frag text-center"><div class="big-emoji">ℹ️</div><p class="font-bold mt-1">صفحة "عن الجامعة"</p></div>
+          <div class="card frag text-center"><div class="big-emoji">📞</div><p class="font-bold mt-1">صفحة "اتصل بنا"</p></div>
+          <div class="card frag text-center"><div class="big-emoji">📰</div><p class="font-bold mt-1">مقال منشور</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · الصفحة الثابتة" data-title="✋ تأكد من فهمك (٢)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">رتّب رحلة الصفحة الثابتة</h2>
+        <p class="lead">اضغط على الخطوات بالترتيب الصح.</p>
+        <div class="interactive mt-3" data-order="static"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٣) مشكلة المحتوى المتغير ===================== -->
+
+    <section class="slide" data-section="٣ · المحتوى المتغير" data-title="موقع نتائج الجامعة">
+      <div class="slide-inner">
+        <span class="eyebrow">🎓 موقف حقيقي</span><span class="goal">🎯 تشوف حدود الصفحات الثابتة</span>
+        <h2 class="title">الجامعة عايزة تعرض نتيجة كل طالب</h2>
+        <p class="lead">عندها <b>20,000</b> طالب. كل طالب لازم يشوف نتيجته هو.</p>
+        <div class="def mt-5 frag" style="border-right-color: var(--pink)">
+          <span class="def-label" style="color: var(--pink)">❓ فكّر</span>
+          باللي عرفناه لحد دلوقتي (ملفات HTML ثابتة)… هنعمل ده إزاي؟
+        </div>
+        <div class="card mt-4 frag">
+          <p class="h3">الحل الأول اللي ييجي في دماغنا: ملف لكل طالب</p>
+          <div class="file-pile mt-3">
+            <span>result-2401.html</span><span>result-2402.html</span><span>result-2403.html</span><span>result-2404.html</span>
+            <span>result-2405.html</span><span>result-2406.html</span><span>result-2407.html</span><span>result-2408.html</span>
+            <span>…</span><span>result-22400.html</span>
+          </div>
+          <p class="text-lg font-bold mt-3">ممكن؟ <span class="hl-safe">أيوه، ممكن.</span> عملي؟ 🤔</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٣ · المحتوى المتغير" data-title="ليه الحل ده صعب؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🧯 المشكلة</span>
+        <h2 class="title">20,000 ملف = 20,000 مشكلة</h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-4">
+          <div class="callout c-danger frag"><span class="ico">✏️</span><div class="text-lg"><b>درجة اتعدلت؟</b> تدوّر على ملف الطالب وتعدّله بإيدك.</div></div>
+          <div class="callout c-danger frag"><span class="ico">🎨</span><div class="text-lg"><b>عايز تغيّر شكل الصفحة؟</b> تعدّل 20,000 ملف.</div></div>
+          <div class="callout c-danger frag"><span class="ico">🔁</span><div class="text-lg"><b>نفس المعلومة متكررة</b> في أماكن كتير، فسهل يحصل تضارب أو غلط.</div></div>
+          <div class="callout c-danger frag"><span class="ico">🔓</span><div class="text-lg"><b>الخصوصية:</b> أي حد يغيّر الرقم في العنوان ممكن يفتح نتيجة غيره.</div></div>
+        </div>
+        <div class="def mt-5 frag" style="border-right-color: var(--safe)">
+          <span class="def-label" style="color: var(--safe)">💡 الفكرة اللي هتحل المشكلة</span>
+          نفصل <b>البيانات</b> (أسماء ودرجات) عن <b>تصميم الصفحة</b>: البيانات في مكان منظّم، والتصميم في قالب واحد.
+        </div>
+        <p class="mt-3 text-lg font-bold muted frag">طيب البيانات دي هنحطها فين؟ ← المحطة الجاية 👇</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٣ · المحتوى المتغير" data-title="✋ تأكد من فهمك (٣)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">فكّر فيها</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-3"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٤) قواعد البيانات ===================== -->
+
+    <section class="slide" data-section="٤ · قواعد البيانات" data-title="يعني إيه قاعدة بيانات؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🗃️ مصطلح</span><span class="goal">🎯 تعرف قاعدة البيانات بتحل إيه</span>
+        <h2 class="title">قاعدة البيانات <span class="en">Database</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          مجموعة بيانات <b>منظّمة</b> ومتخزّنة بطريقة تخلّي <b>حفظها</b> و<b>استرجاعها</b> و<b>تحديثها</b> سهل وسريع.
+        </div>
+        <p class="text-lg font-extrabold mt-4 frag">بيانات الطلاب في جدول منظّم:</p>
+        <table class="tbl mt-2 text-lg frag">
+          <thead><tr><th>رقم الطالب</th><th>الاسم</th><th>الرياضيات</th><th>الفيزياء</th><th>البرمجة</th></tr></thead>
+          <tbody>
+            <tr><td>2401</td><td>أحمد سامي</td><td>88</td><td>91</td><td>95</td></tr>
+            <tr><td>2402</td><td>مريم خالد</td><td>97</td><td>85</td><td>99</td></tr>
+            <tr><td>2403</td><td>يوسف عادل</td><td>74</td><td>80</td><td>86</td></tr>
+          </tbody>
+        </table>
+        <p class="muted mt-2 frag">كل صف = طالب، وكل عمود = نوع معلومة. وفي الحقيقة فيه 20,000 صف.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · قواعد البيانات" data-title="ملفات HTML ولا قاعدة بيانات؟">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ مقارنة</span>
+        <h2 class="title">نفس المهمة… بطريقتين</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>المهمة</th><th>📄 ملف HTML لكل طالب</th><th>🗃️ قاعدة بيانات</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">💾 حفظ طالب جديد</td><td>تكتب ملف جديد كامل بالتصميم</td><td>تضيف <b>صف</b> واحد</td></tr>
+            <tr class="frag"><td class="rowhead">🔍 استرجاع نتيجة</td><td>تفتح الملف وتدوّر جوه الكلام</td><td>تطلب الصف برقم الطالب</td></tr>
+            <tr class="frag"><td class="rowhead">✏️ تحديث درجة</td><td>تعدّل الملف بإيدك</td><td>تعدّل <b>خانة</b> واحدة</td></tr>
+            <tr class="frag"><td class="rowhead">📊 متوسط الرياضيات</td><td>تفتح 20,000 ملف 😩</td><td>البيانات مرتبة في عمود واحد</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-info mt-4 frag">
+          <span class="ico">🤔</span>
+          <div class="text-lg">بس قاعدة البيانات <b>بتخزّن بيانات بس</b>، مش بتعمل صفحات. مين اللي هياخد الطلب، ويجيب البيانات، ويحطها في صفحة؟</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · قواعد البيانات" data-title="✋ تأكد من فهمك (٤)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">قاعدة البيانات</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-4"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٥) الـ Backend ===================== -->
+
+    <section class="slide" data-section="٥ · الـ Backend" data-title="يعني إيه Backend؟">
+      <div class="slide-inner">
+        <span class="eyebrow">⚙️ مصطلح</span><span class="goal">🎯 تتبّع توليد صفحة ديناميكية</span>
+        <h2 class="title">الـ <span class="en">Backend</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          الجزء اللي شغال <b>على السيرفر</b>: بيستقبل الطلبات، وينفّذ <b>منطق التطبيق</b> (القواعد والقرارات)، ويتعامل مع البيانات.
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          <div class="card frag text-center"><div class="big-emoji">📥</div><p class="h3 mt-1">يستقبل</p><p>الطلب جاي من مين؟ وعايز إيه؟</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🧠</div><p class="h3 mt-1">يقرر</p><p>مسموح له؟ نعمل إيه بالظبط؟</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🗃️</div><p class="h3 mt-1">يتعامل مع البيانات</p><p>يقرا أو يحفظ في قاعدة البيانات.</p></div>
+        </div>
+        <p class="muted mt-4 frag">طريقة التنفيذ بتختلف من نظام لنظام، بس الأدوار دي ثابتة.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · الـ Backend" data-title="رحلة صفحة النتيجة">
+      <div class="slide-inner">
+        <span class="eyebrow">🔄 خطوة بخطوة</span>
+        <h2 class="title">مريم (2402) بتطلب نتيجتها</h2>
+        <div class="card mt-3 stepper" data-steps="7">
+          <div class="flow three">
+            <div class="actor" data-states="0:off 1:on 2:off 7:on"><div class="avatar">🖥️</div>Browser</div>
+            <div class="link">
+              <span class="msg" data-only="1,2">طلب: صفحة النتيجة ←</span>
+              <span class="msg res" data-only="6">→ صفحة HTML جاهزة</span>
+            </div>
+            <div class="actor" data-states="0:off 2:on 4:off 5:on 7:off"><div class="avatar">⚙️</div>Backend</div>
+            <div class="link">
+              <span class="msg data" data-only="4">⇄ بيانات الطالب 2402: طلب ورد</span>
+            </div>
+            <div class="actor" data-states="0:off 4:on 5:off"><div class="avatar">🗃️</div>Database</div>
+          </div>
+          <div class="caption mt-3">
+            <span data-only="0">٧ خطوات من الطلب لحد ما النتيجة تظهر 👇</span>
+            <span data-only="1"><b>١.</b> مريم تطلب صفحة النتائج من المتصفح.</span>
+            <span data-only="2"><b>٢.</b> الـ Backend يستقبل الطلب.</span>
+            <span data-only="3"><b>٣.</b> يتأكد إن دي فعلًا مريم، وإن مسموح لها تشوف النتيجة دي. 🔐</span>
+            <span data-only="4"><b>٤.</b> يسترجع بيانات الطالب 2402 من قاعدة البيانات.</span>
+            <span data-only="5"><b>٥.</b> يحط البيانات في <b>قالب HTML</b> ← صفحة كاملة.</span>
+            <span data-only="6"><b>٦.</b> يبعت الصفحة الناتجة للمتصفح.</span>
+            <span data-only="7"><b>٧.</b> المتصفح يعرض النتيجة. 🎉</span>
+          </div>
+          <div class="grid md:grid-cols-2 gap-3 mt-3">
+            <div class="code" data-only="5"><span class="tag">&lt;h4&gt;</span>Result: <span class="ph">{{ name }}</span><span class="tag">&lt;/h4&gt;</span>
+<span class="tag">&lt;p&gt;</span>Math: <span class="ph">{{ math }}</span><span class="tag">&lt;/p&gt;</span></div>
+            <div class="code" data-only="5"><span class="tag">&lt;h4&gt;</span>Result: <span class="ph">مريم خالد</span><span class="tag">&lt;/h4&gt;</span>
+<span class="tag">&lt;p&gt;</span>Math: <span class="ph">97</span><span class="tag">&lt;/p&gt;</span></div>
+          </div>
+          <div class="browser mt-3" data-only="7">
+            <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><div class="addr">www.univ.example/results</div></div>
+            <div class="browser-body mini-page text-left" dir="ltr"><h4>Result: مريم خالد</h4><p>Math: 97 · Physics: 85 · Programming: 99</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · الـ Backend" data-title="جرّب: قالب واحد وبيانات مختلفة">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب بنفسك</span>
+        <h2 class="title">قالب واحد + بيانات مختلفة = صفحات مختلفة</h2>
+        <div class="flex flex-wrap items-center gap-2 mt-3 interactive">
+          <span class="font-extrabold">الطلب جاي من طالب رقم:</span>
+          <button class="btn on" data-stu="2401">2401</button>
+          <button class="btn" data-stu="2402">2402</button>
+          <button class="btn" data-stu="2403">2403</button>
+        </div>
+        <div class="eq mt-4 interactive" id="tpl-demo">
+          <div>
+            <p class="font-extrabold mb-1">📄 القالب (واحد بس)</p>
+<div class="code"><span class="tag">&lt;h4&gt;</span>Result: <span class="ph">{{ name }}</span><span class="tag">&lt;/h4&gt;</span>
+<span class="tag">&lt;p&gt;</span>ID: <span class="ph">{{ id }}</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>Math: <span class="ph">{{ math }}</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>Physics: <span class="ph">{{ physics }}</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>Programming: <span class="ph">{{ prog }}</span><span class="tag">&lt;/p&gt;</span></div>
+          </div>
+          <div class="op">+</div>
+          <div>
+            <p class="font-extrabold mb-1">🗃️ الصف من قاعدة البيانات</p>
+            <div class="code" id="tpl-row"></div>
+          </div>
+          <div class="op">=</div>
+          <div>
+            <p class="font-extrabold mb-1">🖥️ الصفحة اللي وصلت</p>
+            <div class="browser"><div class="browser-body mini-page text-left" dir="ltr" id="tpl-out"></div></div>
+          </div>
+        </div>
+        <p class="muted mt-3 text-sm">الأقواس <span class="en">{{ }}</span> مجرد علامة لمكان البيانات في المثال؛ كل لغة Backend ليها طريقتها في كتابة القوالب.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · الـ Backend" data-title="Dynamic Page و SSR">
+      <div class="slide-inner">
+        <span class="eyebrow">📌 مصطلحين</span>
+        <h2 class="title"><span class="en">Dynamic Web Page</span> و <span class="en">SSR</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="def">
+            <span class="def-label">Dynamic Web Page · صفحة ديناميكية</span>
+            صفحة محتواها <b>بيتولّد وقت الطلب</b>، حسب مين طلبها أو حسب البيانات الحالية.
+          </div>
+          <div class="def" style="border-right-color: var(--pink)">
+            <span class="def-label" style="color: var(--pink)">Server-Side Rendering (SSR)</span>
+            إن السيرفر هو اللي <b>يجهّز HTML</b> كامل (قالب + بيانات) قبل ما يبعته للمتصفح.
+          </div>
+        </div>
+        <table class="tbl mt-5 text-lg frag">
+          <thead><tr><th></th><th>📄 Static</th><th>⚙️ Dynamic (SSR)</th></tr></thead>
+          <tbody>
+            <tr><td class="rowhead">المحتوى بيتجهز إمتى؟</td><td>مسبقًا، مرة واحدة</td><td>وقت كل طلب</td></tr>
+            <tr><td class="rowhead">السيرفر بيعمل إيه؟</td><td>يلاقي الملف ويبعته</td><td>يشغّل Backend، يجيب بيانات، يملا القالب</td></tr>
+            <tr><td class="rowhead">كل الزوار يشوفوا؟</td><td>نفس المحتوى</td><td>ممكن كل واحد يشوف محتوى مختلف</td></tr>
+            <tr><td class="rowhead">محتاج Database؟</td><td>لأ</td><td>غالبًا أيوه</td></tr>
+            <tr><td class="rowhead">مثال</td><td>عن الجامعة</td><td>نتيجة الطالب</td></tr>
+          </tbody>
+        </table>
+        <p class="muted mt-3 frag">في الحالتين المتصفح بيستلم <b>HTML</b> ويعرضه بنفس الطريقة. الفرق كله في <b>السيرفر</b>.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · الـ Backend" data-title="✋ تأكد من فهمك (٥)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">الـ Backend والصفحات الديناميكية</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-5"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٦) JavaScript ===================== -->
+
+    <section class="slide" data-section="٦ · JavaScript" data-title="ليه احتجنا JavaScript؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🖱️ نقلة جديدة</span><span class="goal">🎯 تعرف دور JavaScript</span>
+        <h2 class="title">من صفحة <span class="hl">بتعرض</span>… لصفحة <span class="hl">بتتفاعل</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <p class="h3">😐 قبل JavaScript</p>
+            <p class="text-lg mt-1">الصفحة بعد ما تتعرض كانت زي <b>مستند</b>: تقراه وتضغط روابط. مفيش كود جوه المتصفح يرد على اللي بتعمله في الصفحة نفسها.</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--safe)">
+            <p class="h3">🙂 مع JavaScript</p>
+            <p class="text-lg mt-1"><b>لغة برمجة بتشتغل جوه المتصفح</b>، تخلّي الصفحة ترد على المستخدم: ضغطة زرار، كتابة في خانة، اختيار من قائمة.</p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          <div class="callout c-primary frag"><span class="ico">✅</span><div>تتحقق من المدخلات وتنبّهك فورًا.</div></div>
+          <div class="callout c-primary frag"><span class="ico">👆</span><div>تفتح/تقفل قائمة لما تضغط زرار.</div></div>
+          <div class="callout c-primary frag"><span class="ico">🔄</span><div>تغيّر جزء من الصفحة حسب اختيارك.</div></div>
+        </div>
+        <p class="muted mt-3 frag">📅 ظهرت سنة 1995 في متصفح Netscape، علشان تضيف سلوك للصفحات جوه المتصفح.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · JavaScript" data-title="HTML و CSS و JavaScript">
+      <div class="slide-inner">
+        <span class="eyebrow">🧱🎨⚡ ثلاث طبقات</span>
+        <h2 class="title">كل لغة ليها شغلانة</h2>
+        <div class="grid md:grid-cols-2 gap-5 mt-4 items-start">
+          <div>
+            <div class="flex flex-wrap gap-2 layer-btns interactive">
+              <button class="btn on" title="HTML موجود دايمًا: هو أساس الصفحة"><span class="tick"></span>HTML</button>
+              <button class="btn" id="ld-css"><span class="tick"></span>CSS</button>
+              <button class="btn" id="ld-js"><span class="tick"></span>JavaScript</button>
+            </div>
+            <div class="layer-demo mt-3 interactive" id="ld">
+              <p class="ld-title">استعلام عن النتيجة</p>
+              <label>رقم الطالب: <input id="ld-input" placeholder="مثلًا 2402"></label><button id="ld-btn">عرض</button>
+              <p class="ld-msg" id="ld-msg"></p>
+            </div>
+            <p class="muted text-sm mt-2">شغّل وطفّي CSS و JavaScript، وجرّب تكتب حروف بدل أرقام.</p>
+          </div>
+          <div class="grid gap-3">
+            <div class="def" style="border-right-color: var(--info)"><span class="def-label" style="color: var(--info)">HTML · البنية</span>إيه اللي في الصفحة: عنوان، خانة، زرار.</div>
+            <div class="def" style="border-right-color: var(--pink)"><span class="def-label" style="color: var(--pink)">CSS · المظهر</span>شكله إيه: ألوان، مسافات، خطوط، ترتيب.</div>
+            <div class="def" style="border-right-color: var(--warn)"><span class="def-label" style="color: var(--warn)">JavaScript · السلوك</span>بيعمل إيه لما المستخدم يتفاعل.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · JavaScript" data-title="JavaScript شغالة فين؟">
+      <div class="slide-inner">
+        <span class="eyebrow">📍 تحديد المكان</span>
+        <h2 class="title">JavaScript هنا شغالة <span class="hl">في المتصفح</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag">
+            <p class="h3">🔄 بتوصل إزاي؟</p>
+            <p class="text-lg mt-1">السيرفر بيبعت ملفات JavaScript مع الصفحة، و<b>المتصفح هو اللي بيشغّلها</b> على جهاز المستخدم.</p>
+          </div>
+          <div class="card frag">
+            <p class="h3">🤝 علاقتها بـ HTML و CSS</p>
+            <p class="text-lg mt-1">JavaScript تقدر <b>تقرا وتغيّر</b> محتوى الصفحة وشكلها بعد ما اتعرضت: تضيف نص، تخفي عنصر، تغيّر لون.</p>
+          </div>
+        </div>
+        <div class="callout c-warn mt-4 frag">
+          <span class="ico">🔐</span>
+          <div class="text-lg">التحقق في المتصفح <b>للراحة</b> (تنبيه سريع). لكن الـ Backend <b>لازم يتحقق تاني</b>، لأن أي حد ممكن يتحكم في الكود اللي شغال على جهازه.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · JavaScript" data-title="✋ تأكد من فهمك (٦)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">HTML ولا CSS ولا JavaScript؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-6"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٧) طلبات في الخلفية ===================== -->
+
+    <section class="slide" data-section="٧ · طلبات في الخلفية" data-title="المشكلة: الصفحة كلها بتتحمّل">
+      <div class="slide-inner">
+        <span class="eyebrow">🐢 المشكلة</span><span class="goal">🎯 تحديث جزء من غير تحميل الكل</span>
+        <h2 class="title">عايز معلومة صغيرة… ليه أحمّل الصفحة كلها؟</h2>
+        <p class="lead">في بوابة الطلاب، بتدوّر على زميل برقمه. في الطريقة اللي اتعلمناها في الـ SSR:</p>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          <div class="card frag text-center"><div class="big-emoji">📨</div><p class="font-bold mt-1">المتصفح يطلب <b>صفحة جديدة كاملة</b></p></div>
+          <div class="card frag text-center"><div class="big-emoji">⚙️</div><p class="font-bold mt-1">السيرفر يبني الصفحة كلها من جديد (الهيدر والقوائم وكل حاجة)</p></div>
+          <div class="card frag text-center"><div class="big-emoji">⬜</div><p class="font-bold mt-1">المتصفح يشيل الصفحة القديمة ويعرض الجديدة</p></div>
+        </div>
+        <div class="callout c-info mt-5 frag">
+          <span class="ico">💡</span>
+          <div class="text-lg">الفكرة الجديدة: <b>JavaScript</b> (اللي شغالة أصلًا في الصفحة) تطلب <b>البيانات الناقصة بس</b> في الخلفية، وتحطها في المكان المناسب.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · طلبات في الخلفية" data-title="طلب في الخلفية خطوة بخطوة">
+      <div class="slide-inner">
+        <span class="eyebrow">🔄 خطوة بخطوة</span>
+        <h2 class="title">البحث عن طالب من غير ما الصفحة تتشال</h2>
+        <div class="card mt-3 stepper" data-steps="5">
+          <div class="flow">
+            <div class="actor" data-states="0:off 1:on 3:off 5:on"><div class="avatar">🖥️</div>Browser + JS</div>
+            <div class="link">
+              <span class="msg" data-only="2">طلب بيانات: طالب 2403 ←</span>
+              <span class="msg data" data-only="4">→ بيانات بس (مش صفحة)</span>
+            </div>
+            <div class="actor" data-states="0:off 3:on 5:off"><div class="avatar">⚙️</div>Server</div>
+          </div>
+          <div class="site mt-3">
+            <div class="site-head"><span>🎓 بوابة الطلاب</span><span class="text-sm">الرئيسية · نتائجي · خروج</span></div>
+            <div class="site-body">
+              <div>🔍 بحث برقم الطالب: <span class="pill"><span data-at="1">2403</span></span></div>
+              <div class="site-box" data-states="0:x 5:new">
+                <span data-only="0,1">النتيجة هتظهر هنا</span>
+                <span data-only="2,3,4" class="muted">⏳ بندوّر… (والصفحة لسه شغالة عادي)</span>
+                <span data-only="5"><b>يوسف عادل</b> · رياضيات 74 · فيزياء 80 · برمجة 86</span>
+              </div>
+            </div>
+          </div>
+          <div class="caption mt-3">
+            <span data-only="0">لاحظ: الهيدر والقوائم مش هيتغيروا 👀</span>
+            <span data-only="1"><b>١.</b> المستخدم يكتب الرقم ويضغط بحث.</span>
+            <span data-only="2"><b>٢.</b> JavaScript تبعت طلب <b>في الخلفية</b>. الصفحة فاضلة قدامك وتقدر تستخدمها.</span>
+            <span data-only="3"><b>٣.</b> السيرفر يعالج الطلب (ويسأل قاعدة البيانات).</span>
+            <span data-only="4"><b>٤.</b> السيرفر يرجّع <b>البيانات المطلوبة بس</b>.</span>
+            <span data-only="5"><b>٥.</b> JavaScript تحدّث <b>الجزء ده بس</b> من الصفحة. ✨</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · طلبات في الخلفية" data-title="جرّب: تحميل كامل ولا تحديث جزء؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب بنفسك</span>
+        <h2 class="title">قارن الطريقتين</h2>
+        <div class="flex flex-wrap gap-2 items-center mt-3 interactive">
+          <span class="font-extrabold">ابحث عن طالب:</span>
+          <select class="field" style="width:auto" id="ax-id">
+            <option value="2401">2401</option><option value="2402">2402</option><option value="2403">2403</option>
+          </select>
+          <button class="btn" id="ax-full">📄 طلب صفحة كاملة</button>
+          <button class="btn btn-primary" id="ax-bg">⚡ طلب في الخلفية</button>
+        </div>
+        <div class="site mt-4 interactive" id="ax-site">
+          <div class="site-head"><span>🎓 بوابة الطلاب</span><span class="counter">مرات تحميل الصفحة كلها: <b id="ax-count">١</b></span></div>
+          <div class="site-body">
+            <div class="flex gap-2 items-center flex-wrap">📝 ملاحظاتك: <input class="field" style="width:16rem" placeholder="اكتب هنا وبعدين جرّب الزرارين"></div>
+            <div class="site-box" id="ax-box">النتيجة هتظهر هنا</div>
+          </div>
+        </div>
+        <p class="mt-3 text-lg font-bold" id="ax-note">اكتب ملاحظة، وبعدين جرّب كل زرار ولاحظ إيه اللي بيحصل للملاحظة وللعدّاد.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · طلبات في الخلفية" data-title="Asynchronous و AJAX">
+      <div class="slide-inner">
+        <span class="eyebrow">📌 مصطلحات</span>
+        <h2 class="title"><span class="en">Asynchronous Requests</span> و <span class="en">AJAX</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">Asynchronous Request · طلب غير متزامن</span>
+          طلب بيتبعت و<b>الصفحة مش بتقف تستناه</b>: المستخدم يكمل شغله، ولما الرد يوصل الكود يتعامل معاه.
+        </div>
+        <div class="def mt-4 frag" style="border-right-color: var(--pink)">
+          <span class="def-label" style="color: var(--pink)">AJAX · Asynchronous JavaScript and XML</span>
+          أسلوب <b>تاريخي ومشهور</b>: JavaScript تبعت طلبات غير متزامنة وتحدّث أجزاء من الصفحة. الاسم انتشر سنة 2005، ومواقع زي Gmail و Google Maps كانت أشهر أمثلته.
+        </div>
+        <div class="grid md:grid-cols-2 gap-3 mt-4">
+          <div class="callout c-info frag"><span class="ico">ℹ️</span><div>رغم إن في الاسم <b>XML</b>، البيانات اللي بترجع مش لازم تكون XML.</div></div>
+          <div class="callout c-warn frag"><span class="ico">⚠️</span><div>تحديث جزء من الصفحة ≠ إعادة تحميل الصفحة. <b>مستند HTML</b> الأصلي فاضل زي ما هو، واتغيّر فيه جزء.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · طلبات في الخلفية" data-title="✋ تأكد من فهمك (٧)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">رتّب خطوات الطلب في الخلفية</h2>
+        <div class="interactive mt-3" data-order="async"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٨) تمهيد للـ API ===================== -->
+
+    <section class="slide" data-section="٨ · تمهيد للـ API" data-title="JavaScript عرفت منين؟">
+      <div class="slide-inner">
+        <span class="eyebrow">❓ سؤال مهم</span><span class="goal">🎯 فكرة مبدئية عن الـ API</span>
+        <h2 class="title">JavaScript عرفت منين تطلب إيه؟</h2>
+        <div class="grid md:grid-cols-3 gap-3 mt-5">
+          <div class="card frag text-center"><div class="big-emoji">📍</div><p class="h3 mt-1">عنوان الطلب</p><p>تبعت لأنهي عنوان؟</p></div>
+          <div class="card frag text-center"><div class="big-emoji">📝</div><p class="h3 mt-1">طريقة الطلب</p><p>تبعت معاه إيه؟ (رقم الطالب مثلًا)</p></div>
+          <div class="card frag text-center"><div class="big-emoji">📦</div><p class="h3 mt-1">شكل الرد</p><p>هيرجع إيه؟ وبأي ترتيب؟</p></div>
+        </div>
+        <div class="callout c-primary mt-5 frag">
+          <span class="ico">🤝</span>
+          <div class="text-lg">الإجابة: لازم يكون فيه <b>اتفاق معلن</b> بين البرنامجين. السيرفر يقول: "دي الحاجات اللي أقدر أعملها، ودي طريقة طلبها، وده اللي هترجعلك". الاتفاق ده اسمه <b>API</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · تمهيد للـ API" data-title="يعني إيه API؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🔌 مصطلح</span>
+        <h2 class="title"><span class="en">API</span> · Application Programming Interface</h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          <b>واجهة (عقد)</b> بتحدد البرامج تتعامل مع بعض إزاي: العمليات أو البيانات اللي ممكن تتطلب، وإزاي تتطلب، وإيه اللي هيرجع، حسب القواعد اللي الواجهة بتوفرها.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4 items-start">
+          <dl class="contract frag">
+            <p class="h3 hl-info mb-2">📘 مثال: API نتائج الجامعة</p>
+            <dt>العملية</dt><dd>عرض نتيجة طالب</dd>
+            <dt>المطلوب منك تبعته</dt><dd>رقم الطالب + إثبات إنك مسموح لك</dd>
+            <dt>اللي هيرجعلك</dt><dd>الاسم ودرجة كل مادة</dd>
+            <dt>لو الرقم مش موجود</dt><dd>رسالة "الطالب غير موجود"</dd>
+          </dl>
+          <div class="grid gap-3">
+            <div class="card frag"><p class="h3">🌍 أوسع من الويب</p><p class="mt-1">برنامج بيطلب من نظام التشغيل يحفظ ملف ← بيستخدم <b>API</b> نظام التشغيل.</p></div>
+            <div class="card frag"><p class="h3">📅 أقدم من JavaScript</p><p class="mt-1">فكرة الـ API موجودة في البرمجة من قبل JavaScript بسنين. الويب استخدمها، مش اخترعها.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · تمهيد للـ API" data-title="أخطاء شائعة عن الـ API">
+      <div class="slide-inner">
+        <span class="eyebrow">🚫 أخطاء شائعة</span>
+        <h2 class="title">الـ API <span class="hl-danger">مش</span>…</h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-4">
+          <div class="myth frag"><span class="x">✗</span><div>هي <b>الطلب نفسه</b>. الطلب حاجة بتتبعت <b>حسب</b> قواعد الـ API.</div></div>
+          <div class="myth frag"><span class="x">✗</span><div>صيغة بيانات زي <b>JSON</b>. JSON طريقة لكتابة البيانات، مش الاتفاق.</div></div>
+          <div class="myth frag"><span class="x">✗</span><div>لازم تكون <b>REST</b>. REST أسلوب واحد من أساليب كتير.</div></div>
+          <div class="myth frag"><span class="x">✗</span><div>ردّها لازم يكون <b>JSON</b>. ممكن نص، أو HTML، أو XML، أو غيره.</div></div>
+          <div class="myth frag md:col-span-2"><span class="x">✗</span><div>حاجة خاصة بـ <b>JavaScript</b> أو ظهرت بسببها. أي برنامج بأي لغة ممكن يستخدم API أو يوفّرها.</div></div>
+        </div>
+        <p class="muted mt-4 frag">📚 REST و JSON و HTTP Methods بالتفصيل في الدرس الجاي.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · تمهيد للـ API" data-title="✋ تأكد من فهمك (٨)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">صح ولا غلط؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-8"></div>
+      </div>
+    </section>
+
+<!-- ===================== ٩) Web Page و Web App ===================== -->
+
+    <section class="slide" data-section="٩ · Web Page و Web App" data-title="Web Page مقابل Web App">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ مقارنة</span><span class="goal">🎯 تفرّق بين الصفحة والتطبيق</span>
+        <h2 class="title"><span class="en">Web Page</span> ولا <span class="en">Web App</span>؟</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag" style="border-top: .3rem solid var(--info)">
+            <p class="h3">📄 Web Page</p>
+            <p class="text-lg mt-1">هدفها الأساسي <b>عرض معلومات</b>. بتقرا وتتنقل.</p>
+            <p class="mt-2 font-bold muted">مثال: صفحة الجامعة: الكليات، العنوان، الأخبار.</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--pink)">
+            <p class="h3">🧰 Web App</p>
+            <p class="text-lg mt-1">بتوفر <b>وظائف تفاعلية</b> تخلّيك <b>تنفّذ مهام</b>.</p>
+            <p class="mt-2 font-bold muted">مثال: بوابة الطلاب: تسجّل دخول، تشوف درجاتك، تسجّل مواد، تقدّم طلب.</p>
+          </div>
+        </div>
+        <p class="text-lg font-extrabold mt-5 frag">الفرق <b>مش حد فاصل</b>، هو أقرب لمسطرة:</p>
+        <div class="spectrum mt-2 frag">
+          <div class="s1">مقال<small>قراءة بس</small></div>
+          <div class="s2">صفحة الجامعة<small>+ قائمة تفتح وتقفل</small></div>
+          <div class="s3">صفحة أخبار<small>+ بحث وتعليقات</small></div>
+          <div class="s4">بوابة الطلاب<small>دخول ودرجات وطلبات</small></div>
+          <div class="s5">محرر مستندات أونلاين<small>مهام كاملة</small></div>
+        </div>
+        <div class="flex justify-between font-black mt-1"><span class="hl-info">📄 أقرب لـ Web Page</span><span class="hl-pink">أقرب لـ Web App 🧰</span></div>
+        <p class="muted mt-3 frag">الصفحة ممكن يبقى فيها تفاعل، والتطبيق ممكن يتكوّن من صفحات كتير.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٩ · Web Page و Web App" data-title="✋ تأكد من فهمك (٩)">
+      <div class="slide-inner">
+        <span class="eyebrow">✋ تأكد من فهمك</span>
+        <h2 class="title">أقرب لـ Web Page ولا Web App؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="check-9"></div>
+      </div>
+    </section>
+
+<!-- ===================== ١٠) الخلاصة ===================== -->
+
+    <section class="slide" data-section="١٠ · الخلاصة" data-title="خريطة المفاهيم">
+      <div class="slide-inner">
+        <span class="eyebrow">🗺️ خريطة المفاهيم</span>
+        <h2 class="title">الصورة الكاملة</h2>
+        <div class="cmap mt-5">
+          <div class="cnode c-browser">🖥️ Web Browser<small>Frontend: HTML · CSS · JS</small></div><span class="carrow">←</span>
+          <div class="cnode c-req">📨 HTTP Request<small>لـ URL</small></div><span class="carrow">←</span>
+          <div class="cnode c-srv">🗄️ Web Server<small>يستقبل الطلب</small></div><span class="carrow">←</span>
+          <div class="cnode c-be">⚙️ Backend<small>منطق التطبيق</small></div><span class="carrow">←</span>
+          <div class="cnode c-db">🗃️ Database<small>البيانات</small></div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mt-5 interactive">
+          <span class="font-extrabold">الرد بيرجع إزاي؟</span>
+          <button class="btn on" data-ret="html">📄 HTML جاهز</button>
+          <button class="btn" data-ret="data">📦 بيانات لـ JavaScript</button>
+        </div>
+        <div class="ret html mt-3" data-retbox="html">⚙️ الـ Backend يملا القالب ← <b>صفحة HTML كاملة</b> ← المتصفح يعرضها. (زي صفحة النتيجة بالـ SSR)</div>
+        <div class="ret data mt-3 hidden" data-retbox="data">⚙️ الـ Backend يرجّع <b>البيانات بس</b> ← JavaScript في الصفحة تستلمها ← <b>تحدّث الجزء المناسب</b>. (زي البحث في الخلفية)</div>
+        <div class="callout c-info mt-4 frag">
+          <span class="ico">ℹ️</span>
+          <div>ده <b>نموذج توضيحي</b> للأدوار، مش الشكل الوحيد. أحيانًا الـ Web Server والـ Backend يبقوا برنامج واحد، وأحيانًا مفيش Database خالص (زي الصفحة الثابتة).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١٠ · الخلاصة" data-title="رحلة التطور">
+      <div class="slide-inner">
+        <span class="eyebrow">📈 رحلة التطور</span>
+        <h2 class="title">كل خطوة حلّت مشكلة</h2>
+        <div class="tline mt-5">
+          <div class="frag"><b>📄 صفحات ثابتة</b><p>مستندات مربوطة بروابط.</p><p class="muted">المشكلة: نفس المحتوى للكل.</p></div>
+          <div class="frag"><b>🗃️ + Database</b><p>البيانات منظمة في مكان واحد.</p><p class="muted">المشكلة: مين يحوّلها لصفحة؟</p></div>
+          <div class="frag"><b>⚙️ + Backend (SSR)</b><p>قالب واحد + بيانات = صفحة لكل مستخدم.</p><p class="muted">المشكلة: الصفحة مش بتتفاعل.</p></div>
+          <div class="frag"><b>🖱️ + JavaScript</b><p>الصفحة ترد على المستخدم.</p><p class="muted">المشكلة: أي بيانات جديدة = صفحة كاملة.</p></div>
+          <div class="frag"><b>⚡ + طلبات في الخلفية و API</b><p>نجيب البيانات بس ونحدّث جزء.</p><p class="muted">النتيجة: Web Apps.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١٠ · الخلاصة" data-title="المنظومة: Frontend · Backend · Database · API">
+      <div class="slide-inner">
+        <span class="eyebrow">🧩 المنظومة</span>
+        <h2 class="title">أدوار بتكمّل بعض</h2>
+        <div class="grid md:grid-cols-4 gap-3 mt-5">
+          <div class="role frag" style="--c: var(--info)"><p class="h3">💻 Frontend</p><p class="muted text-sm">الواجهة الأمامية</p><p class="mt-1">اللي المستخدم بيشوفه ويتفاعل معاه في المتصفح.</p></div>
+          <div class="role frag" style="--c: var(--warn)"><p class="h3">⚙️ Backend</p><p class="muted text-sm">الواجهة الخلفية</p><p class="mt-1">على السيرفر: يعالج الطلبات ويطبّق قواعد التطبيق.</p></div>
+          <div class="role frag" style="--c: var(--safe)"><p class="h3">🗃️ Database</p><p class="muted text-sm">طبقة البيانات</p><p class="mt-1">تحفظ البيانات وتوفرها عند الحاجة.</p></div>
+          <div class="role frag" style="--c: var(--pink)"><p class="h3">🔌 API</p><p class="muted text-sm">واجهة التواصل</p><p class="mt-1">الاتفاق اللي بيحدد البرامج تطلب من بعض إيه وإزاي.</p></div>
+        </div>
+        <div class="callout c-primary mt-5 frag">
+          <span class="ico">🧠</span>
+          <div class="text-lg">دي <b>أدوار ومفاهيم</b>، مش لازم كل واحد يبقى نظام منفصل. في موقع صغير ممكن برنامج واحد يعمل دور الـ Backend والـ Web Server مع بعض.</div>
+        </div>
+      </div>
+    </section>
+
+<!-- ============================ التقييم ============================ -->
+
+    <section class="slide" data-section="التقييم" data-title="اختيار من متعدد">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 التقييم · ١</span>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <h2 class="title">اختر الإجابة الصحيحة</h2>
+          <div class="flex gap-2 items-center">
+            <span class="pill pill-safe" id="quiz-score"></span>
+            <button class="btn" id="quiz-reset">↺ إعادة</button>
+          </div>
+        </div>
+        <div class="interactive mt-4 grid gap-3" id="quiz"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="التقييم" data-title="فرّق بين المفاهيم">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 التقييم · ٢</span>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <h2 class="title">فرّق بين المفاهيم المتقاربة</h2>
+          <div class="flex gap-2 items-center">
+            <span class="pill pill-safe" id="diff-score"></span>
+            <button class="btn" id="diff-reset">↺ إعادة</button>
+          </div>
+        </div>
+        <div class="interactive mt-4 grid gap-3" id="diff"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="التقييم" data-title="رتّب الخطوات">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 التقييم · ٣</span>
+        <h2 class="title">رتّب خطوات صفحة النتيجة (SSR)</h2>
+        <div class="interactive mt-3" data-order="ssr"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="التقييم" data-title="أسئلة تطبيقية">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 التقييم · ٤</span>
+        <h2 class="title">فكّر وجاوب، وبعدين اكشف الإجابة</h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-4" id="applied"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="التقييم" data-title="نهاية الدرس">
+      <div class="slide-inner text-center">
+        <span class="eyebrow">🎉 خلصنا!</span>
+        <h1 class="title-xl mt-4">من صفحة ثابتة… لتطبيق ويب</h1>
+        <p class="mt-4 text-xl font-bold muted"><bdi>HTML</bdi> ← <bdi>Database</bdi> ← <bdi>Backend</bdi> ← <bdi>JavaScript</bdi> ← طلبات في الخلفية ← <bdi>API</bdi></p>
+        <div class="end-banner mt-8 max-w-xl mx-auto">
+          <span>📚</span>
+          <div><b>الدرس الجاي:</b> طرق الاتصال في تطبيقات الويب: HTTP بالتفصيل، و REST، و JSON.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bar">
+    <button class="bar-btn" data-deck-act="overview" title="فهرس الشرائح (O)">☰</button>
+    <span class="section" data-deck="section"></span>
+    <span class="flex-1"></span>
+    <span class="count" data-deck="count"></span>
+    <button class="bar-btn" data-deck-act="prev" title="السابق (→)">→</button>
+    <button class="bar-btn primary" data-deck-act="next" title="التالي (←)">التالي ←</button>
+    <button class="bar-btn" data-deck-act="theme" title="الوضع الليلي">🌓</button>
+    <button class="bar-btn" data-deck-act="fullscreen" title="ملء الشاشة (F)">⛶</button>
+  </footer>
+</div>
+
+<div class="overview" role="dialog" aria-label="فهرس الشرائح">
+  <div class="overview-panel">
+    <div class="flex items-center justify-between">
+      <p class="h3">☰ فهرس الشرائح</p>
+      <button class="bar-btn" onclick="document.querySelector('.overview').classList.remove('open')">✕</button>
+    </div>
+    <div class="ov-body"></div>
+  </div>
+</div>
+
+<script src="../assets/lesson-kit.js"></script>
+<script src="unit3-lesson1.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

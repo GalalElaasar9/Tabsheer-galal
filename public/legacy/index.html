@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>منصة الشرح · البرمجة والذكاء الاصطناعي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="assets/shell.css">
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+  <header class="tabbar">
+    <div class="brand" title="البرمجة والذكاء الاصطناعي · الصف الثاني الثانوي بكالوريا">
+      <span class="brand-logo">AI</span>
+      <span class="brand-text hidden md:inline">منصة الشرح</span>
+    </div>
+
+    <div id="tabs" class="tabs" role="tablist"></div>
+
+    <button id="newTabBtn" class="icon-btn" title="تبويب جديد (Alt + N)" aria-label="تبويب جديد">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+
+    <div class="flex-1"></div>
+
+    <button id="themeBtn" class="icon-btn" title="الوضع الليلي / النهاري" aria-label="تبديل الوضع">
+      <span class="theme-ico-dark">🌙</span><span class="theme-ico-light">☀️</span>
+    </button>
+  </header>
+
+  <main id="views" class="flex-1 relative min-h-0"></main>
+
+  <script src="assets/shell.js"></script>
+</body>
+</html>

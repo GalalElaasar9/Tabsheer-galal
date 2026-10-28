@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الاستجابة للحوادث وإدارة المخاطر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="../assets/deck.css">
+  <link rel="stylesheet" href="../assets/lesson-kit.css">
+  <link rel="stylesheet" href="unit2-lesson3.css">
+</head>
+<body>
+<div class="deck">
+  <div class="progress"><i></i></div>
+
+  <main class="stage">
+
+<!-- ============================ المقدمة ============================ -->
+
+    <section class="slide" data-section="المقدمة" data-title="الغلاف">
+      <div class="slide-inner text-center">
+        <span class="eyebrow">الصف الثاني الثانوي · بكالوريا</span>
+        <p class="mt-8 text-xl font-extrabold muted">الفصل الثاني: <span class="hl">الأمن السيبراني</span> · الدرس الثالث</p>
+        <h1 class="title-xl mt-2">الاستجابة للحوادث وإدارة المخاطر</h1>
+        <div class="cover-icons mt-10">
+          <div class="cover-ico">🚨<span>الحادث الأمني</span></div>
+          <div class="cover-ico">🔢<span>المراحل الست</span></div>
+          <div class="cover-ico">🧱<span>الاحتواء</span></div>
+          <div class="cover-ico">🧹<span>الاستئصال</span></div>
+          <div class="cover-ico">⚖️<span>تقييم المخاطر</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="أهداف الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 أهداف التعلم</span>
+        <h2 class="title">في نهاية الدرس هتقدر:</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="card frag"><span class="num">1</span><p class="mt-3 text-lg font-bold">تشرح <span class="hl">المراحل العامة</span> للاستجابة للحوادث والغرض من كل مرحلة.</p></div>
+          <div class="card frag"><span class="num pink">2</span><p class="mt-3 text-lg font-bold">تستخدم <span class="hl">التأثير</span> و<span class="hl">الاحتمالية</span> لترتيب أولويات المخاطر.</p></div>
+          <div class="card frag"><span class="num safe">3</span><p class="mt-3 text-lg font-bold">تصمّم <span class="hl">استجابة مبرّرة</span> لحادث أمني.</p></div>
+        </div>
+        <div class="def mt-6 frag" style="border-right-color: var(--pink)">
+          <span class="def-label" style="color: var(--pink)">❓ السؤال الرئيسي</span>
+          لما يحصل حادث أمني: إزاي المؤسسة <b>تنظّم استجابتها</b>؟ وإزاي <b>تقرر أي المخاطر تعالجها الأول</b>؟
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="خريطة الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🗺️ خريطة الدرس</span>
+        <h2 class="title">رحلتنا النهارده</h2>
+        <ol class="roadmap mt-6">
+          <li><span class="num">1</span><b>هل الحماية بتمنع كل حاجة؟</b></li>
+          <li><span class="num">2</span><b>الحادث الأمني</b></li>
+          <li><span class="num">3</span><b>مراحل الاستجابة الست</b></li>
+          <li><span class="num">4</span><b>الاحتواء والاستئصال</b></li>
+          <li><span class="num">5</span><b>تقييم المخاطر</b></li>
+          <li><span class="num">6</span><b>مراجعة واختبار</b></li>
+        </ol>
+      </div>
+    </section>
+
+<!-- ===================== ١) هل الحماية تمنع كل شيء؟ ===================== -->
+
+    <section class="slide" data-section="١ · ليه نستعد؟" data-title="هل الحماية تمنع كل الحوادث؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🤔 سؤال</span>
+        <h2 class="title">لو عندنا حماية كاملة… هل كده مفيش حوادث؟</h2>
+        <div class="shields mt-5 frag">
+          <span>🔑 كلمات مرور قوية</span><span>🧱 جدار حماية</span><span>🦠 مضاد فيروسات</span>
+          <span>🔐 تشفير</span><span>💾 نسخ احتياطية</span><span>📱 MFA</span>
+        </div>
+        <p class="text-center text-4xl font-black mt-6 hl-danger frag">لأ! ❌</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+          <div class="card frag text-center"><div class="big-emoji">📤</div><p class="font-bold mt-1">تسرّب بيانات</p></div>
+          <div class="card frag text-center"><div class="big-emoji">✂️</div><p class="font-bold mt-1">تلاعب بملفات</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🦠</div><p class="font-bold mt-1">إصابة ببرمجية ضارة</p></div>
+          <div class="card frag text-center"><div class="big-emoji">⛔</div><p class="font-bold mt-1">توقف موقع أو خدمة</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · ليه نستعد؟" data-title="الوقاية لوحدها مش كفاية">
+      <div class="slide-inner">
+        <span class="eyebrow">💡 الفكرة</span>
+        <h2 class="title">الوقاية لوحدها <span class="hl-danger">مش كفاية</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag" style="border-top: .3rem solid var(--info)">
+            <div class="big-emoji">🛡️</div>
+            <p class="h3 mt-2">الوقاية</p>
+            <p class="text-lg">نقلّل فرصة إن الحادث يحصل.</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--safe)">
+            <div class="big-emoji">🚒</div>
+            <p class="h3 mt-2">الاستعداد للاستجابة</p>
+            <p class="text-lg">لو حصل، نتعامل معاه بخطة منظّمة.</p>
+          </div>
+        </div>
+        <div class="callout c-warn mt-5 frag">
+          <span class="ico">🔥</span>
+          <div class="text-lg">زي المدرسة: فيها طفايات وممنوع التدخين (وقاية)… وبرضه فيها <b>خطة إخلاء وتدريب حريق</b> (استجابة).</div>
+        </div>
+      </div>
+    </section>
+
+<!-- ========================= ٢) الحادث الأمني ========================= -->
+
+    <section class="slide" data-section="٢ · الحادث الأمني" data-title="ما هو الحادث الأمني؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🚨 تعريف</span>
+        <h2 class="title">الحادث الأمني <span class="en">Security Incident</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          حدث يؤثّر في <b class="hl-info">سرية</b> المعلومات أو <b class="hl-pink">سلامتها</b> أو <b class="hl-safe">توافرها</b>، أو يهددها بجدية، أو يخالف سياسة أمنية.
+        </div>
+        <p class="mt-5 text-lg font-extrabold frag">أمثلة (فاكرين مثلث CIA؟ 🔺)</p>
+        <div class="grid md:grid-cols-3 gap-4 mt-2">
+          <div class="inc-card frag" style="--c: var(--info); --cs: var(--info-soft)">
+            <div class="big-emoji">📤</div>
+            <p class="h3">تسريب المعلومات</p>
+            <p>معلومات شخصية أو سرية تطلع برّه.</p>
+            <span class="pill">🤫 السرية</span>
+          </div>
+          <div class="inc-card frag" style="--c: var(--pink); --cs: var(--pink-soft)">
+            <div class="big-emoji">✂️</div>
+            <p class="h3">التلاعب بالبيانات</p>
+            <p>تعديل البيانات من غير تصريح.</p>
+            <span class="pill">🧩 السلامة</span>
+          </div>
+          <div class="inc-card frag" style="--c: var(--safe); --cs: var(--safe-soft)">
+            <div class="big-emoji">⛔</div>
+            <p class="h3">انقطاع الخدمة</p>
+            <p>الخدمة تبقى مش متاحة بسبب هجوم.</p>
+            <span class="pill">✅ التوافر</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · الحادث الأمني" data-title="تدرّب: حادث أمني ولا لأ؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 تدرّب</span>
+        <h2 class="title">حادث أمني ولا لأ؟ ونوعه إيه؟</h2>
+        <p class="lead">🦠 برنامج الفدية <span class="en">Ransomware</span>: بيشفّر ملفاتك ويطلب فلوس علشان يرجّعها.</p>
+        <div class="interactive mt-4 grid md:grid-cols-2 gap-3" id="inc-quiz"></div>
+      </div>
+    </section>
+
+<!-- ======================= ٣) مراحل الاستجابة ======================= -->
+
+    <section class="slide" data-section="٣ · مراحل الاستجابة" data-title="المراحل الست">
+      <div class="slide-inner">
+        <span class="eyebrow">🔢 تدفّق الاستجابة</span>
+        <h2 class="title">الاستجابة للحوادث: <span class="hl">٦ مراحل</span></h2>
+        <div class="phases mt-6">
+          <div class="phase frag"><span class="num">1</span><b>التحضير</b><small>جهّز الإجراءات مسبقًا</small></div>
+          <div class="phase frag"><span class="num">2</span><b>الاكتشاف</b><small>اكتشف الحادث وأكّده</small></div>
+          <div class="phase frag"><span class="num">3</span><b>الاحتواء</b><small>امنع انتشار الضرر</small></div>
+          <div class="phase frag"><span class="num">4</span><b>إزالة التهديد</b><small>(الاستئصال) شيل السبب</small></div>
+          <div class="phase frag"><span class="num">5</span><b>الاستعادة</b><small>رجّع الأنظمة تشتغل</small></div>
+          <div class="phase frag"><span class="num">6</span><b>الدروس المستفادة</b><small>اتعلّم وحسّن</small></div>
+        </div>
+        <div class="callout c-primary mt-6 frag">
+          <span class="ico">🧠</span>
+          <div class="text-lg">للحفظ: <b>جهّز ← اكتشف ← احتوِ ← أزِل ← استعِد ← اتعلّم</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٣ · مراحل الاستجابة" data-title="جدول المراحل">
+      <div class="slide-inner">
+        <span class="eyebrow">📋 من الكتاب</span>
+        <h2 class="title">كل مرحلة بتعمل إيه؟</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>المرحلة</th><th>الوصف</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">1 التحضير</td><td>إنشاء إجراءات وهياكل استجابة <b>مسبقًا</b>، استعدادًا للحوادث.</td></tr>
+            <tr class="frag"><td class="rowhead">2 الاكتشاف</td><td>اكتشاف وقوع حادث <b>وتأكيده</b>.</td></tr>
+            <tr class="frag"><td class="rowhead">3 الاحتواء</td><td>تحديد نطاق التأثير بحيث <b>لا ينتشر الضرر</b> أكثر.</td></tr>
+            <tr class="frag"><td class="rowhead">4 إزالة التهديد</td><td>إزالة التهديد <b>ومسبباته</b>: حذف البرمجيات الخبيثة ومعالجة الثغرة.</td></tr>
+            <tr class="frag"><td class="rowhead">5 الاستعادة</td><td>إعادة الأنظمة لحالة <b>آمنة وطبيعية</b> (ممكن من نسخة احتياطية سليمة).</td></tr>
+            <tr class="frag"><td class="rowhead">6 الدروس المستفادة</td><td>تحليل ما حدث وتحسين الضوابط <b>لتقليل التكرار</b>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٣ · مراحل الاستجابة" data-title="قصة: فيروس في معمل المدرسة">
+      <div class="slide-inner">
+        <span class="eyebrow">🎬 قصة خطوة بخطوة</span>
+        <h2 class="title">برمجية خبيثة في معمل المدرسة 🏫</h2>
+        <div class="card mt-3 stepper" data-steps="6">
+          <div class="phase-strip">
+            <div class="ps" data-states="0:idle 1:on 2:done"><span>1</span>التحضير</div>
+            <div class="ps" data-states="0:idle 2:on 3:done"><span>2</span>الاكتشاف</div>
+            <div class="ps" data-states="0:idle 3:on 4:done"><span>3</span>الاحتواء</div>
+            <div class="ps" data-states="0:idle 4:on 5:done"><span>4</span>الإزالة</div>
+            <div class="ps" data-states="0:idle 5:on 6:done"><span>5</span>الاستعادة</div>
+            <div class="ps" data-states="0:idle 6:on"><span>6</span>الدروس</div>
+          </div>
+          <div class="lab mt-4">
+            <div class="pc-grid">
+              <div class="lab-pc" data-states="0:ok 2:sick 3:iso 4:clean 5:ok">🖥️<small>جهاز 7</small></div>
+              <div class="lab-pc" data-states="0:ok">🖥️<small>جهاز 1</small></div>
+              <div class="lab-pc" data-states="0:ok">🖥️<small>جهاز 2</small></div>
+              <div class="lab-pc" data-states="0:ok">🖥️<small>جهاز 3</small></div>
+              <div class="lab-pc" data-states="0:ok">🖥️<small>جهاز 4</small></div>
+              <div class="lab-pc" data-states="0:ok">🖥️<small>جهاز 5</small></div>
+            </div>
+            <div class="lab-note">
+              <div data-only="0">🏫 معمل فيه ٦ أجهزة متوصلين بنفس الشبكة.</div>
+              <div data-only="1">📋 خطة مكتوبة · 👥 فريق مسؤول · 💾 نسخ احتياطية جاهزة</div>
+              <div data-only="2">🚨 مضاد الفيروسات نبّه: ملفات <b>جهاز 7</b> بتتشفّر!</div>
+              <div data-only="3">🔌 فصل <b>جهاز 7</b> عن الشبكة ← البرمجية مش هتوصل لباقي الأجهزة.</div>
+              <div data-only="4">🧹 حذف البرمجية + تحديث النظام لسد الثغرة.</div>
+              <div data-only="5">💾 استرجاع الملفات من نسخة احتياطية سليمة ← الجهاز رجع يشتغل.</div>
+              <div data-only="6">📝 السبب: فلاشة مصابة ← نمنع الفلاشات المجهولة + توعية للطلاب.</div>
+            </div>
+          </div>
+          <div class="caption mt-3">
+            <span data-only="0">يلا نمشي على المراحل الست في موقف حقيقي 👇</span>
+            <span data-only="1"><b>التحضير:</b> قبل أي حادث، الخطة جاهزة.</span>
+            <span data-only="2"><b>الاكتشاف:</b> عرفنا إن في حادث وأكّدناه.</span>
+            <span data-only="3"><b>الاحتواء:</b> عزلنا الجزء المتأثر علشان الضرر مايتنشرش.</span>
+            <span data-only="4"><b>إزالة التهديد:</b> شلنا السبب من جذوره.</span>
+            <span data-only="5"><b>الاستعادة:</b> رجّعنا كل حاجة لحالة آمنة.</span>
+            <span data-only="6"><b>الدروس المستفادة:</b> علشان الحادث مايتكررش.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===================== ٤) الاحتواء والاستئصال ===================== -->
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="الاحتواء والاستئصال">
+      <div class="slide-inner">
+        <span class="eyebrow">🧱🧹 مصطلحات مهمة</span>
+        <h2 class="title">الاحتواء ≠ الاستئصال</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="def" style="border-right-color: var(--warn)">
+            <span class="def-label" style="color: var(--warn)">🧱 الاحتواء</span>
+            <b>الحد من انتشار الضرر</b>: اعزل الجزء المتأثر أو قيّد أثره.
+          </div>
+          <div class="def" style="border-right-color: var(--danger)">
+            <span class="def-label" style="color: var(--danger)">🧹 الاستئصال (إزالة التهديد)</span>
+            <b>إزالة السبب</b>: حذف البرمجية الخبيثة ومعالجة الثغرة.
+          </div>
+        </div>
+        <table class="tbl mt-5 text-lg frag">
+          <thead><tr><th>تشبيه</th><th>🧱 الاحتواء</th><th>🧹 الاستئصال</th><th>💾 الاستعادة</th></tr></thead>
+          <tbody>
+            <tr><td class="rowhead">🔥 حريق</td><td>اقفل الباب علشان مايوصلش لباقي الأوض</td><td>اطفي مصدر النار</td><td>رمّم الأوضة</td></tr>
+            <tr><td class="rowhead">🤒 طالب عنده عدوى</td><td>يقعد في البيت بعيد عن زمايله</td><td>ياخد العلاج</td><td>يرجع المدرسة</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="توقف وفكر: الترتيب ليه مهم؟">
+      <div class="slide-inner">
+        <span class="eyebrow">⏸️ توقف وفكّر</span>
+        <h2 class="title">ليه الترتيب مهم؟</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag">
+            <p class="h3">❓ ليه الاحتواء قبل الاستئصال؟</p>
+            <p class="mt-2 text-lg">علشان <b>نوقف انتشار الضرر الأول</b>. لو قعدنا ندوّر على السبب والجهاز لسه على الشبكة، البرمجية هتوصل لأجهزة تانية.</p>
+          </div>
+          <div class="card frag">
+            <p class="h3">❓ ولو بدأنا الاستعادة قبل إزالة التهديد؟</p>
+            <p class="mt-2 text-lg">ممكن <b>البرمجية الخبيثة أو الثغرة تفضل موجودة</b> ← المشكلة ترجع تاني، ونضطر نرجع للاحتواء والإزالة.</p>
+          </div>
+        </div>
+        <div class="callout c-danger mt-5 frag">
+          <span class="ico">🦠</span>
+          <div class="text-lg">زي ما ترجّع المريض المدرسة قبل ما يخلّص علاجه… <b>العدوى هترجع</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="المراحل ممكن تتداخل">
+      <div class="slide-inner">
+        <span class="eyebrow">🔁 ملاحظة مهمة</span>
+        <h2 class="title">الترتيب للفهم… لكن الواقع ممكن <span class="hl">يرجع لورا</span></h2>
+        <div class="loop mt-6">
+          <div class="loop-row">
+            <span class="lp">التحضير</span><i>←</i><span class="lp">الاكتشاف</span><i>←</i>
+            <span class="lp hot">الاحتواء</span><i>←</i><span class="lp hot">الإزالة</span><i>←</i>
+            <span class="lp warn">الاستعادة</span><i>←</i><span class="lp">الدروس</span>
+          </div>
+          <div class="loop-back frag">↩ اكتشفنا بقايا للتهديد أثناء الاستعادة ← نرجع للاحتواء والإزالة</div>
+        </div>
+        <div class="callout c-info mt-6 frag">
+          <span class="ico">📌</span>
+          <div class="text-lg">المراحل الست <b>تسلسل عام</b> بينظّم الاستجابة، لكن بعض الأنشطة <b>ممكن تتداخل أو تتكرر</b> حسب طبيعة الحادث.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="لعبة: رتّب المراحل">
+      <div class="slide-inner">
+        <span class="eyebrow">🎮 نشاط</span>
+        <h2 class="title">رتّب المراحل الست</h2>
+        <p class="lead">اضغط على المراحل بالترتيب الصح.</p>
+        <div class="interactive" id="order">
+          <div class="order-slots mt-5" id="ord-slots"></div>
+          <div class="chips mt-5" id="ord-pool"></div>
+          <div class="flex items-center justify-center gap-3 mt-4">
+            <span class="pill pill-primary" id="ord-msg"></span>
+            <button class="btn" id="ord-reset">↺ إعادة</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="تدرّب: الإجراء ده في أنهي مرحلة؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 تدرّب</span>
+        <h2 class="title">الإجراء ده تبع أنهي مرحلة؟</h2>
+        <div class="interactive mt-4 grid md:grid-cols-2 gap-3" id="stage-quiz"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · الاحتواء والاستئصال" data-title="سؤال امتحان">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 سؤال امتحان · ٦ درجات</span>
+        <h2 class="title">اشرح أهمية التسلسل العام لمراحل الاستجابة، مستخدمًا الاحتواء والاستئصال والاستعادة كمثال، ووضّح ليه ممكن نرجع لمرحلة سابقة.</h2>
+        <p class="lead">💡 في إجابتك: إيه اللي يحصل لو بدأت الاستعادة قبل إزالة السبب؟</p>
+        <div class="grid gap-3 mt-5">
+          <div class="callout c-warn frag"><span class="ico">🧱</span><div class="text-lg"><b>الاحتواء أولاً</b>: نعزل الجزء المتأثر علشان الضرر مايتنشرش.</div></div>
+          <div class="callout c-danger frag"><span class="ico">🧹</span><div class="text-lg"><b>ثم الاستئصال</b>: نحذف البرمجية الخبيثة ونعالج الثغرة.</div></div>
+          <div class="callout c-safe frag"><span class="ico">💾</span><div class="text-lg"><b>ثم الاستعادة</b>: نرجّع الأنظمة لحالة آمنة.</div></div>
+          <div class="callout c-primary frag"><span class="ico">↩</span><div class="text-lg">لو استعدنا قبل الإزالة ← <b>التهديد يفضل موجود والمشكلة ترجع</b> ← نرجع للاحتواء والإزالة. والاستعادة نفسها ممكن تكشف بقايا للتهديد.</div></div>
+        </div>
+      </div>
+    </section>
+
+<!-- ========================= ٥) تقييم المخاطر ========================= -->
+
+    <section class="slide" data-section="٥ · تقييم المخاطر" data-title="ليه نقيّم المخاطر؟">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ تقييم المخاطر</span>
+        <h2 class="title">مش هنقدر نعالج كل حاجة مرة واحدة!</h2>
+        <p class="lead">الفريق وقته وإمكانياته محدودة… فلازم <b>نرتّب المخاطر حسب الأولوية</b>.</p>
+        <div class="def mt-5">
+          <span class="def-label">الخطر</span>
+          احتمال حدوث شيء <b>يسبّب ضررًا أو خسارة</b>.
+        </div>
+        <p class="mt-5 text-lg font-extrabold frag">ولكل خطر بنسأل سؤالين:</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-2">
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <p class="h3">💥 التأثير <span class="en">Impact</span></p>
+            <p class="text-lg mt-1">لو حصل… <b>الضرر قد إيه؟</b></p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--info)">
+            <p class="h3">🎲 الاحتمالية <span class="en">Likelihood</span></p>
+            <p class="text-lg mt-1"><b>احتمال يحصل</b> قد إيه؟</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · تقييم المخاطر" data-title="مصفوفة تقييم المخاطر">
+      <div class="slide-inner">
+        <span class="eyebrow">🧮 مصفوفة تقييم المخاطر</span>
+        <h2 class="title">المخاطرة = <span class="hl-danger">التأثير</span> × <span class="hl-info">الاحتمالية</span></h2>
+        <div class="grid md:grid-cols-[1.2fr_1fr] gap-6 mt-4 items-center interactive" id="risk">
+          <div class="matrix-wrap">
+            <div class="m-ylab">💥 التأثير</div>
+            <div class="matrix" id="rk-matrix"></div>
+            <div class="m-xlab">🎲 الاحتمالية</div>
+          </div>
+          <div>
+            <p class="font-extrabold">💥 التأثير:</p>
+            <div class="seg mt-1" data-axis="impact">
+              <button class="btn" data-v="0">منخفض</button><button class="btn" data-v="1">متوسط</button><button class="btn" data-v="2">مرتفع</button>
+            </div>
+            <p class="font-extrabold mt-4">🎲 الاحتمالية:</p>
+            <div class="seg mt-1" data-axis="prob">
+              <button class="btn" data-v="0">منخفضة</button><button class="btn" data-v="1">متوسطة</button><button class="btn" data-v="2">مرتفعة</button>
+            </div>
+            <div class="risk-out mt-5" id="rk-out"></div>
+          </div>
+        </div>
+        <div class="callout c-danger mt-4 frag">
+          <span class="ico">⚠️</span><div class="text-lg">نعالج <b>التأثير المرتفع + الاحتمالية المرتفعة</b> أولاً.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · تقييم المخاطر" data-title="تدرّب: رتّب الأولويات">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 تدرّب</span>
+        <h2 class="title">رتّب أولوية المخاطر</h2>
+        <p class="lead">نديّ كل مستوى درجة: منخفض = ١ · مرتفع = ٣</p>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>الخطر</th><th>التأثير</th><th>الاحتمالية</th><th>الدرجة</th><th>الأولوية</th></tr></thead>
+          <tbody>
+            <tr><td class="rowhead">١</td><td>كبير</td><td>عالية</td><td class="frag font-black">٣ × ٣ = ٩</td><td class="frag"><span class="pill pill-danger">الأولى 🔥</span></td></tr>
+            <tr><td class="rowhead">٢</td><td>صغير</td><td>عالية</td><td class="frag font-black">١ × ٣ = ٣</td><td class="frag"><span class="pill pill-warn">متساوية</span></td></tr>
+            <tr><td class="rowhead">٣</td><td>كبير</td><td>منخفضة</td><td class="frag font-black">٣ × ١ = ٣</td><td class="frag"><span class="pill pill-warn">متساوية</span></td></tr>
+            <tr><td class="rowhead">٤</td><td>صغير</td><td>منخفضة</td><td class="frag font-black">١ × ١ = ١</td><td class="frag"><span class="pill pill-safe">الأخيرة</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-warn mt-4 frag">
+          <span class="ico">⚖️</span>
+          <div class="text-lg">٢ و ٣ <b>متساويين في الدرجة</b> ← الترتيب بينهم يعتمد على <b>السياق والضوابط المتاحة</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · تقييم المخاطر" data-title="فكّر كمهندس: هجوم فدية على المدرسة">
+      <div class="slide-inner">
+        <span class="eyebrow">🛠️ فكّر كمهندس</span>
+        <h2 class="title">برنامج فدية شفّر سجلات الطلاب 🏫🦠</h2>
+        <p class="lead">الموظفين مش قادرين يدخلوا. اتكشف الحادث دلوقتي… <b>إنت قائد الاستجابة</b>.</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card">
+            <p class="h3">١. أول قرار: تعمل إيه؟</p>
+            <div class="grid gap-2 mt-3 interactive" id="eng-choice">
+              <button class="btn" data-v="restore">💾 أستعيد من النسخة الاحتياطية فورًا</button>
+              <button class="btn" data-v="phases">🔢 أتّبع المراحل بالترتيب</button>
+            </div>
+            <div class="mt-3" id="eng-out"></div>
+          </div>
+          <div class="card frag">
+            <p class="h3">٢. المراحل المتبقية</p>
+            <ol class="grid gap-1 mt-2 text-lg">
+              <li><b>🧱 الاحتواء:</b> فصل الأجهزة المصابة عن الشبكة.</li>
+              <li><b>🧹 الإزالة:</b> حذف برنامج الفدية وسد الثغرة.</li>
+              <li><b>💾 الاستعادة:</b> استرجاع السجلات من نسخة سليمة.</li>
+              <li><b>📝 الدروس:</b> نعرف دخل منين ونحسّن الحماية.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="card mt-4 frag">
+          <p class="h3">٣. قيّم خطرين: أيهم الأول؟</p>
+          <div class="grid md:grid-cols-2 gap-3 mt-2">
+            <div class="callout c-danger"><span class="ico">🦠</span><div><b>هجوم فدية تاني</b>: تأثير مرتفع · احتمالية مرتفعة (الثغرة كانت موجودة) ← <b>الأول</b></div></div>
+            <div class="callout c-info"><span class="ico">🔌</span><div><b>انقطاع كهرباء قصير</b>: تأثير منخفض · احتمالية متوسطة ← بعده</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ============================ ٦) المراجعة ============================ -->
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="ملخص الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🏆 ملخص</span>
+        <h2 class="title">الخلاصة</h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-5 summary">
+          <div class="frag"><span>🛡️</span><b>الحماية</b><i>=</i>مش بتمنع كل الحوادث ← لازم نستعد</div>
+          <div class="frag"><span>🚨</span><b>الحادث الأمني</b><i>=</i>يؤثر في السرية أو السلامة أو التوافر</div>
+          <div class="frag"><span>🔢</span><b>المراحل</b><i>=</i>تحضير · اكتشاف · احتواء · إزالة · استعادة · دروس</div>
+          <div class="frag"><span>🧱</span><b>الاحتواء</b><i>=</i>قبل الاستئصال لمنع انتشار الضرر</div>
+          <div class="frag"><span>🔁</span><b>التسلسل</b><i>=</i>عام، وممكن نرجع لمرحلة سابقة</div>
+          <div class="frag"><span>⚖️</span><b>المخاطرة</b><i>=</i>التأثير × الاحتمالية ← المرتفع الأول</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="صح ولا غلط">
+      <div class="slide-inner">
+        <span class="eyebrow">✔️✖️ مثال محلول</span>
+        <h2 class="title">صح ولا غلط؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="tf"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="املأ الفراغات">
+      <div class="slide-inner">
+        <span class="eyebrow">✏️ تمرين</span>
+        <h2 class="title">املأ الفراغات</h2>
+        <div class="card mt-4 text-xl leading-loose interactive" id="blanks">
+          يُسمى الحدث الذي يؤثر في سرية المعلومات أو سلامتها أو توافرها <button class="blank" data-a="الحادث الأمني">[أ]</button>.
+          وفي نموذج الدرس نستخدم <button class="blank" data-a="الاحتواء">[ب]</button> للحد من انتشار الضرر،
+          ثم <button class="blank" data-a="إزالة التهديد (الاستئصال)">[ج]</button> لإزالة التهديد ومسبباته،
+          وتليها <button class="blank" data-a="الاستعادة">[د]</button> لإعادة الأنظمة والخدمات،
+          ثم <button class="blank" data-a="الدروس المستفادة والتحسين">[هـ]</button> لتحليل ما حدث وتحسين الحماية.
+        </div>
+        <p class="mt-3 muted font-bold text-center">اضغط على الفراغ علشان تظهر الإجابة</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="بطاقات المصطلحات">
+      <div class="slide-inner">
+        <span class="eyebrow">🃏 مراجعة</span>
+        <h2 class="title">اقلب البطاقة 👆</h2>
+        <div class="flash-grid mt-4 interactive" id="flash"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="الاختبار">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 تدريبات الفائز</span>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <h2 class="title">اختر الإجابة الصحيحة</h2>
+          <div class="flex gap-2 items-center">
+            <span class="pill pill-safe" id="quiz-score"></span>
+            <button class="btn" id="quiz-reset">↺ إعادة</button>
+          </div>
+        </div>
+        <div class="interactive mt-4 grid gap-3" id="quiz"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · المراجعة والاختبار" data-title="طبّق ما تعلمته">
+      <div class="slide-inner">
+        <span class="eyebrow">🛒 طبّق ما تعلمته</span>
+        <h2 class="title">متجر إلكتروني اكتشف إن بيانات العملاء <span class="hl-danger">اتسرّبت</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag">
+            <p class="h3">المرحلتين الجايين؟</p>
+            <p class="mt-2 text-lg">الاكتشاف حصل خلاص ← <b>🧱 الاحتواء</b> (نقفل الثغرة المؤقتة ونوقف التسريب) ثم <b>🧹 الإزالة</b> (نشيل السبب).</p>
+          </div>
+          <div class="card frag">
+            <p class="h3">خطر له الأولوية بعد كده؟</p>
+            <p class="mt-2 text-lg"><b>تكرار التسريب</b> من نفس الثغرة: تأثير مرتفع واحتمالية مرتفعة.</p>
+          </div>
+        </div>
+        <div class="end-banner mt-6">
+          <span>🎉</span>
+          <div><b>أحسنتم!</b> خلّصنا درس الاستجابة للحوادث وإدارة المخاطر.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bar">
+    <button class="bar-btn" data-deck-act="overview" title="فهرس الشرائح (O)">☰</button>
+    <span class="section" data-deck="section"></span>
+    <span class="flex-1"></span>
+    <span class="count" data-deck="count"></span>
+    <button class="bar-btn" data-deck-act="prev" title="السابق (→)">→</button>
+    <button class="bar-btn primary" data-deck-act="next" title="التالي (←)">التالي ←</button>
+    <button class="bar-btn" data-deck-act="theme" title="الوضع الليلي">🌓</button>
+    <button class="bar-btn" data-deck-act="fullscreen" title="ملء الشاشة (F)">⛶</button>
+  </footer>
+</div>
+
+<div class="overview" role="dialog" aria-label="فهرس الشرائح">
+  <div class="overview-panel">
+    <div class="flex items-center justify-between">
+      <p class="h3">☰ فهرس الشرائح</p>
+      <button class="bar-btn" onclick="document.querySelector('.overview').classList.remove('open')">✕</button>
+    </div>
+    <div class="ov-body"></div>
+  </div>
+</div>
+
+<script src="../assets/lesson-kit.js"></script>
+<script src="unit2-lesson3.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

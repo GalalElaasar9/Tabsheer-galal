@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تقنيات التشفير والمصادقة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="../assets/deck.css">
+  <link rel="stylesheet" href="../assets/lesson-kit.css">
+  <link rel="stylesheet" href="unit2-lesson1.css">
+</head>
+<body>
+<div class="deck">
+  <div class="progress"><i></i></div>
+
+  <main class="stage">
+
+<!-- ============================ المقدمة ============================ -->
+
+    <section class="slide" data-section="المقدمة" data-title="الغلاف">
+      <div class="slide-inner text-center">
+        <span class="eyebrow">الصف الثاني الثانوي · بكالوريا</span>
+        <p class="mt-8 text-xl font-extrabold muted">الفصل الثاني: <span class="hl">الأمن السيبراني</span> · الدرس الأول</p>
+        <h1 class="title-xl mt-2">تقنيات التشفير والمصادقة</h1>
+        <div class="cover-icons mt-10">
+          <div class="cover-ico">🛡️<span>الأمن السيبراني</span></div>
+          <div class="cover-ico">🔐<span>التشفير</span></div>
+          <div class="cover-ico">🌐<span>HTTPS</span></div>
+          <div class="cover-ico">🤝<span>TLS</span></div>
+          <div class="cover-ico">📱<span>2FA</span></div>
+          <div class="cover-ico">✍️<span>التوقيع الرقمي</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="أهداف الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 أهداف التعلم</span>
+        <h2 class="title">في نهاية الدرس هتقدر:</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="card frag"><span class="num">1</span><p class="mt-3 text-lg font-bold">تشرح إزاي <span class="hl">HTTPS</span> بيحمي الاتصال.</p></div>
+          <div class="card frag"><span class="num pink">2</span><p class="mt-3 text-lg font-bold">تميّز بين <span class="hl">التشفير</span> و<span class="hl">الشهادة الرقمية</span> و<span class="hl">2FA</span> و<span class="hl">التوقيع الرقمي</span>.</p></div>
+          <div class="card frag"><span class="num safe">3</span><p class="mt-3 text-lg font-bold">تختار طريقة مصادقة مناسبة وتبرّر اختيارك.</p></div>
+        </div>
+        <div class="def mt-6 frag" style="border-right-color: var(--pink)">
+          <span class="def-label" style="color: var(--pink)">❓ السؤال الرئيسي</span>
+          إزاي التشفير والمصادقة بيشتغلوا <b>مع بعض</b> لحماية الاتصال والخدمات على الإنترنت؟
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="المقدمة" data-title="خريطة الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🗺️ خريطة الدرس</span>
+        <h2 class="title">رحلتنا النهارده</h2>
+        <ol class="roadmap mt-6">
+          <li><span class="num">0</span><b>الأمن السيبراني ومثلث CIA</b></li>
+          <li><span class="num">1</span><b>يعني إيه تشفير؟</b></li>
+          <li><span class="num">2</span><b>المتماثل وغير المتماثل</b></li>
+          <li><span class="num">3</span><b>مكونات الإنترنت</b></li>
+          <li><span class="num">4</span><b>بروتوكول HTTP</b></li>
+          <li><span class="num">5</span><b>HTTPS</b></li>
+          <li><span class="num">6</span><b>TLS والشهادة الرقمية</b></li>
+          <li><span class="num">7</span><b>مصافحة TLS</b></li>
+          <li><span class="num">8</span><b>المصادقة و 2FA</b></li>
+          <li><span class="num">9</span><b>التوقيع الرقمي</b></li>
+          <li><span class="num">10</span><b>تركيب التقنيات + مراجعة</b></li>
+        </ol>
+      </div>
+    </section>
+
+<!-- ====================== ٠) الأمن السيبراني ====================== -->
+
+    <section class="slide" data-section="٠ · الأمن السيبراني" data-title="يعني إيه أمن سيبراني؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🛡️ نبدأ من الأساس</span>
+        <h2 class="title">يعني إيه <span class="hl">أمن سيبراني</span>؟ <span class="en">Cyber Security</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          حماية <b>الأجهزة</b> و<b>الشبكات</b> و<b>البيانات</b> من الهجمات والوصول غير المصرّح به.
+        </div>
+        <p class="mt-5 text-lg font-extrabold frag">بيحمينا من حاجات زي:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-2">
+          <div class="card frag text-center"><div class="big-emoji">🕵️</div><p class="font-bold mt-1">التجسس على بياناتك</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🔓</div><p class="font-bold mt-1">سرقة حسابك</p></div>
+          <div class="card frag text-center"><div class="big-emoji">✂️</div><p class="font-bold mt-1">تعديل البيانات</p></div>
+          <div class="card frag text-center"><div class="big-emoji">💥</div><p class="font-bold mt-1">إيقاف المواقع والخدمات</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٠ · الأمن السيبراني" data-title="مثلث الأمن CIA">
+      <div class="slide-inner">
+        <span class="eyebrow">🔺 مثلث الأمن</span>
+        <h2 class="title">مثلث <span class="hl">CIA</span>: ٣ أهداف لأي نظام آمن</h2>
+        <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 mt-4 items-center">
+          <svg class="cia" viewBox="0 0 320 310" role="img" aria-label="مثلث السرية والسلامة والتوافر">
+            <polygon points="160,30 30,250 290,250" class="cia-tri"/>
+            <text x="160" y="175" class="cia-mid">CIA</text>
+            <circle cx="160" cy="30" r="26" class="cia-c"/><text x="160" y="38" class="cia-ico">🤫</text>
+            <circle cx="30" cy="250" r="26" class="cia-i"/><text x="30" y="258" class="cia-ico">🧩</text>
+            <circle cx="290" cy="250" r="26" class="cia-a"/><text x="290" y="258" class="cia-ico">✅</text>
+            <text x="160" y="80" class="cia-label">السرية</text>
+            <text x="40" y="302" class="cia-label">السلامة</text>
+            <text x="280" y="302" class="cia-label">التوافر</text>
+          </svg>
+          <div class="grid gap-3">
+            <div class="cia-card frag" style="--c: var(--info); --cs: var(--info-soft)">
+              <p class="h3">🤫 السرية <span class="en">Confidentiality</span></p>
+              <p>البيانات <b>محدش يشوفها</b> غير المصرّح لهم.</p>
+              <p class="muted">مثال: محدش يقرا رسايلك أو كلمة المرور.</p>
+            </div>
+            <div class="cia-card frag" style="--c: var(--pink); --cs: var(--pink-soft)">
+              <p class="h3">🧩 السلامة <span class="en">Integrity</span></p>
+              <p>البيانات <b>متتغيّرش</b> من غير إذن.</p>
+              <p class="muted">مثال: محدش يغيّر درجتك أو مبلغ التحويل.</p>
+            </div>
+            <div class="cia-card frag" style="--c: var(--safe); --cs: var(--safe-soft)">
+              <p class="h3">✅ التوافر <span class="en">Availability</span></p>
+              <p>الخدمة <b>شغّالة ومتاحة</b> وقت ما تحتاجها.</p>
+              <p class="muted">مثال: موقع النتيجة مايقعش يوم النتيجة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٠ · الأمن السيبراني" data-title="تدرّب: أنهي ضلع اتضرب؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 تدرّب</span>
+        <h2 class="title">في كل موقف… أنهي ضلع في المثلث اتضرب؟</h2>
+        <div class="interactive mt-4 grid md:grid-cols-2 gap-3" id="cia-quiz"></div>
+        <div class="callout c-primary mt-4 frag">
+          <span class="ico">📌</span>
+          <div class="text-lg">الدرس ده بيركّز على <b>السرية</b> (التشفير) و<b>السلامة</b> (التوقيع الرقمي وTLS) + <b>التحقق من الهوية</b> (الشهادات والمصادقة).</div>
+        </div>
+      </div>
+    </section>
+
+<!-- ======================== ١) يعني إيه تشفير؟ ======================== -->
+
+    <section class="slide" data-section="١ · يعني إيه تشفير؟" data-title="تخيّل: الورقة في الفصل">
+      <div class="slide-inner">
+        <span class="eyebrow">🤔 تخيّل</span>
+        <h2 class="title">بتبعت ورقة لصاحبك في آخر الفصل…</h2>
+        <div class="card mt-5 frag">
+          <div class="pass-row">
+            <div class="pass-node">🧑‍🎓<span>إنت</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">👦<span>طالب</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">👧<span>طالب</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">🧒<span>طالب</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">🧑<span>صاحبك</span></div>
+          </div>
+          <p class="text-center mt-3 text-lg font-bold">أي حد في السكة <span class="hl-danger">يقدر يقراها</span> 😬</p>
+        </div>
+        <div class="card mt-4 frag">
+          <div class="pass-row">
+            <div class="pass-node">📱<span>جهازك</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">📶<span>الراوتر</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">🏢<span>مزوّد الخدمة</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">🛰️<span>شبكات وسيطة</span></div><div class="pass-arrow"></div>
+            <div class="pass-node">🖥️<span>الموقع</span></div>
+          </div>
+          <p class="text-center mt-3 text-lg font-bold">🌐 والإنترنت نفس الفكرة!</p>
+        </div>
+        <div class="callout c-primary mt-4 frag">
+          <span class="ico">💡</span>
+          <div class="text-lg">الحل: نكتب الرسالة بطريقة <b>محدش يفهمها غير صاحبنا</b> = <b>التشفير</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · يعني إيه تشفير؟" data-title="تعريف التشفير">
+      <div class="slide-inner">
+        <span class="eyebrow">📖 تعريف</span>
+        <h2 class="title">التشفير <span class="en">Encryption</span></h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-4">
+          <div class="def">
+            <span class="def-label">التشفير</span>
+            تحويل البيانات المفهومة إلى بيانات <b>غير مفهومة</b> باستخدام <b class="hl-warn">مفتاح</b>.
+          </div>
+          <div class="def frag" style="border-right-color: var(--safe)">
+            <span class="def-label" style="color: var(--safe)">فك التشفير</span>
+            إرجاع البيانات المشفرة لأصلها <b>بالمفتاح</b>.
+          </div>
+        </div>
+        <div class="flow mt-6 frag">
+          <div class="flow-box plain"><small>النص الأصلي</small><span class="mono">12345678</span></div>
+          <div class="flow-op"><span class="keychip">🔑 المفتاح</span><b>تشفير</b><i class="flow-arrow"></i></div>
+          <div class="flow-box cipher"><small>النص المشفر</small><span class="mono">x9#Lq@2!</span></div>
+          <div class="flow-op"><span class="keychip">🔑 المفتاح</span><b>فك التشفير</b><i class="flow-arrow"></i></div>
+          <div class="flow-box plain"><small>النص الأصلي</small><span class="mono">12345678</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · يعني إيه تشفير؟" data-title="مصطلحات التشفير">
+      <div class="slide-inner">
+        <span class="eyebrow">🧩 مصطلحات</span>
+        <h2 class="title">٤ مصطلحات أساسية</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag"><div class="flex items-center gap-3"><span class="big-emoji">📄</span><div><p class="h3">النص الأصلي <span class="en">Plaintext</span></p><p>البيانات المفهومة قبل التشفير.</p></div></div></div>
+          <div class="card frag"><div class="flex items-center gap-3"><span class="big-emoji">🔣</span><div><p class="h3">النص المشفر <span class="en">Ciphertext</span></p><p>البيانات بعد التشفير — غير مفهومة.</p></div></div></div>
+          <div class="card frag"><div class="flex items-center gap-3"><span class="big-emoji">⚙️</span><div><p class="h3">الخوارزمية <span class="en">Algorithm</span></p><p>طريقة التشفير. <span class="muted">مثال: «حرّك كل حرف خطوات»</span></p></div></div></div>
+          <div class="card frag"><div class="flex items-center gap-3"><span class="big-emoji">🔑</span><div><p class="h3">المفتاح <span class="en">Key</span></p><p>القيمة السرية. <span class="muted">مثال: «٣ خطوات»</span></p></div></div></div>
+        </div>
+        <div class="callout c-warn mt-4 frag">
+          <span class="ico">⚠️</span><div>الخوارزمية غالبًا معروفة… <b>السر الحقيقي هو المفتاح</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · يعني إيه تشفير؟" data-title="جرّب: شفرة قيصر">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب بنفسك</span>
+        <h2 class="title">شفرة قيصر <span class="en">Caesar Cipher</span></h2>
+        <p class="lead">كل حرف يتبدّل بالحرف اللي بعده بعدد خطوات = <b>المفتاح</b>.</p>
+        <div class="card mt-4 interactive" id="caesar">
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <label class="font-extrabold">📄 النص الأصلي</label>
+              <input class="field mt-1 text-xl" id="cz-in" value="نتقابل الساعة خمسة" autocomplete="off">
+              <div class="mt-4 flex items-center gap-3">
+                <span class="keychip text-base">🔑 المفتاح = <b id="cz-k-val">3</b></span>
+                <input type="range" min="1" max="10" value="3" id="cz-k" aria-label="المفتاح">
+              </div>
+              <label class="font-extrabold block mt-4">🔣 النص المشفر</label>
+              <div class="cz-out" id="cz-out"></div>
+            </div>
+            <div>
+              <p class="font-extrabold">🔤 جدول التبديل</p>
+              <div class="cz-strip" id="cz-strip"></div>
+              <div class="card-soft mt-4">
+                <p class="font-extrabold">🕵️ خمّن المفتاح وفك الرسالة:</p>
+                <div class="mt-2 flex items-center gap-3">
+                  <span class="keychip">تخمينك = <b id="cz-g-val">1</b></span>
+                  <input type="range" min="1" max="10" value="1" id="cz-g" aria-label="تخمين المفتاح">
+                </div>
+                <div class="cz-out small mt-2" id="cz-guess"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١ · يعني إيه تشفير؟" data-title="هدف التشفير">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 الهدف</span>
+        <h2 class="title">هدف التشفير: <span class="hl-safe">السرية</span></h2>
+        <div class="def mt-4" style="border-right-color: var(--safe)">
+          منع غير المصرّح لهم من <b>قراءة</b> البيانات أثناء انتقالها.
+        </div>
+        <div class="callout c-info mt-4 frag">
+          <span class="ico">📦</span>
+          <div class="text-lg">التشفير <b>مش بيمنع</b> اعتراض الرسالة… لكنه بيخلّيها <b>بلا قيمة</b> للي اعترضها.</div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag text-center">
+            <p class="muted font-bold">شفرة قيصر</p>
+            <p class="text-4xl font-black hl-danger">٢٧</p>
+            <p class="font-bold">احتمال بس — تتكسر في دقيقة 😅</p>
+          </div>
+          <div class="card frag text-center">
+            <p class="muted font-bold">التشفير الحديث (١٢٨ بت)</p>
+            <p class="text-3xl font-black hl-safe">٣٤٠ × ١٠<sup>٣٦</sup></p>
+            <p class="font-bold">احتمال — محتاج أكتر من عمر الكون 🌌</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ========================= ٢) أنواع التشفير ========================= -->
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="نوعين التشفير">
+      <div class="slide-inner">
+        <span class="eyebrow">🔀 أنواع التشفير</span>
+        <h2 class="title">عندنا نوعين</h2>
+        <div class="grid md:grid-cols-2 gap-5 mt-6">
+          <div class="type-card frag" style="--c: var(--warn); --cs: var(--warn-soft)">
+            <div class="huge-emoji">🔑</div>
+            <p class="type-name">التشفير المتماثل</p>
+            <p class="en">Symmetric</p>
+            <p class="mt-3 text-lg font-bold">مفتاح <u>واحد</u> للتشفير وفكّه</p>
+          </div>
+          <div class="type-card frag" style="--c: var(--info); --cs: var(--info-soft)">
+            <div class="huge-emoji">🔓🗝️</div>
+            <p class="type-name">التشفير غير المتماثل</p>
+            <p class="en">Asymmetric = Public-Key</p>
+            <p class="font-extrabold" style="color: var(--info)">(في الكتاب: التشفير بالمفتاح العام)</p>
+            <p class="mt-2 text-lg font-bold"><u>زوج</u> مفاتيح: عام + خاص</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="التشفير المتماثل">
+      <div class="slide-inner">
+        <span class="eyebrow">🔑 النوع الأول</span>
+        <h2 class="title">التشفير المتماثل <span class="en">Symmetric</span></h2>
+        <div class="grid md:grid-cols-[1.3fr_1fr] gap-3 mt-3">
+          <div class="def" style="border-right-color: var(--warn)">
+            <span class="def-label" style="color: var(--warn)">التعريف</span>
+            <b>نفس المفتاح</b> يُستخدم للتشفير وفك التشفير.
+          </div>
+          <div class="callout c-warn">
+            <span class="ico">📦</span><div>زي صندوق بقفل وله <b>مفتاحين متطابقين</b>: واحد مع أحمد وواحد مع منى.</div>
+          </div>
+        </div>
+        <div class="card mt-4 stepper" data-steps="3">
+          <div class="lane">
+            <div class="actor">
+              <div class="avatar">👦</div>أحمد
+              <span class="keychip">🔑 المفتاح</span>
+            </div>
+            <div class="actor hacker">
+              <div class="avatar">🕵️</div>متطفل
+              <div class="bubble bad" data-at="2"><span class="mono">ط#ل9ق@!ث</span> 🤷</div>
+            </div>
+            <div class="actor">
+              <div class="avatar">👧</div>منى
+              <span class="keychip">🔑 نفس المفتاح</span>
+              <div class="bubble good" data-at="3">«نتقابل الساعة ٥» ✅</div>
+            </div>
+            <div class="wire"></div>
+            <div class="packet" data-states="0:r 2:m 3:l">
+              <span data-only="0">📄 نتقابل الساعة ٥</span>
+              <span data-only="1,2">🔒 ط#ل9ق@!ث</span>
+              <span data-only="3">📄 نتقابل الساعة ٥</span>
+            </div>
+          </div>
+          <div class="caption">
+            <span data-only="0">أحمد ومنى متفقين على مفتاح سري واحد 🔑</span>
+            <span data-only="1">أحمد يشفّر الرسالة بالمفتاح.</span>
+            <span data-only="2">المتطفل اعترضها… شايف رموز ملهاش معنى.</span>
+            <span data-only="3">منى تفك التشفير <b>بنفس المفتاح</b> ✅</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="مشكلة توزيع المفتاح">
+      <div class="slide-inner">
+        <span class="eyebrow">⚠️ المشكلة</span>
+        <h2 class="title">إزاي أحمد يوصّل المفتاح لمنى أصلاً؟</h2>
+        <div class="grid md:grid-cols-3 gap-3 mt-5">
+          <div class="card frag text-center"><div class="big-emoji">📨</div><p class="mt-2 font-bold">يبعته على الإنترنت</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🕵️🔑</div><p class="mt-2 font-bold">المتطفل ياخد نسخة</p></div>
+          <div class="card frag text-center" style="border-color: var(--danger)"><div class="big-emoji">💥</div><p class="mt-2 font-bold hl-danger">كل الرسايل اتكشفت!</p></div>
+        </div>
+        <p class="mt-3 text-center text-lg font-extrabold frag">= <span class="hl-danger">مشكلة توزيع المفتاح</span></p>
+
+        <div class="card mt-4 frag interactive" id="keycount">
+          <p class="font-extrabold text-lg">🧮 وكمان: كل اتنين محتاجين مفتاح خاص بيهم!</p>
+          <div class="mt-3 flex items-center gap-3">
+            <span class="pill pill-primary">عدد الأشخاص: <b id="kc-n">30</b></span>
+            <input type="range" min="2" max="200" value="30" id="kc-range" aria-label="عدد الأشخاص">
+          </div>
+          <div class="grid md:grid-cols-2 gap-3 mt-3">
+            <div class="card-soft text-center">
+              <p class="font-bold muted">المتماثل</p>
+              <p class="text-4xl font-black hl-warn" id="kc-sym">435</p>
+              <p class="font-bold">مفتاح</p>
+            </div>
+            <div class="card-soft text-center">
+              <p class="font-bold muted">المفتاح العام</p>
+              <p class="text-4xl font-black hl-info" id="kc-asym">60</p>
+              <p class="font-bold">مفتاح (زوج لكل شخص)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="مميزات وعيوب المتماثل">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ تقييم</span>
+        <h2 class="title">المتماثل: مميزات وعيوب</h2>
+        <div class="grid md:grid-cols-2 gap-5 mt-5">
+          <div class="pc pros">
+            <p class="pc-head">✅ المميزات</p>
+            <ul class="list safe text-lg">
+              <li class="frag"><span><b>سريع جدًا</b> وكفء.</span></li>
+              <li class="frag"><span>مناسب للبيانات <b>الكبيرة</b>.</span></li>
+            </ul>
+          </div>
+          <div class="pc cons">
+            <p class="pc-head">❌ العيوب</p>
+            <ul class="list danger text-lg">
+              <li class="frag"><span><b>صعب توصيل المفتاح</b> بأمان.</span></li>
+              <li class="frag"><span>لو المفتاح اتسرق ← كله ينكشف.</span></li>
+              <li class="frag"><span>عدد المفاتيح كبير مع ناس كتير.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="التشفير بالمفتاح العام">
+      <div class="slide-inner">
+        <span class="eyebrow">🔓🗝️ النوع الثاني</span>
+        <h2 class="title">التشفير <span class="hl-info">بالمفتاح العام</span> (غير المتماثل)</h2>
+        <div class="def mt-3" style="border-right-color: var(--info)">
+          <span class="def-label" style="color: var(--info)">التعريف</span>
+          يستخدم <b>زوجًا من المفاتيح المرتبطة</b>: مفتاح عام ومفتاح خاص.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag" style="border-color: var(--info)">
+            <p class="h3"><span class="keychip pub text-base">🔓 المفتاح العام</span></p>
+            <p class="mt-2 text-lg">مع <b>أي حد</b> ← بيُستخدم في <b>التشفير</b>.</p>
+          </div>
+          <div class="card frag" style="border-color: var(--pink)">
+            <p class="h3"><span class="keychip priv text-base">🗝️ المفتاح الخاص</span></p>
+            <p class="mt-2 text-lg">مع <b>صاحبه بس</b> ← بيُستخدم في <b>فك التشفير</b>.</p>
+          </div>
+        </div>
+        <div class="callout c-info mt-4 frag">
+          <span class="ico">📮</span>
+          <div class="text-lg">زي <b>صندوق البريد</b>: أي حد يرمي جواب (العام)، وإنت بس اللي تفتحه (الخاص).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="المفتاح العام خطوة بخطوة">
+      <div class="slide-inner">
+        <span class="eyebrow">🎬 خطوة بخطوة</span>
+        <h2 class="title">أحمد يبعت رسالة سرية لمنى</h2>
+        <div class="card mt-4 stepper" data-steps="5">
+          <div class="lane">
+            <div class="actor">
+              <div class="avatar">👦</div>أحمد
+              <span class="keychip pub" data-at="2">🔓 عام (منى)</span>
+            </div>
+            <div class="actor hacker">
+              <div class="avatar">🕵️</div>متطفل
+              <span class="keychip pub" data-at="2">🔓 شاف العام</span>
+              <div class="bubble bad" data-at="4">مش قادر أفك! 😤</div>
+            </div>
+            <div class="actor">
+              <div class="avatar">👧</div>منى
+              <span class="keychip pub" data-at="1">🔓 عام</span>
+              <span class="keychip priv" data-at="1">🗝️ خاص</span>
+              <div class="bubble good" data-at="5">«الامتحان يوم الأحد» ✅</div>
+            </div>
+            <div class="wire"></div>
+            <div class="packet" data-states="0:hide 2:l 3:r 4:m 5:l">
+              <span data-only="2">🔓 المفتاح العام</span>
+              <span data-only="3,4,5">🔒 ق$ع8#ل!ز</span>
+            </div>
+          </div>
+          <div class="caption">
+            <span data-only="0">مفيش مفتاح مشترك بين أحمد ومنى.</span>
+            <span data-only="1">منى تعمل <b>زوج مفاتيح</b>: عام 🔓 + خاص 🗝️</span>
+            <span data-only="2">منى تبعت <b>العام</b> لأحمد. المتطفل شافه؟ <b>عادي!</b></span>
+            <span data-only="3">أحمد يشفّر بمفتاح منى <b>العام</b>.</span>
+            <span data-only="4">المتطفل معاه العام… لكن <b>العام مابيفكّش</b>.</span>
+            <span data-only="5">منى تفك بـ<b>الخاص</b> ✅ — والخاص عمره ما اتبعت!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="مميزات وعيوب المفتاح العام">
+      <div class="slide-inner">
+        <span class="eyebrow">⚖️ تقييم</span>
+        <h2 class="title">المفتاح العام: مميزات وعيوب</h2>
+        <div class="grid md:grid-cols-2 gap-5 mt-5">
+          <div class="pc pros">
+            <p class="pc-head">✅ المميزات</p>
+            <ul class="list safe text-lg">
+              <li class="frag"><span><b>يحل مشكلة توزيع المفتاح</b>.</span></li>
+              <li class="frag"><span>المفتاح الخاص <b>مابيتبعتش</b> أبدًا.</span></li>
+              <li class="frag"><span>بيُستخدم في <b>التحقق من الهوية</b> (الشهادات والتوقيع).</span></li>
+            </ul>
+          </div>
+          <div class="pc cons">
+            <p class="pc-head">❌ العيوب</p>
+            <ul class="list danger text-lg">
+              <li class="frag"><span><b>أبطأ بكتير</b>.</span></li>
+              <li class="frag"><span>مش مناسب للبيانات الكبيرة.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٢ · أنواع التشفير" data-title="مقارنة النوعين">
+      <div class="slide-inner">
+        <span class="eyebrow">📊 مقارنة</span>
+        <h2 class="title">الفرق بين النوعين</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead>
+            <tr><th></th><th style="color: var(--warn)">🔑 المتماثل</th><th style="color: var(--info)">🔓🗝️ المفتاح العام</th></tr>
+          </thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">المفاتيح</td><td>مفتاح واحد</td><td>زوج: عام + خاص</td></tr>
+            <tr class="frag"><td class="rowhead">السرعة</td><td class="hl-safe">سريع ⚡</td><td class="hl-danger">أبطأ 🐢</td></tr>
+            <tr class="frag"><td class="rowhead">تبادل المفتاح</td><td class="hl-danger">صعب</td><td class="hl-safe">آمن</td></tr>
+            <tr class="frag"><td class="rowhead">دوره في HTTPS</td><td>حماية البيانات</td><td>المصادقة والاتفاق على المفتاح</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-primary mt-4 frag">
+          <span class="ico">💡</span>
+          <div class="text-lg">الحل الذكي: <b>نستخدم الاتنين</b>! العام يتفق بأمان، والمتماثل يشفّر بسرعة ← ده اللي بيعمله <b>HTTPS</b>.</div>
+        </div>
+      </div>
+    </section>
+
+<!-- ======================== ٣) مكونات الإنترنت ======================== -->
+
+    <section class="slide" data-section="٣ · مكونات الإنترنت" data-title="مكونات الإنترنت">
+      <div class="slide-inner">
+        <span class="eyebrow">🌐 الإنترنت</span>
+        <h2 class="title">الإنترنت متكوّن من ٣ حاجات</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="comp-card frag">
+            <span class="num">1</span>
+            <div class="huge-emoji mt-2">💻📱🖥️</div>
+            <p class="h3 mt-2">الأجهزة</p>
+            <p class="mt-1">الكمبيوتر، الموبايل، و<b>الخوادم</b>.</p>
+          </div>
+          <div class="comp-card frag">
+            <span class="num pink">2</span>
+            <div class="huge-emoji mt-2">🔌📶🛰️</div>
+            <p class="h3 mt-2">وسيلة الاتصال</p>
+            <p class="mt-1">كابلات، ألياف ضوئية، واي فاي، أقمار صناعية.</p>
+          </div>
+          <div class="comp-card frag">
+            <span class="num safe">3</span>
+            <div class="huge-emoji mt-2">📜🚦</div>
+            <p class="h3 mt-2">قواعد تنظّم الاتصال</p>
+            <p class="mt-1">= <b class="hl-safe">البروتوكولات</b></p>
+          </div>
+        </div>
+        <div class="callout c-info mt-4 frag">
+          <span class="ico">🚗</span>
+          <div class="text-lg">زي الشارع: عربيات + طرق + <b>قواعد مرور</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٣ · مكونات الإنترنت" data-title="البروتوكول">
+      <div class="slide-inner">
+        <span class="eyebrow">📜 البروتوكولات</span>
+        <h2 class="title">يعني إيه <span class="hl">بروتوكول</span>؟</h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          مجموعة <b>قواعد</b> بتنظّم طريقة تبادل البيانات بين الأجهزة.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag">
+            <p class="font-extrabold text-lg">☎️ زي المكالمة:</p>
+            <div class="chat mt-3">
+              <div class="msg r">ألو؟</div>
+              <div class="msg l">أيوه، مين معايا؟</div>
+              <div class="msg r">أنا أحمد…</div>
+            </div>
+          </div>
+          <div class="card frag">
+            <p class="font-extrabold text-lg">🧾 أمثلة:</p>
+            <ul class="proto-list mt-3">
+              <li><b class="mono">HTTP</b><span>صفحات الويب</span></li>
+              <li><b class="mono">HTTPS</b><span>صفحات الويب <b>بأمان</b></span></li>
+              <li><b class="mono">FTP</b><span>نقل الملفات</span></li>
+              <li><b class="mono">SMTP</b><span>إرسال الإيميل</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ============================ ٤) HTTP ============================ -->
+
+    <section class="slide" data-section="٤ · بروتوكول HTTP" data-title="ما هو HTTP؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🌍 HTTP</span>
+        <h2 class="title">بروتوكول <span class="hl mono">HTTP</span> <span class="en">HyperText Transfer Protocol</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          طريقة التواصل بين <b>المتصفح</b> و<b>خادم الموقع</b>.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag"><p class="h3">🧑‍💻 العميل <span class="en">Client</span></p><p class="mt-1 text-lg">= المتصفح ← <b>بيطلب</b>.</p></div>
+          <div class="card frag"><p class="h3">🖥️ الخادم <span class="en">Server</span></p><p class="mt-1 text-lg">عليه ملفات الموقع ← <b>بيرد</b>.</p></div>
+        </div>
+        <div class="callout c-warn mt-4 frag">
+          <span class="ico">🍽️</span>
+          <div class="text-lg">زي المطعم: إنت تطلب (<b>Request</b>) ← المطبخ يرد بالأكل (<b>Response</b>).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · بروتوكول HTTP" data-title="الطلب والاستجابة">
+      <div class="slide-inner">
+        <span class="eyebrow">🎬 خطوة بخطوة</span>
+        <h2 class="title">لما تفتح موقع بـ HTTP</h2>
+        <div class="card mt-4 stepper" data-steps="4">
+          <div class="rr">
+            <div class="actor">
+              <div class="avatar">🧑‍💻</div>المتصفح
+              <div class="mini-browser" data-at="0">
+                <div class="addr"><span class="scheme-bad">http://</span>example.com</div>
+                <div class="mini-page" data-at="4">🏠 أهلاً بك!</div>
+              </div>
+            </div>
+            <div class="rr-mid">
+              <div class="rr-msg to-l keep" data-at="1">
+                <span class="rr-label">طلب Request ←</span>
+                <pre class="mono code">GET /index.html HTTP/1.1
+Host: example.com</pre>
+              </div>
+              <div class="rr-msg to-r keep" data-at="3">
+                <span class="rr-label">→ استجابة Response</span>
+                <pre class="mono code">HTTP/1.1 200 OK
+&lt;html&gt;…&lt;/html&gt;</pre>
+              </div>
+            </div>
+            <div class="actor">
+              <div class="avatar">🖥️</div>الخادم
+              <div class="bubble" data-at="2">⚙️ بيجهّز الصفحة</div>
+            </div>
+          </div>
+          <div class="caption">
+            <span data-only="0">بتكتب العنوان وتدوس Enter.</span>
+            <span data-only="1">المتصفح يبعت <b>طلب</b>.</span>
+            <span data-only="2">الخادم يجهّز الصفحة.</span>
+            <span data-only="3">الخادم يرد بـ<b>استجابة</b>: <span class="mono">200 OK</span> + الصفحة.</span>
+            <span data-only="4">المتصفح يعرض الصفحة 🎉</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · بروتوكول HTTP" data-title="عيوب HTTP">
+      <div class="slide-inner">
+        <span class="eyebrow">🚨 المشكلة</span>
+        <h2 class="title">عيوب <span class="hl-danger">HTTP</span></h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <div class="big-emoji">👀</div>
+            <p class="h3 mt-2">بيانات مكشوفة</p>
+            <p class="mt-1">نص واضح بدون تشفير.</p>
+            <p class="pill pill-info mt-2">ضرب السرية</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <div class="big-emoji">✂️</div>
+            <p class="h3 mt-2">مفيش كشف تلاعب</p>
+            <p class="mt-1">البيانات ممكن تتعدّل في السكة.</p>
+            <p class="pill pill-pink mt-2">ضرب السلامة</p>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--danger)">
+            <div class="big-emoji">🎭</div>
+            <p class="h3 mt-2">مفيش تحقق من الهوية</p>
+            <p class="mt-1">ممكن يكون موقع مزيف.</p>
+          </div>
+        </div>
+        <div class="callout c-danger mt-5 frag">
+          <span class="ico">💌</span>
+          <div class="text-lg">HTTP = <b>كارت بوستال</b> من غير ظرف.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٤ · بروتوكول HTTP" data-title="تجربة: واي فاي الكافيه">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 تجربة</span>
+        <h2 class="title">واي فاي الكافيه ☕ — HTTP ضد HTTPS</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4 interactive" id="sniff">
+          <div class="browser">
+            <div class="browser-top">
+              <div class="browser-dots"><i></i><i></i><i></i></div>
+              <div class="addr" id="sn-addr"></div>
+            </div>
+            <div class="browser-body">
+              <div class="flex gap-2 mb-3">
+                <button class="btn on" data-proto="http">HTTP</button>
+                <button class="btn" data-proto="https">HTTPS 🔒</button>
+              </div>
+              <label class="font-bold">اسم المستخدم</label>
+              <input class="field mt-1" id="sn-user" value="ahmed2009" autocomplete="off">
+              <label class="font-bold block mt-2">كلمة المرور</label>
+              <input class="field mt-1" id="sn-pass" type="password" value="12345678" autocomplete="off">
+              <button class="btn btn-primary w-full mt-4" id="sn-send">تسجيل الدخول ←</button>
+            </div>
+          </div>
+          <div class="sniffer">
+            <div class="sniffer-head">🕵️ شاشة المتطفل</div>
+            <div class="sniffer-wire"><span class="sn-packet" id="sn-packet">📦</span></div>
+            <pre class="sniffer-screen mono" id="sn-screen">في انتظار بيانات…</pre>
+            <div class="sniffer-verdict" id="sn-verdict"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ============================ ٥) HTTPS ============================ -->
+
+    <section class="slide" data-section="٥ · بروتوكول HTTPS" data-title="ما هو HTTPS؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🔒 الحل</span>
+        <h2 class="title">بروتوكول <span class="hl-safe mono">HTTPS</span></h2>
+        <div class="formula mt-4 frag">
+          <span class="f-box">HTTP</span><span class="f-op">+</span><span class="f-box safe">TLS 🔒</span><span class="f-op">=</span><span class="f-box safe big">HTTPS</span>
+        </div>
+        <div class="def mt-4 frag" style="border-right-color: var(--safe)">
+          <span class="def-label" style="color: var(--safe)">التعريف</span>
+          بروتوكول <b>HTTP</b> منقول عبر اتصال <b>TLS</b> مؤمَّن: <b>تشفير</b> + <b>كشف تلاعب</b> + <b>تحقق من الطرف المقابل</b>.
+        </div>
+        <div class="browser mt-4 frag">
+          <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><div class="addr">🔒 <span class="scheme-good">https://</span>www.bank.com</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · بروتوكول HTTPS" data-title="HTTPS: ٣ تقنيات">
+      <div class="slide-inner">
+        <span class="eyebrow">🛡️ إيه اللي بيحصل؟</span>
+        <h2 class="title">لما تفتح موقع HTTPS، ٣ حاجات بتحصل:</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="card frag"><span class="num">1</span><p class="h3 mt-2">🔐 TLS يشفّر</p><p class="mt-1">البيانات أثناء انتقالها.</p></div>
+          <div class="card frag"><span class="num pink">2</span><p class="h3 mt-2">📜 المتصفح يتحقق</p><p class="mt-1">من <b>الشهادة الرقمية</b> و<b>اسم النطاق</b>.</p></div>
+          <div class="card frag"><span class="num safe">3</span><p class="h3 mt-2">👤 الموقع يتحقق منك</p><p class="mt-1">قبل ما يدخلك حسابك.</p></div>
+        </div>
+        <div class="callout c-danger mt-5 frag">
+          <span class="ico">⚠️</span>
+          <div class="text-lg">HTTPS <b>بيقلل المخاطر</b>، لكن <b>مش معناه إن الموقع موثوق</b> — ممكن موقع احتيالي يستخدم HTTPS! 🎣</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٥ · بروتوكول HTTPS" data-title="HTTP ضد HTTPS">
+      <div class="slide-inner">
+        <span class="eyebrow">📊 مقارنة</span>
+        <h2 class="title">HTTP ضد HTTPS</h2>
+        <table class="tbl mt-5 text-lg">
+          <thead><tr><th></th><th style="color: var(--danger)">🔓 HTTP</th><th style="color: var(--safe)">🔒 HTTPS</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">البيانات</td><td>مكشوفة</td><td>مشفرة</td></tr>
+            <tr class="frag"><td class="rowhead">هوية الموقع</td><td>مفيش تحقق</td><td>شهادة رقمية</td></tr>
+            <tr class="frag"><td class="rowhead">التلاعب</td><td>مايتكشفش</td><td>يتكشف</td></tr>
+            <tr class="frag"><td class="rowhead">العنوان</td><td class="mono">http://</td><td class="mono">🔒 https://</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+<!-- ===================== ٦) TLS والشهادة الرقمية ===================== -->
+
+    <section class="slide" data-section="٦ · TLS والشهادة الرقمية" data-title="ما هو TLS؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🔐 TLS</span>
+        <h2 class="title"><span class="hl mono">TLS</span> <span class="en">Transport Layer Security</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          تقنية أمان بتشفّر الاتصال بين جهازك وخادم الموقع.
+        </div>
+        <p class="mt-5 text-lg font-extrabold">بيوفّر:</p>
+        <div class="grid md:grid-cols-3 gap-4 mt-3">
+          <div class="card frag text-center"><div class="big-emoji">🤫</div><p class="h3 mt-2">السرية</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🧩</div><p class="h3 mt-2">سلامة البيانات</p></div>
+          <div class="card frag text-center"><div class="big-emoji">🪪</div><p class="h3 mt-2">التحقق من هوية الخادم</p></div>
+        </div>
+        <div class="flow mt-5 frag">
+          <div class="flow-box plain"><small>إنت كتبت</small><span class="mono">12345678</span></div>
+          <div class="flow-op"><b>TLS</b><i class="flow-arrow"></i></div>
+          <div class="flow-box cipher"><small>اللي بيتنقل</small><span class="mono">a7F$k2!Qz9#</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · TLS والشهادة الرقمية" data-title="الشهادة الرقمية">
+      <div class="slide-inner">
+        <span class="eyebrow">📜 الشهادة الرقمية</span>
+        <h2 class="title">الشهادة الرقمية <span class="en">Digital Certificate</span></h2>
+        <div class="grid md:grid-cols-[1.1fr_1fr] gap-5 mt-4 items-start">
+          <div>
+            <div class="def">
+              = <b>بطاقة هوية إلكترونية</b> للموقع.
+            </div>
+            <p class="mt-4 text-lg font-extrabold frag">المتصفح بيتأكد إنها:</p>
+            <ul class="list mt-2 text-lg">
+              <li class="frag"><span>✅ <b>تخص اسم الموقع</b> المطلوب.</span></li>
+              <li class="frag"><span>✅ <b>صادرة عن جهة موثوقة</b>.</span></li>
+              <li class="frag"><span>✅ <b>صالحة وغير منتهية</b>.</span></li>
+            </ul>
+            <div class="callout c-info mt-4 frag">
+              <span class="ico">🪪</span>
+              <div>زي البطاقة الشخصية: فيها اسمك، صادرة من السجل المدني، وليها تاريخ انتهاء.</div>
+            </div>
+          </div>
+          <div class="cert frag">
+            <div class="cert-head">📜 شهادة رقمية</div>
+            <div class="cert-row"><span>صادرة لـ</span><b class="mono">www.bank.com</b></div>
+            <div class="cert-row"><span>صادرة من</span><b>جهة موثوقة ✔</b></div>
+            <div class="cert-row"><span>صالحة حتى</span><b class="mono">2027-01-01</b></div>
+            <div class="cert-row"><span>المفتاح العام</span><b class="keychip pub">🔓 3082 010A…</b></div>
+            <div class="cert-seal">🏅</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · TLS والشهادة الرقمية" data-title="اسم النطاق وسلسلة الثقة">
+      <div class="slide-inner">
+        <span class="eyebrow">🔗 تفاصيل</span>
+        <h2 class="title">اسم النطاق و«سلسلة الثقة»</h2>
+        <div class="grid md:grid-cols-2 gap-5 mt-4">
+          <div class="card">
+            <p class="h3">🏷️ اسم النطاق <span class="en">Domain Name</span></p>
+            <p class="mt-2 text-lg">= عنوان الموقع: <span class="mono hl">example.com</span></p>
+            <p class="mt-2 text-lg">لازم <b>يطابق</b> الاسم اللي في الشهادة.</p>
+            <div class="callout c-danger mt-4">
+              <span class="ico">🎣</span><div>فتحت <span class="mono">bamk.com</span> والشهادة لـ <span class="mono">bank.com</span> ← <b>تحذير!</b></div>
+            </div>
+          </div>
+          <div class="card frag">
+            <p class="h3">⛓️ سلسلة الثقة</p>
+            <div class="chain mt-3">
+              <div class="chain-node root">🏛️ <b>جهة جذر</b><small>متخزّنة في المتصفح</small></div>
+              <div class="chain-link">⬇️ وثّقت</div>
+              <div class="chain-node">🏢 <b>جهة وسيطة</b></div>
+              <div class="chain-link">⬇️ أصدرت</div>
+              <div class="chain-node leaf">📜 <b>شهادة الموقع</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · TLS والشهادة الرقمية" data-title="جرّب: افحص الشهادة">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب</span>
+        <h2 class="title">إنت المتصفح! افحص الشهادة 🔍</h2>
+        <div class="flex flex-wrap gap-2 mt-3 interactive" id="cert-btns">
+          <button class="btn on" data-case="ok">✅ البنك الحقيقي</button>
+          <button class="btn" data-case="name">🎣 موقع مزيف</button>
+          <button class="btn" data-case="expired">⌛ شهادة منتهية</button>
+          <button class="btn" data-case="self">🏠 جهة غير موثوقة</button>
+        </div>
+        <div class="grid md:grid-cols-[1.2fr_1fr] gap-4 mt-4 interactive">
+          <div class="browser">
+            <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><div class="addr" id="cc-addr"></div></div>
+            <div class="browser-body" id="cc-body"></div>
+          </div>
+          <div class="card">
+            <p class="h3">📋 نتيجة الفحص</p>
+            <ul class="checks mt-3" id="cc-checks"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٦ · TLS والشهادة الرقمية" data-title="إصدار TLS ومجموعة التشفير">
+      <div class="slide-inner">
+        <span class="eyebrow">⚙️ مصطلحات</span>
+        <h2 class="title">إصدار TLS ومجموعة التشفير</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="def">
+            <span class="def-label">إصدار TLS</span>
+            الإصدار المستخدم من بروتوكول TLS. <span class="muted">(مثلاً <span class="mono">TLS 1.3</span>)</span>
+          </div>
+          <div class="def" style="border-right-color: var(--pink)">
+            <span class="def-label" style="color: var(--pink)">مجموعة التشفير <span class="en">Cipher Suite</span></span>
+            مجموعة <b>خوارزميات وقواعد</b> بتحدد إزاي هيتأمّن الاتصال.
+          </div>
+        </div>
+        <div class="callout c-primary mt-5 frag">
+          <span class="ico">🤝</span>
+          <div class="text-lg">المتصفح والخادم <b>بيتفقوا</b> على مجموعة الاتنين بيدعموها.</div>
+        </div>
+      </div>
+    </section>
+
+<!-- ========================= ٧) مصافحة TLS ========================= -->
+
+    <section class="slide" data-section="٧ · مصافحة TLS" data-title="ما هي مصافحة TLS؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🤝 TLS Handshake</span>
+        <h2 class="title">مصافحة <span class="hl">TLS</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          خطوات <b>إنشاء الاتصال الآمن</b> بين المتصفح والخادم — قبل إرسال أي بيانات.
+        </div>
+        <p class="mt-5 text-lg font-extrabold frag">٣ مراحل:</p>
+        <div class="stages mt-3">
+          <div class="stage-card frag"><span class="num">1</span><b>التحقق من الشهادة</b><span class="pill pill-info">المفتاح العام</span></div>
+          <div class="stage-arrow frag">←</div>
+          <div class="stage-card frag"><span class="num pink">2</span><b>اشتقاق مفاتيح الجلسة</b><span class="pill pill-info">المفتاح العام</span></div>
+          <div class="stage-arrow frag">←</div>
+          <div class="stage-card frag"><span class="num safe">3</span><b>تبادل البيانات</b><span class="pill pill-warn">المتماثل</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · مصافحة TLS" data-title="المصافحة خطوة بخطوة">
+      <div class="slide-inner">
+        <span class="eyebrow">🎬 خطوة بخطوة</span>
+        <h2 class="title">تدفّق اتصال HTTPS</h2>
+        <div class="card mt-2 stepper" data-steps="6">
+          <div class="seq">
+            <div class="seq-head">
+              <div class="actor"><div class="avatar">🧑‍💻</div>المتصفح</div>
+              <div></div>
+              <div class="actor"><div class="avatar">🖥️</div>الخادم 🗝️</div>
+            </div>
+            <div class="seq-row keep" data-at="1">
+              <span class="seq-stage">مرحلة ١</span>
+              <div class="seq-arrow to-l"><b>👋 عايز اتصال آمن</b><small>إصدارات TLS ومجموعات التشفير المدعومة</small></div>
+            </div>
+            <div class="seq-row keep" data-at="2">
+              <span class="seq-stage">مرحلة ١</span>
+              <div class="seq-arrow to-r"><b>📜 الشهادة الرقمية + 🔓 المفتاح العام</b></div>
+            </div>
+            <div class="seq-row keep note" data-at="3">
+              <div class="seq-check">🔍 صلاحية الشهادة ✔ سلسلة الثقة ✔ اسم الموقع ✔</div>
+            </div>
+            <div class="seq-row keep" data-at="4">
+              <span class="seq-stage pink">مرحلة ٢</span>
+              <div class="seq-arrow both"><b>🔄 تبادل معاملات المفاتيح</b><small>كل طرف يشتق مفتاح الجلسة بنفسه</small></div>
+            </div>
+            <div class="seq-row keep note" data-at="5">
+              <div class="seq-check good">✅ الطرفين معاهم نفس <span class="keychip sess">🔑 مفتاح الجلسة</span></div>
+            </div>
+            <div class="seq-row keep" data-at="6">
+              <span class="seq-stage safe">مرحلة ٣</span>
+              <div class="seq-arrow both safe"><b>🔒 بيانات مشفرة بالتشفير المتماثل</b></div>
+            </div>
+          </div>
+          <div class="caption mt-2">
+            <span data-only="0">قبل أي بيانات… لازم «تعارف».</span>
+            <span data-only="1">المتصفح: «عايز اتصال آمن، وده اللي بدعمه».</span>
+            <span data-only="2">الخادم يبعت <b>شهادته</b> وفيها <b>مفتاحه العام</b>.</span>
+            <span data-only="3">المتصفح يفحص الشهادة.</span>
+            <span data-only="4">كل طرف يشتق مفتاح الجلسة — <b>من غير ما يتبعت</b> على الشبكة.</span>
+            <span data-only="5">المصافحة خلصت ✅</span>
+            <span data-only="6">البيانات تتشفّر بـ<b>المتماثل</b> بمفتاح الجلسة ⚡</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · مصافحة TLS" data-title="إثراء: خلط الألوان">
+      <div class="slide-inner">
+        <span class="eyebrow">🎨 إثراء</span>
+        <h2 class="title">إزاي نوصل لنفس المفتاح من غير ما نبعته؟</h2>
+        <p class="lead">خلط الألوان سهل… <b>فصلها صعب جدًا</b>.</p>
+        <div class="card mt-3 stepper" data-steps="4" id="paint">
+          <div class="paint-grid">
+            <div class="paint-col">
+              <div class="actor"><div class="avatar">🧑‍💻</div>المتصفح</div>
+              <div class="paint-item keep" data-at="1"><i class="dot" data-color="secretA"></i><span>لون سري</span></div>
+              <div class="paint-item keep" data-at="2"><i class="dot" data-color="mixA"></i><span>عام + سرّه ← يبعته</span></div>
+              <div class="paint-item keep" data-at="4"><i class="dot big" data-color="final"></i><b>المفتاح</b></div>
+            </div>
+            <div class="paint-col mid">
+              <div class="actor hacker"><div class="avatar">🕵️</div>المتطفل</div>
+              <div class="paint-item keep" data-at="0"><i class="dot" data-color="common"></i><span>اللون العام</span></div>
+              <div class="paint-item keep" data-at="3"><i class="dot" data-color="mixA"></i><i class="dot" data-color="mixB"></i><span>الخليطين</span></div>
+              <div class="paint-item keep" data-at="4"><span class="hl-danger font-black">❌ مش قادر يوصل</span></div>
+            </div>
+            <div class="paint-col">
+              <div class="actor"><div class="avatar">🖥️</div>الخادم</div>
+              <div class="paint-item keep" data-at="1"><i class="dot" data-color="secretB"></i><span>لون سري</span></div>
+              <div class="paint-item keep" data-at="2"><i class="dot" data-color="mixB"></i><span>عام + سرّه ← يبعته</span></div>
+              <div class="paint-item keep" data-at="4"><i class="dot big" data-color="final"></i><b>نفس المفتاح!</b></div>
+            </div>
+          </div>
+          <div class="caption mt-2">
+            <span data-only="0">لون عام معروف للكل.</span>
+            <span data-only="1">كل طرف يختار لون سري.</span>
+            <span data-only="2">كل طرف يخلط العام مع سرّه…</span>
+            <span data-only="3">…ويبعت الخليط. المتطفل مايقدرش يفصل الألوان.</span>
+            <span data-only="4">كل طرف يضيف سرّه على اللي وصله ← <b>نفس اللون</b> = مفتاح الجلسة 🎉</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · مصافحة TLS" data-title="جدول المراحل">
+      <div class="slide-inner">
+        <span class="eyebrow">📋 من الكتاب</span>
+        <h2 class="title">مراحل الاتصال الآمن</h2>
+        <table class="tbl mt-4">
+          <thead><tr><th>المرحلة</th><th>ما يحدث</th><th>آلية الحماية</th></tr></thead>
+          <tbody>
+            <tr class="frag">
+              <td class="rowhead">١ التحقق من الشهادة</td>
+              <td>الخادم يرسل شهادته، والمتصفح يتحقق من <b>صلاحيتها</b> و<b>سلسلة الثقة</b> و<b>ملاءمتها لاسم الموقع</b>.</td>
+              <td><span class="pill pill-info">المفتاح العام</span></td>
+            </tr>
+            <tr class="frag">
+              <td class="rowhead">٢ اشتقاق مفاتيح الجلسة</td>
+              <td>الطرفان يتفاوضان على <b>أسرار مشتركة</b> تُشتق منها <b>مفاتيح الجلسة</b>.</td>
+              <td><span class="pill pill-info">المفتاح العام</span></td>
+            </tr>
+            <tr class="frag">
+              <td class="rowhead">٣ تبادل البيانات</td>
+              <td>تُحمى البيانات بالتشفير المتماثل وآليات سلامة البيانات.</td>
+              <td><span class="pill pill-warn">المتماثل</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="def mt-4 frag" style="border-right-color: var(--safe)">
+          <span class="def-label" style="color: var(--safe)">🔑 مفاتيح الجلسة</span>
+          مفاتيح <b>الاتصال الحالي فقط</b> — بتتعمل جديدة مع كل اتصال.
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٧ · مصافحة TLS" data-title="سؤال امتحان">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 سؤال امتحان · ٦ درجات</span>
+        <h2 class="title">ليه TLS بيستخدم <span class="hl-info">المفتاح العام</span> الأول، وبعدين <span class="hl-warn">المتماثل</span>؟</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="card frag" style="border-top: .3rem solid var(--info)">
+            <p class="h3">🛡️ الأمان ← المفتاح العام</p>
+            <ul class="list mt-2">
+              <li><span>يتفق على مفتاح الجلسة <b>من غير ما يتبعت</b>.</span></li>
+              <li><span>يتحقق من <b>هوية الخادم</b> بالشهادة.</span></li>
+            </ul>
+          </div>
+          <div class="card frag" style="border-top: .3rem solid var(--warn)">
+            <p class="h3">⚡ الكفاءة ← المتماثل</p>
+            <ul class="list mt-2">
+              <li><span>المفتاح العام <b>بطيء</b>.</span></li>
+              <li><span>المتماثل <b>أسرع</b> للبيانات الكتير.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="def mt-4 frag" style="border-right-color: var(--safe)">
+          <b>الشهادة</b> ← الهوية · <b>المصافحة</b> ← مفاتيح الجلسة · <b>المتماثل</b> ← حماية البيانات بسرعة.
+        </div>
+      </div>
+    </section>
+
+<!-- ========================== ٨) المصادقة ========================== -->
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="ما هي المصادقة؟">
+      <div class="slide-inner">
+        <span class="eyebrow">👤 المصادقة</span>
+        <h2 class="title"><span class="hl">المصادقة</span> <span class="en">Authentication</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          التحقق من <b>هوية المستخدم</b> قبل ما يدخل = «<b>إثبات إنك إنت</b>».
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <div class="callout c-warn frag"><span class="ico">🔐</span><div class="text-lg"><b>التشفير:</b> محدش يقرا.</div></div>
+          <div class="callout c-primary frag"><span class="ico">🪪</span><div class="text-lg"><b>المصادقة:</b> إنت مين؟</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="فئات عوامل المصادقة">
+      <div class="slide-inner">
+        <span class="eyebrow">🧱 عوامل المصادقة</span>
+        <h2 class="title">٣ فئات</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="factor frag" style="--c: var(--warn); --cs: var(--warn-soft)">
+            <div class="huge-emoji">🧠</div>
+            <p class="factor-name">المعرفة</p>
+            <p class="factor-q">حاجة <b>تعرفها</b></p>
+            <div class="factor-ex"><span>كلمة المرور</span><span>PIN</span><span>سؤال سري</span></div>
+          </div>
+          <div class="factor frag" style="--c: var(--info); --cs: var(--info-soft)">
+            <div class="huge-emoji">📱</div>
+            <p class="factor-name">الحيازة</p>
+            <p class="factor-q">حاجة <b>معاك</b></p>
+            <div class="factor-ex"><span>الهاتف</span><span>تطبيق المصادقة</span><span>مفتاح أمان</span><span>بطاقة</span></div>
+          </div>
+          <div class="factor frag" style="--c: var(--pink); --cs: var(--pink-soft)">
+            <div class="huge-emoji">👆</div>
+            <p class="factor-name">السمات الحيوية</p>
+            <p class="factor-q">حاجة <b>في جسمك</b></p>
+            <div class="factor-ex"><span>البصمة</span><span>الوجه</span><span>بصمة العين</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="لعبة: صنّف العامل">
+      <div class="slide-inner">
+        <span class="eyebrow">🎮 نشاط</span>
+        <h2 class="title">صنّف كل عامل</h2>
+        <p class="lead">اضغط العامل، وبعدين الفئة.</p>
+        <div class="interactive" id="classify">
+          <div class="chips mt-4" id="cl-pool"></div>
+          <div class="grid md:grid-cols-3 gap-4 mt-5">
+            <div class="bucket" data-cat="know" style="--c: var(--warn); --cs: var(--warn-soft)"><p class="bucket-name">🧠 المعرفة</p><div class="bucket-items"></div></div>
+            <div class="bucket" data-cat="have" style="--c: var(--info); --cs: var(--info-soft)"><p class="bucket-name">📱 الحيازة</p><div class="bucket-items"></div></div>
+            <div class="bucket" data-cat="are" style="--c: var(--pink); --cs: var(--pink-soft)"><p class="bucket-name">👆 السمات الحيوية</p><div class="bucket-items"></div></div>
+          </div>
+          <div class="flex items-center justify-center gap-3 mt-4">
+            <span class="pill pill-primary" id="cl-score"></span>
+            <button class="btn" id="cl-reset">↺ إعادة</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="2FA و MFA">
+      <div class="slide-inner">
+        <span class="eyebrow">🔐🔐 أكتر من عامل</span>
+        <h2 class="title"><span class="hl">2FA</span> و <span class="hl-pink">MFA</span></h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="def">
+            <span class="def-label">المصادقة الثنائية <span class="en">2FA</span></span>
+            <b>عاملين</b> من <b>فئتين مختلفتين</b>.
+          </div>
+          <div class="def" style="border-right-color: var(--pink)">
+            <span class="def-label" style="color: var(--pink)">متعددة العوامل <span class="en">MFA</span></span>
+            <b>عاملين أو أكتر</b> من فئات مختلفة.
+          </div>
+        </div>
+        <p class="mt-5 text-lg font-extrabold frag">⚠️ انتبه للفخ:</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-2">
+          <div class="callout c-safe frag"><span class="ico">✅</span><div class="text-lg">كلمة مرور 🧠 + رمز على الهاتف 📱<br><b>2FA</b> (فئتين مختلفتين)</div></div>
+          <div class="callout c-danger frag"><span class="ico">❌</span><div class="text-lg">كلمة مرور 🧠 + سؤال سري 🧠<br><b>مش 2FA</b> (نفس الفئة)</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="جرّب: ليه 2FA بتحمي؟">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب</span>
+        <h2 class="title">كلمة المرور اتسرّبت… الحساب لسه محمي؟</h2>
+        <div class="flex flex-wrap gap-2 mt-3 interactive" id="tfa-modes">
+          <button class="btn on" data-mode="owner">🙂 صاحب الحساب</button>
+          <button class="btn" data-mode="hacker">😈 مخترق معاه كلمة المرور</button>
+        </div>
+        <div class="grid md:grid-cols-[1.3fr_1fr] gap-5 mt-4 interactive" id="tfa">
+          <div class="browser">
+            <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><div class="addr">🔒 <span class="scheme-good">https://</span>social.example</div></div>
+            <div class="browser-body" id="tfa-body"></div>
+          </div>
+          <div class="phone-wrap">
+            <div class="phone" id="tfa-phone">
+              <div class="phone-notch"></div>
+              <div class="phone-screen" id="tfa-phone-screen"></div>
+            </div>
+            <p class="text-center font-bold muted mt-2" id="tfa-phone-label"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="المصادقة في الخدمات">
+      <div class="slide-inner">
+        <span class="eyebrow">🏦 من الواقع</span>
+        <h2 class="title">المصادقة في الخدمات الفعلية</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>الخدمة</th><th>العوامل</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">🏦 البنك أونلاين</td><td>كلمة المرور <span class="pill pill-warn">معرفة</span> + كلمة مرور لمرة واحدة <span class="pill pill-info">حيازة</span></td></tr>
+            <tr class="frag"><td class="rowhead">💬 التواصل الاجتماعي</td><td>كلمة المرور <span class="pill pill-warn">معرفة</span> + SMS <span class="pill pill-info">حيازة</span></td></tr>
+            <tr class="frag"><td class="rowhead">🏢 مبنى مؤمّن</td><td>بطاقة دخول <span class="pill pill-info">حيازة</span> + بصمة <span class="pill pill-pink">سمات حيوية</span></td></tr>
+            <tr class="frag"><td class="rowhead">🛒 التسوق</td><td>كلمة المرور <span class="pill pill-warn">معرفة</span> + بطاقة الائتمان <span class="pill pill-info">حيازة</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٨ · المصادقة" data-title="تدرّب: مجموعة العوامل">
+      <div class="slide-inner">
+        <span class="eyebrow">✏️ تدرّب</span>
+        <h2 class="title">أي مجموعة عوامل في كل خدمة؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="combo"></div>
+      </div>
+    </section>
+
+<!-- ======================== ٩) التوقيع الرقمي ======================== -->
+
+    <section class="slide" data-section="٩ · التوقيع الرقمي" data-title="التوقيع الرقمي">
+      <div class="slide-inner">
+        <span class="eyebrow">✍️ التوقيع الرقمي</span>
+        <h2 class="title">التوقيع الرقمي <span class="en">Digital Signature</span></h2>
+        <div class="def mt-4">
+          <span class="def-label">التعريف</span>
+          يكشف <b>التلاعب</b> و<b>انتحال الشخصية</b>، ويدعم <b>عدم التنصل</b>.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="card frag">
+            <p class="h3">✅ بيثبت إن:</p>
+            <ul class="list mt-2 text-lg">
+              <li><span>البيانات من <b>الجهة الصح</b>.</span></li>
+              <li><span>البيانات <b>متغيّرتش</b> بعد التوقيع.</span></li>
+            </ul>
+          </div>
+          <div class="card frag">
+            <p class="h3">🙅 عدم التنصل</p>
+            <p class="mt-2 text-lg">المرسِل <b>مايقدرش ينكر</b> إنه بعت الرسالة.</p>
+          </div>
+        </div>
+        <table class="tbl mt-4 text-lg frag">
+          <tr><td class="rowhead">التشفير 🔐</td><td>يخفي المحتوى ← <b>السرية</b></td></tr>
+          <tr><td class="rowhead">التوقيع ✍️</td><td>يثبت المصدر ويكشف التعديل ← <b>السلامة</b></td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="٩ · التوقيع الرقمي" data-title="جرّب: اكشف التلاعب">
+      <div class="slide-inner">
+        <span class="eyebrow">🧪 جرّب</span>
+        <h2 class="title">أي تعديل… حتى حرف واحد بيتكشف!</h2>
+        <div class="card mt-4 interactive" id="sig">
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <p class="font-extrabold">🏦 ١. البنك يوقّع الرسالة</p>
+              <input class="field mt-2 text-lg" id="sig-orig" value="حوّل 100 جنيه إلى حساب منى" autocomplete="off">
+              <button class="btn btn-primary mt-3" id="sig-sign">✍️ وقّع</button>
+              <div class="sig-box mt-3" id="sig-out">لسه مااتوقعتش</div>
+            </div>
+            <div>
+              <p class="font-extrabold">🕵️ ٢. المتطفل يعدّل</p>
+              <input class="field mt-2 text-lg" id="sig-recv" autocomplete="off" disabled>
+              <div class="flex gap-2 mt-3 flex-wrap">
+                <button class="btn btn-danger" id="sig-tamper" disabled>😈 خلّي المبلغ 10000</button>
+                <button class="btn btn-safe" id="sig-verify" disabled>🔍 ٣. تحقق</button>
+              </div>
+              <div class="sig-verdict mt-3" id="sig-verdict"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===================== ١٠) تركيبات تقنيات الأمان ===================== -->
+
+    <section class="slide" data-section="١٠ · تركيبات تقنيات الأمان" data-title="تركيبات تقنيات الأمان">
+      <div class="slide-inner">
+        <span class="eyebrow">🧩 نجمع كل حاجة</span>
+        <h2 class="title">الأمان = <b>مجموعة</b> تقنيات مع بعض</h2>
+        <table class="tbl mt-4 text-lg">
+          <thead><tr><th>التقنية</th><th>التأثير</th></tr></thead>
+          <tbody>
+            <tr class="frag"><td class="rowhead">🔐 التشفير</td><td>يمنع قراءة المحتوى.</td></tr>
+            <tr class="frag"><td class="rowhead">✍️ التوقيع الرقمي</td><td>يتحقق من السلامة والمصدر + عدم التنصل.</td></tr>
+            <tr class="frag"><td class="rowhead">📜 الشهادة الرقمية</td><td>تتحقق من هوية الخادم واسم النطاق.</td></tr>
+            <tr class="frag"><td class="rowhead">📱 2FA</td><td>تقلّل الدخول غير المصرّح به.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١٠ · تركيبات تقنيات الأمان" data-title="مثال: الشراء أونلاين">
+      <div class="slide-inner">
+        <span class="eyebrow">🛒 مثال عملي</span>
+        <h2 class="title">شراء من متجر إلكتروني</h2>
+        <div class="card mt-4 stepper" data-steps="5">
+          <div class="shop">
+            <div class="shop-step keep" data-at="1"><span class="num">1</span><div class="big-emoji">🌐</div><b>فتح الموقع</b><span class="pill pill-safe">HTTPS/TLS</span></div>
+            <div class="shop-step keep" data-at="2"><span class="num pink">2</span><div class="big-emoji">📜</div><b>التحقق من الموقع</b><span class="pill pill-safe">الشهادة الرقمية</span></div>
+            <div class="shop-step keep" data-at="3"><span class="num warn">3</span><div class="big-emoji">📱</div><b>تسجيل الدخول</b><span class="pill pill-safe">2FA</span></div>
+            <div class="shop-step keep" data-at="4"><span class="num safe">4</span><div class="big-emoji">📦</div><b>إرسال الطلب</b><span class="pill pill-safe">TLS</span></div>
+            <div class="shop-step keep" data-at="5"><span class="num">5</span><div class="big-emoji">✍️</div><b>عند الحاجة</b><span class="pill pill-safe">التوقيع الرقمي</span></div>
+          </div>
+          <div class="caption mt-3">
+            <span data-only="0">يلا نشتري سماعة 🎧</span>
+            <span data-only="1">اتصال HTTPS ← التشفير يمنع قراءة المحتوى.</span>
+            <span data-only="2">الشهادة + اسم النطاق ← هوية الخادم.</span>
+            <span data-only="3">كلمة المرور + رمز الهاتف ← 2FA.</span>
+            <span data-only="4">TLS يحمي بيانات الطلب أثناء النقل.</span>
+            <span data-only="5">التوقيع يثبت مصدر البيانات وإنها متغيّرتش.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١٠ · تركيبات تقنيات الأمان" data-title="طابق: التهديد والتقنية">
+      <div class="slide-inner">
+        <span class="eyebrow">🎯 تدرّب</span>
+        <h2 class="title">طابق كل تهديد بالتقنية المناسبة</h2>
+        <div class="interactive mt-4 grid gap-3" id="threats"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١٠ · تركيبات تقنيات الأمان" data-title="الفكرة الرئيسية">
+      <div class="slide-inner">
+        <span class="eyebrow">⭐ الفكرة الرئيسية</span>
+        <div class="def mt-3" style="border-right-color: var(--pink); font-size: 1.35rem">
+          الأمان مش من تقنية واحدة، بل من <b>الجمع بين التشفير والشهادات والتوقيعات والمصادقة</b>.
+        </div>
+        <ul class="list mt-5 text-lg">
+          <li class="frag"><span><b>HTTPS</b> = HTTP عبر TLS: الشهادة والمفتاح العام ← مفاتيح الجلسة ← المتماثل يحمي البيانات.</span></li>
+          <li class="frag"><span><b>2FA</b> تقلّل الدخول غير المصرّح به.</span></li>
+          <li class="frag"><span>مفيش حماية <b>مطلقة</b> — طبقات بتقلّل المخاطر 🧅</span></li>
+        </ul>
+      </div>
+    </section>
+
+<!-- ========================== ١١) المراجعة ========================== -->
+
+    <section class="slide" data-section="١١ · المراجعة والاختبار" data-title="ملخص الدرس">
+      <div class="slide-inner">
+        <span class="eyebrow">🏆 ملخص</span>
+        <h2 class="title">الخلاصة</h2>
+        <div class="grid md:grid-cols-2 gap-3 mt-5 summary">
+          <div class="frag"><span>🔺</span><b>مثلث CIA</b><i>=</i>السرية · السلامة · التوافر</div>
+          <div class="frag"><span>📜</span><b>الشهادة الرقمية</b><i>=</i>التحقق من الهوية</div>
+          <div class="frag"><span>🔓</span><b>المفتاح العام</b><i>=</i>الاتفاق الآمن على الأسرار</div>
+          <div class="frag"><span>🔑</span><b>مفاتيح الجلسة</b><i>=</i>مفاتيح الاتصال الحالي</div>
+          <div class="frag"><span>⚡</span><b>التشفير المتماثل</b><i>=</i>حماية البيانات بسرعة</div>
+          <div class="frag"><span>📱</span><b>2FA</b><i>=</i>عاملين من فئتين</div>
+          <div class="frag"><span>✍️</span><b>التوقيع الرقمي</b><i>=</i>المصدر والسلامة وعدم التنصل</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١١ · المراجعة والاختبار" data-title="بطاقات المصطلحات">
+      <div class="slide-inner">
+        <span class="eyebrow">🃏 مراجعة</span>
+        <h2 class="title">اقلب البطاقة 👆</h2>
+        <div class="flash-grid mt-4 interactive" id="flash"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١١ · المراجعة والاختبار" data-title="صح أم خطأ">
+      <div class="slide-inner">
+        <span class="eyebrow">✔️✖️</span>
+        <h2 class="title">صح ولا غلط؟</h2>
+        <div class="interactive mt-4 grid gap-3" id="tf"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١١ · المراجعة والاختبار" data-title="الاختبار">
+      <div class="slide-inner">
+        <span class="eyebrow">📝 تدريبات الفائز</span>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <h2 class="title">اختر الإجابة الصحيحة</h2>
+          <div class="flex gap-2 items-center">
+            <span class="pill pill-safe" id="quiz-score"></span>
+            <button class="btn" id="quiz-reset">↺ إعادة</button>
+          </div>
+        </div>
+        <div class="interactive mt-4 grid gap-3" id="quiz"></div>
+      </div>
+    </section>
+
+    <section class="slide" data-section="١١ · المراجعة والاختبار" data-title="فكّر كمهندس">
+      <div class="slide-inner">
+        <span class="eyebrow">🛠️ فكّر كمهندس</span>
+        <h2 class="title">بوابة المدرسة: أنهي تسجيل دخول أفضل؟</h2>
+        <p class="lead">بوابة فيها <b>درجات</b> و<b>دفع رسوم</b>.</p>
+        <div class="grid gap-2 mt-4 interactive md:grid-cols-2" id="engineer">
+          <button class="btn" data-v="pw">🔤 كلمة مرور فقط</button>
+          <button class="btn" data-v="otp">🔤 + 📱 كلمة مرور + رمز لمرة واحدة</button>
+        </div>
+        <div class="mt-3" id="engineer-out"></div>
+        <div class="end-banner mt-6">
+          <span>🎉</span>
+          <div><b>أحسنتم!</b> خلّصنا درس تقنيات التشفير والمصادقة.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bar">
+    <button class="bar-btn" data-deck-act="overview" title="فهرس الشرائح (O)">☰</button>
+    <span class="section" data-deck="section"></span>
+    <span class="flex-1"></span>
+    <span class="count" data-deck="count"></span>
+    <button class="bar-btn" data-deck-act="prev" title="السابق (→)">→</button>
+    <button class="bar-btn primary" data-deck-act="next" title="التالي (←)">التالي ←</button>
+    <button class="bar-btn" data-deck-act="theme" title="الوضع الليلي">🌓</button>
+    <button class="bar-btn" data-deck-act="fullscreen" title="ملء الشاشة (F)">⛶</button>
+  </footer>
+</div>
+
+<div class="overview" role="dialog" aria-label="فهرس الشرائح">
+  <div class="overview-panel">
+    <div class="flex items-center justify-between">
+      <p class="h3">☰ فهرس الشرائح</p>
+      <button class="bar-btn" onclick="document.querySelector('.overview').classList.remove('open')">✕</button>
+    </div>
+    <div class="ov-body"></div>
+  </div>
+</div>
+
+<script src="../assets/lesson-kit.js"></script>
+<script src="unit2-lesson1.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>
