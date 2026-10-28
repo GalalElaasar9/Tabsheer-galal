@@ -1,7 +1,9 @@
 import {
-  ArrowUpRight, Circle, Eraser, Hand, Highlighter, ImagePlus, LocateFixed, Minus, MousePointer2,
+  ArrowUpRight, BrushCleaning, ChevronDown, Circle, Eraser, GripHorizontal, GripVertical, Hand, Highlighter, ImagePlus,
+  LocateFixed, Minus, MousePointer2,
   Pencil, Shapes, Square, StickyNote, Type, X,
 } from 'lucide-react';
+import { useRef } from 'react';
 import type { ReactNode } from 'react';
 import { COLORS, noteColor, penColor } from './types';
 import type { ColorKey, StickerKind, Tool } from './types';
@@ -21,11 +23,64 @@ export const TOOLS: { id: Tool; icon: ReactNode; name: string; key: string }[] =
   { id: 'sticky', icon: <StickyNote size={19} />, name: 'ملاحظة لاصقة', key: 'N' },
 ];
 
-export function Toolbar({ tool, setTool, onImage, elementsOpen, toggleElements }: {
+/** Where the toolbar lives: docked to the top / a side edge (sides are vertical), or left where it was dropped. */
+export type ToolbarPlace = { dock: 'top' | 'left' | 'right' } | { dock: 'free'; x: number; y: number };
+const SNAP = 90;
+
+export function Toolbar({ tool, setTool, onImage, elementsOpen, toggleElements, swatch, styleOpen, toggleStyle, onClear, place, onPlace, children }: {
   tool: Tool; setTool(t: Tool): void; onImage(): void; elementsOpen: boolean; toggleElements(): void;
+  /** Current color of the active tool, or null when the tool has no style options. */
+  swatch: string | null; styleOpen: boolean; toggleStyle(): void; onClear(): void;
+  place: ToolbarPlace; onPlace(p: ToolbarPlace): void;
+  /** The color/size dropdown, positioned next to the bar. */
+  children?: ReactNode;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ dx: number; dy: number } | null>(null);
+  const vertical = place.dock === 'left' || place.dock === 'right';
+
+  // While dragging, the bar is moved directly (horizontal, under the pointer); on drop it snaps or stays.
+  const onGripDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = ref.current!;
+    const r = el.getBoundingClientRect();
+    drag.current = { dx: Math.min(e.clientX - r.left, 30), dy: Math.min(e.clientY - r.top, 24) };
+    (e.currentTarget as Element).setPointerCapture(e.pointerId);
+    el.classList.add('dragging');
+    Object.assign(el.style, { left: `${e.clientX - drag.current.dx}px`, top: `${e.clientY - drag.current.dy}px`, right: 'auto', transform: 'none', flexDirection: 'row' });
+  };
+  const onGripMove = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    if (!drag.current) return;
+    Object.assign(ref.current!.style, { left: `${e.clientX - drag.current.dx}px`, top: `${e.clientY - drag.current.dy}px` });
+  };
+  const onGripUp = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    if (!drag.current) return;
+    drag.current = null;
+    const el = ref.current!;
+    const box = el.getBoundingClientRect();
+    const W = el.parentElement!.clientWidth, H = el.parentElement!.clientHeight;
+    el.classList.remove('dragging');
+    el.removeAttribute('style');
+    if (e.clientX < SNAP) onPlace({ dock: 'left' });
+    else if (e.clientX > W - SNAP) onPlace({ dock: 'right' });
+    else if (e.clientY < SNAP) onPlace({ dock: 'top' });
+    else onPlace({
+      dock: 'free',
+      x: Math.round(Math.min(Math.max(box.left, 6), W - box.width - 6)),
+      y: Math.round(Math.min(Math.max(box.top, 6), H - box.height - 6)),
+    });
+  };
+
   return (
-    <div className="dock dock-top" role="toolbar" aria-label="أدوات السبورة">
+    <div ref={ref} className={`dock dock-top toolbar place-${place.dock} ${vertical ? 'vertical' : ''}`}
+      style={place.dock === 'free' ? { left: place.x, top: place.y } : undefined} role="toolbar" aria-label="أدوات السبورة">
+      <button className="tb grip" title="اسحب لتحريك الشريط · على الجنب بيبقى بالطول" aria-label="تحريك شريط الأدوات"
+        onPointerDown={onGripDown} onPointerMove={onGripMove} onPointerUp={onGripUp} onPointerCancel={onGripUp}>
+        {vertical ? <GripHorizontal size={16} /> : <GripVertical size={16} />}
+      </button>
       {TOOLS.map((t, i) => (
         <span key={t.id} className="contents">
           {(i === 2 || i === 6 || i === 10) && <span className="dock-sep" />}
@@ -36,45 +91,57 @@ export function Toolbar({ tool, setTool, onImage, elementsOpen, toggleElements }
         </span>
       ))}
       <span className="dock-sep" />
+      <button className={`tb style-btn ${styleOpen ? 'on' : ''}`} title="اللون والسُمك" aria-label="اللون والسُمك" aria-expanded={styleOpen}
+        disabled={!swatch} onClick={toggleStyle}>
+        <i className="dot" style={{ background: swatch ?? 'var(--border)' }} /><ChevronDown size={13} />
+      </button>
+      <button className="tb" title="امسح الرسم اللي على الشاشة (C) · Ctrl+Z للرجوع" aria-label="امسح الرسم اللي على الشاشة" onClick={onClear}>
+        <BrushCleaning size={19} /><span className="key">C</span>
+      </button>
+      <span className="dock-sep" />
       <button className="tb" title="إدراج صورة (I)" aria-label="إدراج صورة" onClick={onImage}><ImagePlus size={19} /><span className="key">I</span></button>
       <button className={`tb ${elementsOpen ? 'on' : ''}`} title="مكتبة العناصر (B)" aria-label="مكتبة العناصر" onClick={toggleElements}>
         <Shapes size={19} /><span className="key">B</span>
       </button>
+      {children}
     </div>
   );
 }
 
 const SIZES = [0, 1, 2];
+export const STYLED_TOOLS: Tool[] = ['pen', 'highlighter', 'rect', 'ellipse', 'arrow', 'line', 'text', 'sticky'];
 const HL_COLORS: ColorKey[] = ['yellow', 'green', 'blue', 'pink'];
 const NOTE_COLORS: ColorKey[] = ['yellow', 'blue', 'green', 'pink', 'orange', 'purple'];
 
-export function StyleBar({ tool, color, setColor, hlColor, setHlColor, noteColor: nc, setNoteColor, size, setSize }: {
-  tool: Tool;
+/** Color and thickness dropdown under the toolbar. Picking a color closes it. */
+export function StyleBar({ tool, color, setColor, hlColor, setHlColor, noteColor: nc, setNoteColor, size, setSize, onPicked }: {
+  tool: Tool; onPicked(): void;
   color: ColorKey; setColor(c: ColorKey): void;
   hlColor: ColorKey; setHlColor(c: ColorKey): void;
   noteColor: ColorKey; setNoteColor(c: ColorKey): void;
   size: number; setSize(s: number): void;
 }) {
-  if (!['pen', 'highlighter', 'rect', 'ellipse', 'arrow', 'line', 'text', 'sticky'].includes(tool)) return null;
+  if (!STYLED_TOOLS.includes(tool)) return null;
   const isHl = tool === 'highlighter', isNote = tool === 'sticky';
   const list = isHl ? HL_COLORS : isNote ? NOTE_COLORS : COLORS.filter(c => c !== 'yellow');
   const active = isHl ? hlColor : isNote ? nc : color;
   const set = isHl ? setHlColor : isNote ? setNoteColor : setColor;
   return (
-    <div className="dock dock-style">
-      {list.map(c => (
-        <button key={c} className={`swatch ${active === c ? 'on' : ''}`} aria-label={c}
-          style={{ background: isNote ? noteColor(c) : penColor(c) }} onClick={() => set(c)} />
-      ))}
+    <div className="dock dock-style" role="dialog" aria-label="اللون والسُمك">
+      <div className="style-row">
+        {list.map(c => (
+          <button key={c} className={`swatch ${active === c ? 'on' : ''}`} aria-label={c}
+            style={{ background: isNote ? noteColor(c) : penColor(c) }} onClick={() => { set(c); onPicked(); }} />
+        ))}
+      </div>
       {!isNote && (
-        <>
-          <span className="dock-sep" />
+        <div className="style-row">
           {SIZES.map(s => (
             <button key={s} className={`size-dot ${size === s ? 'on' : ''}`} title={['رفيع', 'متوسط', 'عريض'][s]} onClick={() => setSize(s)}>
               <i style={{ width: 5 + s * 5, height: 5 + s * 5 }} />
             </button>
           ))}
-        </>
+        </div>
       )}
     </div>
   );
@@ -214,12 +281,16 @@ export function NotesPanel({ index, title, notes, onClose }: { index: number; ti
 const KEYS: [string, string][] = [
   ['الإطار / الخطوة التالية', '← أو PageDown أو Space'],
   ['الإطار / الخطوة السابقة', '→ أو PageUp'],
+  ['الشريحة الجاية / السابقة على طول', 'Shift + ← / →'],
+  ['وضع التركيز (شرائح · ملء الشاشة)', 'W · Esc للخروج'],
   ['تحريك السبورة', 'اسحب الخلفية · Space + سحب · H'],
   ['تكبير وتصغير', 'Ctrl + عجلة الماوس · + / −'],
   ['ملاءمة الإطار الحالي', '0'],
   ['نظرة عامة على الدرس', 'Shift + 1'],
   ['تراجع / إعادة', 'Ctrl+Z / Ctrl+Y'],
   ['حذف العنصر المحدد', 'Delete'],
+  ['مسح الرسم اللي على الشاشة', 'C'],
+  ['مسح كل الرسم من السبورة', 'Shift + C'],
   ['تكرار العنصر المحدد', 'Ctrl + D'],
   ['تعديل نص / ملاحظة', 'دبل كليك'],
   ['لصق صورة أو نص', 'Ctrl + V'],

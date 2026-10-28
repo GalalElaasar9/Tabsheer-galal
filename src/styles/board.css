@@ -24,6 +24,51 @@
 .wb.panning, .wb.panning * { cursor: grabbing !important; }
 .wb.tool-hand { cursor: grab; }
 
+/* Slides mode: only the current frame, no board around it */
+.wb.slides { background: var(--surface); }
+.wb.slides .wb-grid { display: none; }
+.wb.slides .frame { box-shadow: none; border: 0; border-radius: 0; outline: none; }
+.wb.slides .dock { display: none; }
+.wb.slides.tools-open .dock-top,
+.wb.slides.tools-open .dock-style { display: flex; }
+
+/* Focus-mode controls: small, translucent, fade out when the mouse rests */
+.focus-ui {
+  position: absolute;
+  z-index: 22;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(16, 19, 34, .6);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  transition: opacity .35s;
+}
+.focus-ui button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.focus-ui button:hover { background: rgba(255, 255, 255, .14); }
+.focus-ui button.on { background: rgba(255, 255, 255, .24); }
+.focus-ui button:disabled { opacity: .35; cursor: default; background: transparent; }
+.focus-nav { bottom: 12px; left: 50%; transform: translateX(-50%); }
+.focus-count { min-width: 64px; text-align: center; font-weight: 800; font-size: 13px; direction: ltr; }
+.focus-menu { bottom: 12px; left: 12px; }
+.wb.slides.idle .focus-ui { opacity: 0; pointer-events: none; }
+.wb.slides.idle.tool-select,
+.wb.slides.idle.tool-select * { cursor: none !important; }
+.seg { display: flex; gap: 2px; padding: 2px; border-radius: 13px; background: var(--surface-2); }
+.seg .tb { height: 36px; }
+
 /* Capture layer: on top while a drawing tool is active */
 .wb-capture { position: absolute; inset: 0; z-index: 5; }
 .wb.tool-pen .wb-capture,
@@ -206,8 +251,28 @@
   border: 1px solid var(--border);
   box-shadow: var(--shadow-ui);
 }
-.dock-top { top: 12px; left: 50%; transform: translateX(-50%); }
-.dock-style { top: 70px; left: 50%; transform: translateX(-50%); }
+/* Toolbar: docked top (horizontal), left/right (vertical), or free where it was dropped */
+.toolbar.place-top { top: 12px; left: 50%; transform: translateX(-50%); }
+.toolbar.place-left { left: 12px; top: 50%; transform: translateY(-50%); }
+.toolbar.place-right { right: 12px; top: 50%; transform: translateY(-50%); }
+.toolbar.vertical { flex-direction: column; }
+.toolbar.vertical .dock-sep { width: auto; height: 1px; margin: 3px 4px; }
+.toolbar.vertical .tb { width: 38px; height: 34px; }
+.toolbar.dragging { z-index: 40; opacity: .92; box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .45); }
+.toolbar .tb.grip { width: 22px; cursor: grab; color: var(--muted); touch-action: none; }
+.toolbar.vertical .tb.grip { width: 38px; height: 20px; }
+.toolbar.dragging .grip { cursor: grabbing; }
+
+/* Color/size dropdown opens beside the bar */
+.dock-style { position: absolute; flex-direction: column; align-items: stretch; gap: 6px; padding: 8px; animation: drop-in .16s ease both; }
+.toolbar.place-top .dock-style,
+.toolbar.place-free .dock-style { top: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+.toolbar.place-right .dock-style { right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+.toolbar.place-left .dock-style { left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+@keyframes drop-in { from { opacity: 0; } }
+.style-row { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.style-btn { width: auto; padding: 0 6px; display: inline-flex; gap: 2px; }
+.style-btn .dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border); }
 .dock-tr { top: 12px; right: 12px; }
 .dock-tl { top: 12px; left: 12px; }
 .dock-bottom { bottom: 14px; left: 50%; transform: translateX(-50%); }
@@ -378,4 +443,11 @@ kbd {
   font-weight: 800;
   font-size: .9rem;
   pointer-events: none;
+}
+
+/* Narrower screens: keep the three top bars from colliding */
+@media (max-width: 1500px) {
+  .dock-tr .nav-title { display: none; }
+  .dock-top .tb { width: 37px; }
+  .dock-top .tb.style-btn { width: auto; }
 }

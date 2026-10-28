@@ -169,7 +169,8 @@
 
 /* ---------- Fragments (revealed one by one while teaching) ---------- */
 .frag { transition: opacity .35s ease, transform .35s ease; }
-.frag:not(.shown) { opacity: 0; transform: translateY(10px); pointer-events: none; }
+/* Hiding is instant (no flash of content when a frame becomes current); only appearing is animated. */
+.frag:not(.shown) { opacity: 0; transform: translateY(10px); pointer-events: none; transition: none; }
 .frag.current-frag { animation: pulseIn .6s ease; }
 @keyframes pulseIn { 0% { filter: brightness(1.25); } 100% { filter: none; } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }

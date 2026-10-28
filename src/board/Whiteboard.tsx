@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
-  ChevronLeft, ChevronRight, Keyboard, ListTree, Map as MapIcon, Maximize, Moon, NotebookPen,
-  Presentation, Redo2, Scan, Sun, Trash, Undo2, ZoomIn, ZoomOut,
+  ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Keyboard, BrushCleaning, ListTree, Map as MapIcon, Maximize, Minimize, Moon, NotebookPen, Pencil,
+  MonitorPlay, PanelsTopLeft, Presentation, Redo2, Scan, Sun, Undo2, ZoomIn, ZoomOut,
 } from 'lucide-react';
 import { Annotations, type LaserPoint } from './Annotations';
-import { ElementsPanel, HelpModal, NotesPanel, OutlinePanel, StyleBar, Toolbar, type LibItem } from './Chrome';
+import { ElementsPanel, HelpModal, NotesPanel, OutlinePanel, STYLED_TOOLS, StyleBar, Toolbar, type LibItem, type ToolbarPlace } from './Chrome';
 import { FrameContext, type StepperApi } from './frame';
 import { clamp, moveEl, readImage, uid } from './geom';
 import type { Camera, ColorKey, El, FrameDef, LessonDef, Point, Rect, ShapeKind, Tool } from './types';
@@ -71,6 +71,20 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
   const posKey = `board-pos:${lesson.id}`;
   const [cur, setCur] = useState(() => clamp(Number(localStorage.getItem(posKey)) || 0, 0, frames.length - 1));
   const [present, setPresent] = useState(true);
+  const [slides, setSlides] = useState(() => localStorage.getItem('board-slides') === '1');
+  const slidesRef = useRef(slides);
+  slidesRef.current = slides;
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const [styleOpen, setStyleOpen] = useState(false);
+  const [tbPlace, setTbPlace] = useState<ToolbarPlace>(() => {
+    try { return JSON.parse(localStorage.getItem('board-toolbar') ?? '') as ToolbarPlace; } catch { return { dock: 'top' }; }
+  });
+  const tbPlaceRef = useRef(tbPlace);
+  tbPlaceRef.current = tbPlace;
+  const tbShownRef = useRef(true);
+  const [idle, setIdle] = useState(false);
+  const idleRef = useRef(false);
+  const idleTimer = useRef(0);
   const [fragSteps, setFragSteps] = useState<Record<string, number>>({});
   const [panel, setPanel] = useState<'outline' | 'elements' | 'notes' | null>(null);
   const [help, setHelp] = useState(false);
@@ -121,12 +135,23 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     return [(clientX - r.left - x) / z, (clientY - r.top - y) / z];
   }, []);
 
-  const fit = useCallback((r: Rect, panelOpen = panel): Camera => {
+  /** Camera that fits a rect between the docks. Slides mode: no frame label, tighter margins. */
+  const fit = useCallback((r: Rect, panelOpen = panel, slideMode = slidesRef.current): Camera => {
     const { w, h } = view();
-    const top = 70, bottom = 74, side = 28, pw = panelOpen ? 310 : 0;
-    const left = side + (panelOpen === 'elements' ? pw : 0);
-    const aw = w - side * 2 - pw, ah = h - top - bottom;
-    const rr = { x: r.x, y: r.y - LABEL_H, w: r.w, h: r.h + LABEL_H };
+    let top = slideMode ? 0 : 70, left = slideMode ? 0 : 28, right = left;
+    const bottom = slideMode ? 0 : 74;
+    // Keep the docked toolbar in empty space, never over the lesson.
+    if (tbShownRef.current) {
+      const d = tbPlaceRef.current.dock;
+      if (d === 'top') top = Math.max(top, 70);
+      if (d === 'left') left += 62;
+      if (d === 'right') right += 62;
+    }
+    if (panelOpen === 'elements') left += 310;
+    else if (panelOpen) right += 310;
+    const aw = w - left - right, ah = h - top - bottom;
+    const label = slideMode ? 0 : LABEL_H;
+    const rr = { x: r.x, y: r.y - label, w: r.w, h: r.h + label };
     const z = clamp(Math.min(aw / rr.w, ah / rr.h), 0.04, 2.5);
     return { z, x: left + aw / 2 - (rr.x + rr.w / 2) * z, y: top + ah / 2 - (rr.y + rr.h / 2) * z };
   }, [panel]);
@@ -166,8 +191,59 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     const f = frames[clamp(i, 0, frames.length - 1)];
     setCur(f.index);
     setFragSteps(s => ({ ...s, [f.id]: dir >= 0 ? 0 : fragMax.current.get(f.id) ?? 0 }));
-    flyTo(fit(f));
+    if (slidesRef.current) showSlide(f);
+    else flyTo(fit(f));
   }, [frames, fit, flyTo]);
+
+  /** Slides mode: jump straight to the frame (no flight across the board) and fade it in. */
+  function showSlide(f: Placed) {
+    cancelAnimationFrame(anim.current);
+    cam.current = fit(f, panel, true);
+    applyCam();
+    worldRef.current?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' });
+  }
+
+  /** Jump to the next/previous slide, skipping any steps not yet revealed. */
+  const skip = (dir: 1 | -1) => {
+    const i = cur + dir;
+    if (i >= 0 && i < frames.length) goTo(i, dir);
+  };
+
+  /** Slides = focus mode: fullscreen, the slide fills the screen, bars tuck away. */
+  const setSlidesMode = (on: boolean, fromFullscreen = false) => {
+    if (slidesRef.current === on) return;
+    slidesRef.current = on;
+    setSlides(on);
+    setToolsOpen(false);
+    try { localStorage.setItem('board-slides', on ? '1' : '0'); } catch { /* ignore */ }
+    const f = frames[curRef.current];
+    if (on) {
+      if (!fromFullscreen && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+      showSlide(f);
+      poke();
+    } else {
+      if (!fromFullscreen && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      flyTo(fit(f, panel, false));
+    }
+    flash(on ? 'وضع التركيز · Esc للخروج' : 'السبورة: كل الدرس قدامك');
+  };
+  const toggleSlides = () => setSlidesMode(!slidesRef.current);
+  const slidesModeRef = useRef(setSlidesMode);
+  slidesModeRef.current = setSlidesMode;
+
+  /** Show the focus-mode controls; they fade out again after a moment without the mouse. */
+  function poke() {
+    if (idleRef.current) { idleRef.current = false; setIdle(false); }
+    clearTimeout(idleTimer.current);
+    idleTimer.current = window.setTimeout(() => { idleRef.current = true; setIdle(true); }, 2500);
+  }
+
+  /* Leaving fullscreen (Esc, F11…) leaves focus mode too. */
+  useEffect(() => {
+    const onFs = () => { if (!document.fullscreenElement && slidesRef.current) slidesModeRef.current(false, true); };
+    document.addEventListener('fullscreenchange', onFs);
+    return () => { document.removeEventListener('fullscreenchange', onFs); clearTimeout(idleTimer.current); };
+  }, []);
 
   const frameOnScreen = (f: Placed) => {
     const { w, h } = view();
@@ -227,6 +303,21 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
   useEffect(() => {
     try { localStorage.setItem(posKey, String(cur)); } catch { /* ignore */ }
   }, [cur, posKey]);
+
+  /* Slides mode: clip the whole board (lesson + drawings) to the current frame. */
+  useLayoutEffect(() => {
+    const w = worldRef.current;
+    if (!w) return;
+    const f = frames[cur];
+    w.style.clipPath = slides
+      ? `inset(${f.y}px ${-(f.x + f.w)}px ${-(f.y + f.h)}px ${f.x}px)`
+      : '';
+  }, [slides, cur, frames]);
+
+  /* Re-fit when a side panel opens or closes while showing slides. */
+  useEffect(() => {
+    if (slidesRef.current) { cam.current = fit(frames[curRef.current], panel, true); applyCam(); }
+  }, [panel, fit, frames, applyCam]);
 
   /* ---------- Element helpers ---------- */
   const toastTimer = useRef(0);
@@ -305,12 +396,31 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     setSelected(copy.id);
   };
 
+  /** Erase every drawing visible on screen right now (no confirmation: Ctrl+Z brings it back). */
+  const clearScreen = () => {
+    let r = wrapRef.current!.getBoundingClientRect();
+    const slide = slidesRef.current ? document.querySelector('.frame.active')?.getBoundingClientRect() : null;
+    if (slide) r = new DOMRect(Math.max(r.left, slide.left), Math.max(r.top, slide.top),
+      Math.min(r.right, slide.right) - Math.max(r.left, slide.left), Math.min(r.bottom, slide.bottom) - Math.max(r.top, slide.top));
+    const ids = new Set<string>();
+    wrapRef.current!.querySelectorAll('.wb-world [data-el-id]').forEach(n => {
+      const b = n.getBoundingClientRect();
+      if (b.right > r.left && b.left < r.right && b.bottom > r.top && b.top < r.bottom) ids.add(n.getAttribute('data-el-id')!);
+    });
+    if (!ids.size) { flash('مفيش رسم على الشاشة'); return; }
+    commit(list => list.filter(e => !ids.has(e.id)));
+    setSelected(null);
+    setEditing(null);
+    flash('اتمسح الرسم اللي على الشاشة · Ctrl+Z للرجوع');
+  };
+
+  /** Erase all drawings on the whole board (also undoable). */
   const clearBoard = () => {
-    if (!els.length) return;
-    if (window.confirm('مسح كل الرسم والإضافات من السبورة؟ (محتوى الدرس مش هيتأثر، وتقدر تتراجع بـ Ctrl+Z)')) {
-      commit([]);
-      setSelected(null);
-    }
+    if (!els.length) { flash('مفيش رسم على السبورة'); return; }
+    commit([]);
+    setSelected(null);
+    setEditing(null);
+    flash('اتمسح كل الرسم · Ctrl+Z للرجوع');
   };
 
   const eraseAt = (clientX: number, clientY: number) => {
@@ -330,6 +440,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
   const sizeWorld = (base: number) => base / cam.current.z;
 
   const startPan = (e: React.PointerEvent) => {
+    if (slidesRef.current) return;
     cancelAnimationFrame(anim.current);
     gesture.current = { kind: 'pan', sx: e.clientX, sy: e.clientY, cx: cam.current.x, cy: cam.current.y, moved: false };
     setPanning(true);
@@ -338,10 +449,13 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
 
   const onPointerDown = (e: React.PointerEvent) => {
     const target = e.target as HTMLElement;
-    if (target.closest('.dock, .panel, .modal-back')) return;
+    if (slidesRef.current) poke();
+    if (styleOpen && !target.closest('.dock-style, .style-btn')) setStyleOpen(false);
+    if (target.closest('.dock, .panel, .modal-back, .focus-ui')) return;
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
     if (pointers.current.size === 2) {
+      if (slidesRef.current) return;
       const [a, b] = [...pointers.current.values()];
       gesture.current = { kind: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, cam: { ...cam.current } };
       setDraft(null);
@@ -434,6 +548,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
 
   const onPointerMove = (e: React.PointerEvent) => {
     moveCursor(e);
+    if (slidesRef.current && e.pointerType === 'mouse') poke();
     if (pointers.current.has(e.pointerId)) pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     const g = gesture.current;
     if (!g) return;
@@ -551,6 +666,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     const onWheel = (e: WheelEvent) => {
       if ((e.target as HTMLElement).closest('.panel, .modal-back')) return;
       e.preventDefault();
+      if (slidesRef.current) return;
       cancelAnimationFrame(anim.current);
       const unit = e.deltaMode === 1 ? 16 : 1;
       if (e.ctrlKey || e.metaKey) {
@@ -588,33 +704,39 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     if (mod || e.altKey) return;
 
     switch (e.key) {
-      case 'ArrowLeft': case 'PageDown': e.preventDefault(); next(); return;
-      case 'ArrowRight': case 'PageUp': e.preventDefault(); prev(); return;
+      case 'ArrowLeft': case 'PageDown': e.preventDefault(); if (e.shiftKey) skip(1); else next(); return;
+      case 'ArrowRight': case 'PageUp': e.preventDefault(); if (e.shiftKey) skip(-1); else prev(); return;
       case 'Home': goTo(0, 1); return;
       case 'End': goTo(frames.length - 1, -1); return;
       case 'Delete': case 'Backspace': removeSelected(); return;
-      case 'Escape': setHelp(false); setTool('select'); return;
-      case '+': case '=': zoomBy(1.2); return;
-      case '-': case '_': zoomBy(1 / 1.2); return;
+      case 'Escape':
+        setHelp(false);
+        if (slides && tool === 'select' && !toolsOpen) setSlidesMode(false);
+        else { setTool('select'); setToolsOpen(false); }
+        return;
+      case '+': case '=': if (!slides) zoomBy(1.2); return;
+      case '-': case '_': if (!slides) zoomBy(1 / 1.2); return;
       case '?': setHelp(h => !h); return;
       case ' ':
         e.preventDefault();
         if (!e.repeat) space.current = { down: true, used: false };
         return;
     }
-    if (e.shiftKey && e.code === 'Digit1') { flyTo(fit(bounds)); return; }
+    if (e.shiftKey && e.code === 'Digit1') { if (!slides) flyTo(fit(bounds)); return; }
     const map: Record<string, Tool> = {
       KeyV: 'select', KeyH: 'hand', KeyP: 'pen', KeyM: 'highlighter', KeyE: 'eraser', KeyK: 'laser',
       KeyR: 'rect', KeyO: 'ellipse', KeyA: 'arrow', KeyL: 'line', KeyT: 'text', KeyN: 'sticky',
     };
     if (map[e.code]) { setTool(map[e.code]); return; }
-    if (e.code === 'Digit0') flyTo(fit(frames[cur]));
+    if (e.code === 'Digit0') { if (slides) showSlide(frames[cur]); else flyTo(fit(frames[cur])); }
     if (e.code === 'KeyI') fileRef.current?.click();
     if (e.code === 'KeyB') setPanel(p => (p === 'elements' ? null : 'elements'));
     if (e.code === 'KeyG') setPanel(p => (p === 'outline' ? null : 'outline'));
     if (e.code === 'KeyJ') setPanel(p => (p === 'notes' ? null : 'notes'));
     if (e.code === 'KeyF') toggleFullscreen();
     if (e.code === 'KeyS') togglePresent();
+    if (e.code === 'KeyC') { if (e.shiftKey) clearBoard(); else clearScreen(); }
+    if (e.code === 'KeyW') toggleSlides();
   };
 
   useEffect(() => {
@@ -670,7 +792,26 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
 
   const togglePanel = (p: 'outline' | 'elements' | 'notes') => setPanel(cur => (cur === p ? null : p));
 
+  /* Toolbar moved, or shown/hidden in focus mode: re-fit so it never covers the slide. */
+  const toolbarShown = !slides || toolsOpen || tool !== 'select';
+  tbShownRef.current = toolbarShown;
+  const tbFirst = useRef(true);
+  useEffect(() => {
+    if (tbFirst.current) { tbFirst.current = false; return; }
+    const f = frames[curRef.current];
+    if (slidesRef.current) { cancelAnimationFrame(anim.current); cam.current = fit(f, panel, true); applyCam(); }
+    else flyTo(fit(f));
+  }, [tbPlace, toolbarShown]);
+
+  const placeToolbar = (p: ToolbarPlace) => {
+    tbShownRef.current = toolbarShown;
+    setTbPlace(p);
+    try { localStorage.setItem('board-toolbar', JSON.stringify(p)); } catch { /* ignore */ }
+  };
+
   /* ---------- Render ---------- */
+  const swatch = !STYLED_TOOLS.includes(tool) ? null
+    : tool === 'highlighter' ? `var(--pen-${hlColor})` : tool === 'sticky' ? `var(--note-${noteColor})` : `var(--pen-${color})`;
   const f = frames[cur];
   const drawing = tool !== 'select';
   const outline = useMemo(() => {
@@ -681,7 +822,10 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
   return (
     <div
       ref={wrapRef}
-      className={`wb tool-${tool} ${panning ? 'panning' : ''}`}
+      className={[
+        'wb', `tool-${tool}`, panning && 'panning', slides && 'slides', slides && idle && 'idle',
+        (toolsOpen || tool !== 'select') && 'tools-open',
+      ].filter(Boolean).join(' ')}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -732,14 +876,18 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
       </div>
 
       <Toolbar tool={tool} setTool={setTool} onImage={() => fileRef.current?.click()}
-        elementsOpen={panel === 'elements'} toggleElements={() => togglePanel('elements')} />
-      <StyleBar tool={tool} color={color} setColor={setColor} hlColor={hlColor} setHlColor={setHlColor}
-        noteColor={noteColor} setNoteColor={setNoteColor} size={sizeIdx} setSize={setSizeIdx} />
+        elementsOpen={panel === 'elements'} toggleElements={() => togglePanel('elements')}
+        swatch={swatch} styleOpen={styleOpen && !!swatch} toggleStyle={() => setStyleOpen(o => !o)} onClear={clearScreen}
+        place={tbPlace} onPlace={placeToolbar}>
+        {styleOpen && swatch && (
+          <StyleBar tool={tool} color={color} setColor={setColor} hlColor={hlColor} setHlColor={setHlColor}
+            noteColor={noteColor} setNoteColor={setNoteColor} size={sizeIdx} setSize={setSizeIdx} onPicked={() => setStyleOpen(false)} />
+        )}
+      </Toolbar>
 
       <div className="dock dock-tl">
         <button className="tb" title="تراجع (Ctrl+Z)" disabled={!ann.canUndo} onClick={ann.undo}><Undo2 size={19} /></button>
         <button className="tb" title="إعادة (Ctrl+Y)" disabled={!ann.canRedo} onClick={ann.redo}><Redo2 size={19} /></button>
-        <button className="tb" title="مسح الرسم من السبورة" disabled={!els.length} onClick={clearBoard}><Trash size={19} /></button>
         <span className="dock-sep" />
         <button className="tb" title="الوضع الليلي / النهاري" onClick={toggleTheme}>{theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}</button>
         <button className="tb" title="ملء الشاشة (F)" onClick={toggleFullscreen}><Maximize size={19} /></button>
@@ -752,29 +900,67 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
           <Presentation size={18} /> {present ? 'وضع الشرح' : 'استكشاف حر'}
         </button>
         <span className="dock-sep" />
+        <button className="tb" title="الشريحة السابقة على طول (Shift + →)" disabled={cur === 0} onClick={() => skip(-1)}><ChevronsRight size={21} /></button>
         <button className="tb" title="السابق (→)" onClick={prev}><ChevronRight size={22} /></button>
         <div className="nav-title">
           {f.title}
           <small>{cur + 1} / {frames.length}</small>
         </div>
-        <button className="tb" title="التالي (←)" onClick={next} style={{ background: 'var(--primary)', color: 'var(--surface)' }}>
+        <button className="tb" title="التالي: الخطوة الجاية (←)" onClick={next} style={{ background: 'var(--primary)', color: 'var(--surface)' }}>
           <ChevronLeft size={22} />
         </button>
+        <button className="tb" title="الشريحة الجاية على طول (Shift + ←)" disabled={cur === frames.length - 1} onClick={() => skip(1)}><ChevronsLeft size={21} /></button>
       </div>
 
       <div className="dock dock-bl">
-        <button className="tb" title="تصغير (−)" onClick={() => zoomBy(1 / 1.2)}><ZoomOut size={18} /></button>
-        <button className="zoom-label" title="ملاءمة الإطار الحالي (0)" onClick={() => flyTo(fit(f))}>{Math.round(zoom * 100)}%</button>
-        <button className="tb" title="تكبير (+)" onClick={() => zoomBy(1.2)}><ZoomIn size={18} /></button>
-        <span className="dock-sep" />
-        <button className="tb" title="ملاءمة الإطار الحالي (0)" onClick={() => flyTo(fit(f))}><Scan size={18} /></button>
-        <button className="tb" title="نظرة عامة على الدرس (Shift+1)" onClick={() => flyTo(fit(bounds))}><MapIcon size={18} /></button>
+        <div className="seg" role="group" aria-label="طريقة العرض">
+          <button className={`tb tb-wide ${!slides ? 'on' : ''}`} title="السبورة: الدرس كله قدامك (W)" onClick={() => slides && toggleSlides()}>
+            <PanelsTopLeft size={17} /> سبورة
+          </button>
+          <button className={`tb tb-wide ${slides ? 'on' : ''}`} title="شرائح: الشريحة الحالية بس (W)" onClick={() => !slides && toggleSlides()}>
+            <MonitorPlay size={17} /> شرائح
+          </button>
+        </div>
+        {!slides && (
+          <>
+            <span className="dock-sep" />
+            <button className="tb" title="تصغير (−)" onClick={() => zoomBy(1 / 1.2)}><ZoomOut size={18} /></button>
+            <button className="zoom-label" title="ملاءمة الإطار الحالي (0)" onClick={() => flyTo(fit(f))}>{Math.round(zoom * 100)}%</button>
+            <button className="tb" title="تكبير (+)" onClick={() => zoomBy(1.2)}><ZoomIn size={18} /></button>
+            <span className="dock-sep" />
+            <button className="tb" title="ملاءمة الإطار الحالي (0)" onClick={() => flyTo(fit(f))}><Scan size={18} /></button>
+            <button className="tb" title="نظرة عامة على الدرس (Shift+1)" onClick={() => flyTo(fit(bounds))}><MapIcon size={18} /></button>
+          </>
+        )}
       </div>
 
       {panel === 'outline' && <OutlinePanel sections={outline} cur={cur} onGo={i => goTo(i, 1)} onClose={() => setPanel(null)} />}
       {panel === 'notes' && <NotesPanel index={cur} title={f.title} notes={f.notes} onClose={() => setPanel(null)} />}
       {panel === 'elements' && <ElementsPanel onInsert={it => insertLib(it)} onClose={() => setPanel(null)} />}
       {help && <HelpModal onClose={() => setHelp(false)} />}
+
+      {slides && (
+        <>
+          <div className="focus-ui focus-nav">
+            <button title="الشريحة السابقة على طول (Shift + →)" disabled={cur === 0} onClick={() => skip(-1)}><ChevronsRight size={18} /></button>
+            <button title="السابق (→)" onClick={prev}><ChevronRight size={20} /></button>
+            <span className="focus-count">{cur + 1} / {frames.length}</span>
+            <button title="التالي (←)" onClick={next}><ChevronLeft size={20} /></button>
+            <button title="الشريحة الجاية على طول (Shift + ←)" disabled={cur === frames.length - 1} onClick={() => skip(1)}><ChevronsLeft size={18} /></button>
+          </div>
+          <div className="focus-ui focus-menu">
+            <button className={toolsOpen || tool !== 'select' ? 'on' : ''} title="أدوات الرسم"
+              onClick={() => { if (toolsOpen || tool !== 'select') { setToolsOpen(false); setTool('select'); } else setToolsOpen(true); }}>
+              <Pencil size={17} />
+            </button>
+            <button title="امسح الرسم اللي على الشاشة (C)" onClick={clearScreen}><BrushCleaning size={17} /></button>
+            <button className={panel === 'notes' ? 'on' : ''} title="ملاحظات المدرس (J)" onClick={() => togglePanel('notes')}><NotebookPen size={17} /></button>
+            <button className={panel === 'outline' ? 'on' : ''} title="محتوى الدرس (G)" onClick={() => togglePanel('outline')}><ListTree size={17} /></button>
+            <button title="الوضع الليلي / النهاري" onClick={toggleTheme}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</button>
+            <button title="خروج من وضع التركيز (Esc)" onClick={() => setSlidesMode(false)}><Minimize size={17} /></button>
+          </div>
+        </>
+      )}
       {toast && <div className="toast">{toast}</div>}
 
       <input ref={fileRef} type="file" accept="image/*" hidden
