@@ -134,12 +134,42 @@
 .frame-body {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   border-radius: inherit;
   display: flex;
-  padding: 40px 56px;
+  flex-direction: column;
+  justify-content: safe center;
+  align-items: center;
+  padding: 40px 56px 60px 56px;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
 }
-.frame-inner { width: 100%; margin: auto; }
+.frame-body::-webkit-scrollbar {
+  width: 8px;
+}
+.frame-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.frame-body::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  opacity: 0.5;
+  border-radius: 4px;
+}
+.frame-body::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+.frame-body.bare {
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  touch-action: none;
+}
+.frame-inner {
+  width: 100%;
+}
 
 /* ---------- Annotation layer ---------- */
 .wb-svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }

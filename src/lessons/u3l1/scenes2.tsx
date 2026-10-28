@@ -1,7 +1,7 @@
 // Board scenes · parts 2–5: static pages, changing content, databases, the Backend.
 import type { FrameDef } from '../../board/types';
 import {
-  Arrow, Box, Browser, Cylinder, Doodle, Ellipse, Heading, Line, Mark, Note, Paper, Scene, Table, Txt,
+  Arrow, Box, Browser, Cylinder, Doodle, Heading, Line, Mark, Note, Paper, Scene, Table, Txt,
 } from '../../sketch/Sketch';
 import { AboutRendered } from './common';
 
@@ -121,7 +121,7 @@ const GROWTH = [
 
 export const part3: FrameDef[] = [
   {
-    id: 'web-grows', title: 'الويب كبر… والناس عايزة أكتر', scene: true,
+    id: 'web-grows', title: 'الويب كبر… والناس عايزاة أكتر', scene: true,
     notes: (
       <>
         <p>بعد ما الويب اتفتح للناس سنة 1991، ومع ظهور متصفحات سهلة زي Mosaic (1993)، عدد المواقع زاد بسرعة كبيرة: موقع واحد سنة 1991، حوالي 3 آلاف سنة 1994، حوالي ربع مليون سنة 1996، وأكتر من 17 مليون سنة 2000 (أرقام تقريبية).</p>
@@ -130,7 +130,7 @@ export const part3: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading>الويب كبر… والناس عايزة أكتر</Heading>
+        <Heading>انتشار الويب وزياده الطلب عليه..  </Heading>
         <Line pts={[[1200, 530], [520, 530]]} sw={2.4} />
         {GROWTH.map((g, i) => {
           const x = 1080 - i * 170;
@@ -143,9 +143,9 @@ export const part3: FrameDef[] = [
           );
         })}
         <Txt x={850} y={620} size={26} c="ink" at={1} delay={1.6}>عدد المواقع على الويب (تقريبًا)</Txt>
-        <Doodle x={300} y={190} icon="🎓" size={86} c="pink" label="نتيجتي أنا" lsize={26} lc="pink" at={2} />
-        <Doodle x={300} y={335} icon="🏦" size={86} c="pink" label="رصيد حسابي" lsize={26} lc="pink" at={2} delay={0.3} />
-        <Doodle x={300} y={480} icon="🛒" size={86} c="pink" label="السلة بتاعتي" lsize={26} lc="pink" at={2} delay={0.6} />
+        <Doodle x={300} y={190} icon="🎓" size={86} c="pink" label="التعليم" lsize={26} lc="pink" at={2} />
+        <Doodle x={300} y={335} icon="🏦" size={86} c="pink" label="البنوك" lsize={26} lc="pink" at={2} delay={0.3} />
+        <Doodle x={300} y={480} icon="🛒" size={86} c="pink" label="التجارة" lsize={26} lc="pink" at={2} delay={0.6} />
         <Line pts={[[470, 150], [478, 370], [470, 580]]} dashed sw={1.6} />
         <Note x={70} y={600} w={430} h={95} rot={-1.5} size={26} at={3}>صفحة واحدة للكل… مبقتش كفاية</Note>
       </Scene>
@@ -248,11 +248,12 @@ export const part4: FrameDef[] = [
         <Mark x={150} y={308} w={770} h={64} c="orange" at={2} />
         <Txt x={1100} y={470} size={32} c="orange" at={2} delay={0.4}>صف = طالب</Txt>
         <Arrow from={[1030, 455]} to={[930, 345]} c="orange" bend={20} at={2} delay={0.5} />
-        <Mark x={630} y={190} w={160} h={250} c="purple" at={3} />
-        <Txt x={710} y={490} size={32} c="purple" at={3} delay={0.4}>عمود = نوع معلومة</Txt>
-        <Doodle x={900} y={600} icon="💾" size={80} c="blue" label="نحفظ" at={4} />
-        <Doodle x={640} y={600} icon="🔍" size={80} c="blue" label="نسترجع" at={4} delay={0.2} />
-        <Doodle x={380} y={600} icon="✏️" size={80} c="blue" label="نحدّث" at={4} delay={0.4} />
+        <Mark x={570} y={190} w={160} h={250} c="purple" at={3} />
+        <Txt x={650} y={490} size={32} c="purple" at={3} delay={0.4}>عمود = نوع معلومة</Txt>
+        <Doodle x={1100} y={600} icon="💾" size={80} c="blue" label="نحفظ" at={4} />
+        <Doodle x={840} y={600} icon="🔍" size={80} c="blue" label="نسترجع" at={4} delay={0.2} />
+        <Doodle x={580} y={600} icon="✏️" size={80} c="blue" label="نحدّث" at={4} delay={0.4} />
+        <Doodle x={320} y={600} icon="🗑️" size={80} c="blue" label="نحذف" at={4} delay={0.6} />
         <Txt x={160} y={600} size={30} c="green" at={4} delay={0.7}>بسهولة وبسرعة ✔</Txt>
       </Scene>
     ),
@@ -261,28 +262,34 @@ export const part4: FrameDef[] = [
     id: 'files-vs-db', title: 'ملفات ولا قاعدة بيانات؟', scene: true,
     notes: (
       <>
+        <p>نرجع لنفس مشاكل موقع النتائج ونقارن الطريقتين:</p>
         <ul>
-          <li><b>حفظ طالب جديد:</b> ملف جديد كامل بالتصميم ⟷ صف واحد.</li>
-          <li><b>استرجاع نتيجة:</b> تفتح الملف وتدوّر جوه الكلام ⟷ تطلب الصف برقم الطالب.</li>
-          <li><b>تحديث درجة:</b> تعدّل الملف بإيدك ⟷ تعدّل خانة واحدة.</li>
-          <li><b>متوسط الرياضيات:</b> تفتح 20,000 ملف ⟷ البيانات مرتبة في عمود.</li>
+          <li><b>درجة اتعدلت:</b> ملف لكل طالب ← تدوّر على ملفه وتعدّل جوه كود HTML ⟷ قاعدة بيانات ← تعدّل خانة واحدة في صفه.</li>
+          <li><b>تصميم جديد:</b> تعدّل 20,000 ملف ⟷ تعدّل القالب الواحد.</li>
+          <li><b>طالب جديد:</b> تكتب ملف HTML كامل ⟷ تضيف صف واحد.</li>
         </ul>
-        <p>بس قاعدة البيانات بتخزّن بيانات بس، مش بتعمل صفحات. مين اللي ياخد الطلب ويجيب البيانات ويحطها في صفحة؟</p>
+        <p>بس قاعدة البيانات بتخزّن وترجّع بيانات وبس: مش بتستقبل طلبات ولا بتبني صفحات. لسه محتاجين حد في النص، وده المحطة الجاية.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>درجة مريم اتعدلت… نعمل إيه؟</Heading>
-        <Line pts={[[640, 150], [632, 400], [640, 560]]} dashed sw={2} />
-        {[0, 1, 2].map(i => <Paper key={i} x={840 + i * 26} y={190 + i * 20} w={210} h={170} at={1} delay={i * 0.15} />)}
-        <Txt x={960} y={450} size={34} at={1} delay={0.5}>📄 ملف لكل طالب</Txt>
-        <Txt x={960} y={500} size={30} c="red" at={1} delay={0.7}>دوّر على الملف وعدّل بإيدك 😩</Txt>
-        <Txt x={640} y={300} size={44} c="purple">VS</Txt>
-        <Cylinder x={250} y={180} w={160} h={190} label="DB" at={2} />
-        <Table x={120} y={400} cols={[110, 160, 120]} rowH={44} size={24} rows={[['2402', 'مريم', 'رياضيات'], ['', '', '97']].map(r => r)} at={2} delay={0.3} />
-        <Mark x={100} y={430} w={150} h={64} c="green" at={2} delay={0.8} />
-        <Txt x={300} y={530} size={30} c="green" at={2} delay={1}>خانة واحدة 🙂</Txt>
-        <Note x={360} y={580} w={560} h={100} rot={1.5} color="blue" size={30} at={3}>بس مين ياخد الطلب ويجيب البيانات ويعمل صفحة؟ 🤔</Note>
+        <Heading>ملفات ولا قاعدة بيانات؟</Heading>
+        <Txt x={1010} y={170} size={34} c="red">📄 ملف لكل طالب</Txt>
+        <Txt x={290} y={170} size={34} c="green">🗃️ قاعدة بيانات + قالب</Txt>
+        <Line pts={[[800, 210], [806, 420], [800, 600]]} dashed sw={1.6} />
+        <Line pts={[[480, 210], [474, 420], [480, 600]]} dashed sw={1.6} />
+        {([
+          ['✏️', 'درجة مريم اتعدلت', 'دوّر على ملفها وعدّل جوه الكود', 'خانة واحدة في صفها'],
+          ['🎨', 'تصميم جديد', 'عدّل 20,000 ملف 😩', 'عدّل القالب الواحد'],
+          ['➕', 'طالب جديد', 'اكتب ملف HTML كامل', 'ضيف صف واحد'],
+        ] as const).map(([icon, task, files, db], i) => (
+          <span key={task} className="contents">
+            <Txt x={640} y={270 + i * 120} size={30} at={i + 1}>{icon} {task}</Txt>
+            <Txt x={1010} y={270 + i * 120} w={360} size={27} c="red" at={i + 1} delay={0.3}>{files}</Txt>
+            <Txt x={290} y={270 + i * 120} w={340} size={27} c="green" at={i + 1} delay={0.6}>{db} ✔</Txt>
+          </span>
+        ))}
+        <Note x={300} y={590} w={680} h={95} rot={-1.5} color="blue" size={28} at={4}>بس قاعدة البيانات بتخزّن وبس… مين ياخد الطلب ويبني الصفحة؟ 🤔</Note>
       </Scene>
     ),
   },
@@ -290,89 +297,57 @@ export const part4: FrameDef[] = [
 
 export const part5: FrameDef[] = [
   {
-    id: 'backend-problem', title: '٣ حاجات… مين يجمعهم؟', scene: true,
-    notes: <p>عندنا طلب جاي من الطالب، وبيانات في قاعدة البيانات، وقالب للصفحة. محتاجين برنامج على السيرفر يستقبل الطلب ويقرر ويجيب البيانات ويبني الصفحة: ده الـ Backend.</p>,
-    render: () => (
-      <Scene>
-        <Heading>٣ حاجات… مين يجمعهم؟</Heading>
-        <Box x={930} y={190} w={280} h={100} c="blue" fill="blue" tc="ink" size={28} at={1}>📨 طلب من مريم (2402)</Box>
-        <Paper x={540} y={175} w={210} h={150} label="قالب الصفحة" at={1} delay={0.3}>
-          <div className="sk-code" style={{ fontSize: 22 }}><span className="tag">&lt;h4&gt;</span><span className="ph">{'{{name}}'}</span><br /><span className="tag">&lt;p&gt;</span><span className="ph">{'{{math}}'}</span></div>
-        </Paper>
-        <Cylinder x={150} y={170} w={160} h={170} label="البيانات" at={1} delay={0.6} />
-        <Ellipse x={470} y={420} w={340} h={170} c="red" size={70} tc="red" at={2}>؟</Ellipse>
-        <Arrow from={[1050, 300]} to={[790, 450]} c="red" dashed at={2} delay={0.2} />
-        <Arrow from={[645, 335]} to={[640, 412]} c="red" dashed at={2} delay={0.3} />
-        <Arrow from={[310, 330]} to={[495, 455]} c="red" dashed at={2} delay={0.4} />
-        <Txt x={640} y={640} size={30} c="red" at={2} delay={0.7}>مين يستقبل الطلب ويجيب البيانات ويبني الصفحة؟</Txt>
-        <Note x={880} y={440} w={340} h={150} rot={2} color="green" size={26} at={3}>💡 برنامج على السيرفر<br />بيستقبل · يقرر · يجيب · يبني</Note>
-      </Scene>
-    ),
-  },
-  {
-    id: 'backend-def', title: 'الـ Backend', scene: true,
+    id: 'backend-def', title: 'الـ Backend: المخ اللي على السيرفر', scene: true,
     notes: (
       <>
-        <p><b>Backend:</b> الجزء اللي شغال على السيرفر: بيستقبل الطلبات، وينفّذ منطق التطبيق (القواعد والقرارات)، ويتعامل مع البيانات.</p>
-        <p>طريقة التنفيذ بتختلف من نظام لنظام، بس الأدوار دي ثابتة.</p>
+        <p><b>Backend:</b> البرنامج اللي شغال على السيرفر. بيستقبل الطلبات، وينفّذ منطق التطبيق (القواعد والقرارات زي الصلاحيات)، ويتعامل مع قاعدة البيانات، ويجهّز الرد.</p>
+        <p>شغلانته ٤ حاجات:</p>
+        <ul>
+          <li><b>يستقبل</b> الطلب اللي جاي من المتصفح.</li>
+          <li><b>يقرر:</b> مين ده؟ مسموح له؟ المفروض نعمل إيه؟</li>
+          <li><b>يقرا ويحفظ</b> البيانات في قاعدة البيانات.</li>
+          <li><b>يبني الرد:</b> يملا قالب HTML بالبيانات ويبعت الصفحة.</li>
+        </ul>
+        <p>ولأن الكود ده على السيرفر مش في المتصفح، المستخدم مش شايفه ومش قادر يغيّره. ده اللي بيحل مشكلة "غيّرت الرقم في الرابط فشفت نتيجة غيري".</p>
+        <p><b>تشبيه:</b> المتصفح هو الزبون في الصالة، وقاعدة البيانات هي المخزن، والـ Backend هو الشيف في المطبخ: ياخد الطلب، يجيب المكونات، ويجهّز الطبق.</p>
       </>
     ),
     render: () => (
       <Scene>
         <Heading>الـ Backend: المخ اللي على السيرفر</Heading>
-        <Doodle x={640} y={370} icon="⚙️" size={170} c="orange" fill="orange" label="Backend" lsize={38} lc="orange" />
-        <Doodle x={1110} y={370} icon="🖥️" size={110} c="blue" label="المتصفح" />
-        <Cylinder x={90} y={290} w={150} h={170} label="DB" />
-        <Arrow from={[1050, 370]} to={[735, 370]} c="blue" label="طلب" at={1} />
-        <Txt x={640} y={180} size={34} at={1} delay={0.4}>📥 يستقبل الطلب</Txt>
-        <Txt x={870} y={570} size={34} at={2}>🧠 يقرر: مسموح؟ نعمل إيه؟</Txt>
-        <Arrow from={[545, 370]} to={[250, 370]} c="green" both at={3} />
-        <Txt x={400} y={570} size={34} at={3} delay={0.4}>🗃️ يقرا ويحفظ البيانات</Txt>
-      </Scene>
-    ),
-  },
-  {
-    id: 'ssr-steps', title: 'مريم بتطلب نتيجتها', scene: true,
-    notes: (
-      <>
-        <p>دورة العمل في صفحة النتائج:</p>
-        <ul>
-          <li>١. الطالب يطلب صفحة النتائج.</li>
-          <li>٢. الـ Backend يستقبل الطلب.</li>
-          <li>٣. يتحقق من هوية الطالب وصلاحيته عند الحاجة.</li>
-          <li>٤. يسترجع البيانات المطلوبة من قاعدة البيانات.</li>
-          <li>٥. يستخدم البيانات مع قالب HTML مناسب.</li>
-          <li>٦. يرسل الصفحة الناتجة للمتصفح.</li>
-          <li>٧. المتصفح يعرض النتيجة.</li>
-        </ul>
-        <p>مينفعش يجيب البيانات قبل ما يتأكد من الصلاحية.</p>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>مريم (2402) بتطلب نتيجتها</Heading>
-        <Browser x={930} y={200} w={300} h={200} url="/results" />
-        <Doodle x={620} y={290} icon="⚙️" size={130} c="orange" fill="orange" label="Backend" lc="orange" />
-        <Cylinder x={80} y={200} w={150} h={180} label="DB" />
-        <Txt x={1080} y={165} size={28} c="purple" at={1}>① مريم تطلب النتيجة 👩‍🎓</Txt>
-        <Arrow from={[920, 260]} to={[700, 265]} c="blue" at={2} />
-        <Txt x={810} y={232} size={28} c="blue" at={2} delay={0.4}>② طلب</Txt>
-        <Doodle x={480} y={175} icon="🔐" size={70} c="red" at={3} />
-        <Txt x={420} y={250} size={27} c="red" at={3} delay={0.3}>③ دي مريم؟ مسموح لها؟</Txt>
-        <Arrow from={[545, 300]} to={[240, 280]} c="green" at={4} />
-        <Arrow from={[240, 345]} to={[545, 330]} c="green" at={4} delay={0.4} />
-        <Txt x={390} y={385} size={27} c="green" at={4} delay={0.6}>④ هات بيانات 2402… ورجعت ✔</Txt>
-        <Paper x={430} y={440} w={250} h={130} at={5}>
-          <div className="sk-code" style={{ fontSize: 23 }}><span className="tag">&lt;h4&gt;</span>Result: <span className="ph">{'{{name}}'}</span><br /><span className="tag">&lt;p&gt;</span>Math: <span className="ph">{'{{math}}'}</span></div>
-        </Paper>
-        <Txt x={300} y={500} size={34} c="ink" at={5} delay={0.3}>+ 📊</Txt>
-        <Txt x={555} y={620} size={30} c="purple" at={5} delay={0.5}>⑤ قالب + بيانات = صفحة</Txt>
-        <Arrow from={[700, 360]} to={[925, 360]} c="green" bend={30} at={6} />
-        <Txt x={820} y={420} size={28} c="green" at={6} delay={0.4}>⑥ صفحة HTML جاهزة</Txt>
-        <Browser x={930} y={200} w={300} h={200} url="/results" at={7}>
-          <div className="sk-code" style={{ fontSize: 26 }}>Result: مريم خالد<br />Math: 97 · Prog: 99</div>
+        <Line pts={[[60, 165], [820, 165], [820, 670], [60, 670], [60, 165]]} dashed c="orange" sw={2} />
+        <Txt x={160} y={195} size={28} c="orange">🗄️ السيرفر</Txt>
+        <Doodle x={530} y={400} icon="⚙️" size={150} c="orange" fill="orange" label="Backend" lsize={34} lc="orange" />
+        <Browser x={890} y={235} w={340} h={200} url="/results?id=2402" c="blue">
+          <div style={{ fontSize: 22, textAlign: 'center', paddingTop: 16 }}>
+            <div style={{ fontSize: 26 }}>👩‍🎓 مريم (2402)</div>
+            <div style={{ fontSize: 18, color: 'var(--muted)', marginTop: 10 }}>⏳ مستنية النتيجة...</div>
+          </div>
         </Browser>
-        <Txt x={1080} y={445} size={30} c="purple" at={7} delay={0.5}>⑦ المتصفح يعرضها 🎉</Txt>
+        <Arrow from={[880, 295]} to={[615, 360]} c="blue" label="📥 يستقبل الطلب" at={1} />
+        <Doodle x={700} y={240} icon="🔐" size={70} c="red" at={2} />
+        <Txt x={540} y={240} size={28} c="red" at={2} delay={0.3}>🧠 يقرر: مسموح؟</Txt>
+        <Cylinder x={100} y={230} w={140} h={160} label="DB" at={3} />
+        <Arrow from={[250, 320]} to={[450, 375]} c="green" both label="يدور" at={3} delay={0.3} />
+        <Paper x={110} y={500} w={200} h={110} label="قالب HTML" at={4}>
+          <div className="sk-code" style={{ fontSize: 20 }}>Result: <span className="ph">{'{{name}}'}</span><br />Math: <span className="ph">{'{{math}}'}</span></div>
+        </Paper>
+        <Arrow from={[455, 440]} to={[320, 540]} c="purple" label="يملا القالب" loff={26} at={4} delay={0.2} />
+        <Arrow from={[615, 440]} to={[880, 375]} c="green" label="📤 صفحة HTML جاهزة" loff={26} at={4} delay={0.5} />
+        {/* المتصفح يستلم ويعرض الصفحة بالبيانات المعبأة */}
+        <Browser x={890} y={235} w={340} h={200} url="/results?id=2402" c="green" at={4} delay={0.9}>
+          <div style={{ fontSize: 20, padding: '6px 8px' }}>
+            <div style={{ fontSize: 22, fontWeight: 'bold', borderBottom: '1.5px dashed var(--pen-blue)', paddingBottom: 4 }}>
+              👩‍🎓 مريم خالد
+            </div>
+            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--tint-green)', padding: '6px 12px', borderRadius: 8 }}>
+              <span style={{ fontSize: 20, color: 'var(--pen-ink)' }}>الرياضيات</span>
+              <span style={{ fontSize: 24, fontWeight: 'bold', color: 'var(--pen-green)' }}>97 / 100 ✨</span>
+            </div>
+          </div>
+        </Browser>
+        <Txt x={1060} y={465} size={22} c="green" at={4} delay={1.1}>🖥️ المتصفح يعرض النتيجة!</Txt>
+        <Note x={870} y={510} w={370} h={140} rot={2} color="green" size={26} at={5}>🔒 الكود ده على السيرفر<br />المستخدم مش شايفه ولا يقدر يغيّره</Note>
       </Scene>
     ),
   },
@@ -410,6 +385,48 @@ export const part5: FrameDef[] = [
         ))}
         <Txt x={320} y={590} size={30} c="orange" at={3} delay={1}>السيرفر يجهّز HTML وقت كل طلب</Txt>
         <Txt x={640} y={670} size={28} c="purple" at={4}>في الحالتين المتصفح بيستلم HTML ويعرضه 🖥️</Txt>
+      </Scene>
+    ),
+  },
+  {
+    id: 'site-examples', title: 'أمثلة من حياتنا', scene: true,
+    notes: (
+      <>
+        <p><b>Static:</b> كل الزوار بيشوفوا نفس المحتوى، والصفحة متجهزة من الأول:</p>
+        <ul>
+          <li>صفحة "عن الجامعة" أو "اتصل بنا".</li>
+          <li>منيو مطعم صغير على النت.</li>
+          <li>صفحة شخصية (CV) لمصمم أو مبرمج.</li>
+          <li>صفحة إعلان عن حفلة أو مؤتمر.</li>
+        </ul>
+        <p><b>Dynamic:</b> كل مستخدم بيشوف محتوى مختلف، والصفحة بتتبني وقت الطلب من قاعدة البيانات:</p>
+        <ul>
+          <li>موقع نتيجة الثانوية العامة: كل طالب يكتب رقم جلوسه ويشوف درجاته هو.</li>
+          <li>فيسبوك: الصفحة الرئيسية بتاعتك غير بتاعة صاحبك.</li>
+          <li>موقع شوبينج زي أمازون: السلة والطلبات بتاعتك أنت.</li>
+          <li>حسابك في البنك: رصيدك أنت بس.</li>
+        </ul>
+        <p><b>اسأل الطلاب:</b> "كل الزوار بيشوفوا نفس المحتوى؟" لو أيوه يبقى Static، لو لأ يبقى Dynamic. وخلّيهم يقولوا أمثلة من عندهم.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>أمثلة من حياتنا</Heading>
+        <Line pts={[[640, 150], [646, 360], [640, 545]]} dashed sw={2} />
+
+        <Txt x={960} y={180} size={34} c="blue" at={1}>📄 Static: نفس المحتوى للكل</Txt>
+        {([[1090, 290, '🏫', '«عن الجامعة»'], [830, 290, '🍽️', 'منيو مطعم'], [1090, 445, '👤', 'صفحة CV شخصية'], [830, 445, '🎤', 'إعلان مؤتمر']] as const).map(([x, y, icon, l], i) => (
+          <Doodle key={l} x={x} y={y} icon={icon} size={88} c="blue" label={l} lsize={26} lc="blue" at={1} delay={i * 0.25} />
+        ))}
+
+        <Txt x={320} y={180} size={34} c="orange" at={2}>⚙️ Dynamic: كل واحد له محتواه</Txt>
+        {([[450, 290, '🎓', 'نتيجة الثانوية العامة'], [190, 290, '📘', 'فيسبوك بتاعك'], [450, 445, '🛒', 'سلة أمازون'], [190, 445, '🏦', 'حسابك في البنك']] as const).map(([x, y, icon, l], i) => (
+          <Doodle key={l} x={x} y={y} icon={icon} size={88} c="orange" label={l} lsize={24} lc="orange" at={2} delay={i * 0.25} />
+        ))}
+
+        <Box x={170} y={575} w={940} h={95} c="purple" fill="purple" size={30} tc="ink" at={3}>
+          🔑 اسأل نفسك: كل الزوار بيشوفوا نفس المحتوى؟ <b>أيوه ← Static</b> · <b>لأ ← Dynamic</b>
+        </Box>
       </Scene>
     ),
   },

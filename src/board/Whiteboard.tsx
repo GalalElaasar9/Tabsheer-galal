@@ -191,6 +191,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     const f = frames[clamp(i, 0, frames.length - 1)];
     setCur(f.index);
     setFragSteps(s => ({ ...s, [f.id]: dir >= 0 ? 0 : fragMax.current.get(f.id) ?? 0 }));
+    wrapRef.current?.querySelectorAll<HTMLElement>('.frame-body').forEach(b => { b.scrollTop = 0; });
     if (slidesRef.current) showSlide(f);
     else flyTo(fit(f));
   }, [frames, fit, flyTo]);
@@ -665,8 +666,33 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     const el = wrapRef.current!;
     const onWheel = (e: WheelEvent) => {
       if ((e.target as HTMLElement).closest('.panel, .modal-back')) return;
+
+      // In slides mode: wheel scrolls the active slide's body if it has scrollable content
+      if (slidesRef.current) {
+        const activeBody = el.querySelector<HTMLElement>('.frame.active .frame-body:not(.bare)');
+        if (activeBody && activeBody.scrollHeight > activeBody.clientHeight) {
+          const unit = e.deltaMode === 1 ? 28 : 1;
+          activeBody.scrollTop += e.deltaY * unit;
+          e.preventDefault();
+          return;
+        }
+        return;
+      }
+
+      // In whiteboard mode: if hovering over an overflowing frame body, scroll it instead of board pan
+      const frameBody = (e.target as HTMLElement).closest<HTMLElement>('.frame-body:not(.bare)');
+      if (frameBody && frameBody.scrollHeight > frameBody.clientHeight && !e.ctrlKey && !e.metaKey) {
+        const unit = e.deltaMode === 1 ? 28 : 1;
+        const atTop = frameBody.scrollTop <= 0 && e.deltaY < 0;
+        const atBottom = frameBody.scrollTop + frameBody.clientHeight >= frameBody.scrollHeight && e.deltaY > 0;
+        if (!atTop && !atBottom) {
+          frameBody.scrollTop += e.deltaY * unit;
+          e.preventDefault();
+          return;
+        }
+      }
+
       e.preventDefault();
-      if (slidesRef.current) return;
       cancelAnimationFrame(anim.current);
       const unit = e.deltaMode === 1 ? 16 : 1;
       if (e.ctrlKey || e.metaKey) {
@@ -704,6 +730,24 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
     if (mod || e.altKey) return;
 
     switch (e.key) {
+      case 'ArrowDown': {
+        const activeBody = wrapRef.current?.querySelector<HTMLElement>('.frame.active .frame-body:not(.bare)');
+        if (activeBody && activeBody.scrollHeight > activeBody.clientHeight) {
+          e.preventDefault();
+          activeBody.scrollBy({ top: 90, behavior: 'smooth' });
+          return;
+        }
+        break;
+      }
+      case 'ArrowUp': {
+        const activeBody = wrapRef.current?.querySelector<HTMLElement>('.frame.active .frame-body:not(.bare)');
+        if (activeBody && activeBody.scrollHeight > activeBody.clientHeight) {
+          e.preventDefault();
+          activeBody.scrollBy({ top: -90, behavior: 'smooth' });
+          return;
+        }
+        break;
+      }
       case 'ArrowLeft': case 'PageDown': e.preventDefault(); if (e.shiftKey) skip(1); else next(); return;
       case 'ArrowRight': case 'PageUp': e.preventDefault(); if (e.shiftKey) skip(-1); else prev(); return;
       case 'Home': goTo(0, 1); return;

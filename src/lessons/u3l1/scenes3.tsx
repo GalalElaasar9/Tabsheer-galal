@@ -1,8 +1,9 @@
 // Board scenes · parts 6–10: JavaScript, background requests, API, page vs app, summary.
 import type { ColorKey, FrameDef } from '../../board/types';
 import {
-  Arrow, Box, Browser, Cylinder, Doodle, Ellipse, Heading, Line, Mark, Note, Paper, Scene, Struck, Txt,
+  Arrow, Box, Browser, Cylinder, Doodle, Ellipse, Heading, Line, Mark, Note, Paper, Scene, Txt,
 } from '../../sketch/Sketch';
+import { C } from './common';
 
 /** A small form drawn three ways: plain HTML, styled with CSS, and reacting with JavaScript. */
 function Form({ x, title, c, styled, js, at }: { x: number; title: string; c: ColorKey; styled?: boolean; js?: boolean; at: number }) {
@@ -30,25 +31,92 @@ const portal = (result?: string) => (
 );
 
 export const part6: FrameDef[] = [
-  {
-    id: 'js-problem', title: 'الصفحة وصلت… بس مبتردش', scene: true,
-    notes: <p>من غير كود شغال جوه المتصفح، الصفحة بعد ما بتتعرض مبتقدرش ترد على المستخدم بنفسها: أي رد فعل (حتى رسالة "الرقم غلط") محتاج رحلة للسيرفر وصفحة جديدة كاملة.</p>,
+    {
+    id: 'css-what', title: 'يعني إيه CSS ببساطة؟', scene: true,
+    notes: (
+      <>
+        <p><b>CSS (Cascading Style Sheets):</b> لغة بتحدد <b>شكل</b> الصفحة: الألوان، الخطوط، الأحجام، المسافات، وترتيب العناصر على الشاشة.</p>
+        <p><b>أهم النقاط:</b></p>
+        <ul>
+          <li><b>بتحدد الشكل مش المحتوى:</b> HTML بيقول "فيه عنوان"، وCSS بتقول "العنوان ده أزرق وكبير وفي النص".</li>
+          <li><b>بتتكتب كقواعد:</b> كل قاعدة بتختار عناصر (مثلًا كل <code>h1</code>) وتقول شكلها يبقى إزاي: <code>h1 {'{'} color: blue; {'}'}</code>.</li>
+          <li><b>قاعدة واحدة لكل الموقع:</b> لو عايز تغيّر لون كل العناوين في الموقع، بتغيّر سطر واحد في ملف CSS.</li>
+          <li><b>لغة تنسيق مش برمجة:</b> زي HTML، مفيهاش شروط ولا قرارات.</li>
+        </ul>
+        <p><b>التشبيه:</b> لو HTML هو طوب العمارة، فـ CSS هي الدهان والديكور: نفس الحيطان، بس شكلها اتغيّر.</p>
+      </>
+    ),
     render: () => (
       <Scene>
-        <Heading>الصفحة وصلت… بس مبتردش!</Heading>
-        <Browser x={820} y={180} w={400} h={220} c="blue">
-          <div style={{ fontSize: 26 }}>رقم الطالب: <span className="sk-input" style={{ width: '3.4em', textAlign: 'center' }}>abc</span> <span className="sk-btn">عرض</span></div>
-        </Browser>
-        <Txt x={915} y={300} size={46} at={1}>👆</Txt>
-        <Txt x={1020} y={440} size={28} c="blue" at={1} delay={0.3}>كتب حروف بدل الرقم ودوس عرض</Txt>
-        <Doodle x={200} y={290} icon="🗄️" size={130} c="orange" fill="orange" label="السيرفر" lc="orange" />
-        <Arrow from={[810, 250]} to={[285, 250]} c="blue" at={2} />
-        <Txt x={550} y={220} size={28} c="blue" at={2} delay={0.4}>البيانات كلها تروح للسيرفر</Txt>
-        <Arrow from={[285, 340]} to={[810, 355]} c="red" at={3} />
-        <Txt x={550} y={385} size={28} c="red" at={3} delay={0.4}>صفحة جديدة كاملة: "الرقم غلط" ❌</Txt>
-        <Doodle x={550} y={505} icon="⏳" size={90} c="red" at={4} />
-        <Txt x={550} y={600} size={32} c="red" at={4} delay={0.3}>كل ده علشان رسالة صغيرة؟!</Txt>
-        <Note x={870} y={500} w={350} h={140} rot={2} color="green" size={27} at={5}>💡 محتاجين كود شغال<br /><b>جوه الصفحة نفسها</b></Note>
+        <Heading sub="الشكل والتنسيق لصفحات الويب">يعني إيه CSS ببساطة؟</Heading>
+        <Box x={80} y={145} w={1120} h={75} c="blue" fill="blue" size={30} tc="ink">
+          🎨 <span style={{ fontWeight: 'bold' }}>CSS:</span> لغة بتحدد <span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>شكل</span> الصفحة… الألوان والخطوط والمسافات وترتيب العناصر
+        </Box>
+
+        {/* 1. بتحدد الشكل (Right) */}
+        <Box x={670} y={235} w={530} h={305} c="pink" at={1} />
+        <Doodle x={935} y={290} icon="🎨" size={80} c="pink" fill="pink" at={1} />
+        <Txt x={935} y={360} size={30} c="pink" at={1}>① بتحدد الشكل… مش المحتوى</Txt>
+        <Txt x={935} y={405} w={480} size={23} c="ink" at={1}>• HTML يقول: «فيه عنوان»</Txt>
+        <Txt x={935} y={450} w={480} size={23} c="ink" at={1}>• CSS تقول: «العنوان أزرق وكبير وفي النص»</Txt>
+        <Txt x={935} y={500} size={26} c="pink" at={1}>🖌️ زي الدهان والديكور في العمارة</Txt>
+
+        {/* 2. بتتكتب كقواعد (Left) */}
+        <Box x={80} y={235} w={530} h={305} c="blue" at={2} />
+        <Doodle x={345} y={290} icon="📏" size={80} c="blue" fill="blue" at={2} />
+        <Txt x={345} y={360} size={30} c="blue" at={2}>② بتتكتب كقواعد</Txt>
+        <Txt x={345} y={405} size={26} at={2}><C>h1 {'{'} color: blue; {'}'}</C></Txt>
+        <Txt x={345} y={450} w={480} size={23} c="ink" at={2}>• تختار العنصر… وتقول شكله يبقى إزاي</Txt>
+        <Txt x={345} y={500} size={26} c="blue" at={2}>⚡ سطر واحد يغيّر كل عناوين الموقع</Txt>
+
+        {/* الخلاصة في الأسفل */}
+        <Box x={80} y={560} w={1120} h={100} c="purple" fill="purple" size={28} tc="ink" at={3}>
+          💡 <span style={{ fontWeight: 'bold' }}>الخلاصة:</span> CSS بتجاوب على سؤال: <span style={{ color: 'var(--pen-purple)', fontWeight: 'bold' }}>«الصفحة دي شكلها إيه؟»</span>
+        </Box>
+      </Scene>
+    ),
+  },
+    {
+    id: 'js-what', title: 'يعني إيه JavaScript ببساطة؟', scene: true,
+    notes: (
+      <>
+        <p><b>JavaScript:</b> لغة برمجة بتشتغل جوه المتصفح، ووظيفتها تدّي الصفحة <b>سلوك</b>: تخليها ترد على اللي المستخدم بيعمله.</p>
+        <p><b>أهم النقاط:</b></p>
+        <ul>
+          <li><b>لغة برمجة بجد:</b> فيها شروط (لو… يبقى…) وحسابات وقرارات، وده اللي مش موجود في HTML ولا CSS.</li>
+          <li><b>بتسمع وترد:</b> بتستنى <b>حدث</b> (ضغطة زرار، كتابة في خانة، اختيار من قائمة)، وترد عليه: تظهر رسالة، تحسب حاجة، تغيّر جزء من الصفحة.</li>
+          <li><b>بتغيّر الصفحة بعد ما اتعرضت:</b> تقدر تضيف أو تشيل أو تعدّل أي عنصر من غير ما الصفحة تتحمّل من جديد.</li>
+        </ul>
+        <p><b>التشبيه:</b> لو HTML هو طوب العمارة، فـ JavaScript هي الكهربا والأسانسير: اللي بيخلّي المبنى يشتغل ويرد عليك.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading sub="السلوك والتفاعل في صفحات الويب">يعني إيه JavaScript ببساطة؟</Heading>
+        <Box x={80} y={145} w={1120} h={75} c="green" fill="green" size={30} tc="ink">
+          ⚡ <span style={{ fontWeight: 'bold' }}>JavaScript:</span> لغة برمجة شغالة جوه المتصفح… بتخلّي الصفحة <span style={{ color: 'var(--pen-green)', fontWeight: 'bold' }}>تتفاعل</span> مع المستخدم
+        </Box>
+
+        {/* 1. لغة برمجة بجد (Right) */}
+        <Box x={670} y={235} w={530} h={305} c="purple" at={1} />
+        <Doodle x={935} y={290} icon="🧠" size={80} c="purple" fill="purple" at={1} />
+        <Txt x={935} y={360} size={30} c="purple" at={1}>① لغة برمجة بجد</Txt>
+        <Txt x={935} y={405} w={480} size={23} c="ink" at={1}>• فيها شروط وحسابات وقرارات (عكس HTML و CSS)</Txt>
+        <Txt x={935} y={450} size={24} at={1}><C>if (id == "") alert("اكتب رقمك")</C></Txt>
+        <Txt x={935} y={500} size={26} c="purple" at={1}>💡 زي الكهربا والأسانسير في العمارة</Txt>
+
+        {/* 2. بتسمع وترد (Left) */}
+        <Box x={80} y={235} w={530} h={305} c="orange" at={2} />
+        <Doodle x={345} y={290} icon="👂" size={80} c="orange" fill="orange" at={2} />
+        <Txt x={345} y={360} size={30} c="orange" at={2}>② بتسمع… وترد</Txt>
+        <Txt x={345} y={405} w={480} size={23} c="ink" at={2}>• بتستنى حدث: ضغطة زرار، كتابة، اختيار</Txt>
+        <Txt x={345} y={450} w={480} size={23} c="ink" at={2}>• وترد: تظهر رسالة، تحسب، تغيّر جزء من الصفحة</Txt>
+        <Txt x={345} y={500} size={26} c="orange" at={2}>🔄 بتغيّر الصفحة بعد ما اتعرضت</Txt>
+
+        {/* الخلاصة في الأسفل */}
+        <Box x={80} y={560} w={1120} h={100} c="purple" fill="purple" size={28} tc="ink" at={3}>
+          💡 <span style={{ fontWeight: 'bold' }}>الخلاصة:</span> JavaScript بتجاوب على سؤال: <span style={{ color: 'var(--pen-purple)', fontWeight: 'bold' }}>«الصفحة دي بتعمل إيه لما أتفاعل معاها؟»</span>
+        </Box>
       </Scene>
     ),
   },
@@ -56,26 +124,37 @@ export const part6: FrameDef[] = [
     id: 'why-js', title: 'ليه JavaScript؟', scene: true,
     notes: (
       <>
-        <p>قبل JavaScript الصفحة بعد ما تتعرض كانت زي مستند: تقراه وتضغط روابط. مفيش كود جوه المتصفح يرد على اللي بتعمله في الصفحة نفسها.</p>
-        <p><b>JavaScript:</b> لغة برمجة بتشتغل جوه المتصفح وتضيف سلوك للصفحة: تتحقق من المدخلات، ترد على ضغطة زرار، تغيّر جزء من الصفحة. ظهرت سنة 1995 في متصفح Netscape.</p>
-        <p>⚠️ ما تقولش إنها ظهرت علشان تقلل الضغط على السيرفر: ده تبسيط غلط.</p>
+        <p><b>المثال:</b> طالب كتب حروف (abc) بدل رقمه ودوس "عرض".</p>
+        <p><b>من غير JavaScript:</b> الصفحة (HTML وCSS) بتعرض بس ومبتفكرش، فمتعرفش إن ده غلط. بتبعته للسيرفر، والسيرفر يرد بصفحة جديدة كاملة علشان يقول "الرقم غلط".</p>
+        <p><b>مع JavaScript:</b> كود شغال جوه الصفحة نفسها بيتأكد ويقول فورًا "أرقام بس!" من غير ما يروح للسيرفر.</p>
+        <p><b>JavaScript:</b> لغة برمجة بتشتغل جوه المتصفح، بتخلّي الصفحة ترد على المستخدم. ظهرت سنة 1995.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>JavaScript: الصفحة بقت بترد عليك</Heading>
-        <Paper x={890} y={190} w={290} h={290} label="قبل" at={1}>
-          <div style={{ fontSize: 26 }}>جامعة المستقبل<br />——————<br />——————<br />——</div>
-        </Paper>
-        <Txt x={1035} y={530} size={32} at={1} delay={0.4}>😐 مستند بتقراه وبس</Txt>
-        <Arrow from={[870, 330]} to={[580, 330]} c="orange" bend={-40} label="+ JavaScript ⚡" lsize={34} at={2} />
-        <Browser x={130} y={190} w={430} h={290} c="green" at={3}>
-          <div style={{ fontSize: 26 }}>رقم الطالب: <span className="sk-input" /> <span className="sk-btn">عرض</span></div>
-          <div className="sk-pop">⚠️ اكتب رقم الطالب الأول</div>
+        <Heading>ليه محتاجين JavaScript؟</Heading>
+        <Line pts={[[640, 150], [646, 400], [640, 560]]} dashed sw={2} />
+
+        {/* من غير JavaScript */}
+        <Txt x={960} y={180} size={36} c="red">😐 من غير JavaScript</Txt>
+        <Browser x={790} y={220} w={340} h={140} c="red" at={1}>
+          <div style={{ fontSize: 26 }}>رقم الطالب: <span className="sk-input" style={{ width: '3em', textAlign: 'center' }}>abc</span> <span className="sk-btn">عرض</span></div>
         </Browser>
-        <Txt x={480} y={350} size={50} at={3} delay={0.8}>👆</Txt>
-        <Txt x={345} y={530} size={32} c="green" at={3} delay={0.6}>🙂 بترد على ضغطاتك</Txt>
-        <Note x={420} y={580} w={440} h={100} rot={-1.5} size={28} at={4}>لغة برمجة شغالة <b>جوه المتصفح</b> · 1995</Note>
+        <Txt x={960} y={410} size={28} c="red" at={1} delay={0.4}>🐢 يروح للسيرفر ويرجع بصفحة جديدة</Txt>
+        <Txt x={960} y={460} size={28} c="red" at={1} delay={0.7}>علشان يقول: «الرقم غلط»</Txt>
+
+        {/* مع JavaScript */}
+        <Txt x={320} y={180} size={36} c="green" at={2}>🙂 مع JavaScript</Txt>
+        <Browser x={150} y={220} w={340} h={140} c="green" at={2}>
+          <div style={{ fontSize: 26 }}>رقم الطالب: <span className="sk-input" style={{ width: '3em', textAlign: 'center' }}>abc</span> <span className="sk-btn">عرض</span></div>
+          <div className="sk-pop">⚠️ أرقام بس!</div>
+        </Browser>
+        <Txt x={320} y={410} size={28} c="green" at={2} delay={0.4}>⚡ الصفحة نفسها بتقولك فورًا</Txt>
+        <Txt x={320} y={460} size={28} c="green" at={2} delay={0.7}>من غير ما تروح للسيرفر</Txt>
+
+        <Box x={190} y={570} w={900} h={95} c="purple" fill="purple" size={30} tc="ink" at={3}>
+          ⚡ <b>JavaScript</b> = لغة برمجة شغالة <b>جوه المتصفح</b>… بتخلّي الصفحة ترد عليك
+        </Box>
       </Scene>
     ),
   },
@@ -125,7 +204,6 @@ export const part6: FrameDef[] = [
           <div style={{ fontSize: 30, textAlign: 'center', marginTop: 30 }}>⚙️⚡<br />المتصفح بيشغّل الكود</div>
         </Browser>
         <Txt x={990} y={500} size={32} c="blue" at={2} delay={0.5}>على جهاز المستخدم 💻</Txt>
-        <Note x={140} y={520} w={560} h={130} rot={-2} color="pink" size={29} at={3}>🔐 التحقق في المتصفح للراحة…<br />والسيرفر <b>لازم</b> يتحقق تاني</Note>
       </Scene>
     ),
   },
@@ -183,6 +261,7 @@ export const part7: FrameDef[] = [
           <li>٥. JavaScript تحدّث الجزء المناسب من الصفحة.</li>
         </ul>
         <p>تحديث جزء من الصفحة مش معناه إن مستند HTML اتحمّل كله من جديد.</p>
+        <p><b>انتقال للصفحة الجاية:</b> اسأل الطلاب: JavaScript عرفت منين تبعت الطلب فين، وتبعت معاه إيه، وهيرجعلها إيه؟</p>
       </>
     ),
     render: () => (
@@ -204,6 +283,7 @@ export const part7: FrameDef[] = [
         <Browser x={700} y={190} w={500} h={300} c="blue" at={5}>{portal('يوسف عادل · 74 · 80 · 86 ✨')}</Browser>
         <Mark x={700} y={300} w={500} h={110} c="green" at={5} delay={0.5} />
         <Txt x={950} y={520} size={30} c="green" at={5} delay={0.8}>⑤ JavaScript حدّثت الجزء ده بس</Txt>
+        <Note x={760} y={575} w={440} h={95} rot={-1.5} color="pink" size={28} at={6}>🤔 بس JavaScript عرفت منين تطلب إزاي؟</Note>
       </Scene>
     ),
   },
@@ -211,25 +291,31 @@ export const part7: FrameDef[] = [
 
 export const part8: FrameDef[] = [
   {
-    id: 'how-js-knows', title: 'JavaScript عرفت منين؟', scene: true,
+    id: 'api-problem', title: 'المشكلة: هيفهموا بعض إزاي؟', scene: true,
     notes: (
       <>
-        <p>السؤال: إزاي JavaScript تعرف البيانات اللي ممكن تطلبها؟ وتعرف عنوان الطلب وطريقته وشكل الرد المتوقع؟</p>
-        <p>لازم يكون فيه اتفاق معلن بين البرنامجين: "دي الحاجات اللي أقدر أعملها، ودي طريقة طلبها، وده اللي هيرجعلك". الاتفاق ده اسمه <b>API</b>.</p>
+        <p><b>المشكلة:</b> JavaScript في المتصفح عايزة تطلب بيانات من السيرفر. بس الاتنين برنامجين مختلفين، اتكتبوا غالبًا على إيد ناس مختلفة. فـ JavaScript محتاجة تعرف ٣ حاجات:</p>
+        <ul>
+          <li>📍 تبعت الطلب على أنهي عنوان؟</li>
+          <li>📝 تبعت معاه إيه بالظبط؟ (رقم الطالب؟ اسمه؟ بأي شكل؟)</li>
+          <li>📦 هيرجعلها إيه؟ وبأي شكل؟</li>
+        </ul>
+        <p>لو كل طرف اشتغل على مزاجه، JavaScript ممكن تبعت حاجة السيرفر مش مستنيها، فمش هيفهمها، أو يرجّع حاجة هي مش عارفة تقراها.</p>
+        <p><b>الحل:</b> اتفاق متكتب ومعروف للطرفين. وده موضوع الصفحة الجاية.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>JavaScript عرفت منين تطلب إيه؟</Heading>
-        <Doodle x={1080} y={370} icon="⚡" size={150} c="orange" fill="orange" label="JavaScript" lc="orange" />
-        <Ellipse x={720} y={160} w={260} h={100} c="blue" size={32} at={1}>📍 أبعت فين؟</Ellipse>
-        <Ellipse x={660} y={330} w={260} h={100} c="blue" size={32} at={2}>📝 أبعت إيه؟</Ellipse>
-        <Ellipse x={720} y={500} w={290} h={100} c="blue" size={32} at={3}>📦 هيرجعلي إيه؟</Ellipse>
-        <Paper x={150} y={200} w={340} h={330} label="📜 الاتفاق" at={4}>
-          <div style={{ fontSize: 30, lineHeight: 1.9 }}>📍 العنوان<br />📝 المطلوب منك<br />📦 شكل الرد</div>
-        </Paper>
-        <Arrow from={[650, 380]} to={[500, 370]} c="purple" at={4} delay={0.4} />
-        <Txt x={320} y={600} size={64} c="pink" at={5}>= API</Txt>
+        <Heading>المشكلة: هيفهموا بعض إزاي؟</Heading>
+        <Doodle x={1090} y={250} icon="⚡" size={130} c="orange" fill="orange" label="JavaScript" lc="orange" />
+        <Doodle x={190} y={250} icon="🗄️" size={130} c="blue" fill="blue" label="السيرفر" lc="blue" />
+        <Arrow from={[1010, 250]} to={[275, 250]} c="ink" dashed />
+        <Txt x={640} y={200} size={34}>عايزة تطلب بيانات… بس 🤔</Txt>
+        {([[1000, '📍 أبعت فين؟'], [640, '📝 أبعت إيه؟'], [280, '📦 هيرجعلي إيه؟']] as const).map(([x, q], i) => (
+          <Ellipse key={q} x={x - 160} y={350} w={320} h={95} c="purple" size={30} at={i + 1}>{q}</Ellipse>
+        ))}
+        <Txt x={640} y={505} size={30} c="red" at={4}>لو كل واحد اشتغل على مزاجه… محدش هيفهم التاني ❌</Txt>
+        <Note x={340} y={570} w={600} h={95} rot={-1.5} color="green" size={30} at={5}>💡 محتاجين اتفاق متكتب ومعروف للطرفين</Note>
       </Scene>
     ),
   },
@@ -237,89 +323,57 @@ export const part8: FrameDef[] = [
     id: 'api-def', title: 'API = اتفاق', scene: true,
     notes: (
       <>
-        <p><b>API (Application Programming Interface):</b> واجهة أو عقد بيحدد البرامج تتفاعل مع بعض إزاي: العمليات أو البيانات اللي ممكن تتطلب، وإزاي تتطلب، وإيه اللي هيرجع، حسب القواعد اللي الواجهة بتوفرها.</p>
-        <p>المفهوم أوسع من الويب (برنامج بيطلب من نظام التشغيل يحفظ ملف) وأقدم من JavaScript بسنين.</p>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>API = اتفاق بين برنامجين</Heading>
-        <Doodle x={1110} y={330} icon="💻" size={130} c="blue" label="برنامج ١" />
-        <Doodle x={170} y={330} icon="🗄️" size={130} c="orange" label="برنامج ٢" />
-        <Paper x={420} y={170} w={440} h={330} label="📘 API نتائج الجامعة" c="pink" at={1}>
-          <div style={{ fontSize: 26, lineHeight: 1.75 }}>
-            <span style={{ color: 'var(--pen-pink)' }}>العملية:</span> عرض نتيجة طالب<br />
-            <span style={{ color: 'var(--pen-pink)' }}>تبعت:</span> رقم الطالب + إثبات صلاحية<br />
-            <span style={{ color: 'var(--pen-pink)' }}>يرجعلك:</span> الاسم والدرجات<br />
-            <span style={{ color: 'var(--pen-pink)' }}>لو مش موجود:</span> رسالة خطأ
-          </div>
-        </Paper>
-        <Arrow from={[1040, 330]} to={[870, 330]} c="blue" both at={2} />
-        <Arrow from={[410, 330]} to={[240, 330]} c="orange" both at={2} delay={0.2} />
-        <Note x={760} y={545} w={430} h={110} rot={2} color="green" size={28} at={3}>🌍 أوسع من الويب: برنامج ↔ نظام التشغيل</Note>
-        <Note x={90} y={545} w={430} h={110} rot={-2} size={28} at={4}>📅 أقدم من JavaScript بسنين</Note>
-      </Scene>
-    ),
-  },
-  {
-    id: 'api-myths', title: 'أخطاء شائعة', scene: true,
-    notes: (
-      <>
+        <p><b>الطرفين:</b></p>
         <ul>
-          <li>الـ API مش هي الطلب نفسه: الطلب بيتبعت حسب قواعد الـ API.</li>
-          <li>الـ API مش صيغة بيانات زي JSON.</li>
-          <li>مش كل API مبنية على REST.</li>
-          <li>مش شرط استجابة API تكون JSON.</li>
-          <li>مفهوم API أوسع من JavaScript، ومظهرش بسببها.</li>
+          <li><b>Frontend (الواجهة الأمامية):</b> اللي المستخدم شايفه وبيتعامل معاه في المتصفح: HTML وCSS وJavaScript.</li>
+          <li><b>Backend:</b> اللي شغال ورا الكواليس على السيرفر: المنطق وقاعدة البيانات.</li>
         </ul>
-        <p>REST و JSON و HTTP Methods بالتفصيل في الدرس الجاي.</p>
+        <p>علشان الـ Frontend يطلب حاجة من الـ Backend، فيه اتفاق متكتب ومعروف بينهم اسمه <b>API</b> (Application Programming Interface). بيحدد:</p>
+        <ul>
+          <li>📍 تبعت الطلب على أنهي عنوان.</li>
+          <li>📝 تبعت معاه إيه (مثلًا رقم الطالب).</li>
+          <li>📦 هيرجعلك إيه (الاسم والدرجات، أو رسالة خطأ لو الطالب مش موجود).</li>
+        </ul>
+        <p><b>التشبيه (مرسوم على السبورة):</b> الـ Frontend هو الزبون في الصالة، والـ Backend هو الشيف في المطبخ، والـ API هو المنيو. الزبون مش بيدخل المطبخ ولا يعرف الأكل بيتعمل إزاي، هو بيطلب من المنيو وبس.</p>
+        <p>الفكرة أوسع من الويب وأقدم من JavaScript: أي برنامج بيطلب من نظام التشغيل يحفظ ملف بيستخدم API.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading c="red" u="red">الـ API مش…</Heading>
-        {([
-          ['API = الطلب نفسه', 'الطلب بيتبعت حسب قواعد الـ API'],
-          ['API = JSON', 'JSON مجرد صيغة لكتابة البيانات'],
-          ['كل API لازم تكون REST', 'REST أسلوب واحد من كتير'],
-          ['الرد لازم يكون JSON', 'ممكن نص أو HTML أو XML…'],
-          ['JavaScript اخترعت الـ API', 'الفكرة أقدم وأوسع من أي لغة'],
-        ] as const).map(([wrong, right], i) => (
-          <span key={wrong} className="contents">
-            <Struck x={1200} y={190 + i * 95} size={36} at={i + 1}>{wrong}</Struck>
-            <Txt x={90} y={190 + i * 95} size={32} c="green" align="left" at={i + 1} delay={0.9}>✔ {right}</Txt>
-          </span>
-        ))}
-        <Txt x={640} y={680} size={26} c="purple" at={6}>📚 REST و JSON و HTTP Methods ← الدرس الجاي</Txt>
-      </Scene>
-    ),
-  },
-];
+        <Heading>الـ API: اتفاق بين الـ Frontend والـ Backend</Heading>
 
-export const part9: FrameDef[] = [
-  {
-    id: 'page-vs-app', title: 'Web Page ولا Web App؟', scene: true,
-    notes: (
-      <>
-        <p><b>Web Page:</b> هدفها الأساسي عرض معلومات (صفحة الجامعة: الكليات، العنوان، الأخبار).</p>
-        <p><b>Web App:</b> بتوفر وظائف تفاعلية تساعد المستخدم ينفّذ مهام (بوابة الطلاب: تسجيل دخول، الدرجات، تسجيل المواد، تقديم طلب).</p>
-        <p>الفرق مش حد فاصل صارم: الصفحة ممكن يكون فيها تفاعل، والتطبيق ممكن يتكوّن من صفحات كتير.</p>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>Web Page ولا Web App؟</Heading>
-        <Doodle x={1080} y={250} icon="📄" size={140} c="blue" fill="blue" label="Web Page: تقرا وتعرف" lsize={32} lc="blue" at={1} />
-        <Doodle x={200} y={250} icon="🧰" size={140} c="pink" fill="pink" label="Web App: تعمل مهام" lsize={32} lc="pink" at={2} />
-        <Txt x={640} y={250} size={36} c="red" at={3}>مش حد فاصل… مسطرة! 📏</Txt>
-        <Arrow from={[1170, 480]} to={[110, 480]} c="ink" both at={3} delay={0.3} />
-        {([[1080, 'مقال'], [860, 'صفحة الجامعة'], [640, 'أخبار + بحث'], [420, 'بوابة الطلاب'], [200, 'محرر مستندات']] as const).map(([x, t], i) => (
-          <span key={t} className="contents">
-            <Ellipse x={x - 12} y={468} w={24} h={24} c={i < 2 ? 'blue' : i > 2 ? 'pink' : 'purple'} fill={i < 2 ? 'blue' : i > 2 ? 'pink' : 'purple'} at={4} delay={i * 0.25} />
-            <Txt x={x} y={540} size={30} at={4} delay={i * 0.25 + 0.2}>{t}</Txt>
-          </span>
-        ))}
-        <Note x={420} y={590} w={440} h={95} rot={-1} size={27} at={5}>الصفحة ممكن تتفاعل… والتطبيق ممكن يبقى صفحات كتير</Note>
+        {/* Frontend (right) */}
+        <Browser x={950} y={170} w={280} h={165} c="orange">
+          <div style={{ fontSize: 24 }}>🎓 بوابة النتائج</div>
+          <div style={{ fontSize: 22 }}>رقم الطالب: <span className="sk-input" style={{ width: '2.6em' }} /> <span className="sk-btn">⚡</span></div>
+        </Browser>
+        <Txt x={1090} y={370} size={36} c="orange">💻 Frontend</Txt>
+        <Txt x={1090} y={410} w={280} size={22}>اللي المستخدم شايفه في المتصفح</Txt>
+
+        {/* Backend (left) */}
+        <Doodle x={150} y={250} icon="⚙️" size={120} c="blue" fill="blue" />
+        <Cylinder x={225} y={200} w={75} h={95} label="DB" size={20} />
+        <Txt x={190} y={370} size={36} c="blue">🗄️ Backend</Txt>
+        <Txt x={190} y={410} w={280} size={22}>اللي شغال ورا الكواليس على السيرفر</Txt>
+
+        {/* The agreement (middle) */}
+        <Arrow from={[940, 255]} to={[890, 255]} c="orange" both />
+        <Arrow from={[390, 255]} to={[310, 255]} c="blue" both />
+        <Paper x={400} y={170} w={480} h={270} label="📜 الاتفاق (API)" c="pink" />
+        <Txt x={640} y={240} size={28} at={1}>📍 تبعت فين؟ <span className="ltr" style={{ color: 'var(--pen-pink)' }}>/api/results</span></Txt>
+        <Txt x={640} y={310} size={28} at={2}>📝 تبعت إيه؟ <span style={{ color: 'var(--pen-pink)' }}>رقم الطالب</span></Txt>
+        <Txt x={640} y={380} size={28} at={3}>📦 هيرجعلك إيه؟ <span style={{ color: 'var(--pen-pink)' }}>الاسم والدرجات</span></Txt>
+
+        {/* Restaurant picture under each part */}
+        <Doodle x={1090} y={500} icon="🙋" size={74} c="orange" label="الزبون في الصالة" lsize={24} lc="orange" at={4} />
+        <Doodle x={640} y={500} icon="🍽️" size={74} c="pink" label="المنيو" lsize={24} lc="pink" at={4} delay={0.3} />
+        <Doodle x={190} y={500} icon="👨‍🍳" size={74} c="blue" label="الشيف في المطبخ" lsize={24} lc="blue" at={4} delay={0.6} />
+        <Line pts={[[1030, 500], [700, 500]]} dashed c="ink" sw={1.6} at={4} delay={0.3} />
+        <Line pts={[[580, 500], [250, 500]]} dashed c="ink" sw={1.6} at={4} delay={0.6} />
+
+        <Box x={170} y={600} w={940} h={80} c="green" fill="green" size={27} tc="ink" at={5}>
+          الزبون مش بيدخل المطبخ… بيطلب من المنيو. والـ Frontend بيطلب من الـ Backend حسب الـ API
+        </Box>
       </Scene>
     ),
   },
@@ -364,24 +418,6 @@ export const part10: FrameDef[] = [
     ),
   },
   {
-    id: 'stairs', title: 'كل خطوة حلّت مشكلة', scene: true,
-    notes: <p>كل مرحلة في تطور الويب حلّت مشكلة ظهرت في اللي قبلها: صفحات ثابتة ← قاعدة بيانات ← Backend يولّد الصفحة ← JavaScript للتفاعل ← طلبات في الخلفية و API ← تطبيقات ويب.</p>,
-    render: () => (
-      <Scene>
-        <Heading>كل خطوة حلّت مشكلة</Heading>
-        <Line at={1} sw={3.4} pts={[[1230, 650], [1010, 650], [1010, 560], [790, 560], [790, 470], [570, 470], [570, 380], [350, 380], [350, 290], [130, 290]]} />
-        {STAIRS.map(([step, problem], i) => (
-          <span key={step} className="contents">
-            <Txt x={1120 - i * 220} y={620 - i * 90} size={28} c="blue" at={i + 1} delay={0.4}>{step}</Txt>
-            {problem && <Txt x={1120 - i * 220} y={684 - i * 90} size={23} c="red" at={i + 1} delay={0.6}>{problem}</Txt>}
-          </span>
-        ))}
-        <Doodle x={200} y={190} icon="🏆" size={110} c="orange" fill="orange" label="" at={6} />
-        <Txt x={390} y={190} size={44} c="orange" at={6} delay={0.3}>= Web Apps</Txt>
-      </Scene>
-    ),
-  },
-  {
     id: 'ecosystem', title: 'Frontend · Backend · Database · API', scene: true,
     notes: (
       <>
@@ -419,8 +455,7 @@ export const ending: FrameDef = {
       {[['📄', 'HTML'], ['🗃️', 'Database'], ['⚙️', 'Backend'], ['🖱️', 'JavaScript'], ['🔌', 'API']].map(([icon, label], i) => (
         <Doodle key={label} x={1060 - i * 200} y={400} icon={icon} size={100} label={label} lc="blue" />
       ))}
-      {[0, 1, 2, 3].map(i => <Arrow key={i} from={[1060 - i * 200 - 62, 400]} to={[1060 - (i + 1) * 200 + 62, 400]} bend={-14} c="orange" />)}
-      <Note x={390} y={540} w={500} h={120} rot={-1.5} size={30} at={1}>📚 الدرس الجاي<br /><bdi>HTTP · REST · JSON</bdi></Note>
+      <Note x={390} y={540} w={500} h={120} rot={-1.5} size={30} at={1}>📚 الدرس الجاي<br /><bdi>HTTP · JSON</bdi></Note>
     </Scene>
   ),
 };

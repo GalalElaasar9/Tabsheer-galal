@@ -1,8 +1,8 @@
 // Board scenes · intro and part 1 (beginning of the web).
 import type { FrameDef } from '../../board/types';
-import { Arrow, Box, Browser, Doodle, Heading, Line, Mark, Note, Num, Paper, Parts, Scene, Txt, Underline } from '../../sketch/Sketch';
+import { Arrow, Box, Browser, Doodle, Heading, Line, Mark, Note, Num, Paper, Scene, Txt, Underline } from '../../sketch/Sketch';
 import { Eyebrow, Title } from '../../kit/blocks';
-import { ABOUT, C, Code } from './common';
+import { ABOUT, Code } from './common';
 import { HtmlPlayground } from './demos';
 
 const STOPS = [
@@ -72,6 +72,64 @@ export const intro: FrameDef[] = [
 
 export const part1: FrameDef[] = [
   {
+    id: 'what-is-internet', title: 'مراجعة: ما هو الإنترنت ومكوناته؟', scene: true,
+    notes: (
+      <>
+        <p><b>مراجعة لما سبق دراسته:</b></p>
+        <p><b>الإنترنت (Internet):</b> شبكة عالمية عملاقة تربط ملايين الشبكات ومليارات الأجهزة ببعضها (Network of Networks)، وكان موجودًا قبل الويب بسنوات طويلة.</p>
+        <p><b>الإنترنت ببساطة يتكون من ٣ عناصر أساسية:</b></p>
+        <ul>
+          <li><b>١. أجهزة (Devices):</b> أجهزة المستخدمين (كمبيوتر، هاتف) وخوادم (Servers) تخزن البيانات وتستضيف المواقع.</li>
+          <li><b>٢. وسيلة اتصال (Transmission Media):</b> كابلات (ألياف ضوئية بحرية وأسلاك) وموجات لاسلكية (Wi-Fi، أقمار صناعية) تنقل الإشارات.</li>
+          <li><b>٣. قواعد تنظم حركة الاتصال (Protocols):</b> معايير وقوانين موحدة (مثل حزمة <b>TCP/IP</b>) تنظم كيفية إرسال واستقبال البيانات وفهمها بين الأجهزة.</li>
+        </ul>
+        <p><b>الربط بالدرس:</b> الإنترنت هو "شبكة الطرق والبنية التحتية"، بينما الويب (Web) هو مجرد خدمة واحدة تعمل فوقه.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading sub="مراجعة">ما هو الإنترنت ومما يتكون؟</Heading>
+        <Box x={80} y={145} w={1120} h={75} c="blue" fill="blue" size={30} tc="ink">
+          🌍 <span style={{ fontWeight: 'bold' }}>الإنترنت (Internet):</span> شبكة عالمية عملاقة بتربط مليارات الأجهزة ببعضها
+        </Box>
+
+        {/* 1. أجهزة (Devices) */}
+        <Box x={850} y={245} w={340} h={285} c="blue" at={1} />
+        <Doodle x={1020} y={305} icon="💻" size={78} c="blue" fill="blue" at={1} />
+        <Txt x={1020} y={365} size={30} c="blue" at={1}>① أجهزة (Devices)</Txt>
+        <Txt x={1020} y={435} w={300} size={23} c="ink" at={1} style={{ lineHeight: 1.5 }}>
+          أجهزة شخصية (كمبيوتر، موبايل) + خوادم (Servers) بتخزن المواقع والبيانات
+        </Txt>
+        <Txt x={1020} y={495} size={26} at={1}>🖥️ 📱 🗄️</Txt>
+
+        {/* 2. وسيلة اتصال (Media) */}
+        <Arrow from={[850, 385]} to={[810, 385]} c="blue" at={2} />
+        <Box x={470} y={245} w={340} h={285} c="green" at={2} />
+        <Doodle x={640} y={305} icon="🔌" size={78} c="green" fill="green" at={2} />
+        <Txt x={640} y={365} size={30} c="green" at={2}>② وسيلة اتصال</Txt>
+        <Txt x={640} y={435} w={300} size={23} c="ink" at={2} style={{ lineHeight: 1.5 }}>
+          Wired (الكابلات) + <br />Wireless (اللاسلكي)
+        </Txt>
+        <Txt x={640} y={495} size={26} at={2}>🌊 📡 🌐</Txt>
+
+        {/* 3. قواعد تنظم الاتصال (Protocols) */}
+        <Arrow from={[470, 385]} to={[430, 385]} c="green" at={3} />
+        <Box x={90} y={245} w={340} h={285} c="purple" at={3} />
+        <Doodle x={260} y={305} icon="📜" size={78} c="purple" fill="purple" at={3} />
+        <Txt x={260} y={365} size={30} c="purple" at={3}>③ قواعد بتنظم الاتصال</Txt>
+        <Txt x={260} y={435} w={300} size={23} c="ink" at={3} style={{ lineHeight: 1.5 }}>
+          بروتوكولات وقوانين موحدة
+        </Txt>
+        <Txt x={260} y={495} size={26} at={3}>🚦 🤝 📦</Txt>
+
+        {/* الخلاصة والربط */}
+        <Box x={80} y={560} w={1120} h={95} c="pink" fill="pink" size={30} tc="ink" at={4}>
+          💡 <span style={{ color: 'var(--pen-red)', fontWeight: 'bold' }}>الإنترنت</span> هو شبكة الطرق والبنية التحتية… و<span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>الويب (Web)</span> مجرد خدمة واحدة شغالة فوقه!
+        </Box>
+      </Scene>
+    ),
+  },
+  {
     id: 'problem-1989', title: 'المشكلة سنة 1989', scene: true,
     notes: (
       <>
@@ -121,68 +179,133 @@ export const part1: FrameDef[] = [
         <Arrow from={[565, 245]} to={[350, 245]} bend={-40} c="red" label="رابط 🔗" at={2} delay={0.4} />
         <Txt x={640} y={400} size={36} c="red" at={3}>الويب ≠ الإنترنت</Txt>
         <Box x={120} y={570} w={1040} h={90} c="green" fill="green" size={32} tc="ink" at={3} delay={0.3}>🌍 الإنترنت: الشبكة اللي بتوصّل الأجهزة (موجودة قبل الويب)</Box>
-        <Box x={700} y={450} w={420} h={80} c="blue" fill="blue" size={32} tc="ink" at={4}>🌐 الويب: خدمة فوق الشبكة</Box>
+        <Box x={700} y={450} w={420} h={80} c="blue" fill="blue" size={32} tc="ink" at={4}>🌐 الويب: خدمة على الانترنت</Box>
         <Box x={160} y={450} w={420} h={80} c="purple" fill="purple" size={32} tc="ink" at={4} delay={0.3}>✉️ الإيميل: خدمة تانية</Box>
         <Note x={30} y={130} w={130} h={120} rot={-4} size={24} at={5}>1990 أول سيرفر<br />1991 للناس</Note>
       </Scene>
     ),
   },
   {
-    id: 'html-why', title: 'لغة واحدة يفهمها أي جهاز', scene: true,
+    id: 'host-and-domain', title: 'يعني إيه Host و Domain؟', scene: true,
     notes: (
       <>
-        <p>كل برنامج وقتها كان بيحفظ المستندات بصيغته، فالجهاز اللي عنده برنامج مختلف مش هيقدر يقرا المستند.</p>
-        <p>الحل: لغة واحدة متفق عليها لكتابة المستندات: <b>HTML</b> (HyperText Markup Language). أي متصفح على أي جهاز يقدر يقراها ويعرضها.</p>
-        <p>HTML <b>لغة ترميز</b> مش لغة برمجة: بتوصف المحتوى (عنوان، فقرة، رابط)، مش بتنفّذ أوامر.</p>
+        <p><b>علشان أي موقع ويب يشتغل ويكون متاح للناس، محتاج حاجتين أساسيتين:</b></p>
+        <ul>
+          <li><b>١. الاستضافة (Web Host = Server):</b> جهاز كمبيوتر قوي متصل بالإنترنت 24/7 بمواصفات خاصة، بتأجّر فيه مساحة تخزينية تحط عليها ملفات موقعك (صفحات HTML، صور، بيانات).</li>
+          <li><b>٢. اسم النطاق (Domain Name):</b> الاسم الفريد والمميز للموقع (زي <code>google.com</code> أو <code>univ.example</code>). وظيفته يسهّل على الناس الوصول للموقع بدل ما يكتبوا عنوان الـ IP الرقمي المعقد للسيرفر.</li>
+        </ul>
+        <p><b>التشبيه للتوضيح:</b> الـ <b>Host</b> هو البيت أو المحل الفعلي… والـ <b>Domain</b> هو اسم الشارع وعنوان البيت المكتوب على الباب!</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>مستند واحد… يقراه أي جهاز إزاي؟</Heading>
-        {([[90, 'صيغة ١', '#@%&'], [250, 'صيغة ٢', '◊∆≈≠'], [410, 'صيغة ٣', '¤§¶¥']] as const).map(([x, l, junk], i) => (
-          <Paper key={l} x={x} y={190} w={140} h={150} label={l} at={1} delay={i * 0.2}>
-            <div style={{ fontSize: 30, textAlign: 'center', lineHeight: 1.7 }}>{junk}<br />{junk}</div>
-          </Paper>
-        ))}
-        <Doodle x={300} y={470} icon="🖥️" size={110} c="red" at={1} delay={0.8} />
-        <Txt x={300} y={575} size={32} c="red" at={1} delay={1}>؟؟ مش فاهم الصيغة دي</Txt>
-        <Line dashed pts={[[640, 150], [632, 420], [640, 690]]} sw={2} />
-        <Paper x={760} y={180} w={430} h={210} label="💡 لغة واحدة للكل: HTML" c="green" at={2}><Code lines={ABOUT} size={24} /></Paper>
-        {[820, 975, 1130].map((x, i) => (
-          <Doodle key={x} x={x} y={490} icon="🖥️" size={80} c="green" label="✔ فهمها" lsize={24} lc="green" at={3} delay={i * 0.2} />
-        ))}
-        <Note x={700} y={595} w={500} h={95} rot={-1} size={26} at={4}>HyperText Markup Language<br />لغة ترميز… مش لغة برمجة</Note>
+        <Heading sub="أساسيات إطلاق أي موقع">يعني إيه Host و Domain؟</Heading>
+
+        {/* 1. Host = Server (Right) */}
+        <Box x={670} y={155} w={530} h={375} c="orange" at={1} />
+        <Doodle x={935} y={220} icon="🗄️" size={85} c="orange" fill="orange" at={1} />
+        <Txt x={935} y={285} size={32} c="orange" at={1}>🏢 الاستضافة (Host = Server)</Txt>
+        <Txt x={935} y={345} w={470} size={24} c="ink" at={1}>• كمبيوتر قوي متصل بالإنترنت 24 ساعة بدون انقطاع</Txt>
+        <Txt x={935} y={395} w={470} size={24} c="ink" at={1}>• بيخزّن ملفات موقعك (صفحات HTML، صور، بيانات)</Txt>
+        <Txt x={935} y={465} size={26} c="orange" at={1}>🏠 هو "البيت أو المحل" اللي شايل حاجتك</Txt>
+
+        {/* Arrow connecting Domain to Host */}
+        <Arrow from={[580, 340]} to={[670, 340]} c="purple" label="بيشاور عليه 🎯" loff={-26} at={3} />
+
+        {/* 2. Domain Name (Left) */}
+        <Box x={80} y={155} w={500} h={375} c="blue" at={2} />
+        <Doodle x={330} y={220} icon="🏷️" size={85} c="blue" fill="blue" at={2} />
+        <Txt x={330} y={285} size={32} c="blue" at={2}>📍 اسم النطاق (Domain Name)</Txt>
+        <Txt x={330} y={345} w={450} size={24} c="ink" at={2}>• الاسم السهل اللي بنكتبه (مثال: univ.example)</Txt>
+        <Txt x={330} y={395} w={450} size={24} c="ink" at={2}>• بديل ذكي لحفظ رقم الـ IP المعقد (192.0.2.1)</Txt>
+        <Txt x={330} y={465} size={26} c="blue" at={2}>🪧 هو "العنوان واليافطة" اللي بتدل الناس</Txt>
+
+        {/* Bottom Takeaway */}
+        <Box x={80} y={560} w={1120} h={100} c="green" fill="green" size={28} tc="ink" at={4}>
+          💡 <span style={{ fontWeight: 'bold' }}>التشبيه الأسهل:</span> الـ <b>Host</b> هو <span style={{ color: 'var(--pen-orange)' }}>"المحل الفعلي"</span> اللي فيه بضاعتك وملفاتك… والـ <b>Domain</b> هو <span style={{ color: 'var(--pen-blue)' }}>"اليافطة والعنوان"</span> اللي بتوصّل الناس ليه!
+        </Box>
       </Scene>
     ),
   },
   {
-    id: 'html-code', title: 'شكل كود HTML', scene: true,
+    id: 'components', title: 'المكونات الخمسة', scene: true,
     notes: (
       <>
-        <p><b>Tag:</b> كلمة بين قوسين زي <C>{'<h1>'}</C>. فيه Tag فتح و Tag قفل فيه شرطة مايلة <C>{'</h1>'}</C>.</p>
-        <p><b>Element (عنصر):</b> Tag فتح + محتوى + Tag قفل.</p>
-        <p><b>Attribute:</b> معلومة إضافية جوه Tag الفتح، زي <C>href</C> في الرابط: بيحدد الرابط يودّي فين.</p>
-        <p>أمثلة: <C>h1</C> عنوان رئيسي، <C>p</C> فقرة (paragraph)، <C>a</C> رابط (anchor).</p>
+        <p>علشان صفحة تتطلب وتتعرض محتاجين ٥ حاجات، والمهم العلاقة بينهم مش التعريفات لوحدها:</p>
+        <ul>
+          <li><b>Web Browser:</b> برنامج عند المستخدم بيطلب الصفحة ويعرضها.</li>
+          <li><b>Web Server:</b> جهاز/برنامج بيخزّن الصفحات ويبعتها لما تتطلب.</li>
+          <li><b>URL:</b> عنوان فريد لكل مورد (صفحة، صورة…).</li>
+          <li><b>HTTP:</b> بروتوكول: قواعد الطلب والرد بين المتصفح والسيرفر.</li>
+          <li><b>HTML:</b> لغة بتوصف محتوى الصفحة وبنيتها.</li>
+        </ul>
+        <p>الجملة اللي تربطهم: المتصفح بيستخدم HTTP علشان يطلب المورد اللي عنوانه URL من الـ Web Server، والسيرفر يرد بملف HTML يعرضه المتصفح.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>شكل كود HTML</Heading>
-        <Parts y={240} size={70} at={1} parts={[
-          { t: '<h1>', c: 'blue', label: 'Tag فتح', at: 2 },
-          { t: 'جامعة المستقبل', c: 'ink', label: 'المحتوى', at: 3 },
-          { t: '</h1>', c: 'blue', label: 'Tag قفل', at: 4 },
-        ]} />
-        {([[870, '<h1>', 'عنوان رئيسي', 'blue'], [500, '<p>', 'فقرة', 'purple'], [130, '<a>', 'رابط', 'orange']] as const).map(([x, tag, meaning, c], i) => (
-          <Box key={tag} x={x} y={400} w={290} h={76} c={c} fill={c} tc="ink" size={32} at={5} delay={i * 0.2}>
-            <C>{tag}</C> = {meaning}
-          </Box>
-        ))}
-        <Parts y={580} size={50} at={6} parts={[
-          { t: '<a ', c: 'orange' },
-          { t: 'href="contact.html"', c: 'pink', label: 'Attribute: الرابط يودّي فين؟', at: 7 },
-          { t: '>تواصل معنا</a>', c: 'orange' },
-        ]} />
+        <Heading>علشان صفحة تظهر: ٥ حاجات</Heading>
+        <Browser x={800} y={190} w={410} h={270} url="www.univ.example/about.html" at={1}>
+          <div style={{ fontSize: 34 }}>جامعة المستقبل</div><div style={{ fontSize: 22, opacity: .7 }}>تأسست سنة 2005…</div>
+        </Browser>
+        <Txt x={1005} y={500} size={30} c="blue" at={1} delay={0.5}>① Web Browser: بيطلب ويعرض</Txt>
+        <Doodle x={190} y={320} icon="🗄️" size={150} c="orange" fill="orange" at={2} />
+        <Txt x={190} y={445} size={30} c="orange" at={2} delay={0.4}>② Web Server = Host</Txt>
+        <Txt x={190} y={485} size={26} c="orange" at={2} delay={0.5}>بيخزّن ويبعت</Txt>
+        <Mark x={880} y={190} w={330} h={50} c="purple" at={3} />
+        <Txt x={580} y={185} size={30} c="purple" at={3} delay={0.4}>③ URL (domain) = عنوان الموقع</Txt>
+        <Arrow from={[740, 192]} to={[875, 212]} c="purple" bend={-12} at={3} delay={0.3} />
+        <Arrow from={[790, 275]} to={[285, 275]} c="blue" at={4} />
+        <Txt x={720} y={245} size={28} c="blue" at={4} delay={0.4}>طلب ←</Txt>
+        <Arrow from={[285, 375]} to={[790, 375]} c="green" at={5} />
+        <Txt x={350} y={405} size={28} c="green" at={5} delay={0.4}>→ رد</Txt>
+        <Txt x={535} y={325} size={32} c="red" at={4} delay={0.6}>④ HTTP = قواعد الطلب والرد</Txt>
+        <Paper x={480} y={420} w={110} h={120} at={5} delay={0.4}><div style={{ fontSize: 30, textAlign: 'center' }}>📄<br />HTML</div></Paper>
+        <Txt x={535} y={585} size={30} c="green" at={5} delay={0.7}>⑤ HTML = لغة كتابة الصفحة</Txt>
+        <Note x={850} y={555} w={340} h={135} rot={2} size={27} at={6}>يطلب بـ <b>HTTP</b><br />العنوان <b>URL</b><br />← يرجع <b>HTML</b></Note>
+      </Scene>
+    ),
+  },
+  {
+    id: 'html-why', title: 'يعني إيه HTML ببساطة؟', scene: true,
+    notes: (
+      <>
+        <p><b>HTML (HyperText Markup Language):</b> لغة كتابة صفحات الويب، والهدف الأساسي منها هو توحيد طريقة عرض المستندات على كل الأجهزة.</p>
+        <p><b>أهم النقاط لتوضيحها ببساطة:</b></p>
+        <ul>
+          <li><b>الهيكل والمحتوى:</b> بتحدد هيكل الصفحة (ده عنوان، دي فقرة، دي صورة، ده زرار)، زي الهيكل العظمي للجسم أو الطوب في المبنى.</li>
+          <li><b>لغة ترميز مش برمجة:</b> لغة توصيفية (Markup) بتستخدم علامات وأقواس اسمها <b>Tags</b>؛ مفيهاش ذكاء أو شروط أو حسابات.</li>
+          <li><b>المتصفح هو اللي بيعرضها:</b> المتصفح هو البرنامج اللي بيقرا كود الـ HTML ده ويفهم وسومه ويحوّله لشكل مرئي قدام المستخدم.</li>
+        </ul>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading sub="الهيكل العظمي لصفحات الويب">يعني إيه HTML ببساطة؟</Heading>
+        <Box x={80} y={145} w={1120} h={75} c="blue" fill="blue" size={30} tc="ink">
+          📄 <span style={{ fontWeight: 'bold' }}>HTML:</span> هي لغة كتابة صفحات الويب… بتحدد <span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>هيكل ومحتوى</span> الصفحة
+        </Box>
+
+        {/* 1. الهيكل العظمي للصفحة (Right) */}
+        <Box x={670} y={235} w={530} h={305} c="green" at={1} />
+        <Doodle x={935} y={295} icon="🏗️" size={80} c="green" fill="green" at={1} />
+        <Txt x={935} y={375} size={30} c="green" at={1}>① الهيكل العظمي للصفحة</Txt>
+        <Txt x={935} y={415} w={480} size={23} c="ink" at={1}>• بتحدد الصفحة فيها إيه: ده عنوان، دي فقرة، ده زرار</Txt>
+        <Txt x={935} y={455} w={480} size={23} c="ink" at={1}>• من غيرها مفيش صفحة (زي الطوب في العمارة)</Txt>
+        <Txt x={935} y={500} size={26} c="green" at={1}>🦴 هي الأساس اللي بيتبني عليه باقي الصفحة</Txt>
+
+        {/* 2. لغة ترميز مش برمجة (Left) */}
+        <Box x={80} y={235} w={530} h={305} c="orange" at={2} />
+        <Doodle x={345} y={295} icon="🏷️" size={80} c="orange" fill="orange" at={2} />
+        <Txt x={345} y={355} size={30} c="orange" at={2}>② لغة ترميز (Tags) مش برمجة</Txt>
+        <Txt x={345} y={415} w={480} size={23} c="ink" at={2}>• مش برمجة: مفيهاش حسابات أو ذكاء أو أوامر شرطية</Txt>
+        <Txt x={345} y={455} w={480} size={23} c="ink" at={2}>• ترميز: بتعلّم الكلام بـ Tags زي &lt;h1&gt; للعنوان و &lt;p&gt; للفقرة</Txt>
+        <Txt x={345} y={500} size={26} c="orange" at={2}>🌐 المتصفح بيقرا الـ Tags دي ويعرضها قدامك</Txt>
+
+        {/* الخلاصة في الأسفل */}
+        <Box x={80} y={560} w={1120} h={100} c="purple" fill="purple" size={28} tc="ink" at={3}>
+          💡 <span style={{ fontWeight: 'bold' }}>الخلاصة:</span> الـ HTML بتجاوب على سؤال: <span style={{ color: 'var(--pen-purple)', fontWeight: 'bold' }}>«الصفحة دي فيها إيه وشكل هيكلها إيه؟»</span>
+        </Box>
       </Scene>
     ),
   },
@@ -229,70 +352,6 @@ export const part1: FrameDef[] = [
         <Title>اكتب HTML… وشوف المتصفح بيعرضه إزاي</Title>
         <HtmlPlayground />
       </>
-    ),
-  },
-  {
-    id: 'components', title: 'المكونات الخمسة', scene: true,
-    notes: (
-      <>
-        <p>علشان صفحة تتطلب وتتعرض محتاجين ٥ حاجات، والمهم العلاقة بينهم مش التعريفات لوحدها:</p>
-        <ul>
-          <li><b>Web Browser:</b> برنامج عند المستخدم بيطلب الصفحة ويعرضها.</li>
-          <li><b>Web Server:</b> جهاز/برنامج بيخزّن الصفحات ويبعتها لما تتطلب.</li>
-          <li><b>URL:</b> عنوان فريد لكل مورد (صفحة، صورة…).</li>
-          <li><b>HTTP:</b> بروتوكول: قواعد الطلب والرد بين المتصفح والسيرفر.</li>
-          <li><b>HTML:</b> لغة بتوصف محتوى الصفحة وبنيتها.</li>
-        </ul>
-        <p>الجملة اللي تربطهم: المتصفح بيستخدم HTTP علشان يطلب المورد اللي عنوانه URL من الـ Web Server، والسيرفر يرد بملف HTML يعرضه المتصفح.</p>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>علشان صفحة تظهر: ٥ حاجات</Heading>
-        <Browser x={800} y={190} w={410} h={270} url="www.univ.example/about.html" at={1}>
-          <div style={{ fontSize: 34 }}>جامعة المستقبل</div><div style={{ fontSize: 22, opacity: .7 }}>تأسست سنة 2005…</div>
-        </Browser>
-        <Txt x={1005} y={500} size={30} c="blue" at={1} delay={0.5}>① Web Browser: بيطلب ويعرض</Txt>
-        <Doodle x={190} y={320} icon="🗄️" size={150} c="orange" fill="orange" at={2} />
-        <Txt x={190} y={445} size={30} c="orange" at={2} delay={0.4}>② Web Server</Txt>
-        <Txt x={190} y={485} size={26} c="orange" at={2} delay={0.5}>بيخزّن ويبعت</Txt>
-        <Mark x={880} y={190} w={330} h={50} c="purple" at={3} />
-        <Txt x={640} y={185} size={30} c="purple" at={3} delay={0.4}>③ URL = عنوان المورد</Txt>
-        <Arrow from={[740, 192]} to={[875, 212]} c="purple" bend={-12} at={3} delay={0.3} />
-        <Arrow from={[790, 275]} to={[285, 275]} c="blue" at={4} />
-        <Txt x={720} y={245} size={28} c="blue" at={4} delay={0.4}>طلب ←</Txt>
-        <Arrow from={[285, 375]} to={[790, 375]} c="green" at={5} />
-        <Txt x={350} y={405} size={28} c="green" at={5} delay={0.4}>→ رد</Txt>
-        <Txt x={535} y={325} size={32} c="red" at={4} delay={0.6}>④ HTTP = قواعد الطلب والرد</Txt>
-        <Paper x={480} y={420} w={110} h={120} at={5} delay={0.4}><div style={{ fontSize: 30, textAlign: 'center' }}>📄<br />HTML</div></Paper>
-        <Txt x={535} y={585} size={30} c="green" at={5} delay={0.7}>⑤ HTML = لغة كتابة الصفحة</Txt>
-        <Note x={850} y={555} w={340} h={135} rot={2} size={27} at={6}>يطلب بـ <b>HTTP</b><br />العنوان <b>URL</b><br />← يرجع <b>HTML</b></Note>
-      </Scene>
-    ),
-  },
-  {
-    id: 'url', title: 'تشريح URL', scene: true,
-    notes: (
-      <>
-        <p>الـ URL هو عنوان المورد على الويب، وبيتكوّن من أجزاء:</p>
-        <ul>
-          <li><b>https://</b> البروتوكول. https هي النسخة المؤمّنة من HTTP.</li>
-          <li><b>www.univ.example</b> اسم السيرفر اللي عنده المورد.</li>
-          <li><b>/about.html</b> المسار: المورد المطلوب بالظبط على السيرفر.</li>
-        </ul>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>الـ URL: عنوان الصفحة بالظبط</Heading>
-        <Parts y={300} size={80} at={1} parts={[
-          { t: 'https://', c: 'blue', label: 'البروتوكول: نتكلم إزاي؟', at: 2 },
-          { t: 'www.univ.example', c: 'orange', label: 'السيرفر: فين؟', at: 3 },
-          { t: '/about.html', c: 'pink', label: 'المورد: إيه بالظبط؟', at: 4 },
-        ]} />
-        <Note x={120} y={520} w={420} h={120} rot={-2} size={28} color="green" at={5}>🔒 https = HTTP المؤمّن</Note>
-        <Note x={740} y={520} w={420} h={120} rot={2} size={28} at={5} delay={0.2}>زي العنوان: المدينة ← العمارة ← الشقة</Note>
-      </Scene>
     ),
   },
 ];

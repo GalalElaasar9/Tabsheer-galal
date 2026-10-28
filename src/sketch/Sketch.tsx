@@ -383,6 +383,7 @@ const TAGS = {
   summary: ['🧩 الخلاصة', 'purple'],
   journey: ['🗺️ الرحلة', 'blue'],
   story: ['📖 الحكاية', 'pink'],
+  review: ['🔄 مراجعة', 'orange'],
 } as const satisfies Record<string, readonly [string, C]>;
 export type TagKind = keyof typeof TAGS;
 

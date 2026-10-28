@@ -1,61 +1,135 @@
 import { useEffect, useRef, useState } from 'react';
-import { arNum, BrowserMock, Code, Ph, Tg } from '../../kit/blocks';
+import { arNum } from '../../kit/blocks';
 
 export const STUDENTS = {
   2401: { name: 'أحمد سامي', math: 88, physics: 91, prog: 95 },
   2402: { name: 'مريم خالد', math: 97, physics: 85, prog: 99 },
   2403: { name: 'يوسف عادل', math: 74, physics: 80, prog: 86 },
+  2404: { name: 'سارة محمود', math: 92, physics: 89, prog: 90 },
+  2405: { name: 'عمر حسن', math: 65, physics: 71, prog: 78 },
+  2406: { name: 'مريم عادل', math: 81, physics: 94, prog: 87 },
 } as const;
 type StudentId = keyof typeof STUDENTS;
 const IDS = Object.keys(STUDENTS).map(Number) as StudentId[];
 
-/* ---------- One template + different data ---------- */
-export function TemplateDemo() {
-  const [id, setId] = useState<StudentId>(2401);
-  const [tick, setTick] = useState(0);
-  const s = STUDENTS[id];
-  const pickId = (n: StudentId) => { setId(n); setTick(t => t + 1); };
+/* ---------- Results portal: search → Backend → Database → template → page ---------- */
+const find = (q: string): StudentId[] =>
+  /^\d+$/.test(q) ? IDS.filter(id => String(id) === q) : IDS.filter(id => STUDENTS[id].name.includes(q));
+const avg = (id: StudentId) => { const s = STUDENTS[id]; return Math.round((s.math + s.physics + s.prog) / 3); };
+const TRY = ['2402', 'سارة', 'مريم', '9999'];
+const STEP_MS = 700;
+
+export function SearchDemo() {
+  const [text, setText] = useState('');
+  const [req, setReq] = useState<{ q: string; hits: StudentId[]; n: number } | null>(null);
+  const [step, setStep] = useState(0); // 1 request · 2 database · 3 template · 4 page arrived
+  const [shake, setShake] = useState(0);
+  const timers = useRef<number[]>([]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  const search = (raw: string) => {
+    const q = raw.trim();
+    if (!q) { setShake(k => k + 1); return; }
+    timers.current.forEach(clearTimeout);
+    timers.current = [2, 3, 4].map((s, i) => window.setTimeout(() => setStep(s), (i + 1) * STEP_MS));
+    setText(q);
+    setReq(r => ({ q, hits: find(q), n: (r?.n ?? 0) + 1 }));
+    setStep(1);
+  };
+
+  const hits = req?.hits ?? [];
+  const one = hits.length === 1 ? hits[0] : null;
+  const s = one ? STUDENTS[one] : null;
+
   return (
-    <>
-      <div className="flex flex-wrap items-center gap-2 mt-3">
-        <span className="font-extrabold">الطلب جاي من طالب رقم:</span>
-        {IDS.map(n => <button key={n} className={`btn ${n === id ? 'on' : ''}`} onClick={() => pickId(n)}>{n}</button>)}
+    <div className="grid grid-cols-2 gap-4 mt-3 items-start">
+      {/* The student's side: a real-looking results portal */}
+      <div>
+        <div className="browser">
+          <div className="browser-top">
+            <div className="browser-dots"><i /><i /><i /></div>
+            <div className="addr"><bdi dir="ltr">univ.example/results{req ? `?q=${req.q}` : ''}</bdi></div>
+          </div>
+          <div className="site-head"><span>🎓 جامعة المستقبل · بوابة النتائج</span></div>
+          <form className="flex gap-2 p-3" onSubmit={e => { e.preventDefault(); search(text); }}>
+            <input key={shake} className={`field flex-1 ${shake ? 'shake' : ''}`} value={text} placeholder="رقم الطالب أو الاسم"
+              onChange={e => setText(e.target.value)} aria-label="بحث عن طالب" />
+            <button className="btn btn-primary">🔍 بحث</button>
+          </form>
+          <div className="portal-page">
+            {!req && <p className="muted">اكتب رقم أو اسم واضغط بحث.</p>}
+            {req && step < 4 && <p className="muted">⏳ بيحمّل الصفحة…</p>}
+            {req && step >= 4 && (
+              <div key={req.n} className="fade-up">
+                {s && one && (
+                  <>
+                    <h4 className="portal-title">نتيجة: {s.name}</h4>
+                    <div className="portal-row"><span>رقم الطالب</span><b>{one}</b></div>
+                    <div className="portal-row"><span>رياضيات</span><b>{s.math}</b></div>
+                    <div className="portal-row"><span>فيزياء</span><b>{s.physics}</b></div>
+                    <div className="portal-row"><span>برمجة</span><b>{s.prog}</b></div>
+                    <div className="portal-row total"><span>المتوسط</span><b>{avg(one)}%</b></div>
+                  </>
+                )}
+                {hits.length > 1 && (
+                  <>
+                    <h4 className="portal-title">لقينا {arNum(hits.length)} طلاب باسم «{req.q}»</h4>
+                    {hits.map(id => (
+                      <button key={id} className="portal-link" onClick={() => search(String(id))}>
+                        {STUDENTS[id].name} · {id} ←
+                      </button>
+                    ))}
+                  </>
+                )}
+                {!hits.length && <p className="hl-danger">😕 مفيش طالب بالرقم أو الاسم ده.</p>}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2 items-center mt-2">
+          <span className="muted text-sm">جرّب:</span>
+          {TRY.map(t => <button key={t} className="btn" onClick={() => search(t)}>{t}</button>)}
+        </div>
       </div>
-      <div className="eq mt-4">
-        <div>
-          <p className="font-extrabold mb-1">📄 القالب (واحد بس)</p>
-          <Code>
-            <Tg n="h4">Result: <Ph>{'{{ name }}'}</Ph></Tg>
-            <Tg n="p">ID: <Ph>{'{{ id }}'}</Ph></Tg>
-            <Tg n="p">Math: <Ph>{'{{ math }}'}</Ph></Tg>
-            <Tg n="p">Physics: <Ph>{'{{ physics }}'}</Ph></Tg>
-            <Tg n="p">Programming: <Ph>{'{{ prog }}'}</Ph></Tg>
-          </Code>
-        </div>
-        <div className="op">+</div>
-        <div>
-          <p className="font-extrabold mb-1">🗃️ الصف من قاعدة البيانات</p>
-          <Code>
-            <><span className="cm">id:</span> <Ph>{id}</Ph></>
-            <><span className="cm">name:</span> <Ph>{s.name}</Ph></>
-            <><span className="cm">math:</span> <Ph>{s.math}</Ph></>
-            <><span className="cm">physics:</span> <Ph>{s.physics}</Ph></>
-            <><span className="cm">prog:</span> <Ph>{s.prog}</Ph></>
-          </Code>
-        </div>
-        <div className="op">=</div>
-        <div>
-          <p className="font-extrabold mb-1">🖥️ الصفحة اللي وصلت</p>
-          <BrowserMock ltr className={tick ? 'shake' : ''} key={tick}>
-            <h4>Result: {s.name}</h4>
-            <div className="row"><span>ID</span><b>{id}</b></div>
-            <div className="row"><span>Math</span><b>{s.math}</b></div>
-            <div className="row"><span>Physics</span><b>{s.physics}</b></div>
-            <div className="row"><span>Programming</span><b>{s.prog}</b></div>
-          </BrowserMock>
-        </div>
+
+      {/* Behind the scenes on the server */}
+      <div className="backstage">
+        <p className="font-extrabold">⚙️ ورا الكواليس على السيرفر</p>
+        {!req && <p className="muted text-sm mt-2">أول ما تدوس بحث، هتشوف هنا كل خطوة بتحصل.</p>}
+        {req && (
+          <ol key={req.n}>
+            <li className="fade-up">📨 الطلب وصل للـ Backend: <bdi className="code-inline" dir="ltr">GET /results?q={req.q}</bdi></li>
+            {step >= 2 && (
+              <li className="fade-up">
+                🗃️ بيدوّر في قاعدة البيانات… {hits.length ? <b className="hl-safe">لقى {arNum(hits.length)}</b> : <b className="hl-danger">ملقاش حاجة</b>}
+                <table className="db-mini">
+                  <tbody>
+                    {IDS.map(id => (
+                      <tr key={id} className={hits.includes(id) ? 'hit' : ''}>
+                        <td>{id}</td><td>{STUDENTS[id].name}</td><td>{STUDENTS[id].math}</td><td>{STUDENTS[id].physics}</td><td>{STUDENTS[id].prog}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </li>
+            )}
+            {step >= 3 && (
+              <li className="fade-up">
+                🧩 {one ? 'يملا قالب النتيجة:' : hits.length ? 'يكرر سطر في قالب القائمة لكل طالب لقاه' : 'يختار قالب «مش لاقي»'}
+                {s && one && (
+                  <div className="code mt-1">
+                    <div><span className="ph">{'{{ name }}'}</span> ← {s.name}</div>
+                    <div><span className="ph">{'{{ math }}'}</span> ← {s.math}</div>
+                    <div><span className="ph">{'{{ avg }}'}</span> ← {avg(one)} <span className="cm">(الـ Backend حسبه)</span></div>
+                  </div>
+                )}
+              </li>
+            )}
+            {step >= 4 && <li className="fade-up">📤 بعت <b>صفحة HTML كاملة</b> للمتصفح</li>}
+          </ol>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
