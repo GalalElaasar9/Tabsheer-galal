@@ -867,7 +867,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
         <div className="nav-title" style={{ minWidth: 0, maxWidth: 260, textAlign: 'right' }}>
           {lesson.title}<small>{lesson.subtitle}</small>
         </div>
-        <button className={`tb ${panel === 'notes' ? 'on' : ''}`} title="ملاحظات المدرس (J)" onClick={() => togglePanel('notes')}>
+        <button className={`tb ${panel === 'notes' ? 'on' : ''}`} title="سكريبت الشرح (J)" onClick={() => togglePanel('notes')}>
           <NotebookPen size={19} />
         </button>
         <button className={`tb ${panel === 'outline' ? 'on' : ''}`} title="محتوى الدرس (G)" onClick={() => togglePanel('outline')}>
@@ -935,7 +935,10 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
       </div>
 
       {panel === 'outline' && <OutlinePanel sections={outline} cur={cur} onGo={i => goTo(i, 1)} onClose={() => setPanel(null)} />}
-      {panel === 'notes' && <NotesPanel index={cur} title={f.title} notes={f.notes} onClose={() => setPanel(null)} />}
+      {panel === 'notes' && (
+        <NotesPanel index={cur} title={f.title} notes={f.notes} script={f.script}
+          step={present ? fragSteps[f.id] ?? 0 : null} onClose={() => setPanel(null)} />
+      )}
       {panel === 'elements' && <ElementsPanel onInsert={it => insertLib(it)} onClose={() => setPanel(null)} />}
       {help && <HelpModal onClose={() => setHelp(false)} />}
 
@@ -954,7 +957,7 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
               <Pencil size={17} />
             </button>
             <button title="امسح الرسم اللي على الشاشة (C)" onClick={clearScreen}><BrushCleaning size={17} /></button>
-            <button className={panel === 'notes' ? 'on' : ''} title="ملاحظات المدرس (J)" onClick={() => togglePanel('notes')}><NotebookPen size={17} /></button>
+            <button className={panel === 'notes' ? 'on' : ''} title="سكريبت الشرح (J)" onClick={() => togglePanel('notes')}><NotebookPen size={17} /></button>
             <button className={panel === 'outline' ? 'on' : ''} title="محتوى الدرس (G)" onClick={() => togglePanel('outline')}><ListTree size={17} /></button>
             <button title="الوضع الليلي / النهاري" onClick={toggleTheme}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</button>
             <button title="خروج من وضع التركيز (Esc)" onClick={() => setSlidesMode(false)}><Minimize size={17} /></button>

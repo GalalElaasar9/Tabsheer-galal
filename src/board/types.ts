@@ -35,8 +35,10 @@ export type FrameDef = {
   h?: number;
   /** Drawn scene: content is positioned in frame pixels, no padding. */
   scene?: boolean;
-  /** Teacher notes: the full explanation behind the drawing. */
+  /** Teacher notes: precise definitions behind the drawing. */
   notes?: ReactNode;
+  /** Narration, one entry per reveal step (index 0 = before the first "next"). */
+  script?: string[];
   render: () => ReactNode;
 };
 export type SectionDef = { title: string; frames: FrameDef[] };

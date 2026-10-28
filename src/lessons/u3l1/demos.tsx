@@ -169,3 +169,48 @@ export function ReloadDemo() {
     </>
   );
 }
+
+/* ---------- HTML playground: type HTML, see how the browser shows it ---------- */
+const START_HTML = `<h1>جامعة المستقبل</h1>
+<p>تأسست سنة 2005 وفيها 6 كليات.</p>
+<a href="#">تواصل معنا</a>`;
+
+const SNIPPETS: [string, string][] = [
+  ['+ عنوان', '<h1>عنوان جديد</h1>'],
+  ['+ عنوان فرعي', '<h2>عنوان فرعي</h2>'],
+  ['+ فقرة', '<p>دي فقرة كلام عادي.</p>'],
+  ['+ رابط', '<a href="#">رابط</a>'],
+  ['+ قائمة', '<ul>\n  <li>عنصر أول</li>\n  <li>عنصر تاني</li>\n</ul>'],
+  ['+ كلمة عريضة', '<p>كلمة <b>مهمة</b> جوه جملة</p>'],
+];
+
+export function HtmlPlayground() {
+  const [code, setCode] = useState(START_HTML);
+  // Sandboxed preview: no scripts run, links stay inside it.
+  const doc = `<!doctype html><html dir="rtl"><head><meta charset="utf-8"><style>
+    body { font-family: system-ui, sans-serif; padding: 14px 18px; line-height: 1.7; color: #141a2e; background: #fff; }
+    a { color: #1971c2; }
+  </style></head><body>${code}</body></html>`;
+  return (
+    <div className="grid grid-cols-2 gap-4 mt-4" style={{ height: 440 }}>
+      <div className="flex flex-col min-h-0">
+        <div className="flex flex-wrap gap-2 mb-2">
+          {SNIPPETS.map(([label, s]) => (
+            <button key={label} className="btn" onClick={() => setCode(c => `${c.trimEnd()}\n${s}`)}>{label}</button>
+          ))}
+          <button className="btn" title="رجّع الكود الأصلي" onClick={() => setCode(START_HTML)}>↺</button>
+        </div>
+        <textarea className="code-editor" dir="ltr" spellCheck={false} value={code}
+          onChange={e => setCode(e.target.value)} aria-label="كود HTML" />
+        <p className="muted text-sm mt-1">📝 الكود (HTML)</p>
+      </div>
+      <div className="flex flex-col min-h-0">
+        <div className="browser flex flex-col flex-1 min-h-0">
+          <div className="browser-top"><div className="browser-dots"><i /><i /><i /></div><div className="addr">my-page.html</div></div>
+          <iframe title="معاينة الصفحة" sandbox="" srcDoc={doc} style={{ flex: 1, width: '100%', border: 0, background: '#fff' }} />
+        </div>
+        <p className="muted text-sm mt-1">🖥️ المتصفح بيعرضه كده</p>
+      </div>
+    </div>
+  );
+}

@@ -8,6 +8,8 @@ import { LayersDemo, ReloadDemo, TemplateDemo } from './demos';
 import { intro, part1 } from './scenes1';
 import { part2, part3, part4, part5 } from './scenes2';
 import { ending, part6, part7, part8, part9, part10 } from './scenes3';
+import { SCRIPT, TAG } from './script';
+import { Tag } from '../../sketch/Sketch';
 
 const check = (id: string, title: string, items: typeof CHECKS[string], h?: number): FrameDef => ({
   id, title: `✋ ${title}`, h,
@@ -33,7 +35,7 @@ const order = (id: string, title: string, o: { steps: string[]; done: string }, 
   ),
 });
 
-export const u3l1: LessonDef = {
+const lesson: LessonDef = {
   id: 'u3l1',
   title: 'تطور الويب',
   subtitle: 'الفصل الثالث · الدرس الأول',
@@ -46,7 +48,7 @@ export const u3l1: LessonDef = {
     {
       title: '٥ · الـ Backend',
       frames: [
-        ...part5.slice(0, 2),
+        ...part5.slice(0, 3),
         {
           id: 'template-demo', title: '🧪 جرّب: قالب واحد',
           notes: <p>اضغط على أرقام الطلاب: القالب ثابت، والصف من قاعدة البيانات بيتغير، فالصفحة اللي بتوصل بتتغير. الأقواس {'{{ }}'} مجرد علامة لمكان البيانات.</p>,
@@ -58,14 +60,14 @@ export const u3l1: LessonDef = {
             </>
           ),
         },
-        ...part5.slice(2),
+        ...part5.slice(3),
         check('check-5', 'الـ Backend والصفحات الديناميكية', CHECKS.backend),
       ],
     },
     {
       title: '٦ · JavaScript',
       frames: [
-        ...part6.slice(0, 2),
+        ...part6.slice(0, 3),
         {
           id: 'layers-demo', title: '🧪 جرّب: HTML · CSS · JS',
           notes: <p>شغّل CSS الأول وبعدين JavaScript، وجرّب تكتب حروف بدل أرقام. من غير JavaScript الزرار موجود بس مش بيعمل حاجة.</p>,
@@ -77,14 +79,14 @@ export const u3l1: LessonDef = {
             </>
           ),
         },
-        ...part6.slice(2),
+        ...part6.slice(3),
         check('check-6', 'HTML ولا CSS ولا JavaScript؟', CHECKS.langs, 820),
       ],
     },
     {
       title: '٧ · طلبات في الخلفية',
       frames: [
-        ...part7.slice(0, 2),
+        ...part7.slice(0, 3),
         {
           id: 'reload-demo', title: '🧪 جرّب: صفحة كاملة ولا جزء؟',
           notes: <p>خلّي الطالب يكتب ملاحظة، وبعدين يجرّب الزرارين: في التحميل الكامل الملاحظة بتضيع والعدّاد بيزيد، وفي الطلب في الخلفية مربع النتيجة بس اللي بيتغير.</p>,
@@ -96,7 +98,7 @@ export const u3l1: LessonDef = {
             </>
           ),
         },
-        ...part7.slice(2),
+        ...part7.slice(3),
         order('check-7', 'رتّب خطوات الطلب في الخلفية', ORDERS.async),
       ],
     },
@@ -134,4 +136,20 @@ export const u3l1: LessonDef = {
       ],
     },
   ],
+};
+
+/** Attach each frame's narration script and story tag (kept in script.ts so the scenes stay about drawing). */
+export const u3l1: LessonDef = {
+  ...lesson,
+  sections: lesson.sections.map(sec => ({
+    ...sec,
+    frames: sec.frames.map(f => {
+      const tag = TAG[f.id];
+      return {
+        ...f,
+        script: SCRIPT[f.id] ?? f.script,
+        render: tag ? () => <>{f.render()}<Tag kind={tag} /></> : f.render,
+      };
+    }),
+  })),
 };

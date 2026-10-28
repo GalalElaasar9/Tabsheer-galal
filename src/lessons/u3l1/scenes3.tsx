@@ -31,6 +31,28 @@ const portal = (result?: string) => (
 
 export const part6: FrameDef[] = [
   {
+    id: 'js-problem', title: 'الصفحة وصلت… بس مبتردش', scene: true,
+    notes: <p>من غير كود شغال جوه المتصفح، الصفحة بعد ما بتتعرض مبتقدرش ترد على المستخدم بنفسها: أي رد فعل (حتى رسالة "الرقم غلط") محتاج رحلة للسيرفر وصفحة جديدة كاملة.</p>,
+    render: () => (
+      <Scene>
+        <Heading>الصفحة وصلت… بس مبتردش!</Heading>
+        <Browser x={820} y={180} w={400} h={220} c="blue">
+          <div style={{ fontSize: 26 }}>رقم الطالب: <span className="sk-input" style={{ width: '3.4em', textAlign: 'center' }}>abc</span> <span className="sk-btn">عرض</span></div>
+        </Browser>
+        <Txt x={915} y={300} size={46} at={1}>👆</Txt>
+        <Txt x={1020} y={440} size={28} c="blue" at={1} delay={0.3}>كتب حروف بدل الرقم ودوس عرض</Txt>
+        <Doodle x={200} y={290} icon="🗄️" size={130} c="orange" fill="orange" label="السيرفر" lc="orange" />
+        <Arrow from={[810, 250]} to={[285, 250]} c="blue" at={2} />
+        <Txt x={550} y={220} size={28} c="blue" at={2} delay={0.4}>البيانات كلها تروح للسيرفر</Txt>
+        <Arrow from={[285, 340]} to={[810, 355]} c="red" at={3} />
+        <Txt x={550} y={385} size={28} c="red" at={3} delay={0.4}>صفحة جديدة كاملة: "الرقم غلط" ❌</Txt>
+        <Doodle x={550} y={505} icon="⏳" size={90} c="red" at={4} />
+        <Txt x={550} y={600} size={32} c="red" at={4} delay={0.3}>كل ده علشان رسالة صغيرة؟!</Txt>
+        <Note x={870} y={500} w={350} h={140} rot={2} color="green" size={27} at={5}>💡 محتاجين كود شغال<br /><b>جوه الصفحة نفسها</b></Note>
+      </Scene>
+    ),
+  },
+  {
     id: 'why-js', title: 'ليه JavaScript؟', scene: true,
     notes: (
       <>
@@ -111,6 +133,23 @@ export const part6: FrameDef[] = [
 
 export const part7: FrameDef[] = [
   {
+    id: 'apps-era', title: 'الويب بقى مكان بنقعد فيه', scene: true,
+    notes: <p>حوالي 2004–2005 ظهرت خدمات زي Gmail (2004) وGoogle Maps (2005)، والناس بقت تستخدم الويب زي البرامج: وقت طويل وتفاعل كتير. تحميل الصفحة كلها مع كل ضغطة بقى مشكلة واضحة.</p>,
+    render: () => (
+      <Scene>
+        <Heading>الويب بقى مكان بنقعد فيه</Heading>
+        <Doodle x={1020} y={250} icon="✉️" size={120} c="red" fill="red" label="Gmail · 2004" lsize={30} lc="red" at={1} />
+        <Doodle x={760} y={250} icon="🗺️" size={120} c="green" fill="green" label="Google Maps · 2005" lsize={30} lc="green" at={1} delay={0.4} />
+        <Line pts={[[620, 150], [628, 400], [620, 650]]} dashed sw={1.6} at={2} />
+        <Txt x={880} y={440} size={32} c="ink" at={2}>زمان: تفتح الصفحة… تقراها… وتمشي</Txt>
+        <Txt x={880} y={500} size={32} c="purple" at={2} delay={0.4}>دلوقتي: قاعد بالساعات · مئات الضغطات</Txt>
+        <Doodle x={330} y={300} icon="🖱️" size={130} c="purple" fill="purple" at={2} delay={0.6} />
+        <Txt x={330} y={420} size={44} c="purple" at={2} delay={0.8}>× 100</Txt>
+        <Note x={160} y={520} w={420} h={130} rot={-2} color="pink" size={28} at={3}>ولو كل ضغطة<br />بتحمّل الصفحة كلها؟ 😩</Note>
+      </Scene>
+    ),
+  },
+  {
     id: 'reload-problem', title: 'الصفحة كلها؟!', scene: true,
     notes: (
       <>
@@ -153,44 +192,18 @@ export const part7: FrameDef[] = [
         <Doodle x={660} y={540} icon="⚡" size={76} c="orange" fill="orange" label="JS" lsize={26} lc="orange" />
         <Doodle x={180} y={290} icon="⚙️" size={130} c="orange" label="السيرفر" lc="orange" />
         <Cylinder x={130} y={500} w={100} h={110} label="DB" />
-        <Mark x={715} y={268} w={230} h={56} c="red" at={1} />
+        {/* <Mark x={715} y={268} w={230} h={56} c="red" at={1} /> */}
         <Txt x={640} y={300} size={30} c="red" at={1} delay={0.3}>① بحث</Txt>
         <Arrow from={[620, 520]} to={[260, 330]} c="blue" bend={-20} at={2} />
         <Txt x={470} y={330} size={28} c="blue" at={2} delay={0.4}>② طلب صغير في الخلفية</Txt>
-        <Txt x={950} y={540} size={28} c="green" at={2} delay={0.6}>الصفحة لسه شغالة ✔</Txt>
+        {/* <Txt x={950} y={540} size={28} c="green" at={2} delay={0.6}>الصفحة لسه شغالة ✔</Txt> */}
         <Arrow from={[180, 415]} to={[180, 495]} c="green" both at={3} />
         <Txt x={340} y={470} size={28} c="orange" at={3} delay={0.3}>③ يعالج ويسأل الـ DB</Txt>
         <Arrow from={[260, 260]} to={[690, 380]} c="pink" bend={-40} at={4} />
         <Txt x={460} y={205} size={28} c="pink" at={4} delay={0.4}>④ بيانات بس: الاسم + الدرجات</Txt>
         <Browser x={700} y={190} w={500} h={300} c="blue" at={5}>{portal('يوسف عادل · 74 · 80 · 86 ✨')}</Browser>
-        <Mark x={700} y={345} w={500} h={110} c="green" at={5} delay={0.5} />
-        <Txt x={950} y={620} size={30} c="green" at={5} delay={0.8}>⑤ JavaScript حدّثت الجزء ده بس</Txt>
-      </Scene>
-    ),
-  },
-  {
-    id: 'ajax', title: 'Asynchronous و AJAX', scene: true,
-    notes: (
-      <>
-        <p><b>Asynchronous Request (طلب غير متزامن):</b> طلب بيتبعت والصفحة مش بتقف تستناه: المستخدم يكمل شغله، ولما الرد يوصل الكود يتعامل معاه.</p>
-        <p><b>AJAX (Asynchronous JavaScript and XML):</b> أسلوب تاريخي ومشهور لتنفيذ طلبات غير متزامنة وتحديث أجزاء من الصفحة. الاسم انتشر سنة 2005، وGmail وGoogle Maps كانوا أشهر أمثلته. رغم إن في الاسم XML، البيانات مش لازم تكون XML.</p>
-        <p>مش هندخل في Fetch API ولا كتابة كود: المهم الفكرة.</p>
-      </>
-    ),
-    render: () => (
-      <Scene>
-        <Heading>Asynchronous: الصفحة مش بتستنى</Heading>
-        <Arrow from={[1180, 420]} to={[110, 420]} c="ink" sw={2} />
-        <Txt x={140} y={455} size={26} c="ink">الوقت</Txt>
-        <Line pts={[[1150, 380], [1000, 370], [850, 385], [700, 372], [550, 386], [400, 371], [250, 384]]} c="green" sw={4} at={1} />
-        <Txt x={700} y={340} size={30} c="green" at={1} delay={0.5}>✍️ المستخدم بيكمّل شغله عادي</Txt>
-        <Arrow from={[1050, 250]} to={[700, 190]} c="blue" bend={-30} at={2} />
-        <Txt x={880} y={180} size={28} c="blue" at={2} delay={0.3}>⏳ الطلب راح</Txt>
-        <Arrow from={[620, 190]} to={[300, 260]} c="pink" bend={-30} at={2} delay={0.6} />
-        <Txt x={440} y={180} size={28} c="pink" at={2} delay={0.9}>📦 الرد رجع</Txt>
-        <Note x={890} y={520} w={300} h={150} rot={-3} size={28} at={3}>AJAX · 2005<br />Gmail · Google Maps</Note>
-        <Note x={490} y={530} w={340} h={140} rot={2} color="pink" size={27} at={4}>XML في الاسم بس…<br />البيانات ممكن تيجي بأي صيغة</Note>
-        <Note x={90} y={520} w={340} h={150} rot={-1.5} color="blue" size={28} at={5}>تحديث جزء ≠<br />تحميل الصفحة كلها</Note>
+        <Mark x={700} y={300} w={500} h={110} c="green" at={5} delay={0.5} />
+        <Txt x={950} y={520} size={30} c="green" at={5} delay={0.8}>⑤ JavaScript حدّثت الجزء ده بس</Txt>
       </Scene>
     ),
   },

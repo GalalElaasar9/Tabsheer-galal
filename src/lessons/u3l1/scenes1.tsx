@@ -1,6 +1,9 @@
 // Board scenes · intro and part 1 (beginning of the web).
 import type { FrameDef } from '../../board/types';
 import { Arrow, Box, Browser, Doodle, Heading, Line, Mark, Note, Num, Paper, Parts, Scene, Txt, Underline } from '../../sketch/Sketch';
+import { Eyebrow, Title } from '../../kit/blocks';
+import { ABOUT, C, Code } from './common';
+import { HtmlPlayground } from './demos';
 
 const STOPS = [
   'بداية الويب', 'الصفحة الثابتة', 'المحتوى المتغير', 'قواعد البيانات', 'الـ Backend',
@@ -122,6 +125,110 @@ export const part1: FrameDef[] = [
         <Box x={160} y={450} w={420} h={80} c="purple" fill="purple" size={32} tc="ink" at={4} delay={0.3}>✉️ الإيميل: خدمة تانية</Box>
         <Note x={30} y={130} w={130} h={120} rot={-4} size={24} at={5}>1990 أول سيرفر<br />1991 للناس</Note>
       </Scene>
+    ),
+  },
+  {
+    id: 'html-why', title: 'لغة واحدة يفهمها أي جهاز', scene: true,
+    notes: (
+      <>
+        <p>كل برنامج وقتها كان بيحفظ المستندات بصيغته، فالجهاز اللي عنده برنامج مختلف مش هيقدر يقرا المستند.</p>
+        <p>الحل: لغة واحدة متفق عليها لكتابة المستندات: <b>HTML</b> (HyperText Markup Language). أي متصفح على أي جهاز يقدر يقراها ويعرضها.</p>
+        <p>HTML <b>لغة ترميز</b> مش لغة برمجة: بتوصف المحتوى (عنوان، فقرة، رابط)، مش بتنفّذ أوامر.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>مستند واحد… يقراه أي جهاز إزاي؟</Heading>
+        {([[90, 'صيغة ١', '#@%&'], [250, 'صيغة ٢', '◊∆≈≠'], [410, 'صيغة ٣', '¤§¶¥']] as const).map(([x, l, junk], i) => (
+          <Paper key={l} x={x} y={190} w={140} h={150} label={l} at={1} delay={i * 0.2}>
+            <div style={{ fontSize: 30, textAlign: 'center', lineHeight: 1.7 }}>{junk}<br />{junk}</div>
+          </Paper>
+        ))}
+        <Doodle x={300} y={470} icon="🖥️" size={110} c="red" at={1} delay={0.8} />
+        <Txt x={300} y={575} size={32} c="red" at={1} delay={1}>؟؟ مش فاهم الصيغة دي</Txt>
+        <Line dashed pts={[[640, 150], [632, 420], [640, 690]]} sw={2} />
+        <Paper x={760} y={180} w={430} h={210} label="💡 لغة واحدة للكل: HTML" c="green" at={2}><Code lines={ABOUT} size={24} /></Paper>
+        {[820, 975, 1130].map((x, i) => (
+          <Doodle key={x} x={x} y={490} icon="🖥️" size={80} c="green" label="✔ فهمها" lsize={24} lc="green" at={3} delay={i * 0.2} />
+        ))}
+        <Note x={700} y={595} w={500} h={95} rot={-1} size={26} at={4}>HyperText Markup Language<br />لغة ترميز… مش لغة برمجة</Note>
+      </Scene>
+    ),
+  },
+  {
+    id: 'html-code', title: 'شكل كود HTML', scene: true,
+    notes: (
+      <>
+        <p><b>Tag:</b> كلمة بين قوسين زي <C>{'<h1>'}</C>. فيه Tag فتح و Tag قفل فيه شرطة مايلة <C>{'</h1>'}</C>.</p>
+        <p><b>Element (عنصر):</b> Tag فتح + محتوى + Tag قفل.</p>
+        <p><b>Attribute:</b> معلومة إضافية جوه Tag الفتح، زي <C>href</C> في الرابط: بيحدد الرابط يودّي فين.</p>
+        <p>أمثلة: <C>h1</C> عنوان رئيسي، <C>p</C> فقرة (paragraph)، <C>a</C> رابط (anchor).</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>شكل كود HTML</Heading>
+        <Parts y={240} size={70} at={1} parts={[
+          { t: '<h1>', c: 'blue', label: 'Tag فتح', at: 2 },
+          { t: 'جامعة المستقبل', c: 'ink', label: 'المحتوى', at: 3 },
+          { t: '</h1>', c: 'blue', label: 'Tag قفل', at: 4 },
+        ]} />
+        {([[870, '<h1>', 'عنوان رئيسي', 'blue'], [500, '<p>', 'فقرة', 'purple'], [130, '<a>', 'رابط', 'orange']] as const).map(([x, tag, meaning, c], i) => (
+          <Box key={tag} x={x} y={400} w={290} h={76} c={c} fill={c} tc="ink" size={32} at={5} delay={i * 0.2}>
+            <C>{tag}</C> = {meaning}
+          </Box>
+        ))}
+        <Parts y={580} size={50} at={6} parts={[
+          { t: '<a ', c: 'orange' },
+          { t: 'href="contact.html"', c: 'pink', label: 'Attribute: الرابط يودّي فين؟', at: 7 },
+          { t: '>تواصل معنا</a>', c: 'orange' },
+        ]} />
+      </Scene>
+    ),
+  },
+  {
+    id: 'html-render', title: 'المتصفح بيعرض HTML إزاي؟', scene: true,
+    notes: (
+      <>
+        <p>المتصفح بيقرا كود HTML، ويفهم كل عنصر، ويبني منه تمثيل داخلي للمستند (هيكل مترتب للعناصر)، وبعدين يرسم كل عنصر بالشكل المناسب.</p>
+        <p>HTML بيوصف <b>ده إيه</b> (عنوان، فقرة، رابط)، والمتصفح هو اللي بيقرر يبان إزاي. تفاصيل الهيكل الداخلي (DOM) مش موضوع الدرس ده.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>المتصفح بيعرض HTML إزاي؟</Heading>
+        <Paper x={900} y={180} w={330} h={200} label="الكود اللي وصل"><Code lines={ABOUT} size={20} /></Paper>
+        <Txt x={1065} y={425} size={30} c="blue" at={1}>① يقرا الكود</Txt>
+        <Arrow from={[890, 280]} to={[830, 280]} c="blue" at={1} delay={0.3} />
+        <Box x={505} y={170} w={230} h={60} c="purple" fill="purple" tc="ink" size={28} at={2}>📄 الصفحة</Box>
+        {([[410, 'عنوان · h1'], [555, 'فقرة · p'], [700, 'رابط · a']] as const).map(([x, t], i) => (
+          <span key={t} className="contents">
+            <Line pts={[[620, 232], [x + 65, 300]]} c="purple" sw={2} at={2} delay={0.3 + i * 0.15} />
+            <Box x={x} y={300} w={130} h={56} c="purple" size={24} at={2} delay={0.4 + i * 0.15}>{t}</Box>
+          </span>
+        ))}
+        <Txt x={620} y={400} size={28} c="purple" at={2} delay={0.9}>② يفهم كل عنصر ويبني تمثيل للمستند</Txt>
+        <Arrow from={[470, 430]} to={[400, 470]} c="green" bend={-20} at={3} />
+        <Browser x={50} y={440} w={460} h={230} c="green" at={3} delay={0.2}>
+          <div style={{ fontSize: 40 }}>جامعة المستقبل</div>
+          <div style={{ fontSize: 24 }}>تأسست سنة 2005</div>
+          <div style={{ fontSize: 24, color: 'var(--pen-blue)', textDecoration: 'underline' }}>تواصل معنا 👆</div>
+        </Browser>
+        <Txt x={870} y={500} size={30} c="green" at={3} delay={0.6}>③ يرسم كل عنصر بشكله</Txt>
+        <Txt x={870} y={545} size={24} at={3} delay={0.8}>العنوان كبير · الرابط أزرق وتدوس عليه</Txt>
+        <Note x={620} y={590} w={580} h={95} rot={-1} size={27} at={4}>HTML بيقول <b>ده إيه</b>… والمتصفح بيقرر <b>يبان إزاي</b></Note>
+      </Scene>
+    ),
+  },
+  {
+    id: 'html-try', title: '🧪 جرّب: اكتب HTML',
+    notes: <p>خلّي الطلاب يغيّروا الكلام، ويضيفوا عناصر من الزراير، ويلاحظوا إن كل Tag ليه شكل مختلف في المعاينة. المعاينة محمية: مفيش أي كود بيتنفّذ فيها.</p>,
+    render: () => (
+      <>
+        <Eyebrow>🧪 جرّب بنفسك</Eyebrow>
+        <Title>اكتب HTML… وشوف المتصفح بيعرضه إزاي</Title>
+        <HtmlPlayground />
+      </>
     ),
   },
   {

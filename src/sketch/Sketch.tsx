@@ -323,7 +323,7 @@ export function Brace({ x1, x2, y, c = 'ink', label, size = 26, at, delay }: Bas
 
 /** Words in a row (centered at y) with a labeled brace under each part, e.g. the parts of a URL. */
 export function Parts({ y, size = 80, parts, at }: Base & {
-  y: number; size?: number; parts: { t: string; c: C; label: ReactNode; at?: number }[];
+  y: number; size?: number; parts: { t: string; c: C; label?: ReactNode; at?: number }[];
 }) {
   const refs = useRef<(HTMLSpanElement | null)[]>([]);
   const [boxes, setBoxes] = useState<[number, number][]>([]);
@@ -339,7 +339,7 @@ export function Parts({ y, size = 80, parts, at }: Base & {
           {parts.map((p, i) => <span key={i} ref={el => { refs.current[i] = el; }} style={{ color: ink(p.c) }}>{p.t}</span>)}
         </div>
       </Layer>
-      {boxes.length === parts.length && parts.map((p, i) => (
+      {boxes.length === parts.length && parts.map((p, i) => p.label && (
         <Brace key={i} x1={boxes[i][0] + 6} x2={boxes[i][0] + boxes[i][1] - 6} y={y + size * 0.55} c={p.c} label={p.label} at={p.at} />
       ))}
     </>
@@ -366,6 +366,30 @@ export function Struck({ x, y, size = 36, c = 'ink', align = 'right', at, strike
       {w > 0 && <Strike x={x0 - 8} y={y} w={w + 16} at={strikeAt ?? at} delay={strikeAt ? 0 : 0.6} />}
     </>
   );
+}
+
+const TAGS = {
+  problem: ['⚠️ المشكلة', 'red'],
+  solution: ['💡 الحل', 'green'],
+  answer: ['💡 الإجابة', 'green'],
+  question: ['❓ سؤال', 'orange'],
+  term: ['📌 مصطلح', 'purple'],
+  how: ['⚙️ إزاي؟', 'blue'],
+  parts: ['🧩 المكونات', 'purple'],
+  detail: ['🔍 بالتفصيل', 'blue'],
+  example: ['🔎 مثال', 'blue'],
+  compare: ['⚖️ مقارنة', 'blue'],
+  careful: ['⚠️ خلّي بالك', 'orange'],
+  summary: ['🧩 الخلاصة', 'purple'],
+  journey: ['🗺️ الرحلة', 'blue'],
+  story: ['📖 الحكاية', 'pink'],
+} as const satisfies Record<string, readonly [string, C]>;
+export type TagKind = keyof typeof TAGS;
+
+/** Where we are in the story (problem, solution, term…), top-left of the scene. */
+export function Tag({ kind }: { kind: TagKind }) {
+  const [label, c] = TAGS[kind];
+  return <Box x={46} y={30} w={196} h={56} c={c} fill={c} tc={c} size={27}>{label}</Box>;
 }
 
 /** Free HTML block placed on the board (for small interactive bits). */

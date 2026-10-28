@@ -1,48 +1,25 @@
 // Board scenes · parts 2–5: static pages, changing content, databases, the Backend.
 import type { FrameDef } from '../../board/types';
 import {
-  Arrow, Box, Browser, Cylinder, Doodle, Heading, Line, Mark, Note, Paper, Scene, Table, Txt,
+  Arrow, Box, Browser, Cylinder, Doodle, Ellipse, Heading, Line, Mark, Note, Paper, Scene, Table, Txt,
 } from '../../sketch/Sketch';
-
-const Code = ({ lines }: { lines: [string, string, string][] }) => (
-  <div className="sk-code">
-    {lines.map(([t, body, close], i) => (
-      <div key={i}><span className="tag">{t}</span><bdi>{body}</bdi><span className="tag">{close}</span></div>
-    ))}
-  </div>
-);
-
-const ABOUT: [string, string, string][] = [
-  ['<h1>', 'جامعة المستقبل', '</h1>'],
-  ['<p>', 'تأسست سنة 2005', '</p>'],
-  ['<a href="contact.html">', 'تواصل معنا', '</a>'],
-];
-
-const AboutRendered = ({ big = 34 }: { big?: number }) => (
-  <>
-    <div style={{ fontSize: big }}>جامعة المستقبل</div>
-    <div style={{ fontSize: big * 0.65, opacity: .75 }}>تأسست سنة 2005</div>
-    <div style={{ fontSize: big * 0.65, color: 'var(--pen-blue)', textDecoration: 'underline' }}>تواصل معنا</div>
-  </>
-);
+import { AboutRendered } from './common';
 
 export const part2: FrameDef[] = [
   {
-    id: 'about-page', title: 'صفحة ثابتة: about.html', scene: true,
-    notes: (
-      <>
-        <p>مثال بسيط: صفحة "عن الجامعة". ملف HTML واحد محفوظ على السيرفر، ومحتواه واحد لكل الزوار.</p>
-        <p>على السيرفر الملف <b>نص</b> مكتوب بـ HTML. على الشاشة بيظهر كصفحة. السؤال اللي هنجاوبه: إيه اللي حصل بين ما كتبت العنوان وما الصفحة ظهرت؟</p>
-      </>
-    ),
+    id: 'where-is-it', title: 'كتبت العنوان… وبعدين؟', scene: true,
+    notes: <p>الملف about.html على سيرفر الجامعة، والطالب في بيته. السؤال: إيه اللي بيحصل من لحظة ما يكتب العنوان لحد ما الصفحة تظهر؟ الإجابة هي دورة الطلب والاستجابة (Request / Response Lifecycle).</p>,
     render: () => (
       <Scene>
-        <Heading>صفحة ثابتة: about.html</Heading>
-        <Paper x={70} y={200} w={480} h={250} label="🗄️ على السيرفر: نص" at={1}><Code lines={ABOUT} /></Paper>
-        <Browser x={780} y={190} w={420} h={270} url="www.univ.example/about.html" at={2}><AboutRendered /></Browser>
-        <Txt x={990} y={160} size={28} c="blue" at={2} delay={0.3}>🖥️ على شاشتك: صفحة</Txt>
-        <Arrow from={[560, 330]} to={[770, 330]} c="purple" bend={-40} label="المتصفح يرسمها" at={2} delay={0.5} />
-        <Txt x={640} y={590} size={46} c="red" at={3}>إيه اللي حصل في النص؟ 🤔</Txt>
+        <Heading>كتبت العنوان… وبعدين؟</Heading>
+        <Doodle x={1070} y={250} icon="👩‍🎓" size={120} c="blue" fill="blue" label="أنت في البيت" lc="blue" />
+        <Browser x={880} y={390} w={350} h={150} url="www.univ.example/about.html" at={2}><div style={{ fontSize: 30 }}>⏳</div></Browser>
+        <Doodle x={210} y={250} icon="🗄️" size={130} c="orange" fill="orange" label="سيرفر الجامعة" lc="orange" at={1} />
+        <Paper x={145} y={400} w={130} h={140} at={1} delay={0.3}><div style={{ fontSize: 22, textAlign: 'center' }}>📄<br />about.html</div></Paper>
+        <Line dashed pts={[[330, 290], [600, 270], [870, 290]]} sw={2} at={2} />
+        <Txt x={600} y={340} size={120} c="red" at={2} delay={0.4}>؟</Txt>
+        <Txt x={600} y={470} size={34} c="red" at={2} delay={0.6}>إيه اللي بيحصل في الثانية دي؟</Txt>
+        <Note x={420} y={575} w={440} h={95} rot={-1.5} size={28} at={3}>📨 Request / Response Lifecycle</Note>
       </Scene>
     ),
   },
@@ -135,7 +112,45 @@ export const part2: FrameDef[] = [
   },
 ];
 
+const GROWTH = [
+  { year: '1991', label: 'موقع واحد', h: 10 },
+  { year: '1994', label: 'حوالي 3 آلاف', h: 45 },
+  { year: '1996', label: 'حوالي ربع مليون', h: 130 },
+  { year: '2000', label: 'أكتر من 17 مليون', h: 290 },
+];
+
 export const part3: FrameDef[] = [
+  {
+    id: 'web-grows', title: 'الويب كبر… والناس عايزة أكتر', scene: true,
+    notes: (
+      <>
+        <p>بعد ما الويب اتفتح للناس سنة 1991، ومع ظهور متصفحات سهلة زي Mosaic (1993)، عدد المواقع زاد بسرعة كبيرة: موقع واحد سنة 1991، حوالي 3 آلاف سنة 1994، حوالي ربع مليون سنة 1996، وأكتر من 17 مليون سنة 2000 (أرقام تقريبية).</p>
+        <p>الويب مبقاش للباحثين بس: الجامعات والبنوك والمحلات دخلت، والمستخدمين بقوا عايزين محتوى يخصهم هم. الصفحات الثابتة (نفس الملف للكل) مبقتش كفاية.</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>الويب كبر… والناس عايزة أكتر</Heading>
+        <Line pts={[[1200, 530], [520, 530]]} sw={2.4} />
+        {GROWTH.map((g, i) => {
+          const x = 1080 - i * 170;
+          return (
+            <span key={g.year} className="contents">
+              <Box x={x - 45} y={530 - g.h} w={90} h={g.h} c="blue" fill="blue" hachure at={1} delay={i * 0.35} />
+              <Txt x={x} y={510 - g.h} size={24} c="blue" at={1} delay={i * 0.35 + 0.2}>{g.label}</Txt>
+              <Txt x={x} y={565} size={28} at={1} delay={i * 0.35}>{g.year}</Txt>
+            </span>
+          );
+        })}
+        <Txt x={850} y={620} size={26} c="ink" at={1} delay={1.6}>عدد المواقع على الويب (تقريبًا)</Txt>
+        <Doodle x={300} y={190} icon="🎓" size={86} c="pink" label="نتيجتي أنا" lsize={26} lc="pink" at={2} />
+        <Doodle x={300} y={335} icon="🏦" size={86} c="pink" label="رصيد حسابي" lsize={26} lc="pink" at={2} delay={0.3} />
+        <Doodle x={300} y={480} icon="🛒" size={86} c="pink" label="السلة بتاعتي" lsize={26} lc="pink" at={2} delay={0.6} />
+        <Line pts={[[470, 150], [478, 370], [470, 580]]} dashed sw={1.6} />
+        <Note x={70} y={600} w={430} h={95} rot={-1.5} size={26} at={3}>صفحة واحدة للكل… مبقتش كفاية</Note>
+      </Scene>
+    ),
+  },
   {
     id: 'results-site', title: 'نتيجة كل طالب… إزاي؟', scene: true,
     notes: (
@@ -274,6 +289,26 @@ export const part4: FrameDef[] = [
 ];
 
 export const part5: FrameDef[] = [
+  {
+    id: 'backend-problem', title: '٣ حاجات… مين يجمعهم؟', scene: true,
+    notes: <p>عندنا طلب جاي من الطالب، وبيانات في قاعدة البيانات، وقالب للصفحة. محتاجين برنامج على السيرفر يستقبل الطلب ويقرر ويجيب البيانات ويبني الصفحة: ده الـ Backend.</p>,
+    render: () => (
+      <Scene>
+        <Heading>٣ حاجات… مين يجمعهم؟</Heading>
+        <Box x={930} y={190} w={280} h={100} c="blue" fill="blue" tc="ink" size={28} at={1}>📨 طلب من مريم (2402)</Box>
+        <Paper x={540} y={175} w={210} h={150} label="قالب الصفحة" at={1} delay={0.3}>
+          <div className="sk-code" style={{ fontSize: 22 }}><span className="tag">&lt;h4&gt;</span><span className="ph">{'{{name}}'}</span><br /><span className="tag">&lt;p&gt;</span><span className="ph">{'{{math}}'}</span></div>
+        </Paper>
+        <Cylinder x={150} y={170} w={160} h={170} label="البيانات" at={1} delay={0.6} />
+        <Ellipse x={470} y={420} w={340} h={170} c="red" size={70} tc="red" at={2}>؟</Ellipse>
+        <Arrow from={[1050, 300]} to={[790, 450]} c="red" dashed at={2} delay={0.2} />
+        <Arrow from={[645, 335]} to={[640, 412]} c="red" dashed at={2} delay={0.3} />
+        <Arrow from={[310, 330]} to={[495, 455]} c="red" dashed at={2} delay={0.4} />
+        <Txt x={640} y={640} size={30} c="red" at={2} delay={0.7}>مين يستقبل الطلب ويجيب البيانات ويبني الصفحة؟</Txt>
+        <Note x={880} y={440} w={340} h={150} rot={2} color="green" size={26} at={3}>💡 برنامج على السيرفر<br />بيستقبل · يقرر · يجيب · يبني</Note>
+      </Scene>
+    ),
+  },
   {
     id: 'backend-def', title: 'الـ Backend', scene: true,
     notes: (

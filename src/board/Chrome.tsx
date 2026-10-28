@@ -3,7 +3,7 @@ import {
   LocateFixed, Minus, MousePointer2,
   Pencil, Shapes, Square, StickyNote, Type, X,
 } from 'lucide-react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { COLORS, noteColor, penColor } from './types';
 import type { ColorKey, StickerKind, Tool } from './types';
@@ -262,16 +262,41 @@ export function OutlinePanel({ sections, cur, onGo, onClose }: {
 }
 
 /* ---------- Teacher notes ---------- */
-export function NotesPanel({ index, title, notes, onClose }: { index: number; title: string; notes?: ReactNode; onClose(): void }) {
+/** Narration script for the current frame (the line for the current step is highlighted), then the definitions. */
+export function NotesPanel({ index, title, notes, script, step, onClose }: {
+  index: number; title: string; notes?: ReactNode; script?: string[];
+  /** Current reveal step, or null when everything is shown (free mode). */
+  step: number | null;
+  onClose(): void;
+}) {
+  const cur = useRef<HTMLLIElement>(null);
+  const at = step === null ? -1 : Math.min(step, (script?.length ?? 1) - 1);
+  useEffect(() => { cur.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, [at, index]);
   return (
     <div className="panel panel-right">
       <div className="panel-head">
-        <span>📝 ملاحظات المدرس</span>
+        <span>🎙️ سكريبت الشرح</span>
         <button className="tb" onClick={onClose} aria-label="إغلاق"><X size={18} /></button>
       </div>
       <div className="panel-body notes-body">
         <h4>{index + 1} · {title}</h4>
-        {notes ?? <p className="muted">مفيش ملاحظات للإطار ده.</p>}
+        {script?.length ? (
+          <ol className="script">
+            {script.map((line, i) => (
+              <li key={i} ref={i === at ? cur : undefined} className={i === at ? 'cur' : at >= 0 && i < at ? 'past' : ''}>
+                <span className="st">{i === 0 ? '▶' : i.toLocaleString('ar-EG')}</span>
+                <p>{line}</p>
+              </li>
+            ))}
+          </ol>
+        ) : null}
+        {notes && (
+          <>
+            <h5>📌 للمدرس: التعريفات الدقيقة</h5>
+            {notes}
+          </>
+        )}
+        {!script?.length && !notes && <p className="muted">مفيش سكريبت للإطار ده.</p>}
       </div>
     </div>
   );
@@ -297,7 +322,7 @@ const KEYS: [string, string][] = [
   ['رجوع لأداة التحديد', 'Esc'],
   ['ملء الشاشة', 'F'],
   ['محتوى الدرس', 'G'],
-  ['ملاحظات المدرس', 'J'],
+  ['سكريبت الشرح وملاحظات المدرس', 'J'],
   ['وضع الشرح (إظهار تدريجي)', 'S'],
   ['هذه القائمة', '?'],
 ];
