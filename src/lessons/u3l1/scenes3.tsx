@@ -377,15 +377,58 @@ export const part8: FrameDef[] = [
       </Scene>
     ),
   },
-];
+  {
+    id: 'ssr-vs-csr', title: 'SSR ولا CSR؟', scene: true,
+    notes: (
+      <>
+        <p><b>السؤال:</b> مين اللي بيحط البيانات جوه الـ HTML ويبني الصفحة؟</p>
+        <p><b>SSR (Server-Side Rendering):</b> السيرفر يجيب البيانات ويحطها في القالب، ويبعت صفحة HTML <b>كاملة وجاهزة</b>. المتصفح يعرضها على طول. (ده اللي شفناه في بوابة النتائج.)</p>
+        <p><b>CSR (Client-Side Rendering):</b> السيرفر يبعت صفحة HTML شبه فاضية + ملف JavaScript. الـ JavaScript تطلب <b>البيانات بس</b> من الـ API، وتبني الصفحة <b>جوه المتصفح</b>.</p>
+        <ul>
+          <li><b>SSR:</b> الصفحة بتظهر جاهزة من أول لحظة، وسهلة على محركات البحث. أمثلة: مواقع الأخبار، صفحة نتيجة.</li>
+          <li><b>CSR:</b> أول تحميل أبطأ شوية، بس بعد كده التنقل والتفاعل سريع جدًا من غير صفحات جديدة. أمثلة: Gmail، Google Maps.</li>
+        </ul>
+        <p>مواقع كتير النهارده بتخلط الطريقتين. المهم الطالب يعرف يجاوب: البناء حصل فين؟</p>
+      </>
+    ),
+    render: () => (
+      <Scene>
+        <Heading>مين بيبني الصفحة؟ SSR ولا CSR</Heading>
+        <Line pts={[[640, 155], [646, 360], [640, 550]]} dashed sw={2} />
 
-const STAIRS = [
-  ['📄 صفحات ثابتة', 'نفس المحتوى للكل'],
-  ['🗃️ + Database', 'مين يعمل الصفحة؟'],
-  ['⚙️ + Backend (SSR)', 'الصفحة مش بتتفاعل'],
-  ['🖱️ + JavaScript', 'أي بيانات = صفحة كاملة'],
-  ['⚡ + خلفية و API', ''],
-] as const;
+        {/* SSR (right): server → full HTML → browser */}
+        <Txt x={960} y={180} size={32} c="orange" at={1}>⚙️ SSR: السيرفر يبنيها</Txt>
+        <Doodle x={960} y={260} icon="🗄️" size={80} c="orange" fill="orange" at={1} />
+        <Txt x={1120} y={260} size={22} c="orange" at={1}>قالب + بيانات</Txt>
+        <Arrow from={[960, 305]} to={[960, 385]} c="orange" at={1} delay={0.3} />
+        <Txt x={1100} y={345} size={22} c="orange" at={1} delay={0.3}>📄 HTML كامل</Txt>
+        <Browser x={830} y={395} w={260} h={105} c="orange" at={1} delay={0.6}>
+          <div style={{ fontSize: 22 }}>مريم خالد · Math: 97</div>
+        </Browser>
+        <Txt x={960} y={530} size={24} c="orange" at={1} delay={0.9}>✔ بتوصل جاهزة وتظهر على طول</Txt>
+
+        {/* CSR (left): server → empty HTML + JS, then data only → JS builds the page */}
+        <Txt x={320} y={180} size={32} c="green" at={2}>💻 CSR: المتصفح يبنيها</Txt>
+        <Doodle x={320} y={260} icon="🗄️" size={80} c="green" fill="green" at={2} />
+        <Arrow from={[355, 305]} to={[355, 385]} c="green" at={2} delay={0.3} />
+        <Txt x={480} y={330} size={22} c="green" at={2} delay={0.3}>① HTML فاضي + ⚡ JS</Txt>
+        <Browser x={190} y={395} w={260} h={105} c="green" at={2} delay={0.6}>
+          <div style={{ fontSize: 26, textAlign: 'center' }}>⏳</div>
+        </Browser>
+        <Arrow from={[285, 305]} to={[285, 385]} c="pink" at={3} />
+        <Txt x={160} y={345} size={22} c="pink" at={3}>② بيانات بس (API)</Txt>
+        <Browser x={190} y={395} w={260} h={105} c="green" at={3} delay={0.4}>
+          <div style={{ fontSize: 22 }}>مريم خالد · Math: 97</div>
+        </Browser>
+        <Txt x={320} y={530} size={24} c="green" at={3} delay={0.7}>⚡ JavaScript بنتها جوه المتصفح</Txt>
+
+        <Box x={170} y={575} w={940} h={90} c="purple" fill="purple" size={28} tc="ink" at={4}>
+          🔑 مين حط البيانات جوه الـ HTML؟ <b>السيرفر ← SSR</b> · <b>المتصفح ← CSR</b>
+        </Box>
+      </Scene>
+    ),
+  },
+];
 
 export const part10: FrameDef[] = [
   {

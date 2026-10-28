@@ -27,9 +27,6 @@ export const intro: FrameDef[] = [
         {[['📄', 'HTML'], ['🗃️', 'Database'], ['⚙️', 'Backend'], ['🖱️', 'JavaScript'], ['🔌', 'API']].map(([icon, label], i) => (
           <Doodle key={label} x={1060 - i * 200} y={540} icon={icon} size={100} label={label} lc="blue" at={1} delay={i * 0.35} />
         ))}
-        {[0, 1, 2, 3].map(i => (
-          <Arrow key={i} from={[1060 - i * 200 - 62, 540]} to={[1060 - (i + 1) * 200 + 62, 540]} bend={-14} c="orange" at={1} delay={i * 0.35 + 0.2} />
-        ))}
       </Scene>
     ),
   },
@@ -121,11 +118,6 @@ export const part1: FrameDef[] = [
           بروتوكولات وقوانين موحدة
         </Txt>
         <Txt x={260} y={495} size={26} at={3}>🚦 🤝 📦</Txt>
-
-        {/* الخلاصة والربط */}
-        <Box x={80} y={560} w={1120} h={95} c="pink" fill="pink" size={30} tc="ink" at={4}>
-          💡 <span style={{ color: 'var(--pen-red)', fontWeight: 'bold' }}>الإنترنت</span> هو شبكة الطرق والبنية التحتية… و<span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>الويب (Web)</span> مجرد خدمة واحدة شغالة فوقه!
-        </Box>
       </Scene>
     ),
   },
@@ -181,7 +173,6 @@ export const part1: FrameDef[] = [
         <Box x={120} y={570} w={1040} h={90} c="green" fill="green" size={32} tc="ink" at={3} delay={0.3}>🌍 الإنترنت: الشبكة اللي بتوصّل الأجهزة (موجودة قبل الويب)</Box>
         <Box x={700} y={450} w={420} h={80} c="blue" fill="blue" size={32} tc="ink" at={4}>🌐 الويب: خدمة على الانترنت</Box>
         <Box x={160} y={450} w={420} h={80} c="purple" fill="purple" size={32} tc="ink" at={4} delay={0.3}>✉️ الإيميل: خدمة تانية</Box>
-        <Note x={30} y={130} w={130} h={120} rot={-4} size={24} at={5}>1990 أول سيرفر<br />1991 للناس</Note>
       </Scene>
     ),
   },
