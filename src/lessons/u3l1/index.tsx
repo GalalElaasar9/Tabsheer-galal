@@ -4,6 +4,7 @@ import type { FrameDef, LessonDef } from '../../board/types';
 import { Eyebrow, Title } from '../../kit/blocks';
 import { OrderActivity, QuestionList, RevealCard, ScoredQuiz } from '../../kit/questions';
 import { APPLIED, CHECKS, DIFF, ORDERS, QUIZ } from './data';
+import { ApiStatesDemo } from './apiStatesDemo';
 import { LayersDemo, ReloadDemo, SearchDemo } from './demos';
 import { intro, part1 } from './scenes1';
 import { part2, part3, part4, part5 } from './scenes2';
@@ -109,7 +110,34 @@ const lesson: LessonDef = {
     },
     {
       title: '٨ · تمهيد للـ API',
-      frames: [...part8, order('check-7', 'رتّب خطوات الطلب في الخلفية', ORDERS.async), check('check-8', 'صح ولا غلط؟', CHECKS.api, 820)],
+      frames: [
+        ...part8.slice(0, 2),
+        {
+          id: 'api-states-demo', title: '🧪 جرّب: حالات الـ API', h: 860,
+          notes: (
+            <>
+              <p><b>حالات الـ API في تطبيقات الويب:</b> أي طلب يمر بدورة حياة من ٤ حالات أساسية:</p>
+              <ul>
+                <li><b>Idle (خامل):</b> قبل ما المستخدم يضغط، مفيش طلب في الطريق والواجهة مستقرة.</li>
+                <li><b>Pending / Loading (تحميل):</b> الطلب انطلق في الشبكة، بنعرض مؤشر انتظار أو Skeleton ونعطل الزرار علشان ميتكررش.</li>
+                <li><b>Success (نجاح 200 OK):</b> السيرفر رد بالبيانات، وJavaScript تعرضها في مكانها فورًا بدون رفرش.</li>
+                <li><b>Error (أخطاء 404 أو 500 أو شبكة):</b> لو حصلت مشكلة، لازم الواجهة توضح للمستخدم السبب بدقة (بيانات مش موجودة، ولا سيرفر واقع، ولا النت مفصول).</li>
+              </ul>
+              <p>خلّي الطلاب يجرّبوا السيناريوهات الأربعة، ويلاحظوا الفرق بين اللي بيشوفه المستخدم في المتصفح وبين كود الرد (Status Code) والـ JSON المستلم في مراقب الشبكة.</p>
+            </>
+          ),
+          render: () => (
+            <>
+              <Eyebrow>🧪 جرّب بنفسك</Eyebrow>
+              <Title>حالات الـ API: شوف الطلب بيعدّي بإيه</Title>
+              <ApiStatesDemo />
+            </>
+          ),
+        },
+        ...part8.slice(2),
+        order('check-7', 'رتّب خطوات الطلب في الخلفية', ORDERS.async),
+        check('check-8', 'صح ولا غلط؟', CHECKS.api, 820),
+      ],
     },
     { title: '٩ · الخلاصة', frames: part10 },
     {

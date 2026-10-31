@@ -25,7 +25,7 @@ export const CURRICULUM: UnitEntry[] = [
     unit: 'الفصل الثالث', title: 'الويب',
     lessons: [
       { n: 1, title: 'تطور الويب', en: 'The Evolution of the Web', icon: '🌐', board: 'u3l1' },
-      { n: 2, title: 'طرق الاتصال في تطبيقات الويب' },
+      { n: 2, title: 'طرق الاتصال في تطبيقات الويب', en: 'Communication Methods in Web Applications', icon: '📡', board: 'u3l2' },
       { n: 3, title: 'أساسيات تكنولوجيا الواجهة الأمامية' },
     ],
   },
