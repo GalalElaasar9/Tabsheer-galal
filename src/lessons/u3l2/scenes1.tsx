@@ -51,7 +51,7 @@ export const intro: FrameDef[] = [
         <Line at={1} c="ink" sw={3} dashed pts={[...STOP_PTS.slice(0, 4), [150, 460], ...STOP_PTS.slice(4)]} />
         {STOP_PTS.map(([x, y], i) => (
           <span key={i} className="contents">
-            <Num at={1} delay={i * 0.12} x={x} y={y} size={50} n={i + 1} c="purple" fill="purple" />
+            <Num at={1} delay={i * 0.12} x={x} y={y} n={i + 1} c="purple" />
             <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={21}>{STOPS[i]}</Txt>
           </span>
         ))}

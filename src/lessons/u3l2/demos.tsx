@@ -223,9 +223,10 @@ export function GetInteractiveDemo() {
   const [subjectFilter, setSubjectFilter] = useState('الكل');
   const [isSearching, setIsSearching] = useState(false);
 
-  const doSearch = (q: string, filter: string) => {
+  const doSearch = (q: string, filter?: string) => {
     setIsSearching(true);
     setActiveQuery(q);
+    if (filter) setSubjectFilter(filter);
     setTimeout(() => {
       setIsSearching(false);
     }, 450);
