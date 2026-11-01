@@ -75,22 +75,22 @@ export const intro: FrameDef[] = [
         <Heading sub="الأساس المعماري لتبادل البيانات في الويب">نموذج العميل والخادم (Client-Server Model)</Heading>
 
         {/* Client side (Right) */}
-        <Box x={820} y={170} w={380} h={355} c="blue" at={1} />
-        <Doodle x={1010} y={230} icon="💻" size={80} c="blue" fill="blue" at={1} />
-        <Txt x={1010} y={295} size={32} c="blue" at={1}>العميل (Client)</Txt>
-        <Txt x={1010} y={350} w={340} size={21} c="ink" at={1}>
+        <Box x={820} y={165} w={380} h={365} c="blue" at={1} />
+        <Doodle x={1010} y={225} icon="💻" size={75} c="blue" fill="blue" at={1} />
+        <Txt x={1010} y={285} size={32} c="blue" at={1}>العميل (Client)</Txt>
+        <Txt x={1010} y={375} w={350} size={19} c="ink" at={1}>
           📖 <b>تعريف كتاب المدرسة:</b> الجهاز أو البرنامج (كالمتصفح) الذي يبدأ بطلب الخدمة أو المورد من الخادم ويرسل HTTP Request.
         </Txt>
-        <Txt x={1010} y={485} size={23} c="pink" at={1}>👉 هو الطرف الذي يبدأ بالطلب دائماً</Txt>
+        <Txt x={1010} y={490} size={22} c="pink" at={1}>👉 هو الطرف الذي يبدأ بالطلب دائماً</Txt>
 
         {/* Server side (Left) */}
-        <Box x={80} y={170} w={380} h={355} c="orange" at={2} />
-        <Doodle x={270} y={230} icon="🗄️" size={80} c="orange" fill="orange" at={2} />
-        <Txt x={270} y={295} size={32} c="orange" at={2}>الخادم (Server)</Txt>
-        <Txt x={270} y={350} w={340} size={21} c="ink" at={2}>
+        <Box x={80} y={165} w={380} h={365} c="orange" at={2} />
+        <Doodle x={270} y={225} icon="🗄️" size={75} c="orange" fill="orange" at={2} />
+        <Txt x={270} y={285} size={32} c="orange" at={2}>الخادم (Server)</Txt>
+        <Txt x={270} y={375} w={350} size={19} c="ink" at={2}>
           📖 <b>تعريف كتاب المدرسة:</b> حاسوب مركزي متصل دائماً بالشبكة، يمتلك موارد وخدمات، يستقبل طلبات العملاء ويعالجها ويرسل HTTP Response.
         </Txt>
-        <Txt x={270} y={485} size={23} c="green" at={2}>👈 يعالج الطلب ويرد بالاستجابة</Txt>
+        <Txt x={270} y={490} size={22} c="green" at={2}>👈 يعالج الطلب ويرد بالاستجابة</Txt>
 
         {/* The Connection Between them */}
         <Arrow from={[820, 290]} to={[470, 290]} c="purple" at={3} />

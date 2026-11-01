@@ -7,39 +7,153 @@ export const part2: FrameDef[] = [
     id: 'methods-why', title: 'أساليب طلب البيانات (HTTP Methods)', scene: true,
     notes: (
       <>
-        <p><b>أسلوب الطلب (HTTP Request Method):</b> وسيلة لتحديد نوع العملية أو الإجراء المطلوب تنفيذه على الخادم بواسطة العميل.</p>
-        <p>الطلب مش مجرد اتصال عادي، لازم نحدد النية وفقاً لمنهاج كتاب المدرسة:</p>
+        <p><b>أساليب طلب البيانات (HTTP Request Methods) وأمثلتها الفعلية:</b></p>
         <ul>
-          <li>عايز <b>أقرأ أو أسترجع</b> بيانات من الخادم دون تعديل؟ $\leftarrow$ نستخدم <b>GET</b>.</li>
-          <li>عايز <b>أرسل بيانات جديدة</b> للخادم يعالجها أو يخزنها (زي تسجيل دخول أو إضافة مستخدم)؟ $\leftarrow$ نستخدم <b>POST</b>.</li>
+          <li><b>أسلوب GET (قراءة واسترجاع):</b> مثل الاستعلام عن درجات طالب (<code>GET /students/2402</code>) أو قراءة مقال؛ الخادم يقرأ ويرد دون أي تعديل بقاعدة البيانات.</li>
+          <li><b>أسلوب POST (إرسال وتخزين):</b> مثل استمارة تسجيل طالب جديد (<code>POST /students</code>) أو تسجيل الدخول؛ الخادم يستقبل البيانات ويعالجها ويحفظ سجلاً جديداً بقاعدة البيانات.</li>
         </ul>
+        <p><b>القاعدة الامتحانية:</b> GET للقراءة فقط، و POST للكتابة والتخزين والمعالجة.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading sub="تحديد نوع العملية المراد تنفيذها على الخادم">أساليب طلب البيانات (HTTP Methods)</Heading>
+        <Heading>أساليب طلب البيانات (HTTP Methods)</Heading>
 
-        <Box x={80} y={145} w={1120} h={95} c="purple" fill="purple" size={24} tc="ink">
-          📖 <b>تعريف أسلوب الطلب (HTTP Request Method):</b> وسيلة لتحديد نوع العملية أو الإجراء المطلوب تنفيذه على الخادم بواسطة العميل (مثل الاسترجاع أو الإرسال).
-        </Box>
+        {/* Top Definition Banner */}
+        <Place x={80} y={110} w={1120} h={66} at={1}>
+          <div className="flex items-center justify-between px-4 py-2.5 rounded-2xl border shadow-md" style={{ background: '#0b101e', borderColor: '#26304a', color: '#e2e8f0' }}>
+            <div className="flex items-center gap-3">
+              <span className="pill text-xs font-bold" style={{ background: '#251b45', color: '#c4b5fd', borderColor: '#4c1d95' }}>📖 تعريف كتاب المدرسة</span>
+              <span className="text-sm font-bold text-slate-100">
+                <b>أسلوب الطلب (HTTP Request Method):</b> وسيلة لتحديد نوع العملية أو الإجراء المطلوب تنفيذه على الخادم بواسطة العميل (مثل الاسترجاع أو الإرسال).
+              </span>
+            </div>
+            <span className="pill text-xs font-mono font-bold" style={{ background: '#13233a', color: '#7dd3fc', borderColor: '#0369a1' }}>GET & POST</span>
+          </div>
+        </Place>
 
-        {/* GET Box */}
-        <Box x={660} y={255} w={500} h={270} c="blue" at={1} />
-        <Doodle x={910} y={305} icon="🔍" size={75} c="blue" fill="blue" at={1} />
-        <Txt x={910} y={370} size={34} c="blue" at={1}>أسلوب GET</Txt>
-        <Txt x={910} y={425} w={450} size={21} c="ink" at={1}>📖 <b>تعريف كتاب المدرسة:</b> أسلوب طلب لجلب واسترجاع (قراءة) البيانات من الخادم دون تعديلها.</Txt>
-        <Txt x={910} y={480} w={450} size={21} c="ink" at={1}>• يُستخدم لقراءة واستعراض صفحات الويب وملفات الموقع</Txt>
+        {/* Right Card: GET Method with real practical examples */}
+        <Place x={650} y={190} w={550} h={390} at={2}>
+          <div className="p-3.5 rounded-2xl border h-full flex flex-col justify-between shadow-lg" style={{ background: '#0a1122', borderColor: '#1d4ed8' }}>
+            <div>
+              {/* Header */}
+              <div className="flex items-center justify-between mb-2 border-b pb-2" style={{ borderColor: '#1e293b' }}>
+                <span className="font-extrabold text-base text-cyan-300 flex items-center gap-2">
+                  <span className="text-lg">🔍</span> <span>أسلوب GET (جلب واسترجاع)</span>
+                </span>
+                <span className="pill text-[11px] font-bold" style={{ background: '#0c2838', color: '#38bdf8', borderColor: '#0284c7' }}>قراءة فقط · Safe</span>
+              </div>
 
-        {/* POST Box */}
-        <Box x={120} y={255} w={500} h={270} c="orange" at={2} />
-        <Doodle x={370} y={305} icon="📤" size={75} c="orange" fill="orange" at={2} />
-        <Txt x={370} y={370} size={34} c="orange" at={2}>أسلوب POST</Txt>
-        <Txt x={370} y={425} w={450} size={21} c="ink" at={2}>📖 <b>تعريف كتاب المدرسة:</b> أسلوب طلب لإرسال البيانات إلى الخادم لمعالجتها أو تخزينها.</Txt>
-        <Txt x={370} y={480} w={450} size={21} c="ink" at={2}>• يُستخدم لإرسال الاستمارات وتسجيل الدخول وحفظ البيانات</Txt>
+              {/* Textbook Definition */}
+              <div className="p-2.5 rounded-xl text-xs leading-relaxed mb-2.5" style={{ background: '#0f1f38', border: '1px solid #1e3a8a' }}>
+                <span className="font-bold text-sky-300">📖 التعريف الوزاري:</span>{' '}
+                <span className="text-slate-200">أسلوب طلب يُستخدم لجلب واسترجاع (قراءة) البيانات والموارد من الخادم دون إجراء أي تعديل عليها.</span>
+              </div>
 
-        <Box x={120} y={545} w={1040} h={95} c="green" fill="green" size={27} tc="ink" at={3}>
-          💡 قاعدة ذهبية للامتحان: <span style={{ fontWeight: 'bold' }}>GET للقراءة والاسترجاع · POST للإرسال والمعالجة والتخزين</span>
-        </Box>
+              {/* Real Practical Examples */}
+              <div className="text-xs font-bold text-sky-200 mb-1.5 flex items-center gap-1.5">
+                <span>💡</span> <span>أمثلة تطبيقية فعلية من واقع الويب:</span>
+              </div>
+
+              <div className="space-y-2 text-xs">
+                {/* Example 1 */}
+                <div className="p-2.5 rounded-xl border" style={{ background: '#09152b', borderColor: '#1e2e4f' }}>
+                  <div className="flex items-center justify-between font-bold text-[12px] mb-1">
+                    <span className="text-cyan-300 font-bold">١. استعلام عن درجات طالب بالامتحان:</span>
+                    <code className="text-sky-300 font-mono text-[11px] px-1.5 py-0.5 rounded" style={{ background: '#061021' }} dir="ltr">GET /students/2402</code>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    المتصفح يطلب بيانات الطالب «مريم»، فيقوم الخادم بالاستعلام في قاعدة البيانات وإرجاع درجاتها دون أن يغيّر أو يمسح أي حرف.
+                  </p>
+                </div>
+
+                {/* Example 2 */}
+                <div className="p-2.5 rounded-xl border" style={{ background: '#09152b', borderColor: '#1e2e4f' }}>
+                  <div className="flex items-center justify-between font-bold text-[12px] mb-1">
+                    <span className="text-cyan-300 font-bold">٢. تصفح صفحة ويب أو قراءة مقال:</span>
+                    <code className="text-sky-300 font-mono text-[11px] px-1.5 py-0.5 rounded" style={{ background: '#061021' }} dir="ltr">GET /news/article-5</code>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    تحميل مستند HTML وقراءته؛ الخادم يرسل الصفحة للعرض فقط دون إضافة أي سجل جديد.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom impact tag */}
+            <div className="text-[11px] p-2 rounded-xl font-bold flex items-center gap-1.5" style={{ background: '#06281e', border: '1px solid #059669', color: '#6ee7b7' }}>
+              <span>🛡️ أثر العملية على الخادم:</span> <span>قراءة واسترجاع فقط · لا تعديل أو مسح في قاعدة البيانات.</span>
+            </div>
+          </div>
+        </Place>
+
+        {/* Left Card: POST Method with real practical examples */}
+        <Place x={80} y={190} w={550} h={390} at={2}>
+          <div className="p-3.5 rounded-2xl border h-full flex flex-col justify-between shadow-lg" style={{ background: '#130d22', borderColor: '#7c3aed' }}>
+            <div>
+              {/* Header */}
+              <div className="flex items-center justify-between mb-2 border-b pb-2" style={{ borderColor: '#271946' }}>
+                <span className="font-extrabold text-base text-purple-300 flex items-center gap-2">
+                  <span className="text-lg">📤</span> <span>أسلوب POST (إرسال وتخزين)</span>
+                </span>
+                <span className="pill text-[11px] font-bold" style={{ background: '#2c124d', color: '#c084fc', borderColor: '#6b21a8' }}>كتابة ومعالجة · Action</span>
+              </div>
+
+              {/* Textbook Definition */}
+              <div className="p-2.5 rounded-xl text-xs leading-relaxed mb-2.5" style={{ background: '#21133c', border: '1px solid #581c87' }}>
+                <span className="font-bold text-purple-300">📖 التعريف الوزاري:</span>{' '}
+                <span className="text-slate-200">أسلوب طلب يُستخدم لإرسال بيانات جديدة إلى الخادم لمعالجتها أو تخزينها في قاعدة البيانات.</span>
+              </div>
+
+              {/* Real Practical Examples */}
+              <div className="text-xs font-bold text-purple-200 mb-1.5 flex items-center gap-1.5">
+                <span>💡</span> <span>أمثلة تطبيقية فعلية من واقع الويب:</span>
+              </div>
+
+              <div className="space-y-2 text-xs">
+                {/* Example 1 */}
+                <div className="p-2.5 rounded-xl border" style={{ background: '#1c1133', borderColor: '#3b1d6e' }}>
+                  <div className="flex items-center justify-between font-bold text-[12px] mb-1">
+                    <span className="text-purple-300 font-bold">١. استمارة تسجيل طالب جديد بالجامعة:</span>
+                    <code className="text-purple-300 font-mono text-[11px] px-1.5 py-0.5 rounded" style={{ background: '#0e081c' }} dir="ltr">POST /students</code>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    الطالب يملأ بياناته وكلمة السر، فيقوم الخادم باستلامها، التحقق منها، وإنشاء سجل جديد دائم داخل جدول الطلاب.
+                  </p>
+                </div>
+
+                {/* Example 2 */}
+                <div className="p-2.5 rounded-xl border" style={{ background: '#1c1133', borderColor: '#3b1d6e' }}>
+                  <div className="flex items-center justify-between font-bold text-[12px] mb-1">
+                    <span className="text-purple-300 font-bold">٢. تسجيل الدخول أو إرسال استمارة طلب:</span>
+                    <code className="text-purple-300 font-mono text-[11px] px-1.5 py-0.5 rounded" style={{ background: '#0e081c' }} dir="ltr">POST /auth/login</code>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    إرسال اسم المستخدم وكلمة المرور الحساسة في جسم الطلب (Body) مشفرة لمعالجتها وفتح جلسة مستخدم آمنة.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom impact tag */}
+            <div className="text-[11px] p-2 rounded-xl font-bold flex items-center gap-1.5" style={{ background: '#28133f', border: '1px solid #7c3aed', color: '#d8b4fe' }}>
+              <span>💾 أثر العملية على الخادم:</span> <span>تخزين سجل جديد ومعالجة وحفظ بيانات دائمة في السيرفر.</span>
+            </div>
+          </div>
+        </Place>
+
+        {/* Bottom Banner */}
+        <Place x={80} y={596} w={1120} h={64} at={3}>
+          <div className="flex items-center justify-between px-5 py-3 rounded-2xl border shadow-lg" style={{ background: '#081c16', borderColor: '#059669', color: '#a7f3d0' }}>
+            <div className="flex items-center gap-3">
+              <span className="text-lg">💡</span>
+              <span className="text-sm font-bold text-emerald-200">
+                <b>قاعدة ذهبية للامتحان:</b> أسلوب <b>GET</b> لجلب وقراءة واسترجاع البيانات دون تعديل · أسلوب <b>POST</b> لإرسال ومعالجة وتخزين بيانات جديدة!
+              </span>
+            </div>
+            <span className="pill text-xs font-bold" style={{ background: '#043525', color: '#34d399', borderColor: '#059669' }}>سؤال مؤكد</span>
+          </div>
+        </Place>
       </Scene>
     ),
   },
@@ -305,29 +419,29 @@ export const part3: FrameDef[] = [
         {/* 200 OK (Right) */}
         <Box x={840} y={165} w={360} h={365} c="green" at={1} />
         <Doodle x={1020} y={225} icon="🟢" size={70} at={1} />
-        <Txt x={1020} y={290} size={34} c="green" at={1}>200 OK</Txt>
-        <Txt x={1020} y={350} w={320} size={21} c="ink" at={1}>
+        <Txt x={1020} y={285} size={34} c="green" at={1}>200 OK</Txt>
+        <Txt x={1020} y={375} w={330} size={19} c="ink" at={1}>
           📖 <b>تعريف كتاب المدرسة:</b> رمز النجاح التام؛ استلم الخادم الطلب وعالجه بنجاح وأعاد البيانات المطلوبة للمتصفح.
         </Txt>
-        <Txt x={1020} y={485} size={24} c="green" at={1}>✅ نجاح تام (Success)</Txt>
+        <Txt x={1020} y={490} size={23} c="green" at={1}>✅ نجاح تام (Success)</Txt>
 
         {/* 404 Not Found (Center) */}
         <Box x={460} y={165} w={360} h={365} c="orange" at={2} />
         <Doodle x={640} y={225} icon="🟡" size={70} at={2} />
-        <Txt x={640} y={290} size={34} c="orange" at={2}>404 Not Found</Txt>
-        <Txt x={640} y={350} w={320} size={21} c="ink" at={2}>
+        <Txt x={640} y={285} size={34} c="orange" at={2}>404 Not Found</Txt>
+        <Txt x={640} y={375} w={330} size={19} c="ink" at={2}>
           📖 <b>تعريف كتاب المدرسة:</b> خطأ من جانب العميل؛ الخادم سليم ومتصل ولكنه لم يعثر على الصفحة أو المورد المطلوب.
         </Txt>
-        <Txt x={640} y={485} size={24} c="orange" at={2}>⚠️ خطأ عميل (Client Error)</Txt>
+        <Txt x={640} y={490} size={23} c="orange" at={2}>⚠️ خطأ عميل (Client Error)</Txt>
 
         {/* 500 Server Error (Left) */}
         <Box x={80} y={165} w={360} h={365} c="red" at={3} />
         <Doodle x={260} y={225} icon="🔴" size={70} at={3} />
-        <Txt x={260} y={290} size={34} c="red" at={3}>500 Server Error</Txt>
-        <Txt x={260} y={350} w={320} size={21} c="ink" at={3}>
+        <Txt x={260} y={285} size={34} c="red" at={3}>500 Server Error</Txt>
+        <Txt x={260} y={375} w={330} size={19} c="ink" at={3}>
           📖 <b>تعريف كتاب المدرسة:</b> عطل من جانب الخادم؛ حدث خلل تقني داخلي أو انهيار برمجي بالخادم منعه من معالجة الطلب.
         </Txt>
-        <Txt x={260} y={485} size={24} c="red" at={3}>💥 عطل خادم (Server Error)</Txt>
+        <Txt x={260} y={490} size={23} c="red" at={3}>💥 عطل خادم (Server Error)</Txt>
 
         <Box x={80} y={545} w={1120} h={105} c="purple" fill="purple" size={23} tc="ink" at={4}>
           📖 <b>تعريف رموز الحالة (HTTP Status Codes):</b> رموز رقمية قياسية ثلاثية الخانات يُرجعها الخادم في سطر الحالة لبيان نتيجة معالجة الطلب: 200 نجاح · 404 العنوان مش موجود (السيرفر سليم) · 500 السيرفر نفسه انهار!

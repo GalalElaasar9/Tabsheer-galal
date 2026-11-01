@@ -14,7 +14,7 @@
   line-height: 1.35;
   white-space: nowrap;
 }
-.hand.sk-center, .sk-in .hand { white-space: normal; }
+.hand.sk-center, .sk-in .hand, .hand[style*="width"] { white-space: normal; }
 .sk-clean { position: absolute; font-family: var(--font); font-weight: 800; line-height: 1.5; }
 .sk-center {
   display: flex;

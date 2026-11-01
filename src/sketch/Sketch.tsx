@@ -60,7 +60,9 @@ export function Txt({ x, y, size = 34, c = 'ink', w, align = 'center', clean, at
   return (
     <Layer at={at} delay={delay}>
       <div className={clean ? 'sk-clean' : 'hand'} style={{
-        left: x, top: y, width: w, fontSize: size, color: ink(c), textAlign: align, transform: `translate(${tx}, -50%)`, ...style,
+        left: x, top: y, width: w, fontSize: size, color: ink(c), textAlign: align, transform: `translate(${tx}, -50%)`,
+        whiteSpace: w ? 'normal' : undefined,
+        ...style,
       }}>{children}</div>
     </Layer>
   );
