@@ -23,10 +23,25 @@ function Form({ x, title, c, styled, js, at }: { x: number; title: string; c: Co
 }
 
 const portal = (result?: string) => (
-  <div style={{ fontSize: 24 }}>
-    <div style={{ color: 'var(--pen-purple)' }}>🎓 بوابة الطلاب · الرئيسية · نتائجي</div>
-    <div style={{ marginTop: 8 }}>🔍 بحث: 2403</div>
-    <div style={{ marginTop: 10, minHeight: 60, border: '2px dashed var(--pen-pink)', borderRadius: 8, padding: '4px 10px' }}>{result ?? 'النتيجة هنا'}</div>
+  <div style={{ fontSize: 22, lineHeight: 1.5, textAlign: 'center', paddingTop: 4 }}>
+    <div style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>🎓 بوابة الطلاب · الرئيسية · نتائجي</div>
+    <div style={{ marginTop: 8, fontSize: 20, color: 'var(--pen-ink)' }}>🔍 بحث: <b>2403</b></div>
+    <div style={{
+      marginTop: 10,
+      minHeight: 52,
+      border: '2px dashed var(--pen-pink)',
+      borderRadius: 10,
+      padding: '6px 14px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontWeight: 800,
+      fontSize: 22,
+      background: 'var(--tint-pink)',
+      lineHeight: 1.4,
+    }}>
+      {result ?? 'النتيجة هنا'}
+    </div>
   </div>
 );
 
@@ -223,7 +238,7 @@ export const part7: FrameDef[] = [
         <Txt x={880} y={500} size={32} c="purple" at={2} delay={0.4}>دلوقتي: قاعد بالساعات · مئات الضغطات</Txt>
         <Doodle x={330} y={300} icon="🖱️" size={130} c="purple" fill="purple" at={2} delay={0.6} />
         <Txt x={330} y={420} size={44} c="purple" at={2} delay={0.8}>× 100</Txt>
-        <Note x={160} y={520} w={420} h={130} rot={-2} color="pink" size={28} at={3}>ولو كل ضغطة<br />بتحمّل الصفحة كلها؟ 😩</Note>
+        <Note x={150} y={515} w={440} h={140} rot={-2} color="pink" size={27} at={3}>ولو كل ضغطة<br />بتحمّل الصفحة كلها؟ 😩</Note>
       </Scene>
     ),
   },
@@ -244,8 +259,8 @@ export const part7: FrameDef[] = [
         <Line pts={[[790, 210], [990, 330], [1190, 450]]} c="red" sw={5} at={3} />
         <Line pts={[[1190, 210], [990, 330], [790, 450]]} c="red" sw={5} at={3} delay={0.3} />
         <Txt x={990} y={500} size={30} c="red" at={3} delay={0.5}>الهيدر والقوائم اتعادوا على الفاضي</Txt>
-        <Mark x={150} y={330} w={400} h={110} c="green" at={4} />
-        <Note x={360} y={540} w={560} h={120} rot={1.5} color="green" size={30} at={4} delay={0.4}>💡 الفكرة: نجيب البيانات الناقصة بس… ونحطها في مكانها</Note>
+        <Mark x={150} y={332} w={400} h={76} c="green" at={4} />
+        <Note x={340} y={535} w={600} h={130} rot={1.5} color="green" size={28} at={4} delay={0.4}>💡 الفكرة: نجيب البيانات الناقصة بس… ونحطها في مكانها</Note>
       </Scene>
     ),
   },
@@ -272,18 +287,17 @@ export const part7: FrameDef[] = [
         <Doodle x={180} y={290} icon="⚙️" size={130} c="orange" label="السيرفر" lc="orange" />
         <Cylinder x={130} y={500} w={100} h={110} label="DB" />
         {/* <Mark x={715} y={268} w={230} h={56} c="red" at={1} /> */}
-        <Txt x={640} y={300} size={30} c="red" at={1} delay={0.3}>① بحث</Txt>
+        <Txt x={640} y={285} size={30} c="red" at={1} delay={0.3}>① بحث</Txt>
         <Arrow from={[620, 520]} to={[260, 330]} c="blue" bend={-20} at={2} />
-        <Txt x={470} y={330} size={28} c="blue" at={2} delay={0.4}>② طلب صغير في الخلفية</Txt>
-        {/* <Txt x={950} y={540} size={28} c="green" at={2} delay={0.6}>الصفحة لسه شغالة ✔</Txt> */}
+        <Txt x={450} y={350} size={28} c="blue" at={2} delay={0.4}>② طلب صغير في الخلفية</Txt>
         <Arrow from={[180, 415]} to={[180, 495]} c="green" both at={3} />
         <Txt x={340} y={470} size={28} c="orange" at={3} delay={0.3}>③ يعالج ويسأل الـ DB</Txt>
         <Arrow from={[260, 260]} to={[690, 380]} c="pink" bend={-40} at={4} />
-        <Txt x={460} y={205} size={28} c="pink" at={4} delay={0.4}>④ بيانات بس: الاسم + الدرجات</Txt>
+        <Txt x={460} y={195} size={28} c="pink" at={4} delay={0.4}>④ بيانات بس: الاسم + الدرجات</Txt>
         <Browser x={700} y={190} w={500} h={300} c="blue" at={5}>{portal('يوسف عادل · 74 · 80 · 86 ✨')}</Browser>
-        <Mark x={700} y={300} w={500} h={110} c="green" at={5} delay={0.5} />
-        <Txt x={950} y={520} size={30} c="green" at={5} delay={0.8}>⑤ JavaScript حدّثت الجزء ده بس</Txt>
-        <Note x={760} y={575} w={440} h={95} rot={-1.5} color="pink" size={28} at={6}>🤔 بس JavaScript عرفت منين تطلب إزاي؟</Note>
+        <Mark x={710} y={322} w={480} h={76} c="green" at={5} delay={0.5} />
+        <Txt x={950} y={520} size={28} c="green" at={5} delay={0.8}>⑤ JavaScript حدّثت الجزء ده بس</Txt>
+        <Note x={730} y={565} w={480} h={110} rot={-1.5} color="pink" size={26} at={6}>🤔 بس JavaScript عرفت منين تطلب إزاي؟</Note>
       </Scene>
     ),
   },

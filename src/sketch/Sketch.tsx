@@ -62,6 +62,7 @@ export function Txt({ x, y, size = 34, c = 'ink', w, align = 'center', clean, at
       <div className={clean ? 'sk-clean' : 'hand'} style={{
         left: x, top: y, width: w, fontSize: size, color: ink(c), textAlign: align, transform: `translate(${tx}, -50%)`,
         whiteSpace: w ? 'normal' : undefined,
+        lineHeight: 1.65,
         ...style,
       }}>{children}</div>
     </Layer>
@@ -71,14 +72,60 @@ export function Txt({ x, y, size = 34, c = 'ink', w, align = 'center', clean, at
 /** Frame heading, top-right, with a hand-drawn underline. */
 export function Heading({ children, sub, c = 'ink', u = 'blue' }: { children: ReactNode; sub?: ReactNode; c?: C; u?: C }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [w, setW] = useState(0);
-  useLayoutEffect(() => { if (ref.current) setW(ref.current.offsetWidth); }, [children]);
-  const line = useMemo(() => (w ? [gen.curve([[1225, 104], [1225 - w * 0.5, 110], [1225 - w, 103]], opts(u, 3.5, seedOf('h', w)))] : []), [w, u]);
+  const [dims, setDims] = useState({ w: 0, h: 0 });
+  useLayoutEffect(() => {
+    if (ref.current) {
+      setDims({ w: ref.current.offsetWidth, h: ref.current.offsetHeight });
+    }
+  }, [children]);
+
+  // Determine optimal font size based on text length to prevent overflow
+  const strLen = typeof children === 'string' ? children.length : 30;
+  const titleSize = strLen > 45 ? 28 : strLen > 34 ? 32 : strLen > 24 ? 38 : 42;
+  const lineW = Math.min(dims.w || 300, 930);
+  const lineY = Math.min(130, 22 + (dims.h || 46) + 6);
+
+  const line = useMemo(() => (
+    lineW > 0 ? [gen.curve([[1225, lineY], [1225 - lineW * 0.5, lineY + 6], [1225 - lineW, lineY - 1]], opts(u, 3.2, seedOf('h', lineW)))] : []
+  ), [lineW, lineY, u]);
+
   return (
     <div className="sk">
-      <div ref={ref} className="hand" style={{ right: 55, top: 22, fontSize: 56, color: ink(c), lineHeight: 1.3 }}>{children}</div>
+      <div
+        ref={ref}
+        className="hand"
+        style={{
+          right: 55,
+          top: 22,
+          maxWidth: 930,
+          fontSize: titleSize,
+          color: ink(c),
+          lineHeight: 1.35,
+          whiteSpace: 'normal',
+          textAlign: 'right',
+        }}
+      >
+        {children}
+      </div>
       {line.length > 0 && <Ink drawables={line} />}
-      {sub && <div className="hand" style={{ right: 58, top: 118, fontSize: 28, color: ink('ink'), opacity: 0.65 }}>{sub}</div>}
+      {sub && (
+        <div
+          className="hand"
+          style={{
+            right: 58,
+            top: lineY + 10,
+            maxWidth: 930,
+            fontSize: 20,
+            color: ink('ink'),
+            opacity: 0.7,
+            whiteSpace: 'normal',
+            lineHeight: 1.4,
+            textAlign: 'right',
+          }}
+        >
+          {sub}
+        </div>
+      )}
     </div>
   );
 }
@@ -98,7 +145,7 @@ export function Box({ x, y, w, h, c = 'ink', fill, hachure, sw = 2.6, size = 32,
     <Layer at={at} delay={delay}>
       <Ink drawables={d} delay={delay} />
       {children !== undefined && (
-        <div className="hand sk-center" style={{ left: x, top: y, width: w, height: h, fontSize: size, color: ink(tc ?? c) }}><div>{children}</div></div>
+        <div className="hand sk-center" style={{ left: x, top: y, width: w, height: h, fontSize: size, color: ink(tc ?? c), lineHeight: 1.6 }}><div>{children}</div></div>
       )}
     </Layer>
   );
@@ -168,6 +215,12 @@ export function Arrow({ from, to, c = 'ink', bend = 0, sw = 2.8, dashed, both, l
         <div className="hand" style={{
           left: mx + nx * loff * Math.sign(bend || 1), top: my + ny * loff * Math.sign(bend || 1),
           fontSize: lsize, color: ink(lc ?? c), transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap',
+          background: 'var(--surface)',
+          padding: '3px 12px',
+          borderRadius: 10,
+          border: `1.5px solid ${ink(lc ?? c)}44`,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+          zIndex: 5,
         }}>{label}</div>
       )}
     </Layer>
@@ -202,12 +255,12 @@ export function Num({ x, y, n, c = 'red', at, delay }: Base & { x: number; y: nu
 }
 
 /** Sticky note, slightly tilted. */
-export function Note({ x, y, w, h, color = 'yellow', rot = -2, size = 30, at, delay, children }: Base & {
-  x: number; y: number; w: number; h: number; color?: C; rot?: number; size?: number; children: ReactNode;
+export function Note({ x, y, w, h, color = 'yellow', rot = -2, size = 30, at, delay, children, style }: Base & {
+  x: number; y: number; w: number; h: number; color?: C; rot?: number; size?: number; children: ReactNode; style?: CSSProperties;
 }) {
   return (
     <Layer at={at} delay={delay}>
-      <div className="hand sk-note" style={{ left: x, top: y, width: w, height: h, fontSize: size, background: `var(--note-${color})`, transform: `rotate(${rot}deg)` }}>
+      <div className="hand sk-note" style={{ left: x, top: y, width: w, height: h, fontSize: size, background: `var(--note-${color})`, transform: `rotate(${rot}deg)`, lineHeight: 1.65, ...style }}>
         <div>{children}</div>
       </div>
     </Layer>
@@ -229,7 +282,7 @@ export function Paper({ x, y, w, h, c = 'ink', label, children, at, delay, size 
     <Layer at={at} delay={delay}>
       <Ink drawables={d} delay={delay} />
       {label && <div className="hand" style={{ left: x + w / 2, top: y - 24, fontSize: 26, color: ink(c), transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap' }}>{label}</div>}
-      {children && <div className="sk-in" style={{ left: x + 14, top: y + 14, width: w - 28, height: h - 28, fontSize: size, paddingTop: Math.min(36, w * 0.2) * 0.6 }}>{children}</div>}
+      {children && <div className="sk-in" style={{ left: x + 14, top: y + 14, width: w - 28, height: h - 28, fontSize: size, paddingTop: Math.min(36, w * 0.2) * 0.6, lineHeight: 1.65 }}>{children}</div>}
     </Layer>
   );
 }
@@ -248,7 +301,7 @@ export function Browser({ x, y, w, h, url, c = 'blue', children, at, delay, size
     <Layer at={at} delay={delay}>
       <Ink drawables={d} delay={delay} />
       {url && <div className="sk-url" style={{ left: x + 94, top: y + 22, maxWidth: w - 116 }}>{url}</div>}
-      {children && <div className="sk-in" style={{ left: x + 16, top: y + 56, width: w - 32, height: h - 68, fontSize: size }}>{children}</div>}
+      {children && <div className="sk-in" style={{ left: x + 16, top: y + 56, width: w - 32, height: h - 68, fontSize: size, lineHeight: 1.65 }}>{children}</div>}
     </Layer>
   );
 }

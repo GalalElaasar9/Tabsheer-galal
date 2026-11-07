@@ -27,8 +27,8 @@
   background: var(--safe-soft);
   color: var(--safe);
 }
-.title { font-size: 2.35rem; font-weight: 900; line-height: 1.35; margin-top: .6rem; }
-.title-xl { font-size: 3.8rem; font-weight: 900; line-height: 1.25; }
+.title { font-size: 2.05rem; font-weight: 900; line-height: 1.35; margin-top: .5rem; max-width: 100%; word-break: break-word; }
+.title-xl { font-size: 3.1rem; font-weight: 900; line-height: 1.25; max-width: 100%; word-break: break-word; }
 .lead { font-size: 1.25rem; color: var(--muted); margin-top: .4rem; }
 .h3 { font-size: 1.35rem; font-weight: 900; }
 .muted { color: var(--muted); }
@@ -46,6 +46,7 @@
   border: 1px solid var(--border);
   border-radius: 1.1rem;
   padding: 1.1rem 1.25rem;
+  line-height: 1.65;
   box-shadow: var(--shadow);
 }
 .def {
@@ -55,6 +56,7 @@
   border-radius: 1rem;
   padding: 1rem 1.25rem;
   font-size: 1.25rem;
+  line-height: 1.65;
   box-shadow: var(--shadow);
 }
 .def-label { display: block; font-size: .85rem; font-weight: 900; color: var(--c, var(--primary)); margin-bottom: .15rem; }
@@ -67,6 +69,7 @@
   padding: .85rem 1.1rem;
   font-weight: 600;
   font-size: 1.12rem;
+  line-height: 1.65;
 }
 .callout .ico { font-size: 1.5rem; line-height: 1.4; flex-shrink: 0; }
 .c-info { background: var(--info-soft); } .c-info b { color: var(--info); }
@@ -308,17 +311,17 @@
 .site { border-radius: .9rem; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
 .site-head { display: flex; justify-content: space-between; align-items: center; padding: .45rem .9rem; background: var(--primary-soft); color: var(--primary); font-weight: 900; }
 .site-body { padding: .8rem .9rem; display: grid; gap: .6rem; }
-.site-box { padding: .6rem .8rem; border-radius: .8rem; background: var(--surface-2); min-height: 4.5rem; transition: background .3s, box-shadow .3s; }
+.site-box { padding: .6rem .8rem; border-radius: .8rem; background: var(--surface-2); min-height: 4.5rem; line-height: 1.6; transition: background .3s, box-shadow .3s; }
 .site-box.flashed { background: var(--pink-soft); box-shadow: 0 0 0 3px var(--pink); }
 .site.reloading { animation: blank .7s ease; }
 /* Results portal (search demo) */
 .portal-page { padding: .2rem 1rem 1rem; min-height: 15rem; }
 .portal-title { color: var(--primary); font-size: 1.2rem; font-weight: 900; margin-bottom: .4rem; }
-.portal-row { display: flex; justify-content: space-between; padding: .25rem 0; border-bottom: 1px dashed var(--border); }
+.portal-row { display: flex; justify-content: space-between; padding: .35rem 0; border-bottom: 1px dashed var(--border); line-height: 1.55; }
 .portal-row.total { border-bottom: none; color: var(--safe); font-weight: 900; }
 .portal-link { display: block; width: 100%; text-align: start; padding: .4rem .6rem; margin-top: .3rem; border-radius: .6rem; background: var(--surface-2); color: var(--info); font-weight: 800; text-decoration: underline; }
 .backstage { border: 2px dashed var(--warn); border-radius: 1rem; padding: .8rem 1rem; background: var(--surface); min-height: 22rem; }
-.backstage ol { display: grid; gap: .6rem; margin-top: .6rem; }
+.backstage ol { display: grid; gap: .75rem; margin-top: .6rem; line-height: 1.65; }
 .code-inline { font-family: ui-monospace, Consolas, monospace; font-size: .9em; background: var(--surface-2); border-radius: .3rem; padding: 0 .3rem; }
 .db-mini { width: 100%; margin-top: .3rem; font-size: .85rem; border-collapse: collapse; }
 .db-mini td { padding: .1rem .4rem; border-bottom: 1px solid var(--border); color: var(--muted); }
@@ -337,9 +340,10 @@
   border-right: .35rem solid var(--danger);
   font-weight: 700;
   font-size: 1.08rem;
+  line-height: 1.65;
 }
 .myth .x { color: var(--danger); font-weight: 900; font-size: 1.2rem; }
-.contract { border: 2px solid var(--info); border-radius: 1rem; padding: .8rem 1rem; background: var(--surface); }
+.contract { border: 2px solid var(--info); border-radius: 1rem; padding: .8rem 1rem; background: var(--surface); line-height: 1.65; }
 .contract dt { font-weight: 900; color: var(--info); }
 .contract dd { margin: 0 0 .4rem; font-weight: 700; }
 
@@ -406,7 +410,7 @@
 
 /* ---------- Questions ---------- */
 .q-row { padding: .75rem 1rem; border-radius: 1rem; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
-.q-text { font-weight: 800; font-size: 1.12rem; }
+.q-text { font-weight: 800; font-size: 1.12rem; line-height: 1.55; }
 .q-opts { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .45rem; }
 .q-opt {
   padding: .3rem .9rem;
@@ -421,7 +425,7 @@
 .q-opt.right { background: var(--safe); color: #fff; border-color: var(--safe); }
 .q-opt.wrong { background: var(--danger-soft); color: var(--danger); border-color: var(--danger); text-decoration: line-through; }
 :root.dark .q-opt.right { color: #10122a; }
-.q-why { margin-top: .5rem; padding: .4rem .8rem; border-radius: .7rem; background: var(--safe-soft); font-weight: 700; animation: fadeUp .3s ease both; }
+.q-why { margin-top: .5rem; padding: .5rem .9rem; line-height: 1.65; border-radius: .7rem; background: var(--safe-soft); font-weight: 700; animation: fadeUp .3s ease both; }
 .q-row.answered-right { border-color: var(--safe); }
 .q-row.answered-wrong { border-color: var(--danger); }
 

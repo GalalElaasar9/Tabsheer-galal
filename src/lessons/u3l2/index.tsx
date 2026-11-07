@@ -3,7 +3,7 @@ import type { FrameDef, LessonDef } from '../../board/types';
 import { Eyebrow, Title } from '../../kit/blocks';
 import { OrderActivity, QuestionList, RevealCard, ScoredQuiz } from '../../kit/questions';
 import { APPLIED, CHECKS, DIFF, ORDERS, QUIZ } from './data';
-import { GetInteractiveDemo, HttpVsHttpsDemo, PostInteractiveDemo, StatusCodesExplorer, TextbookGlossary } from './demos';
+import { ApiRestaurantDemo, GetInteractiveDemo, HttpVsHttpsDemo, PostInteractiveDemo, StatusCodesExplorer, TextbookGlossary } from './demos';
 import { intro, part1 } from './scenes1';
 import { part2, part3 } from './scenes2';
 import { part4, part6 } from './scenes3';
@@ -148,6 +148,29 @@ const lesson: LessonDef = {
       title: '٤ · واجهات البرمجة وصيغة JSON',
       frames: [
         ...part4,
+        {
+          id: 'api-restaurant-interactive',
+          title: '🧪 جرّب: محاكي تشبيه المطعم والـ API وصيغة JSON',
+          h: 880,
+          notes: (
+            <>
+              <p><b>محاكي تشبيه المطعم والـ API وصيغة JSON:</b> يجسد التشبيه العملي بدقة:</p>
+              <ul>
+                <li>الزبون في الصالة = Frontend (المتصفح)</li>
+                <li>الجرسون = الـ API (الوسيط المنظم)</li>
+                <li>المطبخ والمخزن = Backend + Database</li>
+              </ul>
+              <p>شاهد رحلة استدعاء <code>fetch("/api/students/123")</code>، واستخراج البيانات من المخزن، وتعبئتها في علبة الـ JSON المغلفة، ثم عودتها للزبون لتتحول إلى بطاقة نتيجة طالب جميلة على الشاشة!</p>
+            </>
+          ),
+          render: () => (
+            <>
+              <Eyebrow>🧪 تجربة عملية حية · تشبيه المطعم والـ API</Eyebrow>
+              <Title>محاكي رحلة البيانات: من طلب الزبون إلى استلام حزمة الـ JSON المنظمة</Title>
+              <ApiRestaurantDemo />
+            </>
+          ),
+        },
         order('order-api-flow', 'رتّب مسار طلب الـ API', ORDERS.restApiFlow),
         check('check-json', 'تأكد من فهم صيغة JSON والـ API', CHECKS.jsonApi),
       ],

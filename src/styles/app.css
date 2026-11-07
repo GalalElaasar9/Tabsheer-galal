@@ -42,8 +42,129 @@
 .home { height: 100%; display: flex; flex-direction: column; }
 .home-scroll { flex: 1; overflow-y: auto; }
 .home-inner { max-width: 70rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-.home h1 { font-size: 2.2rem; font-weight: 900; }
-.home .sub { color: var(--muted); font-weight: 700; }
+.home-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+.home h1 { font-size: 2.2rem; font-weight: 900; margin: 0; }
+.home .sub { color: var(--muted); font-weight: 700; margin: .2rem 0 0; }
+
+/* Grade switcher tabs */
+.grade-switcher {
+  display: inline-flex;
+  gap: .35rem;
+  background: var(--surface-2);
+  padding: .35rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+.grade-tab {
+  padding: .5rem 1.15rem;
+  border-radius: .75rem;
+  font-size: .95rem;
+  font-weight: 800;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all .18s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.grade-tab:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, .04);
+}
+:root.dark .grade-tab:hover {
+  background: rgba(255, 255, 255, .05);
+}
+.grade-tab.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(85, 70, 214, .35);
+}
+:root.dark .grade-tab.active {
+  color: #10122a;
+}
+.grade-badge {
+  font-size: .75rem;
+  padding: .1rem .45rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .25);
+  font-weight: 900;
+}
+.grade-tab:not(.active) .grade-badge {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* Hero Review Banner */
+.hero-review-banner {
+  margin: 1.5rem 0 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 2px solid var(--primary);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s, box-shadow .15s;
+}
+.hero-review-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -12px rgba(85, 70, 214, .4);
+}
+.hero-review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .2rem .7rem;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: .8rem;
+  font-weight: 900;
+  margin-bottom: .4rem;
+}
+.hero-review-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--text);
+  margin: 0;
+}
+.hero-review-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  font-weight: 600;
+  margin: .25rem 0 0;
+}
+.hero-review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 1.25rem;
+  border-radius: .85rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 900;
+  font-size: .95rem;
+  white-space: nowrap;
+}
+:root.dark .hero-review-btn {
+  color: #10122a;
+}
+
 .unit { margin-top: 2rem; }
 .unit-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
 .unit-chip {
@@ -78,6 +199,15 @@
 .lesson-card.legacy .s { color: var(--info); }
 .lesson-card.soon { cursor: default; opacity: .55; box-shadow: none; }
 .lesson-card.soon:hover { transform: none; border-color: var(--border); }
+
+/* Highlight for review card */
+.lesson-card.review-featured {
+  border-color: var(--primary);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--primary-soft) 250%);
+}
+.lesson-card.review-featured:hover {
+  box-shadow: 0 10px 24px -8px rgba(85, 70, 214, .45);
+}
 
 /* ---------- Legacy deck viewer ---------- */
 .legacy { height: 100%; display: flex; flex-direction: column; }

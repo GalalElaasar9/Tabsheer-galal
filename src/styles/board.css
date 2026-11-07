@@ -349,18 +349,26 @@
 .size-dot.on, .size-dot:hover { background: var(--surface-2); }
 
 .nav-title {
-  min-width: 15rem;
-  max-width: 24rem;
-  padding: 0 8px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 14px;
+  min-width: 14rem;
+  max-width: 32rem;
+  padding: 0 12px;
+  text-align: right;
+  font-weight: 900;
+  font-size: 16px;
+  font-family: 'Cairo', system-ui, sans-serif;
   line-height: 1.35;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: var(--text);
 }
-.nav-title small { display: block; color: var(--muted); font-weight: 700; font-size: 12px; }
+.nav-title small {
+  display: block;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Cairo', system-ui, sans-serif;
+}
 .zoom-label { min-width: 3.6rem; text-align: center; font-weight: 800; font-size: 13px; cursor: pointer; border: 0; background: transparent; }
 
 /* Side panels */
@@ -497,7 +505,7 @@ kbd {
 
 /* Narrower screens: keep the three top bars from colliding */
 @media (max-width: 1500px) {
-  .dock-tr .nav-title { display: none; }
+  /* nav-title kept visible */
   .dock-top .tb { width: 37px; }
   .dock-top .tb.style-btn { width: auto; }
 }

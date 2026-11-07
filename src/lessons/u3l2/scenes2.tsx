@@ -173,24 +173,112 @@ export const part2: FrameDef[] = [
         <Heading sub="المقارنة المعتمدة في منهج البكالوريا الوزاري">مقارنة أسلوبي GET و POST</Heading>
 
         {/* GET Column (Right) */}
-        <Box x={660} y={160} w={500} h={365} c="blue" at={1} />
-        <Doodle x={910} y={220} icon="🔍" size={75} c="blue" fill="blue" at={1} />
-        <Txt x={910} y={285} size={34} c="blue" at={1}>أسلوب GET (استرجاع وقراءة)</Txt>
-        <Txt x={910} y={345} w={450} size={22} c="ink" at={1}>• <b>الهدف:</b> جلب وقراءة البيانات دون أي تعديل في الخادم</Txt>
-        <Txt x={910} y={395} w={450} size={22} c="ink" at={1}>• <b>طبيعة العملية:</b> طلب استعلام آمن للقراءة فقط</Txt>
-        <Txt x={910} y={445} w={450} size={22} c="ink" at={1}>• <b>أمثلة:</b> تصفح صفحة ويب، استعراض درجات طالب، قراءة مقال</Txt>
-        <Txt x={910} y={495} size={24} c="green" at={1}>👈 للقراءة والاسترجاع فقط</Txt>
+        <Box x={660} y={150} w={500} h={390} c="blue" at={1} />
+        <Doodle x={910} y={195} icon="🔍" size={65} c="blue" fill="blue" at={1} />
+        <Txt x={910} y={242} size={30} c="blue" at={1}>أسلوب GET (استرجاع وقراءة)</Txt>
+        <Place x={680} y={275} w={460} at={1}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 19,
+            lineHeight: 1.55,
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-blue)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>الهدف:</strong>{' '}
+                جلب وقراءة واسترجاع البيانات دون أي تعديل في الخادم
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-blue)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>طبيعة العملية:</strong>{' '}
+                طلب استعلام آمن للقراءة فقط (Idempotent)
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-blue)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>أمثلة:</strong>{' '}
+                تصفح صفحة ويب، استعراض درجات طالب، قراءة مقال
+              </div>
+            </div>
+            <div style={{
+              marginTop: 6,
+              padding: '6px 12px',
+              borderRadius: 10,
+              background: 'rgba(16, 185, 129, 0.12)',
+              border: '1.5px solid var(--pen-green)',
+              color: 'var(--pen-green)',
+              fontWeight: 800,
+              fontSize: 18,
+              textAlign: 'center',
+            }}>
+              👈 للقراءة والاسترجاع فقط
+            </div>
+          </div>
+        </Place>
 
         {/* POST Column (Left) */}
-        <Box x={120} y={160} w={500} h={365} c="orange" at={2} />
-        <Doodle x={370} y={220} icon="📤" size={75} c="orange" fill="orange" at={2} />
-        <Txt x={370} y={285} size={34} c="orange" at={2}>أسلوب POST (إرسال وتخزين)</Txt>
-        <Txt x={370} y={345} w={450} size={22} c="ink" at={2}>• <b>الهدف:</b> إرسال بيانات جديدة لمعالجتها أو تخزينها</Txt>
-        <Txt x={370} y={395} w={450} size={22} c="ink" at={2}>• <b>طبيعة العملية:</b> تؤدي لتسجيل أو تعديل بيانات على الخادم</Txt>
-        <Txt x={370} y={445} w={450} size={22} c="ink" at={2}>• <b>أمثلة:</b> تسجيل الدخول، إنشاء حساب، حفظ بيانات استمارة</Txt>
-        <Txt x={370} y={495} size={24} c="orange" at={2}>👈 للإرسال والتخزين والمعالجة</Txt>
+        <Box x={120} y={150} w={500} h={390} c="orange" at={2} />
+        <Doodle x={370} y={195} icon="📤" size={65} c="orange" fill="orange" at={2} />
+        <Txt x={370} y={242} size={30} c="orange" at={2}>أسلوب POST (إرسال وتخزين)</Txt>
+        <Place x={140} y={275} w={460} at={2}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 19,
+            lineHeight: 1.55,
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-orange)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-orange)', fontWeight: 800 }}>الهدف:</strong>{' '}
+                إرسال بيانات جديدة لمعالجتها أو تخزينها
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-orange)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-orange)', fontWeight: 800 }}>طبيعة العملية:</strong>{' '}
+                تؤدي لتسجيل أو تعديل بيانات على الخادم
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-orange)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>
+                <strong style={{ color: 'var(--pen-orange)', fontWeight: 800 }}>أمثلة:</strong>{' '}
+                تسجيل الدخول، إنشاء حساب، حفظ بيانات استمارة
+              </div>
+            </div>
+            <div style={{
+              marginTop: 6,
+              padding: '6px 12px',
+              borderRadius: 10,
+              background: 'rgba(249, 115, 22, 0.12)',
+              border: '1.5px solid var(--pen-orange)',
+              color: 'var(--pen-orange)',
+              fontWeight: 800,
+              fontSize: 18,
+              textAlign: 'center',
+            }}>
+              👈 للإرسال والتخزين والمعالجة
+            </div>
+          </div>
+        </Place>
 
-        <Box x={120} y={545} w={1040} h={95} c="green" fill="green" size={27} tc="ink" at={3}>
+        <Box x={120} y={555} w={1040} h={90} c="green" fill="green" size={26} tc="ink" at={3}>
           💡 <span style={{ fontWeight: 'bold' }}>سؤال الامتحان الوزاري:</span> GET مخصص لقراءة واسترجاع الموارد · POST مخصص لإرسال وتخزين ومعالجة البيانات في الخادم!
         </Box>
       </Scene>
@@ -467,20 +555,86 @@ export const part3: FrameDef[] = [
         <Line pts={[[640, 155], [640, 540]]} dashed sw={2} />
 
         {/* 404 (Right) */}
-        <Txt x={950} y={190} size={36} c="orange" at={1}>🟡 404 Not Found</Txt>
-        <Doodle x={950} y={265} icon="🗺️" size={80} c="orange" fill="orange" at={1} />
-        <Txt x={950} y={335} size={28} c="orange" at={1}>العنوان مش موجود</Txt>
-        <Txt x={950} y={385} w={450} size={23} c="ink" at={1}>• السيرفر شغال وزي الفل ومفهوش أي عطل</Txt>
-        <Txt x={950} y={435} w={450} size={23} c="ink" at={1}>• الطلب وصل بس المورد المطلوب مش متسجل</Txt>
-        <Txt x={950} y={485} size={25} c="purple" at={1}>👉 السبب: العميل طلب رابط خاطئ أو محذوف</Txt>
+        <Box x={670} y={150} w={530} h={390} c="orange" at={1} />
+        <Txt x={935} y={185} size={34} c="orange" at={1}>🟡 كود 404 · Not Found</Txt>
+        <Doodle x={950} y={250} icon="🗺️" size={70} c="orange" fill="orange" at={1} />
+        <Txt x={950} y={310} size={28} c="orange" at={1}>العنوان مش موجود في الخادم</Txt>
+        <Place x={695} y={345} w={510} at={1}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '14px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 20,
+            lineHeight: 1.6,
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-orange)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>السيرفر شغال وزي الفل ومفهوش أي عطل نهائياً</div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-orange)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>الطلب وصل بس المورد المطلوب مش متسجل عنده</div>
+            </div>
+            <div style={{
+              marginTop: 6,
+              padding: '8px 14px',
+              borderRadius: 10,
+              background: 'rgba(249, 115, 22, 0.12)',
+              border: '1.5px solid var(--pen-orange)',
+              color: 'var(--pen-orange)',
+              fontWeight: 800,
+              fontSize: 19,
+              textAlign: 'center',
+            }}>
+              👉 السبب: العميل طلب رابط خاطئ أو محذوف
+            </div>
+          </div>
+        </Place>
 
         {/* 500 (Left) */}
-        <Txt x={330} y={190} size={36} c="red" at={2}>🔴 500 Internal Server Error</Txt>
-        <Doodle x={330} y={265} icon="💥" size={80} c="red" fill="red" at={2} />
-        <Txt x={330} y={335} size={28} c="red" at={2}>السيرفر نفسه انهار</Txt>
-        <Txt x={330} y={385} w={450} size={23} c="ink" at={2}>• الخادم استقبل الطلب وعايز ينفذه</Txt>
-        <Txt x={330} y={435} w={450} size={23} c="ink" at={2}>• بس حصل كراش في الكود أو سقطت الـ Database</Txt>
-        <Txt x={330} y={485} size={25} c="red" at={2}>👉 السبب: عطل تقني داخلي في السيرفر</Txt>
+        <Box x={80} y={150} w={530} h={390} c="red" at={2} />
+        <Txt x={345} y={185} size={34} c="red" at={2}>🔴 كود 500 · Server Error</Txt>
+        <Doodle x={330} y={250} icon="💥" size={70} c="red" fill="red" at={2} />
+        <Txt x={330} y={310} size={28} c="red" at={2}>السيرفر نفسه انهار</Txt>
+        <Place x={75} y={345} w={510} at={2}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '14px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 20,
+            lineHeight: 1.6,
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-red)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>الخادم استقبل الطلب وعايز ينفذه</div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ color: 'var(--pen-red)', fontSize: 22, lineHeight: 1.2 }}>•</span>
+              <div>بس حصل كراش في الكود أو سقطت قاعدة البيانات</div>
+            </div>
+            <div style={{
+              marginTop: 6,
+              padding: '8px 14px',
+              borderRadius: 10,
+              background: 'rgba(239, 68, 68, 0.12)',
+              border: '1.5px solid var(--pen-red)',
+              color: 'var(--pen-red)',
+              fontWeight: 800,
+              fontSize: 19,
+              textAlign: 'center',
+            }}>
+              👉 السبب: عطل تقني داخلي في السيرفر البرمجي
+            </div>
+          </div>
+        </Place>
 
         <Box x={150} y={560} w={980} h={90} c="green" fill="green" size={28} tc="ink" at={3}>
           💡 الخلاصة: في 404 السيرفر سليم والعنوان غلط · في 500 السيرفر نفسه مريض وعنده عطل!

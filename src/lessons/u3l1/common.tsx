@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 /** A few lines of HTML in handwriting: [opening tag, content, closing tag]. */
 export const Code = ({ lines, size = 26 }: { lines: [string, string, string][]; size?: number }) => (
-  <div className="sk-code" style={{ fontSize: size }}>
+  <div className="sk-code" style={{ fontSize: size, lineHeight: 1.6 }}>
     {lines.map(([t, body, close], i) => (
       <div key={i}><span className="tag">{t}</span><bdi>{body}</bdi><span className="tag">{close}</span></div>
     ))}
@@ -18,11 +18,11 @@ export const ABOUT: [string, string, string][] = [
 
 /** The about page as the browser draws it. */
 export const AboutRendered = ({ big = 34 }: { big?: number }) => (
-  <>
-    <div style={{ fontSize: big }}>جامعة المستقبل</div>
-    <div style={{ fontSize: big * 0.65, opacity: .75 }}>تأسست سنة 2005</div>
-    <div style={{ fontSize: big * 0.65, color: 'var(--pen-blue)', textDecoration: 'underline' }}>تواصل معنا</div>
-  </>
+  <div style={{ lineHeight: 1.65, textAlign: 'center', paddingTop: 8 }}>
+    <div style={{ fontSize: big, fontWeight: 800 }}>جامعة المستقبل</div>
+    <div style={{ fontSize: big * 0.65, opacity: .75, marginTop: 6 }}>تأسست سنة 2005</div>
+    <div style={{ fontSize: big * 0.65, color: 'var(--pen-blue)', textDecoration: 'underline', marginTop: 6 }}>تواصل معنا</div>
+  </div>
 );
 
 /** Inline code inside Arabic text (kept left-to-right so brackets don't flip). */

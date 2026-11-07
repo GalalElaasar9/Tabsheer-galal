@@ -1051,3 +1051,6 @@ export function TextbookGlossary() {
     </div>
   );
 }
+
+
+export { ApiRestaurantDemo } from './apiRestaurantDemo';

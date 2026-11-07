@@ -1,6 +1,6 @@
 // Board scenes · intro and part 1 (beginning of the web).
 import type { FrameDef } from '../../board/types';
-import { Arrow, Box, Browser, Doodle, Heading, Line, Mark, Note, Num, Paper, Scene, Txt, Underline } from '../../sketch/Sketch';
+import { Arrow, Box, Browser, Doodle, Heading, Line, Mark, Note, Num, Paper, Place, Scene, Txt, Underline } from '../../sketch/Sketch';
 import { Eyebrow, Title } from '../../kit/blocks';
 import { ABOUT, Code } from './common';
 import { HtmlPlayground } from './demos';
@@ -94,7 +94,7 @@ export const part1: FrameDef[] = [
         <Box x={850} y={245} w={340} h={285} c="blue" at={1} />
         <Doodle x={1020} y={305} icon="💻" size={78} c="blue" fill="blue" at={1} />
         <Txt x={1020} y={365} size={30} c="blue" at={1}>① أجهزة (Devices)</Txt>
-        <Txt x={1020} y={435} w={300} size={23} c="ink" at={1} style={{ lineHeight: 1.5 }}>
+        <Txt x={1020} y={435} w={300} size={23} c="ink" at={1} style={{ lineHeight: 1.65 }}>
           أجهزة شخصية (كمبيوتر، موبايل) + خوادم (Servers) بتخزن المواقع والبيانات
         </Txt>
         <Txt x={1020} y={495} size={26} at={1}>🖥️ 📱 🗄️</Txt>
@@ -104,7 +104,7 @@ export const part1: FrameDef[] = [
         <Box x={470} y={245} w={340} h={285} c="green" at={2} />
         <Doodle x={640} y={305} icon="🔌" size={78} c="green" fill="green" at={2} />
         <Txt x={640} y={365} size={30} c="green" at={2}>② وسيلة اتصال</Txt>
-        <Txt x={640} y={435} w={300} size={23} c="ink" at={2} style={{ lineHeight: 1.5 }}>
+        <Txt x={640} y={435} w={300} size={23} c="ink" at={2} style={{ lineHeight: 1.65 }}>
           Wired (الكابلات) + <br />Wireless (اللاسلكي)
         </Txt>
         <Txt x={640} y={495} size={26} at={2}>🌊 📡 🌐</Txt>
@@ -114,7 +114,7 @@ export const part1: FrameDef[] = [
         <Box x={90} y={245} w={340} h={285} c="purple" at={3} />
         <Doodle x={260} y={305} icon="📜" size={78} c="purple" fill="purple" at={3} />
         <Txt x={260} y={365} size={30} c="purple" at={3}>③ قواعد بتنظم الاتصال</Txt>
-        <Txt x={260} y={435} w={300} size={23} c="ink" at={3} style={{ lineHeight: 1.5 }}>
+        <Txt x={260} y={435} w={300} size={23} c="ink" at={3} style={{ lineHeight: 1.65 }}>
           بروتوكولات وقوانين موحدة
         </Txt>
         <Txt x={260} y={495} size={26} at={3}>🚦 🤝 📦</Txt>
@@ -196,9 +196,9 @@ export const part1: FrameDef[] = [
         <Box x={670} y={155} w={530} h={375} c="orange" at={1} />
         <Doodle x={935} y={220} icon="🗄️" size={85} c="orange" fill="orange" at={1} />
         <Txt x={935} y={285} size={32} c="orange" at={1}>🏢 الاستضافة (Host = Server)</Txt>
-        <Txt x={935} y={345} w={470} size={24} c="ink" at={1}>• كمبيوتر قوي متصل بالإنترنت 24 ساعة بدون انقطاع</Txt>
-        <Txt x={935} y={395} w={470} size={24} c="ink" at={1}>• بيخزّن ملفات موقعك (صفحات HTML، صور، بيانات)</Txt>
-        <Txt x={935} y={465} size={26} c="orange" at={1}>🏠 هو "البيت أو المحل" اللي شايل حاجتك</Txt>
+        <Txt x={935} y={345} w={490} size={23} c="ink" at={1} style={{ lineHeight: 1.65 }}>• كمبيوتر قوي متصل بالإنترنت 24 ساعة بدون انقطاع</Txt>
+        <Txt x={935} y={410} w={490} size={23} c="ink" at={1} style={{ lineHeight: 1.65 }}>• بيخزّن ملفات موقعك (صفحات HTML، صور، بيانات)</Txt>
+        <Txt x={935} y={475} size={25} c="orange" at={1}>🏠 هو "البيت أو المحل" اللي شايل حاجتك</Txt>
 
         {/* Arrow connecting Domain to Host */}
         <Arrow from={[580, 340]} to={[670, 340]} c="purple" label="بيشاور عليه 🎯" loff={-26} at={3} />
@@ -207,9 +207,9 @@ export const part1: FrameDef[] = [
         <Box x={80} y={155} w={500} h={375} c="blue" at={2} />
         <Doodle x={330} y={220} icon="🏷️" size={85} c="blue" fill="blue" at={2} />
         <Txt x={330} y={285} size={32} c="blue" at={2}>📍 اسم النطاق (Domain Name)</Txt>
-        <Txt x={330} y={345} w={450} size={24} c="ink" at={2}>• الاسم السهل اللي بنكتبه (مثال: univ.example)</Txt>
-        <Txt x={330} y={395} w={450} size={24} c="ink" at={2}>• بديل ذكي لحفظ رقم الـ IP المعقد (192.0.2.1)</Txt>
-        <Txt x={330} y={465} size={26} c="blue" at={2}>🪧 هو "العنوان واليافطة" اللي بتدل الناس</Txt>
+        <Txt x={330} y={345} w={460} size={23} c="ink" at={2} style={{ lineHeight: 1.65 }}>• الاسم السهل اللي بنكتبه (مثال: univ.example)</Txt>
+        <Txt x={330} y={410} w={460} size={23} c="ink" at={2} style={{ lineHeight: 1.65 }}>• بديل ذكي لحفظ رقم الـ IP المعقد (192.0.2.1)</Txt>
+        <Txt x={330} y={475} size={25} c="blue" at={2}>🪧 هو "العنوان واليافطة" اللي بتدل الناس</Txt>
 
         {/* Bottom Takeaway */}
         <Box x={80} y={560} w={1120} h={100} c="green" fill="green" size={28} tc="ink" at={4}>
@@ -237,7 +237,10 @@ export const part1: FrameDef[] = [
       <Scene>
         <Heading>علشان صفحة تظهر: ٥ حاجات</Heading>
         <Browser x={800} y={190} w={410} h={270} url="www.univ.example/about.html" at={1}>
-          <div style={{ fontSize: 34 }}>جامعة المستقبل</div><div style={{ fontSize: 22, opacity: .7 }}>تأسست سنة 2005…</div>
+          <div style={{ fontSize: 32, lineHeight: 1.65, paddingTop: 12, textAlign: 'center' }}>
+            <div style={{ fontWeight: 800 }}>جامعة المستقبل</div>
+            <div style={{ fontSize: 22, opacity: .75, marginTop: 8 }}>تأسست سنة 2005…</div>
+          </div>
         </Browser>
         <Txt x={1005} y={500} size={30} c="blue" at={1} delay={0.5}>① Web Browser: بيطلب ويعرض</Txt>
         <Doodle x={190} y={320} icon="🗄️" size={150} c="orange" fill="orange" at={2} />
@@ -281,16 +284,44 @@ export const part1: FrameDef[] = [
         <Box x={670} y={235} w={530} h={305} c="green" at={1} />
         <Doodle x={935} y={295} icon="🏗️" size={80} c="green" fill="green" at={1} />
         <Txt x={935} y={375} size={30} c="green" at={1}>① الهيكل العظمي للصفحة</Txt>
-        <Txt x={935} y={415} w={480} size={23} c="ink" at={1}>• بتحدد الصفحة فيها إيه: ده عنوان، دي فقرة، ده زرار</Txt>
-        <Txt x={935} y={455} w={480} size={23} c="ink" at={1}>• من غيرها مفيش صفحة (زي الطوب في العمارة)</Txt>
+        <Place x={695} y={400} w={480} h={95} at={1}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 20.5,
+            lineHeight: 1.55,
+            color: 'var(--pen-ink)',
+          }}>
+            <div>• بتحدد الصفحة فيها إيه: ده عنوان، دي فقرة، ده زرار</div>
+            <div>• من غيرها مفيش صفحة (زي الطوب في العمارة)</div>
+          </div>
+        </Place>
         <Txt x={935} y={500} size={26} c="green" at={1}>🦴 هي الأساس اللي بيتبني عليه باقي الصفحة</Txt>
 
         {/* 2. لغة ترميز مش برمجة (Left) */}
         <Box x={80} y={235} w={530} h={305} c="orange" at={2} />
         <Doodle x={345} y={295} icon="🏷️" size={80} c="orange" fill="orange" at={2} />
         <Txt x={345} y={355} size={30} c="orange" at={2}>② لغة ترميز (Tags) مش برمجة</Txt>
-        <Txt x={345} y={415} w={480} size={23} c="ink" at={2}>• مش برمجة: مفيهاش حسابات أو ذكاء أو أوامر شرطية</Txt>
-        <Txt x={345} y={455} w={480} size={23} c="ink" at={2}>• ترميز: بتعلّم الكلام بـ Tags زي &lt;h1&gt; للعنوان و &lt;p&gt; للفقرة</Txt>
+        <Place x={105} y={400} w={480} h={95} at={2}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            fontSize: 20.5,
+            lineHeight: 1.55,
+            color: 'var(--pen-ink)',
+          }}>
+            <div>• مش برمجة: مفيهاش حسابات أو ذكاء أو أوامر شرطية</div>
+            <div>• ترميز: بتعلّم الكلام بـ Tags زي &lt;h1&gt; للعنوان و &lt;p&gt; للفقرة</div>
+          </div>
+        </Place>
         <Txt x={345} y={500} size={26} c="orange" at={2}>🌐 المتصفح بيقرا الـ Tags دي ويعرضها قدامك</Txt>
 
         {/* الخلاصة في الأسفل */}

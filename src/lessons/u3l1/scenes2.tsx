@@ -80,7 +80,7 @@ export const part2: FrameDef[] = [
         <Txt x={320} y={410} size={32} at={1}>📥 يستقبل الطلب</Txt>
         <Txt x={320} y={460} size={32} at={1} delay={0.3}>🔎 يدوّر على الملف</Txt>
         <Txt x={320} y={510} size={32} at={1} delay={0.6}>📤 يبعته زي ما هو</Txt>
-        <Note x={380} y={570} w={520} h={100} rot={-1.5} size={30} at={3}>السيرفر بيبعت <b>نص</b>… المتصفح هو اللي بيحوّله لصفحة</Note>
+        <Note x={360} y={565} w={560} h={115} rot={-1.5} size={28} at={3}>السيرفر بيبعت <b>نص</b>… المتصفح هو اللي بيحوّله لصفحة</Note>
       </Scene>
     ),
   },
@@ -106,7 +106,7 @@ export const part2: FrameDef[] = [
         ))}
         <Txt x={600} y={175} size={34} c="green" at={2} delay={1}>نفس الملف للكل</Txt>
         <Txt x={1015} y={685} size={30} c="blue" at={2} delay={1.2}>= = = نفس المحتوى</Txt>
-        <Note x={60} y={500} w={400} h={150} rot={2.5} color="pink" size={29} at={3}>⚠️ ثابتة ≠ مفيهاش تفاعل<br />ممكن فيها زرار يفتح قائمة 🔘</Note>
+        <Note x={50} y={490} w={420} h={160} rot={2.5} color="pink" size={27} at={3}>⚠️ ثابتة ≠ مفيهاش تفاعل<br />ممكن فيها زرار يفتح قائمة 🔘</Note>
       </Scene>
     ),
   },
@@ -204,7 +204,7 @@ export const part3: FrameDef[] = [
       <Scene>
         <Heading>الحل: افصل!</Heading>
         <Paper x={900} y={200} w={280} h={260} label="ملف فيه كل حاجة" at={1}>
-          <div style={{ fontSize: 26 }}>🎨 تصميم + لون<br />أحمد · 88 · 91<br />🎨 تصميم + خط</div>
+          <div style={{ fontSize: 25, lineHeight: 1.7, textAlign: 'center', paddingTop: 8 }}>🎨 تصميم + لون<br /><b style={{ color: 'var(--pen-purple)' }}>أحمد · 88 · 91</b><br />🎨 تصميم + خط</div>
         </Paper>
         <Line pts={[[860, 170], [880, 330], [860, 500]]} c="red" dashed sw={3} at={2} />
         <Txt x={860} y={150} size={46} at={2}>✂️</Txt>
@@ -284,12 +284,12 @@ export const part4: FrameDef[] = [
           ['➕', 'طالب جديد', 'اكتب ملف HTML كامل', 'ضيف صف واحد'],
         ] as const).map(([icon, task, files, db], i) => (
           <span key={task} className="contents">
-            <Txt x={640} y={270 + i * 120} size={30} at={i + 1}>{icon} {task}</Txt>
-            <Txt x={1010} y={270 + i * 120} w={360} size={27} c="red" at={i + 1} delay={0.3}>{files}</Txt>
-            <Txt x={290} y={270 + i * 120} w={340} size={27} c="green" at={i + 1} delay={0.6}>{db} ✔</Txt>
+            <Txt x={640} y={260 + i * 115} size={30} at={i + 1}>{icon} {task}</Txt>
+            <Txt x={1010} y={260 + i * 115} w={380} size={25} c="red" at={i + 1} delay={0.3} >{files}</Txt>
+            <Txt x={290} y={260 + i * 115} w={360} size={25} c="green" at={i + 1} delay={0.6} style={{ lineHeight: 1.65 }}>{db} ✔</Txt>
           </span>
         ))}
-        <Note x={300} y={590} w={680} h={95} rot={-1.5} color="blue" size={28} at={4}>بس قاعدة البيانات بتخزّن وبس… مين ياخد الطلب ويبني الصفحة؟ 🤔</Note>
+        <Note x={300} y={580} w={680} h={110} rot={-1.5} color="blue" size={27} at={4}>بس قاعدة البيانات بتخزّن وبس… مين ياخد الطلب ويبني الصفحة؟ 🤔</Note>
       </Scene>
     ),
   },
@@ -336,18 +336,18 @@ export const part5: FrameDef[] = [
         <Arrow from={[615, 440]} to={[880, 375]} c="green" label="📤 صفحة HTML جاهزة" loff={26} at={4} delay={0.5} />
         {/* المتصفح يستلم ويعرض الصفحة بالبيانات المعبأة */}
         <Browser x={890} y={235} w={340} h={200} url="/results?id=2402" c="green" at={4} delay={0.9}>
-          <div style={{ fontSize: 20, padding: '6px 8px' }}>
-            <div style={{ fontSize: 22, fontWeight: 'bold', borderBottom: '1.5px dashed var(--pen-blue)', paddingBottom: 4 }}>
+          <div style={{ fontSize: 20, padding: '8px 10px', lineHeight: 1.6 }}>
+            <div style={{ fontSize: 22, fontWeight: 'bold', borderBottom: '1.5px dashed var(--pen-blue)', paddingBottom: 6 }}>
               👩‍🎓 مريم خالد
             </div>
-            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--tint-green)', padding: '6px 12px', borderRadius: 8 }}>
+            <div style={{ marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--tint-green)', padding: '6px 12px', borderRadius: 8 }}>
               <span style={{ fontSize: 20, color: 'var(--pen-ink)' }}>الرياضيات</span>
               <span style={{ fontSize: 24, fontWeight: 'bold', color: 'var(--pen-green)' }}>97 / 100 ✨</span>
             </div>
           </div>
         </Browser>
         <Txt x={1060} y={465} size={22} c="green" at={4} delay={1.1}>🖥️ المتصفح يعرض النتيجة!</Txt>
-        <Note x={870} y={510} w={370} h={140} rot={2} color="green" size={26} at={5}>🔒 الكود ده على السيرفر<br />المستخدم مش شايفه ولا يقدر يغيّره</Note>
+        <Note x={870} y={505} w={370} h={150} rot={2} color="green" size={25} at={5} style={{ lineHeight: 1.65 }}>🔒 الكود ده على السيرفر<br />المستخدم مش شايفه ولا يقدر يغيّره</Note>
       </Scene>
     ),
   },

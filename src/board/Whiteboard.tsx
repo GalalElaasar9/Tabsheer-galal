@@ -908,8 +908,9 @@ export function Whiteboard({ lesson, onHome }: { lesson: LessonDef; onHome(): vo
           <Mark size={26} /> الدروس
         </button>
         <span className="dock-sep" />
-        <div className="nav-title" style={{ minWidth: 0, maxWidth: 260, textAlign: 'right' }}>
-          {lesson.title}<small>{lesson.subtitle}</small>
+        <div className="nav-title" style={{ minWidth: 0, maxWidth: 380, textAlign: 'right' }}>
+          <span>{lesson.title}</span>
+          <small>{lesson.subtitle}</small>
         </div>
         <button className={`tb ${panel === 'notes' ? 'on' : ''}`} title="سكريبت الشرح (J)" onClick={() => togglePanel('notes')}>
           <NotebookPen size={19} />
