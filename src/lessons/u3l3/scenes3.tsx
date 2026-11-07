@@ -28,10 +28,10 @@ export const part3: FrameDef[] = [
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#3b82f6' }}>
             <div>
               <span className="text-xs font-bold text-sky-400 block mb-2">مفهوم التصميم المتجاوب:</span>
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">
+              <p className="text-xs text-slate-300 mb-3" style={{ lineHeight: 1.85 }}>
                 مفهوم تصميمي يُضبط فيه التخطيط تلقائياً وفقاً لأحجام الشاشات المختلفة، مثل:
               </p>
-              <div className="space-y-2 text-xs text-slate-300">
+              <div className="space-y-2.5 text-xs text-slate-300">
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between">
                   <span>📱 الهواتف الذكية</span>
                   <span className="text-sky-400 font-mono text-[11px]">عمود واحد وتمرير سلس</span>
@@ -46,7 +46,7 @@ export const part3: FrameDef[] = [
                 </div>
               </div>
             </div>
-            <div className="p-2 rounded bg-slate-900 text-[11px] text-slate-400 border border-slate-800">
+            <div className="p-2.5 rounded bg-slate-900 text-xs text-slate-300 border border-slate-800" style={{ lineHeight: 1.75 }}>
               يضمن تجربة استخدام مريحة دون الحاجة لتكبير أو تصغير الصفحة يدوياً.
             </div>
           </div>
@@ -57,10 +57,10 @@ export const part3: FrameDef[] = [
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#a855f7' }}>
             <div>
               <span className="text-xs font-bold text-purple-400 block mb-2">نهج الأولوية للجوال (Mobile-first approach):</span>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs text-slate-300 mb-3" style={{ lineHeight: 1.85 }}>
                 يستخدم معظم الناس الويب عبر الهواتف الذكية؛ لذا يراعي المطورون الشاشات الصغيرة منذ بداية مرحلة التصميم، ثم يوسعون التخطيط لاحقاً للشاشات الكبيرة.
               </p>
-              <div className="p-3 rounded-lg border bg-slate-900/80 border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
+              <div className="p-3 rounded-lg border bg-slate-900/80 border-slate-800 text-xs text-slate-300 space-y-2.5" style={{ lineHeight: 1.85 }}>
                 <div className="flex items-center gap-2">
                   <span className="text-purple-400 font-bold">١.</span>
                   <span>التركيز أولاً على المحتوى الأهم والأكثر فائدة للمستخدم.</span>
@@ -148,8 +148,8 @@ export const part3: FrameDef[] = [
         <Place x={890} y={240} w={250} h={370} at={2}>
           <div className="p-3.5 rounded-xl border bg-slate-900 border-sky-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
-              <span className="font-bold text-sky-400 block mb-2 border-b border-slate-800 pb-1">١. الثلاثي الأساسي</span>
-              <ul className="space-y-2 text-[11px] leading-relaxed">
+              <span className="font-bold text-sky-400 block mb-2.5 border-b border-slate-800 pb-1">١. الثلاثي الأساسي</span>
+              <ul className="space-y-3 text-xs leading-relaxed" style={{ lineHeight: 1.85 }}>
                 <li>• <b>HTML:</b> بنية ومحتوى الصفحة (هيكل المبنى).</li>
                 <li>• <b>CSS:</b> المظهر والألوان (الديكور).</li>
                 <li>• <b>JS:</b> السلوك والتفاعل (الكهرباء والسباكة).</li>
@@ -163,8 +163,8 @@ export const part3: FrameDef[] = [
         <Place x={640} y={240} w={230} h={370} at={3}>
           <div className="p-3 rounded-xl border bg-slate-900 border-emerald-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
-              <span className="font-bold text-emerald-400 block mb-2 border-b border-slate-800 pb-1">٢. HTML الدلالية</span>
-              <ul className="space-y-2 text-[11px] leading-relaxed">
+              <span className="font-bold text-emerald-400 block mb-2.5 border-b border-slate-800 pb-1">٢. HTML الدلالية</span>
+              <ul className="space-y-2.5 text-[11.5px] leading-relaxed" style={{ lineHeight: 1.85 }}>
                 <li>• وسوم توضح وظيفة المحتوى: &lt;header&gt; و &lt;nav&gt; و &lt;main&gt; و &lt;footer&gt;.</li>
                 <li>• <b>إمكانية الوصول:</b> مساعدة قارئ الشاشة لذوي الإعاقة.</li>
                 <li>• <b>SEO:</b> تيسير فهم محركات البحث.</li>
@@ -178,10 +178,10 @@ export const part3: FrameDef[] = [
         <Place x={390} y={240} w={230} h={370} at={4}>
           <div className="p-3 rounded-xl border bg-slate-900 border-purple-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
-              <span className="font-bold text-purple-400 block mb-2 border-b border-slate-800 pb-1">٣. التصميم المتجاوب</span>
-              <ul className="space-y-2 text-[11px] leading-relaxed">
+              <span className="font-bold text-purple-400 block mb-2.5 border-b border-slate-800 pb-1">٣. التصميم المتجاوب</span>
+              <ul className="space-y-3 text-xs leading-relaxed" style={{ lineHeight: 1.85 }}>
                 <li>• ضبط التخطيط تلقائياً ليناسب كل أحجام الشاشات.</li>
-                <li>• <b>نهج الأولوية للجوال:</b> مراعاة الهواتف أولاً نظراً لأهميتها وكثرة مستخدميها.</li>
+                <li>• <b>نهج الأولوية للجوال:</b> مراعاة الهواتف أولاً لكثرة مستخدميها.</li>
               </ul>
             </div>
             <span className="text-[10px] text-purple-400/80 font-mono">Responsive & Mobile-First</span>
@@ -192,8 +192,8 @@ export const part3: FrameDef[] = [
         <Place x={140} y={240} w={230} h={370} at={5}>
           <div className="p-3 rounded-xl border bg-slate-900 border-amber-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
-              <span className="font-bold text-amber-400 block mb-2 border-b border-slate-800 pb-1">٤. أطر العمل (Frameworks)</span>
-              <ul className="space-y-2 text-[11px] leading-relaxed">
+              <span className="font-bold text-amber-400 block mb-2.5 border-b border-slate-800 pb-1">٤. أطر العمل (Frameworks)</span>
+              <ul className="space-y-2.5 text-[11.5px] leading-relaxed" style={{ lineHeight: 1.85 }}>
                 <li>• توفير وظائف جاهزة لتطوير أسرع بكثير.</li>
                 <li>• <b>React:</b> مكتبة واجهات ومكونات.</li>
                 <li>• <b>Vue:</b> بنية بسيطة وتدرج.</li>

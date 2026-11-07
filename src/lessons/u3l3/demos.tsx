@@ -1327,7 +1327,7 @@ export function TextbookGlossaryU3L3() {
               <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
               {item.term}
             </span>
-            <p className="text-xs text-slate-300 leading-relaxed">{item.def}</p>
+            <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>{item.def}</p>
           </div>
         ))}
       </div>
@@ -1424,23 +1424,23 @@ export function FrameworksShowcaseWidget() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-center text-xs">
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🚦</span>
-                  <span className="font-extrabold text-sky-300 block mb-0.5">التوجيه (Routing)</span>
-                  <span className="text-[11px] text-slate-400 leading-normal">التنقل بين الصفحات وتغيير الروابط</span>
+                  <span className="font-extrabold text-sky-300 block mb-1">التوجيه (Routing)</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>التنقل بين الصفحات وتغيير الروابط</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">📁</span>
-                  <span className="font-extrabold text-sky-300 block mb-0.5">تنظيم الصفحات</span>
-                  <span className="text-[11px] text-slate-400 leading-normal">هيكلة وتقسيم ملفات ومجلدات المشروع</span>
+                  <span className="font-extrabold text-sky-300 block mb-1">تنظيم الصفحات</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>هيكلة وتقسيم ملفات ومجلدات المشروع</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🔄</span>
-                  <span className="font-extrabold text-sky-300 block mb-0.5">التعامل مع البيانات</span>
-                  <span className="text-[11px] text-slate-400 leading-normal">إرسال واستقبال طلبات API والـ JSON</span>
+                  <span className="font-extrabold text-sky-300 block mb-1">التعامل مع البيانات</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>إرسال واستقبال طلبات API والـ JSON</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🧩</span>
-                  <span className="font-extrabold text-sky-300 block mb-0.5">إدارة أجزاء الموقع</span>
-                  <span className="text-[11px] text-slate-400 leading-normal">تحديث الواجهة وحالة المكونات (State)</span>
+                  <span className="font-extrabold text-sky-300 block mb-1">إدارة أجزاء الموقع</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>تحديث الواجهة وحالة المكونات (State)</span>
                 </div>
               </div>
             </div>
@@ -1464,7 +1464,7 @@ export function FrameworksShowcaseWidget() {
                         مجهود جبار وبطيء
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                       تصنع الطوب بنفسك، وتخلط الأسمنت يدوياً، وتجهز كل مسمار وسلك كهرباء من البداية!
                       <br />
                       <span className="text-rose-400 font-bold">النتيجة:</span> تضييع مئات الساعات، وكثرة الأخطاء، وإعادة اختراع العجلة على الفاضي.
@@ -1484,7 +1484,7 @@ export function FrameworksShowcaseWidget() {
                         الـ Framework الجاهز
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                       عندك هيكل خرساني جاهز ومختبر، وأعمدة وتجهيزات أساسية تساعدك تبدأ فوراً في تشطيب شقتك!
                       <br />
                       <span className="text-emerald-300 font-bold">النتيجة:</span> تركز مباشرة على وظائف موقعك وتصميمه الخاص وتبنيه بأعلى سرعة وأمان.
@@ -1497,7 +1497,7 @@ export function FrameworksShowcaseWidget() {
             {/* Golden Definition Banner */}
             <div className="p-3.5 rounded-xl border bg-gradient-to-r from-blue-950/60 to-indigo-950/60 border-blue-800/60 text-xs text-blue-100 flex items-center gap-3 shadow-lg">
               <span className="text-2xl">💡</span>
-              <div className="leading-relaxed">
+              <div style={{ lineHeight: 1.85 }}>
                 <span className="font-black text-amber-300 text-sm">تعريف إطار العمل (كتاب المدرسة ص ١٤٦): </span>
                 <b>«بنية توفر مسبقًا وظائف ومكونات شائعة الاستخدام، وذلك لجعل عملية تطوير تطبيقات الويب أكثر كفاءة، دون الحاجة لكتابة كامل الكود البرمجي من الصفر.»</b>
               </div>
@@ -1541,7 +1541,7 @@ export function FrameworksShowcaseWidget() {
                   </div>
                   <h4 className="font-extrabold text-base text-sky-400 mb-1">React</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">مكتبة JavaScript لبناء الواجهات</span>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «مكتبة JavaScript لبناء واجهات المستخدم من مكونات قابلة لإعادة الاستخدام وتحديثها عند تغير البيانات.»
                   </p>
                 </div>
@@ -1569,7 +1569,7 @@ export function FrameworksShowcaseWidget() {
                   </div>
                   <h4 className="font-extrabold text-base text-emerald-400 mb-1">Vue.js</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لبناء تطبيقات الويب</span>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «له بنية بسيطة ويتيح بناء تطبيقات الويب تدريجيًا بدءًا من ميزات صغيرة وحتى تطبيقات أكبر.»
                   </p>
                 </div>
@@ -1597,7 +1597,7 @@ export function FrameworksShowcaseWidget() {
                   </div>
                   <h4 className="font-extrabold text-base text-purple-300 mb-1">Next.js</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لتطبيقات الويب</span>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «إطار مبني على React لبناء تطبيقات ويب، ويوفر التوجيه (Routing) وطرقًا مختلفة لعرض الصفحات والعمل على الخادم والعميل.»
                   </p>
                 </div>
@@ -1650,7 +1650,7 @@ export function FrameworksShowcaseWidget() {
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed mb-2.5">
+              <p className="text-xs text-slate-300 mb-2.5" style={{ lineHeight: 1.85 }}>
                 بدل ما نكتب كود العنصر ونكرره في كل صفحة يدوياً، نبرمج <b>مكوناً واحداً (Component)</b> ونستدعيه بسطر واحد في مئات الصفحات:
               </p>
 

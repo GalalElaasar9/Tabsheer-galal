@@ -47,16 +47,16 @@ export const part2: FrameDef[] = [
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">Structure</span>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed mb-2">
+              <p className="text-xs text-slate-300 mb-2" style={{ lineHeight: 1.85 }}>
                 تحديد هيكل صفحة الويب (Structure)، وتوصف العناصر الموجودة فيها، زي:
               </p>
-              <div className="grid grid-cols-3 gap-1 text-[11px] text-slate-300 font-bold mb-3 pr-2">
+              <div className="grid grid-cols-3 gap-2 text-xs text-slate-300 font-bold mb-3 pr-2" style={{ lineHeight: 1.8 }}>
                 <span>• العناوين.</span>
                 <span>• الفقرات.</span>
                 <span>• الصور.</span>
                 <span>• الروابط.</span>
                 <span>• الأزرار.</span>
-                <span>• حقول إدخال البيانات.</span>
+                <span>• حقول الإدخال.</span>
               </div>
 
               {/* Code Snippet from image 2 */}
@@ -67,7 +67,7 @@ export const part2: FrameDef[] = [
               </div>
 
               {/* Pedagogical insight from image 2 */}
-              <div className="p-2.5 rounded-lg bg-sky-950/30 border border-sky-800/40 text-[11px] text-slate-200 leading-relaxed">
+              <div className="p-2.5 rounded-lg bg-sky-950/30 border border-sky-800/40 text-[11px] text-slate-200" style={{ lineHeight: 1.8 }}>
                 💡 <b>الشرح التربوي:</b> الكود ده بيحدد إن عندنا عنوان وفقرة وزرار. لكن هل حددنا لون الزرار أو حجمه؟ <b>لأ!</b> هل الزرار بيضيف منتج للسلة؟ <b>لأ!</b> إحنا بس بنينا العناصر الأساسية.
               </div>
             </div>
@@ -126,15 +126,15 @@ export const part2: FrameDef[] = [
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">Appearance</span>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed mb-2">
+              <p className="text-xs text-slate-300 mb-2" style={{ lineHeight: 1.85 }}>
                 تحديد مظهر صفحة الويب (Appearance)، يعني بنستخدمها في:
               </p>
-              <div className="grid grid-cols-2 gap-1 text-[11px] text-slate-300 font-bold mb-3 pr-2">
+              <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 font-bold mb-3 pr-2" style={{ lineHeight: 1.8 }}>
                 <span>• تغيير ألوان النصوص والخلفيات.</span>
-                <span>• تحديد حجم الخط.</span>
-                <span>• تحديد أبعاد العناصر.</span>
+                <span>• تحديد حجم الخط ومقاساته.</span>
+                <span>• تحديد أبعاد العناصر والتخطيط.</span>
                 <span>• ترتيب العناصر جنب بعضها.</span>
-                <span>• إضافة المسافات.</span>
+                <span>• إضافة المسافات والهوامش.</span>
                 <span>• تنسيق الأزرار والصور.</span>
               </div>
 
@@ -145,7 +145,7 @@ export const part2: FrameDef[] = [
               </div>
 
               {/* Pedagogical insight from image 3 */}
-              <div className="p-2.5 rounded-lg bg-purple-950/30 border border-purple-800/40 text-[11px] text-slate-200 leading-relaxed">
+              <div className="p-2.5 rounded-lg bg-purple-950/30 border border-purple-800/40 text-[11px] text-slate-200" style={{ lineHeight: 1.8 }}>
                 🎨 <b>الشرح والملحوظة المهمة:</b> هنا غيرنا لون العنوان، وخلينا الزرار أخضر والكتابة بيضاء. <b>ملحوظة مهمة:</b> CSS غير مسؤولة عن تنفيذ وظيفة الزرار، هي مسؤولة عن شكله فقط!
               </div>
             </div>
@@ -209,12 +209,12 @@ export const part2: FrameDef[] = [
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-yellow-950 text-yellow-300 border border-yellow-800">Behavior & Interactivity</span>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed mb-2">
+              <p className="text-xs text-slate-300 mb-2" style={{ lineHeight: 1.85 }}>
                 وظيفتها إضافة السلوك والتفاعلية (Behavior & Interactivity). يعني إيه؟ يعني الصفحة متبقاش مجرد نصوص وصور، لكن تستجيب لتصرفات المستخدم:
               </p>
-              <div className="space-y-1 text-[11px] text-slate-300 font-bold mb-3 pr-2">
+              <div className="space-y-2 text-xs text-slate-300 font-bold mb-3 pr-2" style={{ lineHeight: 1.85 }}>
                 <div>• الضغط على زرار يضيف منتج للسلة.</div>
-                <div>• ظهور رسالة عند الضغط على زرار.</div>
+                <div>• ظهور رسالة تنبيه عند الضغط على زرار.</div>
                 <div>• التحقق من صحة البيانات في نموذج تسجيل الدخول.</div>
                 <div>• تحديث عدد الإعجابات وتحديث جزء من الصفحة دون إعادة تحميلها بالكامل.</div>
               </div>
@@ -225,7 +225,7 @@ export const part2: FrameDef[] = [
               </div>
 
               {/* Pedagogical insight from image 4 */}
-              <div className="p-2.5 rounded-lg bg-yellow-950/30 border border-yellow-800/40 text-[11px] text-slate-200 leading-relaxed">
+              <div className="p-2.5 rounded-lg bg-yellow-950/30 border border-yellow-800/40 text-[11px] text-slate-200" style={{ lineHeight: 1.8 }}>
                 ⚡ <b>الشرح التربوي:</b> لما المستخدم يضغط على الزرار، بتظهر رسالة. هنا <b>JavaScript</b> هي اللي نفذت التفاعل الحقيقي.
               </div>
             </div>
@@ -276,12 +276,12 @@ export const part2: FrameDef[] = [
                 <span className="font-extrabold text-base text-sky-400">١. لغة HTML</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">البنية (Structure)</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs text-slate-300 mb-3" style={{ lineHeight: 1.85 }}>
                 تحدد بنية (هيكل) ومحتوى صفحة الويب، وتصف العناصر الأساسية مثل العناوين، الفقرات، الصور، والروابط.
               </p>
-              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800" style={{ lineHeight: 1.75 }}>
                 <span className="text-[10px] text-slate-400 block mb-1">🏛️ التشبيه الوزاري:</span>
-                <span className="text-xs font-bold text-sky-300">هيكل المبنى والجدران</span>
+                <span className="text-xs font-bold text-sky-300">هيكل المبنى والجدران الحاملة</span>
               </div>
             </div>
             <div className="p-2 rounded bg-slate-950 font-mono text-[11px] text-sky-400 border border-slate-800" dir="ltr">
@@ -298,10 +298,10 @@ export const part2: FrameDef[] = [
                 <span className="font-extrabold text-base text-purple-400">٢. لغة CSS</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">المظهر (Presentation)</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs text-slate-300 mb-3" style={{ lineHeight: 1.85 }}>
                 تحدد مظهر وتنسيق صفحة الويب، كالألوان، والتخطيط، ومقاسات العناصر والخطوط، والمسافات الجمالية.
               </p>
-              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800" style={{ lineHeight: 1.75 }}>
                 <span className="text-[10px] text-slate-400 block mb-1">🏛️ التشبيه الوزاري:</span>
                 <span className="text-xs font-bold text-purple-300">الديكور الداخلي والدهانات</span>
               </div>
@@ -320,10 +320,10 @@ export const part2: FrameDef[] = [
                 <span className="font-extrabold text-base text-yellow-400">٣. لغة JavaScript</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-yellow-950 text-yellow-300 border border-yellow-800">السلوك (Behavior)</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs text-slate-300 mb-3" style={{ lineHeight: 1.85 }}>
                 تضيف السلوك والتفاعلية إلى صفحة الويب، كالأزرار المستجيبة، وتحديث جزء فقط من الشاشة، وتشغيل العدادات.
               </p>
-              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800" style={{ lineHeight: 1.75 }}>
                 <span className="text-[10px] text-slate-400 block mb-1">🏛️ التشبيه الوزاري:</span>
                 <span className="text-xs font-bold text-yellow-300">أنظمة الكهرباء والسباكة</span>
               </div>
@@ -374,27 +374,27 @@ export const part2: FrameDef[] = [
         <Place x={140} y={150} w={480} h={480} at={1}>
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#10b981' }}>
             <div>
-              <span className="text-xs font-bold text-emerald-400 block mb-2">عناصر HTML الدلالية المقررة في المنهج:</span>
-              <div className="space-y-2.5 font-mono text-xs">
+              <span className="text-xs font-bold text-emerald-400 block mb-3">عناصر HTML الدلالية المقررة في المنهج:</span>
+              <div className="space-y-3 font-mono text-xs">
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-emerald-900/60">
                   <span className="text-emerald-400 font-bold" dir="ltr">&lt;header&gt;</span>
-                  <p className="text-[11px] text-slate-300 font-sans mt-0.5">في أعلى الصفحة (يحتوي عنوان الموقع وشعاره).</p>
+                  <p className="text-[11px] text-slate-300 font-sans mt-1" style={{ lineHeight: 1.8 }}>في أعلى الصفحة (يحتوي عنوان الموقع وشعاره والترويسة).</p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-sky-900/60">
                   <span className="text-sky-400 font-bold" dir="ltr">&lt;nav&gt;</span>
-                  <p className="text-[11px] text-slate-300 font-sans mt-0.5">مخصص لمنطقة روابط التنقل الرئيسية في الموقع.</p>
+                  <p className="text-[11px] text-slate-300 font-sans mt-1" style={{ lineHeight: 1.8 }}>مخصص لمنطقة روابط التنقل الرئيسية في الموقع.</p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-indigo-900/60">
                   <span className="text-indigo-400 font-bold" dir="ltr">&lt;main&gt;</span>
-                  <p className="text-[11px] text-slate-300 font-sans mt-0.5">المحتوى الرئيس المستقل والفريد للصفحة الحالية.</p>
+                  <p className="text-[11px] text-slate-300 font-sans mt-1" style={{ lineHeight: 1.8 }}>المحتوى الرئيس المستقل والفريد للصفحة الحالية.</p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-amber-900/60">
                   <span className="text-amber-400 font-bold" dir="ltr">&lt;footer&gt;</span>
-                  <p className="text-[11px] text-slate-300 font-sans mt-0.5">في أسفل الصفحة (يحتوي حقوق النشر والروابط السفلية).</p>
+                  <p className="text-[11px] text-slate-300 font-sans mt-1" style={{ lineHeight: 1.8 }}>في أسفل الصفحة (يحتوي حقوق النشر والروابط السفلية).</p>
                 </div>
               </div>
             </div>
-            <span className="text-[10px] text-slate-400 font-sans">
+            <span className="text-[10px] text-slate-400 font-sans" style={{ lineHeight: 1.7 }}>
               بدلاً من استخدام صناديق عامة غير دلالية مثل &lt;div&gt; لا توضح وظيفة المحتوى.
             </span>
           </div>
@@ -408,25 +408,25 @@ export const part2: FrameDef[] = [
 
               {/* Benefit 1 */}
               <div className="p-3.5 rounded-xl border bg-slate-900/80 border-slate-800 mb-3">
-                <span className="text-xs font-bold text-emerald-400 block mb-1">١. تحسين إمكانية الوصول (Accessibility):</span>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <span className="text-xs font-bold text-emerald-400 block mb-1.5">١. تحسين إمكانية الوصول (Accessibility):</span>
+                <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                   يساعد HTML الدلالي برامج قراءة الشاشة (Screen Readers) على فهم بنية الصفحة بشكل أفضل والتنقل فيها، وتحسين إمكانية الوصول للمستخدمين ذوي الإعاقة البصرية.
                 </p>
               </div>
 
               {/* Benefit 2 */}
               <div className="p-3.5 rounded-xl border bg-slate-900/80 border-slate-800">
-                <span className="text-xs font-bold text-amber-400 block mb-1">٢. فهم محركات البحث للمحتوى (SEO):</span>
-                <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                <span className="text-xs font-bold text-amber-400 block mb-1.5">٢. فهم محركات البحث للمحتوى (SEO):</span>
+                <p className="text-xs text-slate-300 mb-2.5" style={{ lineHeight: 1.85 }}>
                   يساعد HTML الدلالي محركات البحث على فهم بنية المحتوى بصورة أفضل وأيسر في الفهرسة.
                 </p>
-                <div className="p-2 rounded bg-amber-950/30 border border-amber-800/50 text-[11px] text-amber-300">
+                <div className="p-2 rounded bg-amber-950/30 border border-amber-800/50 text-[11px] text-amber-300" style={{ lineHeight: 1.8 }}>
                   ⚠️ <b>تنبيه كتاب الوزارة:</b> فهم محركات البحث لبنية المحتوى <u>لا يضمن ترتيباً أعلى بالضرورة</u> في نتائج البحث.
                 </div>
               </div>
             </div>
 
-            <div className="text-[11px] text-slate-400 border-t border-slate-800 pt-2">
+            <div className="text-[11px] text-slate-400 border-t border-slate-800 pt-2" style={{ lineHeight: 1.7 }}>
               HTML الدلالية تمنح الكود معنى برمجياً تفهمه الآلات والبشر على حد سواء.
             </div>
           </div>
