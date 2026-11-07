@@ -247,7 +247,7 @@ export const part4: FrameDef[] = [
 
         {/* 5. Bottom Definition Banner */}
         <Box x={80} y={555} w={1120} h={95} c="green" fill="green" size={23} tc="ink" at={5}>
-          📖 <b>تعريف واجهة برمجة التطبيقات API (كتاب المدرسة):</b> مجموعة من القواعد والبروتوكولات البرمجية التي تتيح للأنظمة والتطبيقات المختلفة التواصل وتبادل البيانات والخدمات فيما بينها بشكل آمن وموحد، وتفصل الواجهة عن السيرفر وقاعدة البيانات.
+          📖 <b>تعريف واجهة برمجة التطبيقات API (كتاب المدرسة الوزاري):</b> «مجموعة قواعد واضحة تسمح لبرنامج بطلب بيانات أو وظائف من برنامج آخر.»
         </Box>
       </Scene>
     ),
@@ -350,7 +350,7 @@ export const part6: FrameDef[] = [
           <li><b>أسلوب GET:</b> جلب وقراءة واسترجاع البيانات دون إجراء أي تعديل عليها في الخادم.</li>
           <li><b>أسلوب POST:</b> إرسال بيانات جديدة إلى الخادم لمعالجتها وتخزينها (كالاستمارات).</li>
           <li><b>رموز الحالة (Status Codes):</b> رموز ثلاثية الخانات لبيان نتيجة الطلب (200 نجاح، 404 غير موجود، 500 عطل داخلي).</li>
-          <li><b>الـ API:</b> قواعد وبروتوكولات تتيح للأنظمة المختلفة تبادل البيانات بشكل منظم وموحد.</li>
+          <li><b>واجهة برمجة التطبيقات (API):</b> مجموعة قواعد واضحة تسمح لبرنامج بطلب بيانات أو وظائف من برنامج آخر.</li>
           <li><b>صيغة JSON:</b> صيغة نصية خفيفة وسريعة ومستقلة لتبادل البيانات المهيكلة بين العميل والسيرفر.</li>
         </ol>
       </>
@@ -360,52 +360,81 @@ export const part6: FrameDef[] = [
         <Heading sub="مرجع الحفظ السريع لجميع المصطلحات المقررة في المنهج الوزاري">📖 معجم تعريفات كتاب المدرسة الوزاري المعتمد</Heading>
 
         {/* Column 1 (Right): الأساسيات والبروتوكولات */}
-        <Box x={660} y={150} w={540} h={495} c="blue" at={1} />
-        <Txt x={930} y={190} size={28} c="blue" at={1}>🏛️ الأساسيات وبروتوكولات الأمان</Txt>
-        
-        <Txt x={930} y={240} w={490} size={20} c="ink" at={1}>
-          • <b>العميل (Client):</b> الجهاز/المتصفح الذي يبدأ بالطلب ويرسل HTTP Request.
-        </Txt>
-        <Txt x={930} y={290} w={490} size={20} c="ink" at={1}>
-          • <b>الخادم (Server):</b> حاسوب مركزي متصل دائماً، يعالج الطلب ويرسل HTTP Response.
-        </Txt>
-        <Txt x={930} y={345} w={490} size={20} c="ink" at={1}>
-          • <b>دورة الطلب والرد:</b> سؤال وجواب؛ العميل يطلب والخادم يرد بالاستجابة.
-        </Txt>
-        <Txt x={930} y={400} w={490} size={20} c="ink" at={1}>
-          • <b>بروتوكول HTTP:</b> نقل بيانات الويب كنص صريح (Plaintext) غير مشفر.
-        </Txt>
-        <Txt x={930} y={460} w={490} size={20} c="ink" at={1}>
-          • <b>بروتوكول HTTPS:</b> النسخة الآمنة من HTTP مضافاً إليها تشفير TLS.
-        </Txt>
-        <Txt x={930} y={520} w={490} size={20} c="ink" at={1}>
-          • <b>طبقة TLS:</b> تشفير قياسي يوفر السرية، سلامة البيانات، والمصادقة.
-        </Txt>
-        <Txt x={930} y={585} size={22} c="green" at={1}>🔒 الحماية إجبارية في تسجيل الدخول وبوابات الدفع</Txt>
+        <Box x={660} y={145} w={540} h={515} c="blue" at={1} />
+        <Place x={685} y={165} w={490} h={475} at={1}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            justifyContent: 'space-between',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-blue)', paddingBottom: 4 }}>
+              🏛️ الأساسيات وبروتوكولات الأمان
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 16.5, lineHeight: 1.55 }}>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>العميل (Client):</strong> الجهاز أو المتصفح الذي يبدأ بالطلب ويرسل HTTP Request.</div>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>الخادم (Server):</strong> حاسوب مركزي متصل دائماً، يعالج الطلب ويرسل HTTP Response.</div>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>دورة الطلب والرد:</strong> سؤال وجواب؛ العميل يطلب والخادم يعالج ويرد بالاستجابة.</div>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>بروتوكول HTTP:</strong> نقل بيانات الويب كنص صريح (Plaintext) غير مشفر.</div>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>بروتوكول HTTPS:</strong> النسخة الآمنة من HTTP مدعومة بتشفير TLS.</div>
+              <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>طبقة TLS:</strong> تشفير قياسي يوفر السرية، سلامة البيانات، والمصادقة.</div>
+            </div>
+            <div style={{
+              padding: '6px 12px',
+              borderRadius: 10,
+              background: 'rgba(16, 185, 129, 0.12)',
+              border: '1.5px solid var(--pen-green)',
+              color: 'var(--pen-green)',
+              fontWeight: 800,
+              fontSize: 16,
+              textAlign: 'center',
+            }}>
+              🔒 الحماية إجبارية في تسجيل الدخول وبوابات الدفع
+            </div>
+          </div>
+        </Place>
 
         {/* Column 2 (Left): الأساليب ورموز الحالة والبيانات */}
-        <Box x={80} y={150} w={540} h={495} c="purple" at={2} />
-        <Txt x={350} y={190} size={28} c="purple" at={2}>⚙️ الأساليب ورموز الحالة والبيانات</Txt>
-
-        <Txt x={350} y={240} w={490} size={20} c="ink" at={2}>
-          • <b>أسلوب GET:</b> جلب وقراءة واسترجاع البيانات دون تعديلها على الخادم.
-        </Txt>
-        <Txt x={350} y={290} w={490} size={20} c="ink" at={2}>
-          • <b>أسلوب POST:</b> إرسال بيانات جديدة إلى الخادم لمعالجتها وتخزينها.
-        </Txt>
-        <Txt x={350} y={345} w={490} size={20} c="ink" at={2}>
-          • <b>رموز الحالة:</b> 200 (نجاح) · 404 (خطأ عميل، السيرفر سليم) · 500 (عطل خادم).
-        </Txt>
-        <Txt x={350} y={410} w={490} size={20} c="ink" at={2}>
-          • <b>واجهة الـ API:</b> قواعد وبروتوكولات تتيح للأنظمة تبادل البيانات بأمان.
-        </Txt>
-        <Txt x={350} y={475} w={490} size={20} c="ink" at={2}>
-          • <b>صيغة JSON:</b> صيغة نصية خفيفة وسريعة لتبادل البيانات كأزواج مفاتيح وقيم.
-        </Txt>
-        <Txt x={350} y={545} w={490} size={20} c="green" at={2}>
-          💡 <b>مفتاح النجاح:</b> حفظ هذه المصطلحات يضمن العلامة الكاملة في الامتحان!
-        </Txt>
-        <Txt x={350} y={595} size={22} c="purple" at={2}>🎯 جميع التعريفات مطابقة للمنهج الوزاري السوري</Txt>
+        <Box x={80} y={145} w={540} h={515} c="purple" at={2} />
+        <Place x={105} y={165} w={490} h={475} at={2}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            justifyContent: 'space-between',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-purple)', paddingBottom: 4 }}>
+              ⚙️ الأساليب ورموز الحالة والبيانات
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: 16.5, lineHeight: 1.55 }}>
+              <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>أسلوب GET:</strong> جلب وقراءة واسترجاع البيانات دون تعديلها على الخادم.</div>
+              <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>أسلوب POST:</strong> إرسال بيانات جديدة إلى الخادم لمعالجتها وتخزينها.</div>
+              <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>رموز الحالة:</strong> 200 (نجاح) · 404 (طلب خاطئ، السيرفر سليم) · 500 (عطل خادم).</div>
+              <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>واجهة الـ API:</strong> مجموعة قواعد واضحة تسمح لبرنامج بطلب بيانات أو وظائف من برنامج آخر.</div>
+              <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>صيغة JSON:</strong> صيغة نصية خفيفة وسريعة لتبادل البيانات كأزواج مفاتيح وقيم.</div>
+            </div>
+            <div style={{
+              padding: '6px 12px',
+              borderRadius: 10,
+              background: 'rgba(168, 85, 247, 0.12)',
+              border: '1.5px solid var(--pen-purple)',
+              color: 'var(--pen-purple)',
+              fontWeight: 800,
+              fontSize: 16,
+              textAlign: 'center',
+            }}>
+              🎯 جميع التعريفات معتمدة ومطابقة لكتاب المدرسة الوزاري
+            </div>
+          </div>
+        </Place>
       </Scene>
     ),
   },
@@ -427,31 +456,117 @@ export const part6: FrameDef[] = [
       <Scene>
         <Heading sub="كل ما تحتاجه للامتحان في لوحة واحدة">خلاصة طرق الاتصال في تطبيقات الويب</Heading>
 
-        {/* 4 Pillars summary */}
-        <Box x={940} y={170} w={260} h={355} c="blue" at={1} />
-        <Doodle x={1070} y={230} icon="🔒" size={70} at={1} />
-        <Txt x={1070} y={295} size={30} c="blue" at={1}>١. الأمان والتشفير</Txt>
-        <Txt x={1070} y={350} w={230} size={21} c="ink" at={1}><b>HTTPS:</b> مشفر بـ TLS لحماية الباسورد</Txt>
-        <Txt x={1070} y={420} w={230} size={21} c="ink" at={1}><b>HTTP:</b> غير مشفر وعرضة للتنصت</Txt>
+        {/* 4 Pillars summary with pure Flexbox and zero line collision */}
+        {/* Pillar 1: Security (Right) */}
+        <Box x={940} y={145} w={260} h={380} c="blue" at={1} />
+        <Place x={950} y={160} w={240} h={350} at={1}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: 12 }}>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>🔒</div>
+              <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-blue)', marginTop: 4 }}>١. الأمان والتشفير</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-green)' }}>
+                <strong style={{ color: 'var(--pen-green)' }}>🔒 HTTPS:</strong> مشفر بطبقة TLS لحماية البيانات
+              </div>
+              <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-red)' }}>
+                <strong style={{ color: 'var(--pen-red)' }}>🔓 HTTP:</strong> نص صريح غير مشفر وعرضة للتنصت
+              </div>
+            </div>
+          </div>
+        </Place>
 
-        <Box x={660} y={170} w={260} h={355} c="orange" at={2} />
-        <Doodle x={790} y={230} icon="📨" size={70} at={2} />
-        <Txt x={790} y={295} size={30} c="orange" at={2}>٢. أساليب الطلب</Txt>
-        <Txt x={790} y={350} w={230} size={21} c="ink" at={2}><b>GET:</b> لجلب وقراءة واسترجاع البيانات</Txt>
-        <Txt x={790} y={420} w={230} size={21} c="ink" at={2}><b>POST:</b> لإرسال وتخزين بيانات جديدة</Txt>
+        {/* Pillar 2: Request Methods */}
+        <Box x={660} y={145} w={260} h={380} c="orange" at={2} />
+        <Place x={670} y={160} w={240} h={350} at={2}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: 12 }}>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>📨</div>
+              <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-orange)', marginTop: 4 }}>٢. أساليب الطلب</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
+              <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-blue)' }}>
+                <strong style={{ color: 'var(--pen-blue)' }}>🔍 أسلوب GET:</strong> جلب وقراءة واسترجاع البيانات
+              </div>
+              <div style={{ background: 'rgba(249, 115, 22, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-orange)' }}>
+                <strong style={{ color: 'var(--pen-orange)' }}>📤 أسلوب POST:</strong> إرسال بيانات جديدة لمعالجتها وتخزينها
+              </div>
+            </div>
+          </div>
+        </Place>
 
-        <Box x={380} y={170} w={260} h={355} c="green" at={3} />
-        <Doodle x={510} y={230} icon="🚦" size={70} at={3} />
-        <Txt x={510} y={295} size={30} c="green" at={3}>٣. رموز الحالة</Txt>
-        <Txt x={510} y={350} w={230} size={21} c="ink" at={3}><b>200:</b> نجاح تام ومعالجة سليمة</Txt>
-        <Txt x={510} y={395} w={230} size={21} c="ink" at={3}><b>404:</b> المورد غير موجود (خطأ عميل)</Txt>
-        <Txt x={510} y={440} w={230} size={21} c="ink" at={3}><b>500:</b> عطل داخلي في الخادم</Txt>
+        {/* Pillar 3: Status Codes */}
+        <Box x={380} y={145} w={260} h={380} c="green" at={3} />
+        <Place x={390} y={160} w={240} h={350} at={3}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: 10 }}>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>🚦</div>
+              <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-green)', marginTop: 4 }}>٣. رموز الحالة</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: 14, lineHeight: 1.45 }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-green)' }}>
+                <strong style={{ color: 'var(--pen-green)' }}>🟢 200 OK:</strong> نجاح تام ومعالجة سليمة للطلب
+              </div>
+              <div style={{ background: 'rgba(249, 115, 22, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-orange)' }}>
+                <strong style={{ color: 'var(--pen-orange)' }}>🟡 404:</strong> المورد غير موجود (خطأ من العميل)
+              </div>
+              <div style={{ background: 'rgba(239, 68, 68, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-red)' }}>
+                <strong style={{ color: 'var(--pen-red)' }}>🔴 500:</strong> عطل داخلي في الخادم البرمجي
+              </div>
+            </div>
+          </div>
+        </Place>
 
-        <Box x={100} y={170} w={260} h={355} c="purple" at={4} />
-        <Doodle x={230} y={230} icon="📦" size={70} at={4} />
-        <Txt x={230} y={295} size={30} c="purple" at={4}>٤. الـ API و JSON</Txt>
-        <Txt x={230} y={350} w={230} size={21} c="ink" at={4}><b>API:</b> وسيط آمن يربط الواجهات بالسيرفر</Txt>
-        <Txt x={230} y={420} w={230} size={21} c="ink" at={4}><b>JSON:</b> صيغة نصية خفيفة لتبادل البيانات</Txt>
+        {/* Pillar 4: API & JSON (Left) */}
+        <Box x={100} y={145} w={260} h={380} c="purple" at={4} />
+        <Place x={110} y={160} w={240} h={350} at={4}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            direction: 'rtl',
+            textAlign: 'right',
+            fontFamily: "'Cairo', system-ui, sans-serif",
+            color: 'var(--pen-ink)',
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: 12 }}>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>📦</div>
+              <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-purple)', marginTop: 4 }}>٤. الـ API و JSON</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
+              <div style={{ background: 'rgba(236, 72, 153, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-pink)' }}>
+                <strong style={{ color: 'var(--pen-pink)' }}>🔌 الـ API:</strong> وسيط وقواعد لطلب البيانات بين البرامج
+              </div>
+              <div style={{ background: 'rgba(168, 85, 247, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-purple)' }}>
+                <strong style={{ color: 'var(--pen-purple)' }}>📦 JSON:</strong> صيغة نصية خفيفة لتبادل البيانات
+              </div>
+            </div>
+          </div>
+        </Place>
 
         <Box x={100} y={550} w={1100} h={95} c="green" fill="green" size={28} tc="ink" at={5}>
           🎓 بكده اكتملت المفاهيم الأساسية للاتصال في الويب.. يلا نقيس فهمنا في بنك الأسئلة والتقييم!

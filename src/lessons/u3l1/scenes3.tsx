@@ -385,8 +385,8 @@ export const part8: FrameDef[] = [
         <Line pts={[[1030, 500], [700, 500]]} dashed c="ink" sw={1.6} at={4} delay={0.3} />
         <Line pts={[[580, 500], [250, 500]]} dashed c="ink" sw={1.6} at={4} delay={0.6} />
 
-        <Box x={170} y={600} w={940} h={80} c="green" fill="green" size={27} tc="ink" at={5}>
-          الزبون مش بيدخل المطبخ… بيطلب من المنيو. والـ Frontend بيطلب من الـ Backend حسب الـ API
+        <Box x={100} y={590} w={1080} h={95} c="green" fill="green" size={23} tc="ink" at={5}>
+          📖 <b>تعريف كتاب المدرسة لـ API:</b> «مجموعة قواعد واضحة تسمح لبرنامج بطلب بيانات أو وظائف من برنامج آخر.» (كالزبون الذي يطلب من المنيو دون دخول المطبخ).
         </Box>
       </Scene>
     ),

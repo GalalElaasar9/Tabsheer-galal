@@ -566,8 +566,15 @@ export function ApiStatesDemo() {
 
           {/* Pedagogical takeaway card */}
           <div className="mt-3 p-2.5 rounded-xl border text-xs leading-relaxed" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+            <div className="mb-2 p-2 rounded-lg border flex items-center justify-between" style={{ background: 'rgba(59, 130, 246, 0.08)', borderColor: 'rgba(59, 130, 246, 0.3)' }}>
+              <div>
+                <span className="font-extrabold text-sky-400 block mb-0.5">📖 تعريف واجهة برمجة التطبيقات API (كتاب المدرسة):</span>
+                <span className="font-bold text-slate-200">«مجموعة قواعد واضحة تسمح لبرنامج بطلب بيانات أو وظائف من برنامج آخر.»</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">API</span>
+            </div>
             <p className="font-extrabold mb-1 flex items-center gap-1">
-              <span>💡</span> <b>المفهوم البرمجي الأساسي:</b>
+              <span>💡</span> <b>حالات الطلب التفاعلي (Lifecycle States):</b>
             </p>
             {phase === 'idle' && (
               <p className="muted">
