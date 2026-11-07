@@ -6,7 +6,6 @@ import { APPLIED, CHECKS, DIFF, ORDERS, QUIZ } from './data';
 import {
   FrontendTrioLabDemo,
   ResponsiveMobileFirstDemo,
-  ReviewPointsDemo,
   SemanticElementBuilderDemo,
   SemanticHtmlComparisonDemo,
   TextbookGlossaryU3L3,
@@ -48,7 +47,7 @@ const order = (id: string, title: string, o: { steps: string[]; done: string }, 
 const lesson: LessonDef = {
   id: 'u3l3',
   title: 'أساسيات تكنولوجيا الواجهة الأمامية',
-  subtitle: 'مراجعة الدرسين ١ و ٢ في نقاط · أدوار الثلاثي (HTML/CSS/JS) · HTML الدلالية · التصميم المتجاوب والأولوية للجوال · أطر العمل',
+  subtitle: 'أدوار الثلاثي (HTML/CSS/JS) · تكامل البنية والمظهر والسلوك · HTML الدلالية · التصميم المتجاوب والأولوية للجوال · أطر العمل (React, Vue, Next)',
   sections: [
     /* =========================================================================
        Section 1: المقدمة وخريطة الرحلة
@@ -59,40 +58,25 @@ const lesson: LessonDef = {
     },
 
     /* =========================================================================
-       Section 2: مراجعة شاملة للدرس الأول والدرس الثاني في نقاط محددة
+       Section 2: مدخل الواجهة الأمامية وتكامل الثلاثي الأساسي (HTML · CSS · JS)
        ========================================================================= */
     {
-      title: '١ · مراجعة الدرس الأول والدرس الثاني في نقاط',
+      title: '١ · مدخل الواجهة الأمامية وتكامل الثلاثي (HTML · CSS · JS)',
       frames: [
-        part1[0], // review-lesson1-points
-        part1[1], // review-lesson2-points
-        {
-          id: 'review-points-demo',
-          title: '🧪 مستكشف نقاط مراجعة الدرسين الأول والثاني',
-          h: 840,
-          notes: (
-            <>
-              <p><b>مستكشف مراجعة الدرسين ١ و ٢:</b> استعراض منظم لنقاط كل درس: تطبيق الويب، بنية الطبقات الثلاث، تدفق الطلب، نموذج العميل والخادم، بروتوكولات HTTP/HTTPS، طريقتي GET و POST، رموز الحالة، و JSON.</p>
-            </>
-          ),
-          render: () => (
-            <>
-              <Eyebrow>🧪 مراجعة مركزة في نقاط</Eyebrow>
-              <Title>مستكشف نقاط مراجعة الدرسين الأول والثاني: البنية والاتصال</Title>
-              <ReviewPointsDemo />
-            </>
-          ),
-        },
-        order('order-flow', 'رتّب خطوات تدفق الطلب في بنية الطبقات الثلاث', ORDERS.requestFlow),
-        check('check-review', 'تأكد من استيعابك لنقاط مراجعة الدرسين الأول والثاني', CHECKS.reviewLessons1And2),
+        part1[0], // html-why (يعني إيه HTML ببساطة؟)
+        part1[1], // css-what (يعني إيه CSS ببساطة؟)
+        part1[2], // js-what (يعني إيه JavaScript ببساطة؟)
+        part1[3], // why-js (ليه محتاجين JavaScript في المتصفح؟)
+        part1[4], // trio-layers (نفس الفورم… ٣ طبقات متكاملة)
+        check('check-langs', 'HTML ولا CSS ولا JavaScript؟', CHECKS.langs, 820),
       ],
     },
 
     /* =========================================================================
-       Section 3: أدوار الثلاثي الأساسي (HTML · CSS · JavaScript)
+       Section 3: دراسة معمقة لأدوار الثلاثي الأساسي والتشبيه الوزاري
        ========================================================================= */
     {
-      title: '٢ · أدوار الثلاثي الأساسي (HTML · CSS · JavaScript)',
+      title: '٢ · دراسة معمقة لأدوار الثلاثي والتشبيه الوزاري بالمبنى',
       frames: [
         part2[0], // html-slide (أولاً: لغة HTML)
         part2[1], // css-slide (ثانياً: لغة CSS)

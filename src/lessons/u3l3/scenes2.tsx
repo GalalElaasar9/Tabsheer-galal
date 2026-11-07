@@ -267,12 +267,13 @@ export const part2: FrameDef[] = [
           خلاصة تكامل الثلاثي: HTML · CSS · JavaScript
         </Heading>
 
-        {/* 3 Columns for Trio */}
-        <Place x={140} y={150} w={320} h={380} at={1}>
+        {/* 3 Columns for Trio in Arabic Right-to-Left order: HTML (Right) -> CSS (Center) -> JS (Left) */}
+        {/* 1. HTML (Right: x=820) */}
+        <Place x={820} y={150} w={320} h={380} at={1}>
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#38bdf8' }}>
             <div>
               <div className="flex items-center justify-between border-b pb-2 mb-3" style={{ borderColor: '#1e293b' }}>
-                <span className="font-extrabold text-base text-sky-400">HTML</span>
+                <span className="font-extrabold text-base text-sky-400">١. لغة HTML</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">البنية (Structure)</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed mb-3">
@@ -289,11 +290,12 @@ export const part2: FrameDef[] = [
           </div>
         </Place>
 
+        {/* 2. CSS (Center: x=480) */}
         <Place x={480} y={150} w={320} h={380} at={2}>
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#a855f7' }}>
             <div>
               <div className="flex items-center justify-between border-b pb-2 mb-3" style={{ borderColor: '#1e293b' }}>
-                <span className="font-extrabold text-base text-purple-400">CSS</span>
+                <span className="font-extrabold text-base text-purple-400">٢. لغة CSS</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">المظهر (Presentation)</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed mb-3">
@@ -310,11 +312,12 @@ export const part2: FrameDef[] = [
           </div>
         </Place>
 
-        <Place x={820} y={150} w={320} h={380} at={3}>
+        {/* 3. JavaScript (Left: x=140) */}
+        <Place x={140} y={150} w={320} h={380} at={3}>
           <div className="p-4 rounded-xl border h-full flex flex-col justify-between" style={{ background: '#0a0f1d', borderColor: '#eab308' }}>
             <div>
               <div className="flex items-center justify-between border-b pb-2 mb-3" style={{ borderColor: '#1e293b' }}>
-                <span className="font-extrabold text-base text-yellow-400">JavaScript</span>
+                <span className="font-extrabold text-base text-yellow-400">٣. لغة JavaScript</span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-yellow-950 text-yellow-300 border border-yellow-800">السلوك (Behavior)</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed mb-3">

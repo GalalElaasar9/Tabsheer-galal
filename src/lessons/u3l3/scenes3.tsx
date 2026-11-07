@@ -143,9 +143,10 @@ export const part3: FrameDef[] = [
           الواجهة الأمامية الحديثة (Frontend)
         </Box>
 
-        {/* 4 Pillars */}
-        <Place x={140} y={240} w={230} h={370} at={2}>
-          <div className="p-3 rounded-xl border bg-slate-900 border-sky-800 text-xs text-slate-300 h-full flex flex-col justify-between">
+        {/* 4 Pillars in Arabic Right-to-Left order: 1 (Right) -> 2 -> 3 -> 4 (Left) */}
+        {/* Pillar 1: الثلاثي الأساسي (Right: x=890) */}
+        <Place x={890} y={240} w={250} h={370} at={2}>
+          <div className="p-3.5 rounded-xl border bg-slate-900 border-sky-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
               <span className="font-bold text-sky-400 block mb-2 border-b border-slate-800 pb-1">١. الثلاثي الأساسي</span>
               <ul className="space-y-2 text-[11px] leading-relaxed">
@@ -158,7 +159,8 @@ export const part3: FrameDef[] = [
           </div>
         </Place>
 
-        <Place x={390} y={240} w={230} h={370} at={3}>
+        {/* Pillar 2: HTML الدلالية (Center-Right: x=640) */}
+        <Place x={640} y={240} w={230} h={370} at={3}>
           <div className="p-3 rounded-xl border bg-slate-900 border-emerald-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
               <span className="font-bold text-emerald-400 block mb-2 border-b border-slate-800 pb-1">٢. HTML الدلالية</span>
@@ -172,7 +174,8 @@ export const part3: FrameDef[] = [
           </div>
         </Place>
 
-        <Place x={640} y={240} w={230} h={370} at={4}>
+        {/* Pillar 3: التصميم المتجاوب (Center-Left: x=390) */}
+        <Place x={390} y={240} w={230} h={370} at={4}>
           <div className="p-3 rounded-xl border bg-slate-900 border-purple-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
               <span className="font-bold text-purple-400 block mb-2 border-b border-slate-800 pb-1">٣. التصميم المتجاوب</span>
@@ -185,13 +188,14 @@ export const part3: FrameDef[] = [
           </div>
         </Place>
 
-        <Place x={890} y={240} w={250} h={370} at={5}>
+        {/* Pillar 4: أطر العمل (Left: x=140) */}
+        <Place x={140} y={240} w={230} h={370} at={5}>
           <div className="p-3 rounded-xl border bg-slate-900 border-amber-800 text-xs text-slate-300 h-full flex flex-col justify-between">
             <div>
               <span className="font-bold text-amber-400 block mb-2 border-b border-slate-800 pb-1">٤. أطر العمل (Frameworks)</span>
               <ul className="space-y-2 text-[11px] leading-relaxed">
                 <li>• توفير وظائف جاهزة لتطوير أسرع بكثير.</li>
-                <li>• <b>React:</b> مكتبة واجهات ومكونات قابلة لإعادة الاستخدام.</li>
+                <li>• <b>React:</b> مكتبة واجهات ومكونات.</li>
                 <li>• <b>Vue:</b> بنية بسيطة وتدرج.</li>
                 <li>• <b>Next.js:</b> إطار عمل مبني على React.</li>
               </ul>

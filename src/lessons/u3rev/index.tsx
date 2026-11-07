@@ -29,7 +29,6 @@ import {
 // -----------------------------------------------------------------------------
 // Lesson 3 Core Explanation Scenes, Demos & Activities
 // -----------------------------------------------------------------------------
-import { part1 as l3_p1 } from '../u3l3/scenes1';
 import { part2 as l3_p2 } from '../u3l3/scenes2';
 import { part3 as l3_p3 } from '../u3l3/scenes3';
 import {
@@ -37,6 +36,7 @@ import {
   ResponsiveMobileFirstDemo,
   SemanticHtmlComparisonDemo,
 } from '../u3l3/demos';
+import { reviewLesson1Points, reviewLesson2Points } from './scenes3';
 
 // Review cover
 import { intro as rev_intro } from './scenes1';
@@ -324,8 +324,8 @@ export const u3rev: LessonDef = {
     {
       title: '٤ · نقاط المراجعة المركزة وماراثون الامتحانات الشامل',
       frames: [
-        wrap('l3', l3_p1[0]), // review-lesson1-points (نقاط مراجعة الدرس الأول المعتمدة في المنهج)
-        wrap('l3', l3_p1[1]), // review-lesson2-points (نقاط مراجعة الدرس الثاني المعتمدة في المنهج)
+        reviewLesson1Points, // review-lesson1-points (نقاط مراجعة الدرس الأول المعتمدة في المنهج)
+        reviewLesson2Points, // review-lesson2-points (نقاط مراجعة الدرس الثاني المعتمدة في المنهج)
         {
           id: 'mega-quiz-frame',
           title: '🏆 ماراثون أسئلة الوحدة الثالثة الشامل',
