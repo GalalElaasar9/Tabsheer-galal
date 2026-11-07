@@ -15,7 +15,8 @@
   white-space: nowrap;
 }
 .hand.sk-center, .sk-in .hand, .hand[style*="width"] { white-space: normal; }
-.sk-clean { position: absolute; font-family: var(--font); font-weight: 800; line-height: 1.7; direction: rtl; unicode-bidi: isolate; }
+.sk-clean { position: absolute; font-family: var(--font); font-weight: 800; line-height: 1.7; direction: rtl; unicode-bidi: isolate; white-space: nowrap; }
+.sk-clean.sk-center, .sk-clean[style*="width"] { white-space: normal; }
 .sk-center {
   display: flex;
   align-items: center;

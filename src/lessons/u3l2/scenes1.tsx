@@ -23,10 +23,10 @@ export const intro: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Txt x={640} y={110} size={28} c="purple">الصف الثاني الثانوي · بكالوريا · Unit 3 · Lesson 2</Txt>
-        <Txt x={640} y={225} size={52} clean style={{ fontWeight: 800 }}>طرق الإتصال فى تطبيقات الويب</Txt>
-        <Underline x={270} y={262} w={740} c="blue" />
-        <Txt x={640} y={315} size={28} c="blue">Web Application Communication Methods</Txt>
+        <Txt x={640} y={115} size={28} c="purple">الصف الثاني الثانوي · بكالوريا · Unit 3 · Lesson 2</Txt>
+        <Txt x={640} y={225} size={60} clean style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>طرق الإتصال فى تطبيقات الويب</Txt>
+        <Underline x={250} y={278} w={780} c="blue" />
+        <Txt x={640} y={330} size={30} c="blue" clean style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Web Application Communication Methods</Txt>
 
         {[['💻', 'العميل Client'], ['📨', 'HTTP & HTTPS'], ['⚙️', 'GET & POST'], ['🚦', 'رموز الحالة'], ['📦', 'JSON & API']].map(([icon, label], i) => (
           <Doodle key={label} x={1060 - i * 200} y={515} icon={icon} size={85} label={label} lc="blue" at={1} delay={i * 0.2} />
