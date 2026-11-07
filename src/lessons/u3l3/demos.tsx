@@ -1501,7 +1501,7 @@ export function TextbookGlossaryU3L3() {
    ========================================================================= */
 export function FrameworksShowcaseWidget() {
   const [activeTab, setActiveTab] = useState<'analogy' | 'compare' | 'components'>('analogy');
-  const [selectedFw, setSelectedFw] = useState<'angular' | 'react' | 'next' | 'vue' | 'bootstrap'>('angular');
+  const [selectedFw, setSelectedFw] = useState<'react' | 'vue' | 'next'>('react');
   const [reusedComponent, setReusedComponent] = useState<'login' | 'card' | 'navbar'>('login');
 
   return (
@@ -1552,7 +1552,7 @@ export function FrameworksShowcaseWidget() {
               }`}
             >
               <Layers className="w-4 h-4" />
-              <span>٢. أطر العمل والمكتبات المقررة 🅰️⚛️</span>
+              <span>٢. أطر العمل المقررة (React · Vue · Next) ⚛️</span>
             </button>
 
             <button
@@ -1659,173 +1659,122 @@ export function FrameworksShowcaseWidget() {
             <div className="p-3.5 rounded-xl border bg-gradient-to-r from-blue-950/60 to-indigo-950/60 border-blue-800/60 text-xs text-blue-100 flex items-center gap-3 shadow-lg">
               <span className="text-2xl">💡</span>
               <div className="leading-relaxed">
-                <span className="font-black text-amber-300 text-sm">التعريف المعتمد في المنهج: </span>
-                <b>الـ Framework (إطار العمل)</b> = بيئة برمجية وأدوات وقواعد جاهزة توفر هيكلاً موحداً يساعد المطور على بناء وتطوير التطبيقات بشكل أسرع وأكثر تنظيماً وأماناً.
+                <span className="font-black text-amber-300 text-sm">تعريف إطار العمل (كتاب المدرسة ص ١٤٦): </span>
+                <b>«بنية توفر مسبقًا وظائف ومكونات شائعة الاستخدام، وذلك لجعل عملية تطوير تطبيقات الويب أكثر كفاءة، دون الحاجة لكتابة كامل الكود البرمجي من الصفر.»</b>
               </div>
             </div>
           </div>
         )}
 
-        {/* Tab 2: Frameworks vs Libraries in Curriculum */}
+        {/* Tab 2: The 3 Frameworks & Libraries in the Textbook */}
         {activeTab === 'compare' && (
-          <div className="space-y-3.5">
+          <div className="space-y-4">
             {/* Core Distinction Explanation */}
-            <div className="p-3 rounded-xl bg-purple-950/30 border border-purple-900/50 text-xs text-purple-200 flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-purple-950/30 border border-purple-900/50 text-xs text-purple-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-lg">⚖️</span>
-                <span>
-                  <b>الفرق التقني الجوهري للامتحان:</b> هل الأداة <b>Framework</b> متكامل أم <b>Library</b> متخصصة؟
+                <span className="text-xl">📚</span>
+                <span className="text-sm">
+                  <b>الأمثلة المقررة في كتاب المدرسة (صفحة ١٤٦):</b> ثلاثة نماذج أساسية لتطوير تطبيقات الويب
                 </span>
               </div>
-              <span className="text-[11px] font-bold text-purple-300 bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">
-                سؤال امتحاني معتمد
+              <span className="text-xs font-bold text-purple-300 bg-purple-950/80 px-3 py-1 rounded-lg border border-purple-800">
+                منهج البكالوريا
               </span>
             </div>
 
-            {/* 5 Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-2.5">
-              {/* 1. Angular */}
+            {/* 3 Spacious Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* 1. React */}
               <div
-                onClick={() => setSelectedFw('angular')}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedFw === 'angular'
-                    ? 'ring-2 ring-red-500 bg-red-950/30 border-red-500 shadow-lg'
+                onClick={() => setSelectedFw('react')}
+                className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                  selectedFw === 'react'
+                    ? 'ring-2 ring-sky-400 bg-sky-950/40 border-sky-400 shadow-xl'
                     : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl">🅰️</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-800">
-                      Framework
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-3xl">⚛️</span>
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">
+                      مكتبة واجهات UI Library
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-xs text-red-400 mb-0.5">Angular</h4>
-                  <span className="text-[10px] text-slate-400 block mb-1.5 font-bold">من Google</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    <b>إطار عمل ويب شامل:</b> يوفر التوجيه (Routing) والنماذج وحالة التطبيق بشكل مدمج دون الحاجة لأدوات خارجية.
+                  <h4 className="font-extrabold text-base text-sky-400 mb-1">React</h4>
+                  <span className="text-xs text-slate-400 block mb-2 font-bold">مكتبة JavaScript لبناء الواجهات</span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    «مكتبة JavaScript لبناء واجهات المستخدم من مكونات قابلة لإعادة الاستخدام وتحديثها عند تغير البيانات.»
                   </p>
                 </div>
-                <div className="mt-2 pt-1.5 border-t border-slate-800/80 text-[10px] text-red-300 font-bold">
-                  👈 Framework متكامل
+                <div className="mt-4 pt-2.5 border-t border-slate-800/80 text-xs text-sky-300 font-bold flex items-center justify-between">
+                  <span>👈 مكتبة (Library) متخصصة</span>
+                  <span className="text-[11px] text-slate-400 font-normal">كتاب المدرسة ص ١٤٦</span>
                 </div>
               </div>
 
-              {/* 2. React */}
+              {/* 2. Vue.js */}
               <div
-                onClick={() => setSelectedFw('react')}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedFw === 'react'
-                    ? 'ring-2 ring-sky-400 bg-sky-950/30 border-sky-400 shadow-lg'
+                onClick={() => setSelectedFw('vue')}
+                className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                  selectedFw === 'vue'
+                    ? 'ring-2 ring-emerald-400 bg-emerald-950/40 border-emerald-400 shadow-xl'
                     : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl">⚛️</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">
-                      UI Library
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-3xl">💚</span>
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                      إطار عمل تدريجي Progressive
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-xs text-sky-400 mb-0.5">React</h4>
-                  <span className="text-[10px] text-slate-400 block mb-1.5 font-bold">من Meta</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    <b>مكتبة واجهات (Library):</b> متخصصة فقط في بناء وتحديث واجهة المستخدم بالمكونات (Components)، وتستدعي مكتبات مساعدة للتوجيه.
+                  <h4 className="font-extrabold text-base text-emerald-400 mb-1">Vue.js</h4>
+                  <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لبناء تطبيقات الويب</span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    «له بنية بسيطة ويتيح بناء تطبيقات الويب تدريجيًا بدءًا من ميزات صغيرة وحتى تطبيقات أكبر.»
                   </p>
                 </div>
-                <div className="mt-2 pt-1.5 border-t border-slate-800/80 text-[10px] text-sky-300 font-bold">
-                  👈 Library وليست Framework
+                <div className="mt-4 pt-2.5 border-t border-slate-800/80 text-xs text-emerald-300 font-bold flex items-center justify-between">
+                  <span>👈 إطار عمل (Framework) مبسط</span>
+                  <span className="text-[11px] text-slate-400 font-normal">كتاب المدرسة ص ١٤٦</span>
                 </div>
               </div>
 
               {/* 3. Next.js */}
               <div
                 onClick={() => setSelectedFw('next')}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
                   selectedFw === 'next'
-                    ? 'ring-2 ring-white bg-slate-800 border-white shadow-lg'
+                    ? 'ring-2 ring-purple-400 bg-purple-950/40 border-purple-400 shadow-xl'
                     : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl">▲</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-700">
-                      Framework
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-3xl">▲</span>
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-slate-950 text-purple-300 border border-purple-800">
+                      إطار متكامل مبني على React
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-xs text-white mb-0.5">Next.js</h4>
-                  <span className="text-[10px] text-slate-400 block mb-1.5 font-bold">مبني فوق React</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    <b>إطار عمل لتطبيقات React:</b> يحل نقص React فيضيف التوجيه (Routing) والتصيير على الخادم (SSR) لسرعة الأرشفة ومحركات البحث.
+                  <h4 className="font-extrabold text-base text-purple-300 mb-1">Next.js</h4>
+                  <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لتطبيقات الويب</span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    «إطار مبني على React لبناء تطبيقات ويب، ويوفر التوجيه (Routing) وطرقًا مختلفة لعرض الصفحات والعمل على الخادم والعميل.»
                   </p>
                 </div>
-                <div className="mt-2 pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-200 font-bold">
-                  👈 Framework فوق React
-                </div>
-              </div>
-
-              {/* 4. Vue.js */}
-              <div
-                onClick={() => setSelectedFw('vue')}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedFw === 'vue'
-                    ? 'ring-2 ring-emerald-400 bg-emerald-950/30 border-emerald-400 shadow-lg'
-                    : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl">💚</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
-                      Progressive
-                    </span>
-                  </div>
-                  <h4 className="font-extrabold text-xs text-emerald-400 mb-0.5">Vue.js</h4>
-                  <span className="text-[10px] text-slate-400 block mb-1.5 font-bold">إطار عمل تدريجي</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    <b>إطار عمل مرن:</b> يسمح ببناء واجهات الويب بشكل تدريجي؛ من إضافة ميزة صغيرة وحتى بناء تطبيقات SPA متكاملة.
-                  </p>
-                </div>
-                <div className="mt-2 pt-1.5 border-t border-slate-800/80 text-[10px] text-emerald-300 font-bold">
-                  👈 Progressive Framework
-                </div>
-              </div>
-
-              {/* 5. Bootstrap (CSS Framework) */}
-              <div
-                onClick={() => setSelectedFw('bootstrap')}
-                className={`p-3 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedFw === 'bootstrap'
-                    ? 'ring-2 ring-indigo-400 bg-indigo-950/30 border-indigo-400 shadow-lg'
-                    : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xl">🎨</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">
-                      CSS Framework
-                    </span>
-                  </div>
-                  <h4 className="font-extrabold text-xs text-indigo-300 mb-0.5">Bootstrap</h4>
-                  <span className="text-[10px] text-slate-400 block mb-1.5 font-bold">أطر عمل التصميم</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    <b>إطار عمل لتنسيق الواجهات:</b> يوفر نظام شبكي متجاوب (Grid System) وعناصر جاهزة (أزرار، قوائم، بطاقات) تتكيف تلقائياً مع الشاشات.
-                  </p>
-                </div>
-                <div className="mt-2 pt-1.5 border-t border-slate-800/80 text-[10px] text-indigo-300 font-bold">
-                  👈 CSS Framework
+                <div className="mt-4 pt-2.5 border-t border-slate-800/80 text-xs text-purple-300 font-bold flex items-center justify-between">
+                  <span>👈 Framework متكامل فوق React</span>
+                  <span className="text-[11px] text-slate-400 font-normal">كتاب المدرسة ص ١٤٦</span>
                 </div>
               </div>
             </div>
 
-            {/* Inversion of Control Rule */}
-            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
-              <span className="text-amber-400 text-base">📌</span>
+            {/* Simple Student-Friendly Note */}
+            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-start gap-3">
+              <span className="text-amber-400 text-xl">💡</span>
               <div className="leading-relaxed">
-                <span className="font-bold text-amber-300">قاعدة الامتحان الذهبية (مبدأ التحكم المعكوس Inversion of Control): </span>
-                في <b>المكتبة (Library)</b> أنت المطور وأنت من يستدعي دوالها وقتما تحب، بينما في <b>إطار العمل (Framework)</b> هو الذي يفرض القواعد والهيكل المعماري ويستدعي الكود الخاص بك داخل قوالبه.
+                <span className="font-bold text-amber-300 text-sm">ملاحظة مهمة للامتحان: </span>
+                تُوصف <b>React</b> بأنها <b>«مكتبة»</b> تركز بشكل رئيسي على واجهات المستخدم والمكونات، بينما يوفر كل من <b>Vue</b> و <b>Next.js</b> بيئة وهيكلاً متكاملاً يُطلق عليه <b>«إطار عمل (Framework)»</b>.
               </div>
             </div>
           </div>
