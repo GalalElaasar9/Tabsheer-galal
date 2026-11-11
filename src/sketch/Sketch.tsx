@@ -145,7 +145,7 @@ export function Box({ x, y, w, h, c = 'ink', fill, hachure, sw = 2.6, size = 32,
     <Layer at={at} delay={delay}>
       <Ink drawables={d} delay={delay} />
       {children !== undefined && (
-        <div className="hand sk-center" style={{ left: x, top: y, width: w, height: h, fontSize: size, color: ink(tc ?? c), lineHeight: 1.6 }}><div>{children}</div></div>
+        <div data-interactive="" className="hand sk-center" style={{ left: x, top: y, width: w, height: h, fontSize: size, color: ink(tc ?? c), lineHeight: 1.6, pointerEvents: 'auto' }}><div>{children}</div></div>
       )}
     </Layer>
   );
@@ -454,7 +454,7 @@ export function Place({ x, y, w, h, at, delay, children, className = '' }: Base 
 }) {
   return (
     <Layer at={at} delay={delay}>
-      <div className={`sk-place ${className}`} style={{ left: x, top: y, width: w, height: h }}>{children}</div>
+      <div data-interactive="" className={`sk-place ${className}`} style={{ left: x, top: y, width: w, height: h, pointerEvents: 'auto' }}>{children}</div>
     </Layer>
   );
 }

@@ -24,9 +24,9 @@ export const intro: FrameDef[] = [
     render: () => (
       <Scene>
         <Txt x={640} y={115} size={28} c="purple">الصف الثاني الثانوي · بكالوريا · Unit 3 · Lesson 2</Txt>
-        <Txt x={640} y={225} size={60} clean style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>طرق الإتصال فى تطبيقات الويب</Txt>
-        <Underline x={250} y={278} w={780} c="blue" />
-        <Txt x={640} y={330} size={30} c="blue" clean style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Web Application Communication Methods</Txt>
+        <Txt x={640} y={215} size={54} clean style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>طرق الاتصال في تطبيقات الويب</Txt>
+        <Underline x={260} y={275} w={760} c="blue" />
+        <Txt x={640} y={330} size={28} c="blue" clean style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Web Application Communication Methods</Txt>
 
         {[['💻', 'العميل Client'], ['📨', 'HTTP & HTTPS'], ['⚙️', 'GET & POST'], ['🚦', 'رموز الحالة'], ['📦', 'JSON & API']].map(([icon, label], i) => (
           <Doodle key={label} x={1060 - i * 200} y={515} icon={icon} size={85} label={label} lc="blue" at={1} delay={i * 0.2} />
@@ -45,14 +45,16 @@ export const intro: FrameDef[] = [
     render: () => (
       <Scene>
         <Heading>خريطة موضوعات الدرس</Heading>
-        <Box x={150} y={150} w={980} h={105} c="pink" fill="pink" size={32} tc="ink">
+        <Box x={150} y={145} w={980} h={100} c="pink" fill="pink" size={28} tc="ink">
           ❓ إزاي تطبيقات الويب بتبعت وتستقبل البيانات بأمان وسرعة؟
         </Box>
         <Line at={1} c="ink" sw={3} dashed pts={[...STOP_PTS.slice(0, 4), [150, 460], ...STOP_PTS.slice(4)]} />
         {STOP_PTS.map(([x, y], i) => (
           <span key={i} className="contents">
             <Num at={1} delay={i * 0.12} x={x} y={y} n={i + 1} c="purple" />
-            <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={21}>{STOPS[i]}</Txt>
+            <Txt at={1} delay={i * 0.12} x={x} y={y + 58} size={17} w={190} align="center" style={{ lineHeight: 1.4, fontWeight: 700 }}>
+              {STOPS[i]}
+            </Txt>
           </span>
         ))}
       </Scene>

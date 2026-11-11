@@ -52,7 +52,7 @@ export const CURRICULUM_G1: UnitEntry[] = [
       { n: 4, title: 'نظام الست عشري', en: 'Hexadecimal System', icon: '🔟' },
       { n: 5, title: 'العمليات الحسابية العددية والمتممات', en: 'Binary Arithmetic & Complements', icon: '➕' },
       { n: 6, title: 'رقمنة الصوت', en: 'Audio Digitization', icon: '🎙️' },
-      { n: 7, title: 'رقمنة الصور', en: 'Image Digitization', icon: '🖼️' },
+      { n: 7, title: 'رقمنة الصور', en: 'Image Digitization', icon: '🖼️', board: 'u6l7', badge: 'جديد' },
       { n: 8, title: 'التمثيل الرقمي وضغط الفيديو', en: 'Video Digitization & Compression', icon: '🎬' },
       { n: 9, title: 'تصميم المعلومات', en: 'Information Design', icon: '📊' },
     ],
@@ -87,7 +87,7 @@ export const CURRICULUM_G2: UnitEntry[] = [
   {
     unit: 'الفصل الرابع', title: 'تصميم الويب والوسائط',
     lessons: [
-      { n: 1, title: 'أنواع الوسائط وخصائصها', en: 'Media Types & Characteristics', icon: '🎥', board: 'u4l1' },
+      { n: 1, title: 'اختيار الوسيلة المناسبة لنقل المعلومات', en: 'Choosing the Right Communication Medium', icon: '📡', board: 'u4l1' },
       { n: 2, title: 'تصميم المعلومات وتجربة المستخدم للمواقع الإلكترونية', en: 'Information Design & Website UX', icon: '🧠', board: 'u4l2' },
       { n: 3, title: 'طرق تقييم المواقع الإلكترونية', en: 'Website Evaluation Methods', icon: '🔍', board: 'u4l3' },
       { n: 4, title: 'عملية التحسين التكراري للمواقع الإلكترونية', en: 'Iterative Website Optimization Process', icon: '🔄', board: 'u4l4' },
@@ -111,7 +111,7 @@ export const GRADES = [
     id: 'g1' as const,
     title: 'الصف الأول الثانوي',
     sub: 'البرمجة والذكاء الاصطناعي · الترم الأول 2026 / 2027',
-    badge: 'درس جديد متاح',
+    badge: 'درسان متاحان',
     curriculum: CURRICULUM_G1,
   },
 ];

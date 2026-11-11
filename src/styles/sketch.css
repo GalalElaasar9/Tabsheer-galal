@@ -24,6 +24,18 @@
   text-align: center;
   padding: 6px 12px;
   line-height: 1.6;
+  pointer-events: auto;
+}
+.hand.sk-center,
+.sk-interactive,
+.sk button,
+.sk input,
+.sk select,
+.sk textarea,
+.sk a,
+.sk [role="button"],
+.sk [data-interactive] {
+  pointer-events: auto;
 }
 .sk-emoji { position: absolute; transform: translate(-50%, -50%); line-height: 1; }
 .sk-num { transform: translate(-50%, -52%); font-size: 30px; line-height: 1; }

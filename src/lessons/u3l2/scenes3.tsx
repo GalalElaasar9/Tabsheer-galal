@@ -360,8 +360,8 @@ export const part6: FrameDef[] = [
         <Heading sub="مرجع الحفظ السريع لجميع المصطلحات المقررة في المنهج الوزاري">📖 معجم تعريفات كتاب المدرسة الوزاري المعتمد</Heading>
 
         {/* Column 1 (Right): الأساسيات والبروتوكولات */}
-        <Box x={660} y={145} w={540} h={515} c="blue" at={1} />
-        <Place x={685} y={165} w={490} h={475} at={1}>
+        <Box x={660} y={145} w={550} h={515} c="blue" at={1} />
+        <Place x={680} y={165} w={510} h={475} at={1}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -372,10 +372,10 @@ export const part6: FrameDef[] = [
             fontFamily: "'Cairo', system-ui, sans-serif",
             color: 'var(--pen-ink)',
           }}>
-            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-blue)', paddingBottom: 4 }}>
+            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-blue)', paddingBottom: 6 }}>
               🏛️ الأساسيات وبروتوكولات الأمان
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 16.5, lineHeight: 1.55 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: 14.5, lineHeight: 1.85 }}>
               <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>العميل (Client):</strong> الجهاز أو المتصفح الذي يبدأ بالطلب ويرسل HTTP Request.</div>
               <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>الخادم (Server):</strong> حاسوب مركزي متصل دائماً، يعالج الطلب ويرسل HTTP Response.</div>
               <div>• <strong style={{ color: 'var(--pen-blue)', fontWeight: 800 }}>دورة الطلب والرد:</strong> سؤال وجواب؛ العميل يطلب والخادم يعالج ويرد بالاستجابة.</div>
@@ -390,7 +390,7 @@ export const part6: FrameDef[] = [
               border: '1.5px solid var(--pen-green)',
               color: 'var(--pen-green)',
               fontWeight: 800,
-              fontSize: 16,
+              fontSize: 15.5,
               textAlign: 'center',
             }}>
               🔒 الحماية إجبارية في تسجيل الدخول وبوابات الدفع
@@ -399,8 +399,8 @@ export const part6: FrameDef[] = [
         </Place>
 
         {/* Column 2 (Left): الأساليب ورموز الحالة والبيانات */}
-        <Box x={80} y={145} w={540} h={515} c="purple" at={2} />
-        <Place x={105} y={165} w={490} h={475} at={2}>
+        <Box x={70} y={145} w={550} h={515} c="purple" at={2} />
+        <Place x={90} y={165} w={510} h={475} at={2}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -411,10 +411,10 @@ export const part6: FrameDef[] = [
             fontFamily: "'Cairo', system-ui, sans-serif",
             color: 'var(--pen-ink)',
           }}>
-            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-purple)', paddingBottom: 4 }}>
+            <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 900, color: 'var(--pen-purple)', paddingBottom: 6 }}>
               ⚙️ الأساليب ورموز الحالة والبيانات
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: 16.5, lineHeight: 1.55 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '13px', fontSize: 14.5, lineHeight: 1.85 }}>
               <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>أسلوب GET:</strong> جلب وقراءة واسترجاع البيانات دون تعديلها على الخادم.</div>
               <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>أسلوب POST:</strong> إرسال بيانات جديدة إلى الخادم لمعالجتها وتخزينها.</div>
               <div>• <strong style={{ color: 'var(--pen-purple)', fontWeight: 800 }}>رموز الحالة:</strong> 200 (نجاح) · 404 (طلب خاطئ، السيرفر سليم) · 500 (عطل خادم).</div>
@@ -428,7 +428,7 @@ export const part6: FrameDef[] = [
               border: '1.5px solid var(--pen-purple)',
               color: 'var(--pen-purple)',
               fontWeight: 800,
-              fontSize: 16,
+              fontSize: 15.5,
               textAlign: 'center',
             }}>
               🎯 جميع التعريفات معتمدة ومطابقة لكتاب المدرسة الوزاري
@@ -458,8 +458,8 @@ export const part6: FrameDef[] = [
 
         {/* 4 Pillars summary with pure Flexbox and zero line collision */}
         {/* Pillar 1: Security (Right) */}
-        <Box x={940} y={145} w={260} h={380} c="blue" at={1} />
-        <Place x={950} y={160} w={240} h={350} at={1}>
+        <Box x={940} y={145} w={260} h={385} c="blue" at={1} />
+        <Place x={950} y={160} w={240} h={360} at={1}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -473,11 +473,11 @@ export const part6: FrameDef[] = [
               <div style={{ fontSize: 36, lineHeight: 1 }}>🔒</div>
               <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-blue)', marginTop: 4 }}>١. الأمان والتشفير</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
-              <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-green)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14, lineHeight: 1.8 }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-green)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-green)' }}>🔒 HTTPS:</strong> مشفر بطبقة TLS لحماية البيانات
               </div>
-              <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-red)' }}>
+              <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-red)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-red)' }}>🔓 HTTP:</strong> نص صريح غير مشفر وعرضة للتنصت
               </div>
             </div>
@@ -485,8 +485,8 @@ export const part6: FrameDef[] = [
         </Place>
 
         {/* Pillar 2: Request Methods */}
-        <Box x={660} y={145} w={260} h={380} c="orange" at={2} />
-        <Place x={670} y={160} w={240} h={350} at={2}>
+        <Box x={660} y={145} w={260} h={385} c="orange" at={2} />
+        <Place x={670} y={160} w={240} h={360} at={2}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -500,11 +500,11 @@ export const part6: FrameDef[] = [
               <div style={{ fontSize: 36, lineHeight: 1 }}>📨</div>
               <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-orange)', marginTop: 4 }}>٢. أساليب الطلب</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
-              <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-blue)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14, lineHeight: 1.8 }}>
+              <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-blue)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-blue)' }}>🔍 أسلوب GET:</strong> جلب وقراءة واسترجاع البيانات
               </div>
-              <div style={{ background: 'rgba(249, 115, 22, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-orange)' }}>
+              <div style={{ background: 'rgba(249, 115, 22, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-orange)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-orange)' }}>📤 أسلوب POST:</strong> إرسال بيانات جديدة لمعالجتها وتخزينها
               </div>
             </div>
@@ -512,8 +512,8 @@ export const part6: FrameDef[] = [
         </Place>
 
         {/* Pillar 3: Status Codes */}
-        <Box x={380} y={145} w={260} h={380} c="green" at={3} />
-        <Place x={390} y={160} w={240} h={350} at={3}>
+        <Box x={380} y={145} w={260} h={385} c="green" at={3} />
+        <Place x={390} y={160} w={240} h={360} at={3}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -527,14 +527,14 @@ export const part6: FrameDef[] = [
               <div style={{ fontSize: 36, lineHeight: 1 }}>🚦</div>
               <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-green)', marginTop: 4 }}>٣. رموز الحالة</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: 14, lineHeight: 1.45 }}>
-              <div style={{ background: 'rgba(16, 185, 129, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-green)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: 13.5, lineHeight: 1.8 }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.12)', padding: '7px 8px', borderRadius: 8, border: '1px solid var(--pen-green)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-green)' }}>🟢 200 OK:</strong> نجاح تام ومعالجة سليمة للطلب
               </div>
-              <div style={{ background: 'rgba(249, 115, 22, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-orange)' }}>
+              <div style={{ background: 'rgba(249, 115, 22, 0.12)', padding: '7px 8px', borderRadius: 8, border: '1px solid var(--pen-orange)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-orange)' }}>🟡 404:</strong> المورد غير موجود (خطأ من العميل)
               </div>
-              <div style={{ background: 'rgba(239, 68, 68, 0.12)', padding: '6px 8px', borderRadius: 8, border: '1px solid var(--pen-red)' }}>
+              <div style={{ background: 'rgba(239, 68, 68, 0.12)', padding: '7px 8px', borderRadius: 8, border: '1px solid var(--pen-red)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-red)' }}>🔴 500:</strong> عطل داخلي في الخادم البرمجي
               </div>
             </div>
@@ -542,8 +542,8 @@ export const part6: FrameDef[] = [
         </Place>
 
         {/* Pillar 4: API & JSON (Left) */}
-        <Box x={100} y={145} w={260} h={380} c="purple" at={4} />
-        <Place x={110} y={160} w={240} h={350} at={4}>
+        <Box x={100} y={145} w={260} h={385} c="purple" at={4} />
+        <Place x={110} y={160} w={240} h={360} at={4}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -557,18 +557,18 @@ export const part6: FrameDef[] = [
               <div style={{ fontSize: 36, lineHeight: 1 }}>📦</div>
               <div style={{ fontSize: 21, fontWeight: 900, color: 'var(--pen-purple)', marginTop: 4 }}>٤. الـ API و JSON</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14.5, lineHeight: 1.5 }}>
-              <div style={{ background: 'rgba(236, 72, 153, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-pink)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: 14, lineHeight: 1.8 }}>
+              <div style={{ background: 'rgba(236, 72, 153, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-pink)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-pink)' }}>🔌 الـ API:</strong> وسيط وقواعد لطلب البيانات بين البرامج
               </div>
-              <div style={{ background: 'rgba(168, 85, 247, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-purple)' }}>
+              <div style={{ background: 'rgba(168, 85, 247, 0.1)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--pen-purple)', lineHeight: 1.8 }}>
                 <strong style={{ color: 'var(--pen-purple)' }}>📦 JSON:</strong> صيغة نصية خفيفة لتبادل البيانات
               </div>
             </div>
           </div>
         </Place>
 
-        <Box x={100} y={550} w={1100} h={95} c="green" fill="green" size={28} tc="ink" at={5}>
+        <Box x={100} y={545} w={1100} h={95} c="green" fill="green" size={26} tc="ink" at={5}>
           🎓 بكده اكتملت المفاهيم الأساسية للاتصال في الويب.. يلا نقيس فهمنا في بنك الأسئلة والتقييم!
         </Box>
       </Scene>

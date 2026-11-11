@@ -1417,7 +1417,7 @@ export function FrameworksShowcaseWidget() {
                 <span className="text-base">🤔</span>
                 <span>المشكلة: لو كل مرة هنعمل موقع هنكتب كل حاجة من الصفر؟</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs text-slate-300 leading-relaxed mb-3" style={{ lineHeight: 1.85 }}>
                 لو كل مطور قرر يبدأ كل تطبيق من نقطة الصفر، هيضيع وقتاً ومجهوداً ضخماً في برمجة أشياء متكررة وشائعة يحتاجها كل موقع:
               </p>
               {/* 4 Routine Tasks */}
@@ -1425,22 +1425,22 @@ export function FrameworksShowcaseWidget() {
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🚦</span>
                   <span className="font-extrabold text-sky-300 block mb-1">التوجيه (Routing)</span>
-                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>التنقل بين الصفحات وتغيير الروابط</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.85 }}>التنقل بين الصفحات وتغيير الروابط</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">📁</span>
                   <span className="font-extrabold text-sky-300 block mb-1">تنظيم الصفحات</span>
-                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>هيكلة وتقسيم ملفات ومجلدات المشروع</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.85 }}>هيكلة وتقسيم ملفات ومجلدات المشروع</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🔄</span>
                   <span className="font-extrabold text-sky-300 block mb-1">التعامل مع البيانات</span>
-                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>إرسال واستقبال طلبات API والـ JSON</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.85 }}>إرسال واستقبال طلبات API والـ JSON</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <span className="text-xl block mb-1">🧩</span>
                   <span className="font-extrabold text-sky-300 block mb-1">إدارة أجزاء الموقع</span>
-                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.65 }}>تحديث الواجهة وحالة المكونات (State)</span>
+                  <span className="text-[11px] text-slate-400 block" style={{ lineHeight: 1.85 }}>تحديث الواجهة وحالة المكونات (State)</span>
                 </div>
               </div>
             </div>
@@ -1521,9 +1521,9 @@ export function FrameworksShowcaseWidget() {
               </span>
             </div>
 
-            {/* 3 Spacious Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* 1. React */}
+            {/* 3 Spacious Cards Grid in RTL order (1 Right, 2 Center, 3 Left) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ direction: 'rtl' }}>
+              {/* 1. React (Right) */}
               <div
                 onClick={() => setSelectedFw('react')}
                 className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
@@ -1539,7 +1539,7 @@ export function FrameworksShowcaseWidget() {
                       مكتبة واجهات UI Library
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-base text-sky-400 mb-1">React</h4>
+                  <h4 className="font-extrabold text-base text-sky-400 mb-1">١ · React</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">مكتبة JavaScript لبناء الواجهات</span>
                   <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «مكتبة JavaScript لبناء واجهات المستخدم من مكونات قابلة لإعادة الاستخدام وتحديثها عند تغير البيانات.»
@@ -1551,7 +1551,7 @@ export function FrameworksShowcaseWidget() {
                 </div>
               </div>
 
-              {/* 2. Vue.js */}
+              {/* 2. Vue.js (Center) */}
               <div
                 onClick={() => setSelectedFw('vue')}
                 className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
@@ -1567,7 +1567,7 @@ export function FrameworksShowcaseWidget() {
                       إطار عمل تدريجي Progressive
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-base text-emerald-400 mb-1">Vue.js</h4>
+                  <h4 className="font-extrabold text-base text-emerald-400 mb-1">٢ · Vue.js</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لبناء تطبيقات الويب</span>
                   <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «له بنية بسيطة ويتيح بناء تطبيقات الويب تدريجيًا بدءًا من ميزات صغيرة وحتى تطبيقات أكبر.»
@@ -1579,7 +1579,7 @@ export function FrameworksShowcaseWidget() {
                 </div>
               </div>
 
-              {/* 3. Next.js */}
+              {/* 3. Next.js (Left) */}
               <div
                 onClick={() => setSelectedFw('next')}
                 className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
@@ -1595,7 +1595,7 @@ export function FrameworksShowcaseWidget() {
                       إطار متكامل مبني على React
                     </span>
                   </div>
-                  <h4 className="font-extrabold text-base text-purple-300 mb-1">Next.js</h4>
+                  <h4 className="font-extrabold text-base text-purple-300 mb-1">٣ · Next.js</h4>
                   <span className="text-xs text-slate-400 block mb-2 font-bold">إطار عمل لتطبيقات الويب</span>
                   <p className="text-xs text-slate-300" style={{ lineHeight: 1.85 }}>
                     «إطار مبني على React لبناء تطبيقات ويب، ويوفر التوجيه (Routing) وطرقًا مختلفة لعرض الصفحات والعمل على الخادم والعميل.»
@@ -1611,7 +1611,7 @@ export function FrameworksShowcaseWidget() {
             {/* Simple Student-Friendly Note */}
             <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-start gap-3">
               <span className="text-amber-400 text-xl">💡</span>
-              <div className="leading-relaxed">
+              <div style={{ lineHeight: 1.85 }}>
                 <span className="font-bold text-amber-300 text-sm">ملاحظة مهمة للامتحان: </span>
                 تُوصف <b>React</b> بأنها <b>«مكتبة»</b> تركز بشكل رئيسي على واجهات المستخدم والمكونات، بينما يوفر كل من <b>Vue</b> و <b>Next.js</b> بيئة وهيكلاً متكاملاً يُطلق عليه <b>«إطار عمل (Framework)»</b>.
               </div>

@@ -22,19 +22,19 @@ function Form({ x, title, c, styled, js, at }: { x: number; title: string; c: Co
 }
 
 const STOPS = [
-  'لغة HTML (بنية الصفحة)',
-  'لغة CSS (المظهر والتنسيق)',
-  'لغة JavaScript (السلوك الحي)',
-  'تكامل الثلاثي والتشبيه الوزاري',
-  'HTML الدلالية والوصول (A11y)',
-  'التصميم المتجاوب (Mobile-first)',
-  'أطر العمل (React · Vue · Next)',
-  'المعجم وبنك أسئلة البكالوريا',
+  '١ · لغة HTML (البنية)',
+  '٢ · لغة CSS (المظهر)',
+  '٣ · لغة JavaScript (السلوك)',
+  '٤ · تكامل الثلاثي والتشبيه',
+  '٥ · HTML الدلالية والوصول',
+  '٦ · التصميم المتجاوب للجوال',
+  '٧ · أطر العمل (React · Vue · Next)',
+  '٨ · المعجم وبنك أسئلة البكالوريا',
 ];
 
 const STOP_PTS: [number, number][] = [
-  [1050, 345], [800, 345], [550, 345], [300, 345],
-  [300, 565], [550, 565], [800, 565], [1050, 565],
+  [1050, 340], [800, 340], [550, 340], [300, 340],
+  [300, 560], [550, 560], [800, 560], [1050, 560],
 ];
 
 export const intro: FrameDef[] = [
@@ -57,12 +57,12 @@ export const intro: FrameDef[] = [
     render: () => (
       <Scene>
         <Txt x={640} y={115} size={26} c="purple">الصف الثاني الثانوي · بكالوريا · Unit 3 · Lesson 3</Txt>
-        <Txt x={640} y={225} size={58} clean style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>أساسيات تكنولوجيا الواجهة الأمامية</Txt>
-        <Underline x={230} y={272} w={820} c="blue" />
+        <Txt x={640} y={215} size={54} clean style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>أساسيات تكنولوجيا الواجهة الأمامية</Txt>
+        <Underline x={240} y={272} w={800} c="blue" />
         <Txt x={640} y={325} size={28} c="blue" clean style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Front-end Technology Fundamentals</Txt>
 
         {[['🧱', 'HTML البنية'], ['🎨', 'CSS المظهر'], ['⚡', 'JS السلوك'], ['♿', 'الدلالية والتجاوب'], ['🚀', 'أطر العمل']].map(([icon, label], i) => (
-          <Doodle key={label} x={1040 - i * 200} y={515} icon={icon} size={85} label={label} lc="blue" at={1} delay={i * 0.18} />
+          <Doodle key={label} x={1040 - i * 200} y={515} icon={icon} size={75} label={label} lsize={17} lc="blue" at={1} delay={i * 0.18} />
         ))}
       </Scene>
     ),
@@ -85,7 +85,7 @@ export const intro: FrameDef[] = [
         {STOP_PTS.map(([x, y], i) => (
           <span key={i} className="contents">
             <Num at={1} delay={i * 0.12} x={x} y={y} n={i + 1} c="purple" />
-            <Txt at={1} delay={i * 0.12} x={x} y={y + 58} size={17} w={210} align="center" style={{ lineHeight: 1.35, fontWeight: 700 }}>
+            <Txt at={1} delay={i * 0.12} x={x} y={y + 56} size={15} w={190} align="center" style={{ lineHeight: 1.6, fontWeight: 700 }}>
               {STOPS[i]}
             </Txt>
           </span>

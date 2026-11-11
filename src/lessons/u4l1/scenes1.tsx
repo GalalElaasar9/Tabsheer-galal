@@ -1,16 +1,26 @@
-// Board scenes · Unit 4 · Lesson 1 · intro and core media types
+// Board scenes · Unit 4 · Lesson 1 · Part 1: Cover, Journey, 4 Planning Questions, and 5 Media Types
 import type { FrameDef } from '../../board/types';
-import { Box, Doodle, Heading, Line, Num, Place, Scene, Txt, Underline } from '../../sketch/Sketch';
+import { Box, Doodle, Heading, Line, Num, Scene, Txt, Underline } from '../../sketch/Sketch';
+import { LessonSceneShell } from './common';
+import {
+  CommunicationDirectionInteractive,
+  NewspaperMediumInteractive,
+  PlanningQuestionsInteractive,
+  RadioMediumInteractive,
+  SocialMediaAndTableInteractive,
+  TvMediumInteractive,
+  WebsiteMediumInteractive,
+} from './demos';
 
 const STOPS = [
-  'الوسائط المتعددة',
-  'الصور النقطية (Raster)',
-  'الصور المتجهة (Vector)',
-  'الضغط (Lossy vs Lossless)',
-  'الصوت الرقمي (Audio)',
-  'الفيديو الرقمي (Video)',
-  'وسوم الوسائط في HTML5',
-  'بنك أسئلة البكالوريا',
+  'الأسئلة الأربعة للتخطيط',
+  'التلفزيون والراديو والصحيفة',
+  'الموقع الإلكتروني وخصائصه',
+  'اتجاه واحد vs اتجاهين',
+  'التواصل الاجتماعي والمقارنة',
+  'نقاط القوة للمواقع (٥)',
+  'قيود المواقع الإلكترونية (٣)',
+  'الغرض والتناقل الشفهي',
 ];
 
 const STOP_PTS: [number, number][] = [
@@ -20,180 +30,257 @@ const STOP_PTS: [number, number][] = [
 
 export const intro: FrameDef[] = [
   {
-    id: 'cover', title: 'الغلاف', scene: true,
+    id: 'cover',
+    title: 'الغلاف الرسمي للدرس',
+    scene: true,
     notes: (
       <>
-        <p><b>أهلاً بكم في أول دروس الوحدة الرابعة: أنواع الوسائط وخصائصها.</b></p>
-        <p>في هذه الوحدة ننتقل إلى عالم <b>تصميم الويب والوسائط</b>، لنتعلم كيف نختار الوسائط المتعددة (الصور، الصوت، الفيديو) ونوازن بين جودتها وسرعة تحميل الصفحة على مختلف الأجهزة.</p>
+        <p><b>الدرس الأول من الوحدة الرابعة: اختيار الوسيلة المناسبة لنقل المعلومات قبل تصميم الموقع الإلكتروني.</b></p>
+        <p><b>أهداف الدرس ومحاوره:</b></p>
+        <ol>
+          <li>الإجابة عن الأسئلة الأربعة قبل اختيار وسيلة الإعلان أو التواصل.</li>
+          <li>المقارنة بين الوسائط الخمسة: التلفزيون، الراديو، الصحيفة، الموقع الإلكتروني، ووسائل التواصل الاجتماعي.</li>
+          <li>التمييز الدقيق بين الاتصال في اتجاه واحد والاتصال في اتجاهين.</li>
+          <li>تحليل نقاط القوة الخمس والقيود الثلاثة للمواقع الإلكترونية.</li>
+          <li>اختيار الوسيلة المناسبة وفقاً للغرض والجمهور وفهم التناقل الشفهي (Word of Mouth).</li>
+        </ol>
       </>
     ),
     render: () => (
       <Scene>
-        <Txt x={640} y={110} size={30} c="purple">الصف الثاني الثانوي · بكالوريا · Unit 4 · Lesson 1</Txt>
-        <Txt x={640} y={235} size={95}>أنواع الوسائط وخصائصها</Txt>
-        <Underline x={260} y={305} w={760} c="blue" />
-        <Txt x={640} y={360} size={42} c="blue">Media Types and Characteristics</Txt>
+        <Txt x={640} y={110} size={27} c="purple">الصف الثاني الثانوي · بكالوريا · الوحدة الرابعة · الدرس (1)</Txt>
+        <Txt x={640} y={210} size={48}>اختيار الوسيلة المناسبة لنقل المعلومات</Txt>
+        <Underline x={235} y={262} w={810} c="blue" />
+        <Txt x={640} y={325} size={26} c="blue">Choosing the Right Communication Medium Before Web Design</Txt>
 
-        {[['📝', 'النص'], ['🖼️', 'الصور'], ['🎵', 'الصوت الرقمي'], ['🎬', 'الفيديو'], ['⚡', 'الصيغ والضغط']].map(([icon, label], i) => (
-          <Doodle key={label} x={1060 - i * 200} y={530} icon={icon} size={90} label={label} lc="blue" at={1} delay={i * 0.3} />
+        {[
+          ['📢', 'الأسئلة الأربعة'],
+          ['📡', 'الوسائط الخمسة'],
+          ['⇄', 'اتجاه واحد واتجاهين'],
+          ['⚖️', 'قوة وقيود الموقع'],
+          ['🗣️', 'التناقل الشفهي'],
+        ].map(([icon, label], i) => (
+          <Doodle
+            key={label}
+            x={1080 - i * 220}
+            y={505}
+            icon={icon}
+            size={84}
+            label={label}
+            lsize={18}
+            lc="blue"
+            at={1}
+            delay={i * 0.18}
+          />
         ))}
       </Scene>
     ),
   },
+
   {
-    id: 'journey', title: 'رحلة الدرس', scene: true,
+    id: 'journey',
+    title: 'خريطة رحلة الدرس',
+    scene: true,
     notes: (
       <>
-        <p><b>خريطة رحلتنا في درس الوسائط:</b> ثماني محطات رئيسية تغطي كل تفاصيل المقرر الوزاري للبكالوريا.</p>
+        <p><b>خريطة رحلة الدرس الأول:</b> ثماني محطات متدرجة من التخطيط بالأسئلة الأربعة حتى اختيار الوسيلة حسب الغرض والتناقل الشفهي.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading>خريطة موضوعات أنواع الوسائط</Heading>
-        <Box x={150} y={150} w={980} h={105} c="pink" fill="pink" size={30} tc="ink">
-          ❓ كيف نختار الوسائط المناسبة لموقع الويب بأعلى جودة وأقل استهلاك للباقة؟
+        <Heading sub="المحطات الثماني لدرس اختيار الوسيلة المناسبة لنقل المعلومات">
+          خريطة رحلة الدرس الأول: من التخطيط حتى اختيار الوسيط 🗺️
+        </Heading>
+        <Box x={110} y={150} w={1060} h={95} c="blue" fill="blue" size={23} tc="ink">
+          ❓ الفكرة المحورية: إزاي نختار الوسيلة المناسبة لنقل المعلومات قبل ما نصمم موقع إلكتروني؟
         </Box>
         <Line at={1} c="ink" sw={3} dashed pts={[...STOP_PTS.slice(0, 4), [150, 460], ...STOP_PTS.slice(4)]} />
         {STOP_PTS.map(([x, y], i) => (
           <span key={i} className="contents">
             <Num at={1} delay={i * 0.12} x={x} y={y} n={i + 1} c="purple" />
-            <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={20}>{STOPS[i]}</Txt>
+            <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={18}>{STOPS[i]}</Txt>
           </span>
         ))}
       </Scene>
+    ),
+  },
+
+  {
+    id: 'planning-four-questions',
+    title: 'الأسئلة الأربعة قبل اختيار الوسيلة (مثال الكورس)',
+    scene: true,
+    notes: (
+      <>
+        <p><b>تخيل إنك عايز تعلن عن كورس جديد للطلاب 📢:</b> قبل ما تختار هتعلن إزاي، لازم تجاوب عن ٤ أسئلة:</p>
+        <ol>
+          <li><b>ما الرسالة التي نريد توصيلها؟</b> (موعد بداية الكورس، محتوى الكورس، طريقة الاشتراك).</li>
+          <li><b>من هو الجمهور المستهدف؟</b> (طلاب الصف الثاني الثانوي المهتمون بالبرمجة · خلي بالك: مش كل الناس جمهور مستهدف!).</li>
+          <li><b>ما الموارد المتاحة لنا؟</b> (ميزانية إعلانات؟ موقع إلكتروني؟ تصوير فيديو؟ فريق إدارة سوشيال ميديا؟).</li>
+          <li><b>ما الوسيلة التي تحقق الهدف بشكل أفضل؟</b> (فيديو فيسبوك/إنستجرام للوصول لعدد كبير + موقع إلكتروني للتفاصيل + نموذج تسجيل للاشتراك).</li>
+        </ol>
+      </>
+    ),
+    render: () => (
+      <LessonSceneShell
+        color="blue"
+        title="أولاً: الأسئلة الأربعة قبل اختيار الوسيلة 📢"
+        sub="تخيل إنك عايز تعلن عن كورس برمجة جديد للطلاب: نحدد الرسالة والجمهور والموارد ثم الوسيلة"
+      >
+        <PlanningQuestionsInteractive />
+      </LessonSceneShell>
     ),
   },
 ];
 
 export const part1: FrameDef[] = [
   {
-    id: 'media-types-overview', title: 'عناصر الوسائط المتعددة في الويب', scene: true,
+    id: 'medium-tv',
+    title: '① التلفزيون (Television)',
+    scene: true,
     notes: (
       <>
-        <p><b>الوسائط المتعددة (Multimedia) في تطبيقات الويب:</b></p>
-        <p>صفحات الويب الحديثة تجمع بين أربعة أشكال رئيسية للوسائط لتوصيل الأفكار بأفضل تجربة مستخدم:</p>
+        <p><b>① التلفزيون (Television):</b></p>
         <ul>
-          <li><b>النصوص (Text):</b> الأساس في نقل الحقائق والمعلومات، سهل الفهرسة من محركات البحث.</li>
-          <li><b>الصور والرسومات (Images & Graphics):</b> تشد انتباه المستخدم وتوضح المفاهيم المعقدة بسرعة.</li>
-          <li><b>الصوت الرقمي (Audio):</b> التوجيه الصوتي، المؤثرات، البودكاست، والقراءة الآلية.</li>
-          <li><b>الفيديو والرسوم المتحركة (Video & Animation):</b> الوسيط الأكثر جذباً وتأثيراً لشرح المنتجات والتعليم.</li>
+          <li><b>المعلومات المنقولة:</b> فيديو + صوت (الصورة المتحركة والصوت في نفس الوقت).</li>
+          <li><b>الخصائص:</b> الوصول لجمهور كبير في وقت واحد، يجمع الصورة والصوت، الاتصال عادةً في اتجاه واحد.</li>
+          <li><b>مثال:</b> نشرة الأخبار أو إعلان منتج (تستقبل فقط ولا ترد من التلفزيون نفسه).</li>
+          <li><b>مناسب لإيه؟</b> شركة تعلن عن منتج جديد وتريد الوصول لعدد كبير من الناس في نفس الوقت.</li>
         </ul>
       </>
     ),
     render: () => (
-      <Scene>
-        <Heading sub="الوسائط الأربعة التي تصنع تجربة ويب غنية ومتكاملة">
-          عناصر الوسائط المتعددة (Multimedia Elements)
-        </Heading>
-
-        {/* Text */}
-        <Box x={890} y={170} w={270} h={360} c="blue" at={1} />
-        <Doodle x={1025} y={235} icon="📝" size={75} c="blue" fill="blue" at={1} />
-        <Txt x={1025} y={305} size={28} c="blue" at={1}>١ · النصوص (Text)</Txt>
-        <Txt x={1025} y={360} w={230} size={18} c="ink" at={1}>• أسرع وسيط في التحميل</Txt>
-        <Txt x={1025} y={400} w={230} size={18} c="ink" at={1}>• ممتاز لمحركات البحث (SEO)</Txt>
-        <Txt x={1025} y={440} w={230} size={18} c="ink" at={1}>• حجم ملف مهمل بالبايتات</Txt>
-        <Txt x={1025} y={485} size={20} c="blue" at={1}>HTML: &lt;p&gt;, &lt;h1&gt;</Txt>
-
-        {/* Images */}
-        <Box x={600} y={170} w={270} h={360} c="green" at={2} />
-        <Doodle x={735} y={235} icon="🖼️" size={75} c="green" fill="green" at={2} />
-        <Txt x={735} y={305} size={28} c="green" at={2}>٢ · الصور (Images)</Txt>
-        <Txt x={735} y={360} w={230} size={18} c="ink" at={2}>• نقطية (JPEG, PNG, WebP)</Txt>
-        <Txt x={735} y={400} w={230} size={18} c="ink" at={2}>• متجهة للشعارات (SVG)</Txt>
-        <Txt x={735} y={440} w={230} size={18} c="ink" at={2}>• تشد انتباه العين فوراً</Txt>
-        <Txt x={735} y={485} size={20} c="green" at={2}>HTML: &lt;img&gt;, &lt;picture&gt;</Txt>
-
-        {/* Audio */}
-        <Box x={310} y={170} w={270} h={360} c="purple" at={3} />
-        <Doodle x={445} y={235} icon="🎵" size={75} c="purple" fill="purple" at={3} />
-        <Txt x={445} y={305} size={28} c="purple" at={3}>٣ · الصوت (Audio)</Txt>
-        <Txt x={445} y={360} w={230} size={18} c="ink" at={3}>• بودكاست وتوجيه صوتي</Txt>
-        <Txt x={445} y={400} w={230} size={18} c="ink" at={3}>• صيغ MP3 و AAC الخفيفة</Txt>
-        <Txt x={445} y={440} w={230} size={18} c="ink" at={3}>• مؤثرات صوتية تفاعلية</Txt>
-        <Txt x={445} y={485} size={20} c="purple" at={3}>HTML: &lt;audio&gt;</Txt>
-
-        {/* Video */}
-        <Box x={20} y={170} w={270} h={360} c="orange" at={4} />
-        <Doodle x={155} y={235} icon="🎬" size={75} c="orange" fill="orange" at={4} />
-        <Txt x={155} y={305} size={28} c="orange" at={4}>٤ · الفيديو (Video)</Txt>
-        <Txt x={155} y={360} w={230} size={18} c="ink" at={4}>• الأكثر جذباً للمستخدم</Txt>
-        <Txt x={155} y={400} w={230} size={18} c="ink" at={4}>• أكبر استهلاك للباقة</Txt>
-        <Txt x={155} y={440} w={230} size={18} c="ink" at={4}>• MP4 (H.264) و WebM</Txt>
-        <Txt x={155} y={485} size={20} c="orange" at={4}>HTML: &lt;video&gt;</Txt>
-
-        {/* Bottom Banner */}
-        <Box x={20} y={555} w={1140} h={80} c="pink" fill="pink" size={21} tc="ink" at={5}>
-          ⚖️ <b>المعادلة الذهبية للمصمم:</b> المحتوى الغني يجذب الزوار، ولكن الحجم الكبير يبطئ الموقع؛ والحل هو الضغط والاختيار الصحيح للصيغ.
-        </Box>
-      </Scene>
+      <LessonSceneShell
+        color="blue"
+        title="① التلفزيون (Television) 📺"
+        sub="فيديو + صوت · الوصول لجمهور كبير في وقت واحد · اتصال في اتجاه واحد"
+      >
+        <TvMediumInteractive />
+      </LessonSceneShell>
     ),
   },
+
   {
-    id: 'raster-vs-vector', title: 'الصور النقطية (Raster) مقابل المتجهة (Vector)', scene: true,
+    id: 'medium-radio',
+    title: '② الراديو (Radio)',
+    scene: true,
     notes: (
       <>
-        <p><b>مقارنة جوهرية في امتحانات البكالوريا:</b></p>
+        <p><b>② الراديو (Radio):</b></p>
         <ul>
-          <li><b>الصور النقطية (Raster / Bitmap):</b> تتكون من شبكة بكسلات ثابتة؛ ممتازة للصور الفوتوغرافية المعقدة (JPEG, PNG, WebP)، لكنها تتبكسل وتفقد وضوحها عند التكبير.</li>
-          <li><b>الصور المتجهة (Vector Graphics):</b> مبنية على معادلات رياضية وأشكال هندسية؛ ممتازة للشعارات والأيقونات والخطوط (SVG)، وتحتفظ بحدتها ونقائها بأي حجم دون زيادة في مساحة الملف.</li>
+          <li><b>المعلومات المنقولة:</b> صوت فقط (خلي بالك: الراديو مش بينقل فيديو!).</li>
+          <li><b>الخصائص:</b> يعتمد على الصوت، يُستمع إليه أثناء التنقل أو أداء مهام أخرى، اتصال باتجاه واحد.</li>
+          <li><b>مثال:</b> سائق السيارة يسمع نشرة الأخبار أو برنامجاً إذاعياً دون الحاجة للتركيز على شاشة.</li>
         </ul>
       </>
     ),
     render: () => (
-      <Scene>
-        <Heading sub="الفارق العلمي بين شبكة البكسلات والمعادلات الرياضية">
-          الصور النقطية (Raster) مقابل المتجهة (Vector)
-        </Heading>
+      <LessonSceneShell
+        color="orange"
+        title="② الراديو (Radio) 📻"
+        sub="صوت فقط · مناسب أثناء التنقل والقيادة بدون التركيز على شاشة"
+      >
+        <RadioMediumInteractive />
+      </LessonSceneShell>
+    ),
+  },
 
-        {/* Raster Card */}
-        <Place x={630} y={160} w={550} h={380} at={1}>
-          <div className="p-4 rounded-2xl border h-full flex flex-col justify-between shadow-lg" style={{ background: '#0a1020', borderColor: '#2563eb' }}>
-            <div>
-              <div className="flex items-center justify-between border-b pb-2 mb-2" style={{ borderColor: '#1e293b' }}>
-                <span className="font-extrabold text-base text-sky-400">🖼️ الصور النقطية (Raster / Bitmap)</span>
-                <span className="pill text-xs font-bold bg-sky-950 text-sky-300 border-sky-700">JPEG · PNG · WebP</span>
-              </div>
-              <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                <li>• <b>البنية:</b> شبكة من المربعات الملونة الدقيقة تُسمى <b>بكسلات (Pixels)</b>.</li>
-                <li>• <b>عند التكبير:</b> تتبكسل (Pixelation) وتصبح حوافها مشوهة ومربعات واضحة.</li>
-                <li>• <b>الاستخدام الأنسب:</b> الصور الفوتوغرافية، الطبيعة، الوجوه، والتدرجات المعقدة.</li>
-                <li>• <b>حجم الملف:</b> يرتبط مباشرة بعدد البكسلات (العرض × الارتفاع).</li>
-              </ul>
-            </div>
-            <div className="p-2.5 rounded-xl bg-sky-950/40 border border-sky-800 text-xs text-sky-300 font-bold">
-              🔍 عيبها الأساسي: مقيدة بدقة عرض محددة؛ التكبير الزائد يفسد مظهرها.
-            </div>
-          </div>
-        </Place>
+  {
+    id: 'medium-newspaper',
+    title: '③ الصحيفة (Newspaper)',
+    scene: true,
+    notes: (
+      <>
+        <p><b>③ الصحيفة (Newspaper):</b></p>
+        <ul>
+          <li><b>المعلومات المنقولة:</b> نصوص + صور.</li>
+          <li><b>الخصائص:</b> وسيلة مطبوعة موجودة مادياً، تُقرأ دون الحاجة إلى إنترنت، اتصال باتجاه واحد.</li>
+          <li><b>أهم ميزة:</b> متاحة مادياً ولا تحتاج إنترنت لقراءتها حتى لو الشبكة مقطوعة.</li>
+        </ul>
+      </>
+    ),
+    render: () => (
+      <LessonSceneShell
+        color="yellow"
+        title="③ الصحيفة (Newspaper) 📰"
+        sub="نصوص + صور · وسيلة مطبوعة مادية تُقرأ دون الحاجة إلى اتصال بالإنترنت"
+      >
+        <NewspaperMediumInteractive />
+      </LessonSceneShell>
+    ),
+  },
 
-        {/* Vector Card */}
-        <Place x={40} y={160} w={550} h={380} at={2}>
-          <div className="p-4 rounded-2xl border h-full flex flex-col justify-between shadow-lg" style={{ background: '#1c1020', borderColor: '#f97316' }}>
-            <div>
-              <div className="flex items-center justify-between border-b pb-2 mb-2" style={{ borderColor: '#1e293b' }}>
-                <span className="font-extrabold text-base text-orange-400">📐 الصور المتجهة (Vector Graphics)</span>
-                <span className="pill text-xs font-bold bg-orange-950 text-orange-300 border-orange-700">SVG (Scalable)</span>
-              </div>
-              <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                <li>• <b>البنية:</b> معادلات رياضية ونقاط إحداثية وخطوط وأقواس برمجية (XML).</li>
-                <li>• <b>عند التكبير:</b> يعيد المتصفح رسمها لحظياً بدقة حادة 100% دون أي تشوه.</li>
-                <li>• <b>الاستخدام الأنسب:</b> شعارات الشركات، الأيقونات، الخرائط، والرسوم البيانية.</li>
-                <li>• <b>حجم الملف:</b> صغير جداً ومستقل تماماً عن مساحة الشاشة.</li>
-              </ul>
-            </div>
-            <div className="p-2.5 rounded-xl bg-orange-950/40 border border-orange-800 text-xs text-orange-300 font-bold">
-              ✨ ميزتها الكبرى: نقاء مطلق على كافة الشاشات العادية وشاشات Retina والشاشات العملاقة.
-            </div>
-          </div>
-        </Place>
+  {
+    id: 'medium-website',
+    title: '④ الموقع الإلكتروني (Website)',
+    scene: true,
+    notes: (
+      <>
+        <p><b>④ الموقع الإلكتروني (Website):</b> أهم وسيلة في الدرس والوحدة.</p>
+        <ul>
+          <li><b>يجمع 4 أنواع من المعلومات:</b> النصوص (Text)، الصور (Images)، الفيديو (Video)، الصوت (Audio).</li>
+          <li><b>مثال المدرسة:</b> أخبار مكتوبة + صور الأنشطة + فيديوهات تعليمية + ملفات صوتية.</li>
+          <li><b>الخصائص الخمسة:</b> التنوع، التحديث في أي وقت، الوصول من أي مكان متصل، التفاعل ثنائي الاتجاه (نماذج/تعليقات)، والعمل من المتصفح مع إمكانية التثبيت لبعض تطبيقات الويب.</li>
+        </ul>
+      </>
+    ),
+    render: () => (
+      <LessonSceneShell
+        color="green"
+        title="④ الموقع الإلكتروني (Website) 🌐"
+        sub="يجمع النصوص والصور والفيديو والصوت في مكان واحد مع التحديث والتفاعل"
+      >
+        <WebsiteMediumInteractive />
+      </LessonSceneShell>
+    ),
+  },
 
-        {/* Bottom Banner */}
-        <Box x={40} y={560} w={1140} h={80} c="green" fill="green" size={21} tc="ink" at={3}>
-          📖 <b>قاعدة امتحانية:</b> الصور الواقعية نستخدم لها Raster (WebP أو JPEG)، بينما الشعارات والأيقونات نستخدم لها Vector (SVG).
-        </Box>
-      </Scene>
+  {
+    id: 'one-way-vs-two-way',
+    title: 'الاتصال في اتجاه واحد مقابل اتجاهين',
+    scene: true,
+    notes: (
+      <>
+        <p><b>الفرق بين الاتجاه الواحد والاتجاهين:</b></p>
+        <ul>
+          <li><b>اتجاه واحد (One-way):</b> انتقال المعلومات من المرسل للمستقبل فقط (مثل إعلان التلفزيون ونشرة الأخبار).</li>
+          <li><b>اتجاهين (Two-way):</b> يمكن للمستخدمين الاستجابة والمشاركة (مثل نموذج تقديم استفسار بموقع المدرسة).</li>
+          <li><b>ملحوظة مهمة:</b> الموقع الإلكتروني أساساً قد يعرض المعلومات في اتجاه واحد، لكن يمكن إضافة وسائل تفاعل تجعله يدعم الاتصال ثنائي الاتجاه.</li>
+        </ul>
+      </>
+    ),
+    render: () => (
+      <LessonSceneShell
+        color="purple"
+        title="الاتصال في اتجاه واحد vs اتجاهين ⇄"
+        sub="من الاستقبال فقط (One-way) إلى الاستجابة والمشاركة التفاعلية (Two-way)"
+      >
+        <CommunicationDirectionInteractive />
+      </LessonSceneShell>
+    ),
+  },
+
+  {
+    id: 'medium-social-and-compare',
+    title: '⑤ وسائل التواصل الاجتماعي ومقارنة الوسائط الخمسة',
+    scene: true,
+    notes: (
+      <>
+        <p><b>⑤ وسائل التواصل الاجتماعي (Social Media):</b></p>
+        <ul>
+          <li><b>المعلومات:</b> نصوص + صور + فيديو + صوت.</li>
+          <li><b>الخصائص:</b> نشر سريع للمعلومات، تسمح للمستخدمين بالنشر والمشاركة، وتتيح التفاعل.</li>
+          <li><b>مثال:</b> بوست على فيسبوك عن كورس جديد (يشوفه الناس، يعلقوا، يشاركوه، ويسألوا عن التفاصيل).</li>
+        </ul>
+      </>
+    ),
+    render: () => (
+      <LessonSceneShell
+        color="pink"
+        title="⑤ التواصل الاجتماعي + مقارنة الوسائط الخمسة 📱"
+        sub="سرعة النشر والمشاركة والتفاعل + جدول المقارنة الشامل بين الوسائط الخمسة"
+      >
+        <SocialMediaAndTableInteractive />
+      </LessonSceneShell>
     ),
   },
 ];
-

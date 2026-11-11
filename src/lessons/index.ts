@@ -7,6 +7,7 @@ import { u4l2 } from './u4l2';
 import { u4l3 } from './u4l3';
 import { u4l4 } from './u4l4';
 import { u6l3 } from './u6l3';
+import { u6l7 } from './u6l7';
 import { u3rev } from './u3rev';
 
 /** Lessons available as whiteboards, keyed by the id used in the URL (#/lesson/<id>). */
@@ -20,4 +21,5 @@ export const LESSONS: Record<string, LessonDef> = {
   u4l3,
   u4l4,
   u6l3,
+  u6l7,
 };
