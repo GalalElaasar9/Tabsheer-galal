@@ -355,200 +355,460 @@ export function DigitizationWorkflowLab() {
    ========================================================================= */
 
 export function RasterVsVectorLab() {
-  const [zoom, setZoom] = useState<number>(1);
-  const [targetShape, setTargetShape] = useState<'circle' | 'letterR' | 'flower'>('flower');
+  const [zoom, setZoom] = useState<number>(4);
+  const [targetShape, setTargetShape] = useState<'logo' | 'letterA' | 'circle'>('logo');
+  const [showGrid, setShowGrid] = useState<boolean>(true);
+  const [showAnchors, setShowAnchors] = useState<boolean>(true);
+
+  // Sharpness metric calculation based on zoom
+  const rasterSharpness = zoom === 1 ? 100 : zoom === 2 ? 65 : zoom === 4 ? 35 : zoom === 8 ? 15 : 5;
 
   return (
-    <div className="card mt-3">
-      {/* Header & Controls */}
+    <div className="card mt-3" style={{ direction: 'rtl', textAlign: 'right', fontFamily: "'Cairo', system-ui, sans-serif" }}>
+      {/* Top Controls Bar with Visual Identity */}
       <div className="flex gap-4 items-center justify-between border-b border-border pb-3 mb-4 flex-wrap">
-        <div className="flex items-center gap-3">
-          <span className="font-bold text-sm">قوة التكبير (Microscope Zoom):</span>
-          <div className="flex gap-1">
+        {/* Zoom Controls */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-1.5 font-bold text-sm">
+            <span style={{ fontSize: 18 }}>🔬</span>
+            <span>قوة التكبير المجهري (Zoom):</span>
+          </div>
+          <div className="flex gap-1 flex-wrap">
             {[1, 2, 4, 8, 16].map(z => (
               <button
                 key={z}
+                type="button"
                 onClick={() => setZoom(z)}
-                className={`btn text-xs ${zoom === z ? 'btn-primary' : ''}`}
+                className={`btn text-xs ${zoom === z ? 'btn-primary font-bold shadow-sm' : ''}`}
+                style={{
+                  minWidth: 46,
+                  borderColor: zoom === z ? '#38bdf8' : undefined,
+                }}
               >
-                {z}x {z > 1 ? `(${z * 100}%)` : '(الأصلي)'}
+                {z}x {z > 1 ? `(${z * 100}%)` : '(100%)'}
               </button>
             ))}
           </div>
+          <span className="text-xs font-bold px-2 py-1 rounded bg-slate-800 text-sky-400 border border-sky-400/30">
+            مقياس التكبير: {zoom * 100}%
+          </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-bold text-muted">الشكل المعروض:</span>
+        {/* Target Shape Selector */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-bold text-muted">النموذج المراد فحصه:</span>
           <button
-            onClick={() => setTargetShape('flower')}
-            className={`pill text-xs ${targetShape === 'flower' ? 'pill-primary font-bold' : ''}`}
+            type="button"
+            onClick={() => setTargetShape('logo')}
+            className={`pill text-xs ${targetShape === 'logo' ? 'pill-primary font-bold shadow-sm' : ''}`}
           >
-            وردة 🌸
+            🛡️ شعار المدرسة (Logo)
           </button>
           <button
-            onClick={() => setTargetShape('letterR')}
-            className={`pill text-xs ${targetShape === 'letterR' ? 'pill-primary font-bold' : ''}`}
+            type="button"
+            onClick={() => setTargetShape('letterA')}
+            className={`pill text-xs ${targetShape === 'letterA' ? 'pill-primary font-bold shadow-sm' : ''}`}
           >
-            حرف R 🔤
+            🔤 حرف طباعي مائل (A)
           </button>
           <button
+            type="button"
             onClick={() => setTargetShape('circle')}
-            className={`pill text-xs ${targetShape === 'circle' ? 'pill-primary font-bold' : ''}`}
+            className={`pill text-xs ${targetShape === 'circle' ? 'pill-primary font-bold shadow-sm' : ''}`}
           >
-            دائرة وشعار 🎯
+            🎯 دائرة وقوس هندسي
           </button>
+        </div>
+      </div>
+
+      {/* Toggles for Inspection Helpers */}
+      <div className="flex gap-3 items-center justify-between bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 mb-4 flex-wrap text-xs">
+        <div className="flex items-center gap-2 text-muted">
+          <span style={{ fontSize: 15 }}>💡</span>
+          <span>حرّك التكبير إلى <b>4x أو 8x أو 16x</b> لمشاهدة الفرق الحاسم بين <b>البكسلات المسننة</b> و<b>المنحنيات الرياضية</b>!</span>
+        </div>
+        <div className="flex gap-3 items-center">
+          <label className="flex items-center gap-1.5 cursor-pointer select-none text-sky-300">
+            <input
+              type="checkbox"
+              checked={showGrid}
+              onChange={(e) => setShowGrid(e.target.checked)}
+              className="accent-sky-500"
+            />
+            <span>إظهار شبكة البكسلات (Pixel Grid) 🔲</span>
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer select-none text-emerald-300">
+            <input
+              type="checkbox"
+              checked={showAnchors}
+              onChange={(e) => setShowAnchors(e.target.checked)}
+              className="accent-emerald-500"
+            />
+            <span>إظهار نقاط التحكم الرياضية (Bézier Anchors) 📐</span>
+          </label>
         </div>
       </div>
 
       {/* Side-by-Side Microscope Comparison */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Raster / Bitmap Box */}
-        <div className="p-4 bg-[var(--surface-2)] border-2 border-red-500/30 rounded-xl relative overflow-hidden flex flex-col items-center">
-          <div className="w-full flex justify-between items-center mb-2">
-            <span className="font-bold text-red-500 flex items-center gap-1 text-sm">
-              <span>🖼️ التنسيق النقطي (Raster / Bitmap)</span>
-            </span>
-            <span className="pill pill-danger text-[11px]">Photoshop · Paint</span>
-          </div>
+        {/* Raster / Bitmap Box (Right) */}
+        <div className="p-4 bg-[var(--surface-2)] border-2 border-red-500/40 rounded-xl relative overflow-hidden flex flex-col justify-between shadow-md">
+          {/* Header */}
+          <div>
+            <div className="w-full flex justify-between items-center mb-2">
+              <span className="font-bold text-red-500 flex items-center gap-1.5 text-sm">
+                <span style={{ fontSize: 18 }}>🖼️</span>
+                <span>التنسيق النقطي (Raster / Bitmap)</span>
+              </span>
+              <span className="pill pill-danger text-[11px] font-bold">
+                Photoshop · برامج التلوين
+              </span>
+            </div>
 
-          <div
-            className="w-full h-52 bg-slate-900 border border-border rounded-lg flex items-center justify-center overflow-hidden relative"
-            style={{ imageRendering: 'pixelated' }}
-          >
-            {/* Simulated Pixelated Content */}
+            {/* Viewer Screen */}
             <div
-              className="transition-transform duration-200 flex items-center justify-center"
-              style={{
-                transform: `scale(${zoom})`,
-                imageRendering: 'pixelated',
-              }}
+              className="w-full h-64 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner"
+              style={{ imageRendering: 'pixelated' }}
             >
-              {targetShape === 'flower' && (
-                <div
-                  className="grid grid-cols-8 gap-[1px] w-24 h-24 p-1 bg-black/40 rounded"
-                  style={{ imageRendering: 'pixelated' }}
-                >
-                  {Array.from({ length: 64 }).map((_, i) => {
-                    const row = Math.floor(i / 8);
-                    const col = i % 8;
-                    const isPetal =
-                      (row >= 1 && row <= 6 && col >= 1 && col <= 6) &&
-                      !(row === 1 && col === 1) && !(row === 1 && col === 6) &&
-                      !(row === 6 && col === 1) && !(row === 6 && col === 6);
-                    const isCenter = row >= 3 && row <= 4 && col >= 3 && col <= 4;
-                    const bg = isCenter ? '#eab308' : isPetal ? '#ec4899' : 'transparent';
-                    return (
-                      <div
-                        key={i}
-                        className="w-full h-full"
-                        style={{ backgroundColor: bg }}
-                      />
-                    );
-                  })}
+              {/* Scaled Pixel Content */}
+              <div
+                className="transition-transform duration-200 flex items-center justify-center"
+                style={{
+                  transform: `scale(${zoom})`,
+                  imageRendering: 'pixelated',
+                }}
+              >
+                {/* 1. School Crest / Logo (Pixelated) */}
+                {targetShape === 'logo' && (
+                  <div
+                    className="relative w-24 h-28 flex flex-col items-center justify-center"
+                    style={{
+                      imageRendering: 'pixelated',
+                    }}
+                  >
+                    {/* Simulated 16x16 Pixel Grid Crest */}
+                    <div
+                      className="grid grid-cols-12 gap-[0.5px] w-24 h-24 p-1"
+                      style={{
+                        background: showGrid && zoom > 2 ? 'rgba(255,255,255,0.06)' : 'transparent',
+                        border: showGrid && zoom > 2 ? '1px dashed rgba(56, 189, 248, 0.4)' : 'none',
+                      }}
+                    >
+                      {Array.from({ length: 144 }).map((_, i) => {
+                        const r = Math.floor(i / 12);
+                        const c = i % 12;
+                        // Draw shield shape outline and star
+                        const isShieldBorder =
+                          (r === 0 && c >= 2 && c <= 9) ||
+                          (r >= 1 && r <= 7 && (c === 1 || c === 10)) ||
+                          (r === 8 && (c === 2 || c === 9)) ||
+                          (r === 9 && (c === 3 || c === 8)) ||
+                          (r === 10 && (c === 4 || c === 7)) ||
+                          (r === 11 && (c === 5 || c === 6));
+                        const isShieldFill =
+                          (r >= 1 && r <= 7 && c >= 2 && c <= 9) ||
+                          (r === 8 && c >= 3 && c <= 8) ||
+                          (r === 9 && c >= 4 && c <= 7) ||
+                          (r === 10 && c >= 5 && c <= 6);
+                        const isStar = (r >= 3 && r <= 5 && c >= 4 && c <= 7);
+
+                        let color = 'transparent';
+                        if (isStar) color = '#facc15';
+                        else if (isShieldBorder) color = '#38bdf8';
+                        else if (isShieldFill) color = '#0369a1';
+
+                        return (
+                          <div
+                            key={i}
+                            style={{
+                              backgroundColor: color,
+                              border: (showGrid && zoom > 2 && color !== 'transparent') ? '0.5px solid rgba(0,0,0,0.5)' : 'none',
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. Diagonal Letter 'A' (Pixelated staircase) */}
+                {targetShape === 'letterA' && (
+                  <div
+                    className="grid grid-cols-10 gap-[0.5px] w-20 h-24 p-1"
+                    style={{
+                      imageRendering: 'pixelated',
+                      border: showGrid && zoom > 2 ? '1px dashed rgba(56, 189, 248, 0.35)' : 'none',
+                    }}
+                  >
+                    {Array.from({ length: 100 }).map((_, i) => {
+                      const r = Math.floor(i / 10);
+                      const c = i % 10;
+                      // Letter A pixel map
+                      const isLeftLeg = (r === 0 && (c === 4 || c === 5)) ||
+                        (r === 1 && (c === 3 || c === 6)) ||
+                        (r === 2 && (c === 3 || c === 6)) ||
+                        (r === 3 && (c === 2 || c === 7)) ||
+                        (r === 4 && (c >= 2 && c <= 7)) ||
+                        (r >= 5 && r <= 9 && (c === 1 || c === 8));
+                      const bg = isLeftLeg ? '#38bdf8' : 'transparent';
+                      return (
+                        <div
+                          key={i}
+                          style={{
+                            backgroundColor: bg,
+                            border: (showGrid && zoom > 2 && bg !== 'transparent') ? '0.5px solid rgba(0,0,0,0.6)' : 'none',
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* 3. Geometric Circle (Pixelated steps) */}
+                {targetShape === 'circle' && (
+                  <div
+                    className="grid grid-cols-12 gap-[0.5px] w-24 h-24 p-1"
+                    style={{
+                      imageRendering: 'pixelated',
+                      border: showGrid && zoom > 2 ? '1px dashed rgba(56, 189, 248, 0.35)' : 'none',
+                    }}
+                  >
+                    {Array.from({ length: 144 }).map((_, i) => {
+                      const r = Math.floor(i / 12) - 5.5;
+                      const c = (i % 12) - 5.5;
+                      const dist = Math.sqrt(r * r + c * c);
+                      const isRing = dist >= 3.8 && dist <= 5.3;
+                      const isCenter = dist <= 1.8;
+                      const color = isCenter ? '#facc15' : isRing ? '#ef4444' : 'transparent';
+                      return (
+                        <div
+                          key={i}
+                          style={{
+                            backgroundColor: color,
+                            border: (showGrid && zoom > 2 && color !== 'transparent') ? '0.5px solid rgba(0,0,0,0.6)' : 'none',
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Jaggies Warning Floating Alert */}
+              {zoom >= 4 && (
+                <div className="absolute top-2 right-2 bg-red-600/95 text-white text-[11px] px-2.5 py-1 rounded-md font-bold shadow-lg animate-pulse flex items-center gap-1 border border-red-400">
+                  <span>⚠️</span>
+                  <span>ظهور التعرجات (Jaggies)!</span>
                 </div>
               )}
 
-              {targetShape === 'letterR' && (
-                <div
-                  className="text-6xl font-black font-sans select-none text-blue-400"
-                  style={{
-                    filter: zoom > 2 ? `blur(0.5px) contrast(20)` : 'none',
-                    letterSpacing: '-2px',
-                  }}
-                >
-                  R
+              {/* Grid Indicator Pill */}
+              {showGrid && zoom >= 4 && (
+                <div className="absolute bottom-2 left-2 bg-slate-900/90 text-sky-400 text-[10px] px-2 py-0.5 rounded border border-slate-700">
+                  🔲 شبكة البكسلات مكبرة
                 </div>
-              )}
-
-              {targetShape === 'circle' && (
-                <div
-                  className="w-20 h-20 rounded-full border-4 border-amber-400 bg-amber-500/20"
-                  style={{
-                    filter: zoom > 2 ? `contrast(50)` : 'none',
-                  }}
-                />
               )}
             </div>
-
-            {/* Jaggies Warning Overlay when zoomed */}
-            {zoom >= 4 && (
-              <div className="absolute top-2 right-2 bg-red-600/90 text-white text-[10px] px-2 py-1 rounded font-bold shadow animate-pulse">
-                ⚠️ تظهر التعرجات (Jaggies)!
-              </div>
-            )}
           </div>
 
-          <div className="mt-3 text-xs text-muted w-full space-y-1">
-            <div className="text-red-400 font-bold">
-              • عند التكبير: تظهر الحواف متكسرة أو متعرجة (Jaggies).
+          {/* Metrics & Explanations */}
+          <div className="mt-3 space-y-2">
+            {/* Live Sharpness Meter */}
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="flex justify-between items-center text-xs mb-1">
+                <span className="text-muted font-bold">مستوى حدة ونقاء الحواف:</span>
+                <span className={`font-bold ${rasterSharpness <= 35 ? 'text-red-400' : 'text-amber-400'}`}>
+                  {rasterSharpness}% {rasterSharpness <= 35 ? '(تكسر مسنن ❌)' : ''}
+                </span>
+              </div>
+              <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-300 ${rasterSharpness <= 35 ? 'bg-red-500' : 'bg-amber-500'}`}
+                  style={{ width: `${rasterSharpness}%` }}
+                />
+              </div>
             </div>
-            <div>
-              • يتكون من شبكة من النقاط (Pixels). مناسب للصور الواقعية والفوتوغرافية.
+
+            {/* Core Textbook Takeaway */}
+            <div className="text-xs text-muted leading-relaxed space-y-1">
+              <div className="text-red-400 font-bold">
+                • ظاهرة التعرجات (Jaggies): تظهر الحواف متكسرة ومسننة في هيئة درجات سلالم لأن الصورة محكومة بشبكة بكسلات ثابتة.
+              </div>
+              <div>
+                • تُنشأ ببرامج التلوين (Paint) مثل <b>Photoshop</b>، ومناسبة للصور الفوتوغرافية الغنية بالتدرجات (صيغ: PNG, JPG).
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Vector Box */}
-        <div className="p-4 bg-[var(--surface-2)] border-2 border-green-500/30 rounded-xl relative overflow-hidden flex flex-col items-center">
-          <div className="w-full flex justify-between items-center mb-2">
-            <span className="font-bold text-green-500 flex items-center gap-1 text-sm">
-              <span>📐 تنسيق المتجهات (Vector Format)</span>
-            </span>
-            <span className="pill pill-safe text-[11px]">Illustrator · SVG</span>
+        {/* Vector Format Box (Left) */}
+        <div className="p-4 bg-[var(--surface-2)] border-2 border-emerald-500/40 rounded-xl relative overflow-hidden flex flex-col justify-between shadow-md">
+          {/* Header */}
+          <div>
+            <div className="w-full flex justify-between items-center mb-2">
+              <span className="font-bold text-emerald-500 flex items-center gap-1.5 text-sm">
+                <span style={{ fontSize: 18 }}>📐</span>
+                <span>تنسيق المتجهات (Vector Format)</span>
+              </span>
+              <span className="pill pill-safe text-[11px] font-bold">
+                Illustrator · برامج الرسم
+              </span>
+            </div>
+
+            {/* Viewer Screen */}
+            <div className="w-full h-64 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner">
+              {/* Scaled Pure Vector Content */}
+              <div
+                className="transition-transform duration-200 flex items-center justify-center"
+                style={{ transform: `scale(${zoom})` }}
+              >
+                {/* 1. School Crest / Logo (Vector) */}
+                {targetShape === 'logo' && (
+                  <div className="relative w-24 h-28 flex items-center justify-center">
+                    <svg width="96" height="110" viewBox="0 0 100 115" className="overflow-visible">
+                      {/* Shield Path */}
+                      <path
+                        d="M 50 5 Q 85 5, 88 35 Q 88 85, 50 110 Q 12 85, 12 35 Q 15 5, 50 5 Z"
+                        fill="#0369a1"
+                        stroke="#38bdf8"
+                        strokeWidth="4"
+                      />
+                      {/* Inner Emblem Star */}
+                      <polygon
+                        points="50,25 55,40 70,40 58,50 62,65 50,55 38,65 42,50 30,40 45,40"
+                        fill="#facc15"
+                        stroke="#eab308"
+                        strokeWidth="1.5"
+                      />
+
+                      {/* Mathematical Bézier Anchors Overlay */}
+                      {showAnchors && (
+                        <g>
+                          {/* Anchor Points */}
+                          <rect x="47" y="2" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                          <rect x="85" y="32" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                          <rect x="47" y="107" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                          <rect x="9" y="32" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                          {/* Tangent Handle Indicators */}
+                          <line x1="88" y1="35" x2="88" y2="60" stroke="#facc15" strokeWidth="1" strokeDasharray="2,2" />
+                          <circle cx="88" cy="60" r="2.5" fill="#facc15" />
+                        </g>
+                      )}
+                    </svg>
+                  </div>
+                )}
+
+                {/* 2. Diagonal Letter 'A' (Vector) */}
+                {targetShape === 'letterA' && (
+                  <div className="relative w-20 h-24 flex items-center justify-center">
+                    <svg width="80" height="96" viewBox="0 0 80 100" className="overflow-visible">
+                      <path
+                        d="M 40 10 L 68 90 L 52 90 L 45 68 L 35 68 L 28 90 L 12 90 Z M 40 32 L 37 56 L 43 56 Z"
+                        fill="#38bdf8"
+                        stroke="#0284c7"
+                        strokeWidth="1.5"
+                      />
+                      {showAnchors && (
+                        <g>
+                          <rect x="37" y="7" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="65" y="87" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="9" y="87" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="32" y="65" width="6" height="6" fill="#facc15" stroke="#fff" strokeWidth="1" />
+                          <rect x="42" y="65" width="6" height="6" fill="#facc15" stroke="#fff" strokeWidth="1" />
+                        </g>
+                      )}
+                    </svg>
+                  </div>
+                )}
+
+                {/* 3. Geometric Circle & Crosshair (Vector) */}
+                {targetShape === 'circle' && (
+                  <div className="relative w-24 h-24 flex items-center justify-center">
+                    <svg width="96" height="96" viewBox="0 0 100 100" className="overflow-visible">
+                      <circle cx="50" cy="50" r="42" fill="none" stroke="#10b981" strokeWidth="5" />
+                      <circle cx="50" cy="50" r="14" fill="#facc15" stroke="#ca8a04" strokeWidth="2" />
+                      <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(16, 185, 129, 0.4)" strokeWidth="1" strokeDasharray="3,3" />
+                      <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(16, 185, 129, 0.4)" strokeWidth="1" strokeDasharray="3,3" />
+                      {showAnchors && (
+                        <g>
+                          <rect x="47" y="5" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="89" y="47" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="47" y="89" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                          <rect x="5" y="47" width="6" height="6" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+                        </g>
+                      )}
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              {/* Crystal Sharp Floating Badge */}
+              <div className="absolute top-2 right-2 bg-emerald-600/95 text-white text-[11px] px-2.5 py-1 rounded-md font-bold shadow-lg flex items-center gap-1 border border-emerald-400">
+                <span>✨</span>
+                <span>نقاء تام ١٠٠٪ دون أي تعرج!</span>
+              </div>
+
+              {/* Math Anchors Indicator Pill */}
+              {showAnchors && (
+                <div className="absolute bottom-2 left-2 bg-slate-900/90 text-emerald-400 text-[10px] px-2 py-0.5 rounded border border-slate-700">
+                  📐 نقاط تحكم ومعادلات رياضية
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="w-full h-52 bg-slate-900 border border-border rounded-lg flex items-center justify-center overflow-hidden relative">
-            {/* Pure SVG Vector content */}
-            <div
-              className="transition-transform duration-200 flex items-center justify-center"
-              style={{ transform: `scale(${zoom})` }}
-            >
-              {targetShape === 'flower' && (
-                <svg width="96" height="96" viewBox="0 0 100 100" className="overflow-visible">
-                  <circle cx="50" cy="30" r="16" fill="#ec4899" />
-                  <circle cx="70" cy="50" r="16" fill="#ec4899" />
-                  <circle cx="50" cy="70" r="16" fill="#ec4899" />
-                  <circle cx="30" cy="50" r="16" fill="#ec4899" />
-                  <circle cx="50" cy="50" r="12" fill="#eab308" stroke="#ca8a04" strokeWidth="2" />
-                </svg>
-              )}
-
-              {targetShape === 'letterR' && (
-                <svg width="80" height="80" viewBox="0 0 100 100" className="overflow-visible">
-                  <text
-                    x="50"
-                    y="75"
-                    fontSize="75"
-                    fontWeight="900"
-                    textAnchor="middle"
-                    fill="#38bdf8"
-                    fontFamily="sans-serif"
-                  >
-                    R
-                  </text>
-                </svg>
-              )}
-
-              {targetShape === 'circle' && (
-                <svg width="80" height="80" viewBox="0 0 100 100" className="overflow-visible">
-                  <circle cx="50" cy="50" r="38" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" strokeWidth="6" />
-                </svg>
-              )}
+          {/* Metrics & Explanations */}
+          <div className="mt-3 space-y-2">
+            {/* Live Sharpness Meter */}
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="flex justify-between items-center text-xs mb-1">
+                <span className="text-muted font-bold">مستوى حدة ونقاء الحواف:</span>
+                <span className="font-bold text-emerald-400">100% (ثابتة تماماً كأول يوم ✅)</span>
+              </div>
+              <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div className="h-full bg-emerald-500 w-full" />
+              </div>
             </div>
 
-            {/* Sharp badge */}
-            <div className="absolute top-2 right-2 bg-green-600/90 text-white text-[10px] px-2 py-1 rounded font-bold shadow">
-              ✨ نقاء تام ١٠٠٪ دون أي تعرج
+            {/* Core Textbook Takeaway */}
+            <div className="text-xs text-muted leading-relaxed space-y-1">
+              <div className="text-emerald-400 font-bold">
+                • لا تفقد جودتها إطلاقاً: الحاسوب يعيد حساب المعادلات الهندسية فوراً عند كل تكبير؛ فتظل حادة وناعمة تماماً.
+              </div>
+              <div>
+                • تُنشأ ببرامج الرسم (Draw) مثل <b>Illustrator</b>، ومثالية للشعارات (Logos) والخطوط (صيغ: SVG, AI).
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div className="mt-3 text-xs text-muted w-full space-y-1">
-            <div className="text-green-400 font-bold">
-              • عند التكبير: تحافظ على كامل حدتها ونعومتها لأنها معادلات رياضية.
-            </div>
-            <div>
-              • يتضمن إحداثيات النقاط، الزوايا وسماكة الخطوط. مثالي للشعارات والخطوط.
-            </div>
+      {/* Bottom Master Comparison Table (Exam Goldmine) */}
+      <div className="mt-4 pt-3 border-t border-border">
+        <div className="text-xs font-bold text-slate-300 mb-2 flex items-center gap-1.5">
+          <span>📋</span>
+          <span>جدول المقارنة الذهبي المعتمد في أسئلة الامتحان:</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-xs">
+          <div className="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+            <div className="text-muted font-bold text-[11px] mb-1">١. البنية الأساسية</div>
+            <div className="text-red-400 font-semibold">• النقطي: شبكة نقاط (بكسلات).</div>
+            <div className="text-emerald-400 font-semibold">• المتجهات: معادلات وخطوط.</div>
+          </div>
+          <div className="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+            <div className="text-muted font-bold text-[11px] mb-1">٢. أثر التكبير (Zoom)</div>
+            <div className="text-red-400 font-semibold">• النقطي: تعرجات مسننة (Jaggies).</div>
+            <div className="text-emerald-400 font-semibold">• المتجهات: نقاء كامل 100%.</div>
+          </div>
+          <div className="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+            <div className="text-muted font-bold text-[11px] mb-1">٣. البرامج المقررة</div>
+            <div className="text-red-400 font-semibold">• النقطي: التلوين (Photoshop).</div>
+            <div className="text-emerald-400 font-semibold">• المتجهات: الرسم (Illustrator).</div>
+          </div>
+          <div className="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+            <div className="text-muted font-bold text-[11px] mb-1">٤. أشهر الامتدادات</div>
+            <div className="text-red-400 font-semibold">• النقطي: PNG, JPG, BMP, GIF.</div>
+            <div className="text-emerald-400 font-semibold">• المتجهات: SVG, AI, EPS, PDF.</div>
           </div>
         </div>
       </div>
@@ -1300,7 +1560,7 @@ export function PixelMatrixInteractiveDemo() {
 }
 
 /* =========================================================================
-   6. DPI & Resolution Interactive Lab (معمل الدقة وكثافة البوصة وحاسبة الفائز ص 130)
+   6. DPI & Resolution Interactive Lab (معمل الدقة وكثافة البوصة وحاسبة المنهج المعتمد ص 130)
    ========================================================================= */
 
 export function DpiResolutionLab() {
@@ -1324,7 +1584,7 @@ export function DpiResolutionLab() {
     { dpi: 72, label: '72 dpi', desc: 'شاشات الويب والموبايل 📱', color: '#f97316' },
     { dpi: 150, label: '150 dpi', desc: 'مستندات وطباعة يومية 📄', color: '#38bdf8' },
     { dpi: 300, label: '300 dpi', desc: 'مطبوعات ورقية وكتب 🖨️', color: '#22c55e' },
-    { dpi: 1200, label: '1200 dpi', desc: 'طابعات ليزر (مثال الفائز) 🌟', color: '#a855f7' },
+    { dpi: 1200, label: '1200 dpi', desc: 'طابعات ليزر (مثال المنهج المعتمد) 🌟', color: '#a855f7' },
   ];
 
   // Visual dot count in the 1-inch preview box
@@ -1354,12 +1614,12 @@ export function DpiResolutionLab() {
             className={`btn ${activeTab === 'calculator' ? 'btn-primary' : ''}`}
             onClick={() => setActiveTab('calculator')}
           >
-            🧮 حاسبة البوصة والبكسل وحجم الملف (كتاب الفائز ص 130)
+            🧮 حاسبة البوصة والبكسل وحجم الملف (المنهج المعتمد ص 130)
           </button>
         </div>
 
         <span className="text-xs font-bold text-muted">
-          كتاب الفائز: دقة الصور ووحدة القياس dpi
+          المنهج المعتمد: دقة الصور ووحدة القياس dpi
         </span>
       </div>
 
@@ -1494,7 +1754,7 @@ export function DpiResolutionLab() {
             <div className="p-4 bg-[var(--surface-2)] border border-border rounded-xl space-y-3">
               <div className="flex justify-between items-center">
                 <h4 className="font-bold text-sm text-primary flex items-center gap-1">
-                  <span>🦜 عينة صورة الببغاء (المثال المعتمد بكتاب الفائز ص 130):</span>
+                  <span>🦜 عينة صورة الببغاء (المثال المعتمد بالمنهج المعتمد ص 130):</span>
                 </h4>
                 <span className="text-xs font-mono font-bold text-muted">
                   {selectedDpi} dpi
@@ -1595,7 +1855,7 @@ export function DpiResolutionLab() {
 
               <div className="p-3 bg-[var(--surface)] border border-border rounded-xl text-xs space-y-1.5 leading-relaxed">
                 <div className="font-bold text-foreground flex items-center gap-1">
-                  <span>📌 خلاصة كتاب الفائز (ص 130):</span>
+                  <span>📌 خلاصة المنهج المعتمد (ص 130):</span>
                 </div>
                 <div>
                   • <b>72 dpi:</b> مناسبة لشاشات الويب لسرعة التصفح وتوفير الذاكرة.<br />
@@ -1683,7 +1943,7 @@ export function DpiResolutionLab() {
           {/* Right: Results & Curriculum Laws */}
           <div className="md:col-span-6 bg-[var(--surface-2)] p-4 rounded-xl border border-border space-y-4">
             <h4 className="font-bold text-sm text-primary flex items-center gap-1">
-              <span>📊 النتيجة بالأبعاد وحجم الذاكرة (كتاب الفائز ص 130 و 132):</span>
+              <span>📊 النتيجة بالأبعاد وحجم الذاكرة (المنهج المعتمد ص 130 و 132):</span>
             </h4>
 
             {/* Pixel Dimensions (The Two Ways from Page 130) */}
@@ -1717,7 +1977,7 @@ export function DpiResolutionLab() {
 
             {/* Curriculum Comparison Alert */}
             <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-xl text-xs space-y-1 text-green-300">
-              <div className="font-bold text-green-400">🎯 مقارنة كتاب الفائز الحاسمة:</div>
+              <div className="font-bold text-green-400">🎯 مقارنة المنهج المعتمد الحاسمة:</div>
               <div className="leading-relaxed">
                 لو قمنا بتغيير الـ DPI من <b>72 dpi</b> إلى <b>300 dpi</b> لنفس الأبعاد ({inchWidth} × {inchHeight} بوصة)،
                 سيتضاعف عدد البكسلات وحجم الملف بمقدار <b>{( (300*300)/(72*72) ).toFixed(1)} ضعفاً</b>!

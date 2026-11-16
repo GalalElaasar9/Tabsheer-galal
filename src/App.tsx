@@ -100,7 +100,7 @@ function Home() {
             <a href="#/lesson/u3rev" className="hero-review-banner">
               <div>
                 <span className="hero-review-badge">
-                  <Sparkles size={14} /> مراجعة شاملة وماراثون الامتحانات · كتاب الوزارة والفائز
+                  <Sparkles size={14} /> مراجعة شاملة وماراثون الامتحانات · المنهج المعتمد والامتحانات
                 </span>
                 <h2 className="hero-review-title">مراجعة الفصل الثالث: الويب (Web Technologies)</h2>
                 <p className="hero-review-desc">

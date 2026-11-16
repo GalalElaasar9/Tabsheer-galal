@@ -322,7 +322,7 @@ export function FrontendTrioLabDemo() {
             <p className="text-xs text-slate-300 leading-relaxed mb-4">{curr.role}</p>
 
             <div className="p-3 rounded-lg border bg-slate-950/70 border-slate-800">
-              <span className="text-[11px] text-slate-400 block mb-1">🏛️ التشبيه المعتمد في كتاب الوزارة والفائز:</span>
+              <span className="text-[11px] text-slate-400 block mb-1">🏛️ التشبيه المعتمد في كتاب الوزارة والمنهج المعتمد:</span>
               <p className="text-xs font-bold text-slate-200">{curr.analogy}</p>
             </div>
           </div>
@@ -1212,7 +1212,7 @@ export function ResponsiveMobileFirstDemo() {
 }
 
 /* =========================================================================
-   5. معجم مصطلحات كتاب المدرسة وكتاب الفائز المعتمدة
+   5. معجم مصطلحات كتاب المدرسة والمنهج المعتمد المعتمدة
    ========================================================================= */
 export function TextbookGlossaryU3L3() {
   const [filter, setFilter] = useState<'all' | 'trio' | 'modern' | 'frameworks'>('all');
@@ -1293,7 +1293,7 @@ export function TextbookGlossaryU3L3() {
         <div>
           <h3 className="text-base font-extrabold text-white flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-amber-400" />
-            معجم مصطلحات كتاب المدرسة وكتاب الفائز المعتمدة
+            معجم مصطلحات كتاب المدرسة والمنهج المعتمد المعتمدة
           </h3>
           <p className="text-xs text-slate-400">النصوص والتعريفات الوزارية المقررة في امتحان البكالوريا 2027</p>
         </div>

@@ -96,7 +96,7 @@ export const wireframeFrames: FrameDef[] = [
                   📖 ١ · يعني إيه Wireframe؟
                 </span>
                 <span style={{ fontSize: 11, fontWeight: 'bold', backgroundColor: 'rgba(249, 115, 22, 0.2)', color: 'var(--pen-orange)', padding: '2px 8px', borderRadius: '6px', border: '1px solid var(--pen-orange)' }}>
-                  كتاب الفائز
+                  المنهج المعتمد
                 </span>
               </div>
 
@@ -1137,7 +1137,7 @@ export const crapDetailFrames: FrameDef[] = [
                   📖 يعني إيه مبادئ CRAP؟
                 </span>
                 <span style={{ fontSize: 12, fontWeight: 'bold', backgroundColor: 'rgba(168, 85, 247, 0.2)', color: 'var(--pen-purple)', padding: '3px 10px', borderRadius: '6px', border: '1px solid var(--pen-purple)' }}>
-                  كتاب الفائز
+                  المنهج المعتمد
                 </span>
               </div>
 
@@ -1226,7 +1226,7 @@ export const crapDetailFrames: FrameDef[] = [
           <li>زر "عرض النتيجة" يكون واضحاً ومميزاً بلون ساطع (CTA).</li>
           <li>المعلومات المهمة تكون سهلة الملاحظة فوراً.</li>
         </ul>
-        <p><b>تنبيه كتاب الفائز:</b> التباين لا يعني اختلاف الألوان فقط، بل اختلاف الحجم أو سمك الخط أو شكل العنصر، مع الحفاظ على سهولة القراءة.</p>
+        <p><b>تنبيه المنهج المعتمد:</b> التباين لا يعني اختلاف الألوان فقط، بل اختلاف الحجم أو سمك الخط أو شكل العنصر، مع الحفاظ على سهولة القراءة.</p>
       </>
     ),
     render: () => (
@@ -1284,7 +1284,7 @@ export const crapDetailFrames: FrameDef[] = [
         {/* Bottom Alert Banner */}
         <Box x={50} y={615} w={1180} h={65} c="orange" fill="orange" at={4}>
           <div style={{ textAlign: 'center', padding: '8px 16px', fontSize: 14.5, color: 'var(--pen-ink)', lineHeight: 1.45, whiteSpace: 'normal' }}>
-            💡 <b>خلي بالك (نصيحة كتاب الفائز):</b>
+            💡 <b>خلي بالك (نصيحة المنهج المعتمد):</b>
             &nbsp;
             «التباين مش معناه اختلاف الألوان بس؛ ممكن يكون اختلاف في الحجم، أو سمك الخط، أو شكل العنصر.. ولازم نحافظ على وضوح النص وسهولة قراءته!»
           </div>
@@ -1648,7 +1648,7 @@ export const part2: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>٣ · المخطط الهيكلي للموقع (Wireframe) طبقاً لكتاب الفائز:</b></p>
+        <p><b>٣ · المخطط الهيكلي للموقع (Wireframe) طبقاً لالمنهج المعتمد:</b></p>
         <p><b>التعريف المعتمد:</b> رسم تخطيطي أولي مبسط يوضح <b>الهيكل البنائي للموقع وترتيب العناصر وأماكن الأزرار والنصوص</b> دون تفاصيل بصرية معقدة.</p>
         <p><b>تشبيه المخطط المعماري (Architectural Blueprint):</b></p>
         <p>مثل المهندس المعماري الذي يرسم مخطط المبنى (الغرف، الجدران، الأبواب، والممرات) قبل اختيار ألوان الطلاء أو شراء الأثاث والديكور.</p>
@@ -1663,7 +1663,7 @@ export const part2: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading sub="المسودة المعمارية لتوزيع عناصر الصفحة وسؤال علل المعتمد في كتاب الفائز">
+        <Heading sub="المسودة المعمارية لتوزيع عناصر الصفحة وسؤال علل المعتمد في المنهج المعتمد">
           ٣ · المخطط الهيكلي للموقع (Wireframe): المسودة المعمارية 📐
         </Heading>
 
@@ -1692,7 +1692,7 @@ export const part2: FrameDef[] = [
                 🏛️ تشبيه المخطط المعماري (Blueprint)
               </div>
               <span style={{ fontSize: 11, fontWeight: 'bold', backgroundColor: 'rgba(168, 85, 247, 0.2)', color: 'var(--pen-purple)', padding: '2px 8px', borderRadius: '6px', border: '1px solid var(--pen-purple)' }}>
-                كتاب الفائز
+                المنهج المعتمد
               </span>
             </div>
 
@@ -1778,7 +1778,7 @@ export const part2: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>٤ · مبادئ التصميم البصري الأربعة (CRAP Principles) طبقاً لكتاب الفائز:</b></p>
+        <p><b>٤ · مبادئ التصميم البصري الأربعة (CRAP Principles) طبقاً لالمنهج المعتمد:</b></p>
         <p>مجموعة القواعد الذهبية التي تحول المخطط الهيكلي الرمادي إلى واجهة مستخدم (UI) احترافية ومريحة وجذابة:</p>
         <ol>
           <li>
@@ -1802,7 +1802,7 @@ export const part2: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading sub="القواعد الذهبية لتحويل الهيكل إلى واجهة جذابة ومريحة في كتاب الفائز">
+        <Heading sub="القواعد الذهبية لتحويل الهيكل إلى واجهة جذابة ومريحة في المنهج المعتمد">
           ٤ · مبادئ التصميم البصري الأربعة (CRAP Principles) 🎨
         </Heading>
 
@@ -1951,7 +1951,7 @@ export const part2: FrameDef[] = [
 
         {/* Bottom Golden Law */}
         <Box x={60} y={595} w={1160} h={75} c="pink" fill="pink" size={19} tc="ink" at={5}>
-          ✨ <b>قاعدة كتاب الفائز:</b> تطبيق مبادئ CRAP الأربعة يضمن تجربة مستخدم (UX) ممتازة، ويزيد معدل بقاء الزوار وإتمام عمليات الشراء بنجاح!
+          ✨ <b>قاعدة المنهج المعتمد:</b> تطبيق مبادئ CRAP الأربعة يضمن تجربة مستخدم (UX) ممتازة، ويزيد معدل بقاء الزوار وإتمام عمليات الشراء بنجاح!
         </Box>
       </Scene>
     ),

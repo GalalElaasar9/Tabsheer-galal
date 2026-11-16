@@ -265,7 +265,7 @@ export const part2: FrameDef[] = [
     render: () => (
       <Scene>
         <Box x={46} y={30} w={196} h={56} c="green" fill="green" tc="green" size={26}>🚦 رموز الاستجابة</Box>
-        <Heading sub="رموز الحالة السبعة الأساسية المقررة في كتاب المدرسة ودليل الفائز">
+        <Heading sub="رموز الحالة السبعة الأساسية المقررة في كتاب المدرسة ودليل المنهج المعتمد">
           أكواد استجابة الخادم (HTTP Status Codes) 🚦
         </Heading>
 

@@ -54,7 +54,7 @@ export const CURRICULUM_G1: UnitEntry[] = [
       { n: 6, title: 'رقمنة الصوت', en: 'Audio Digitization', icon: '🎙️' },
       { n: 7, title: 'رقمنة الصور', en: 'Image Digitization', icon: '🖼️', board: 'u6l7', badge: 'جديد' },
       { n: 8, title: 'التمثيل الرقمي وضغط الفيديو', en: 'Video Digitization & Compression', icon: '🎬' },
-      { n: 9, title: 'تصميم المعلومات', en: 'Information Design', icon: '📊' },
+      { n: 9, title: 'تصميم البيانات والمعلومات', en: 'Information & Data Design', icon: '📊', board: 'u6l9', badge: 'جديد' },
     ],
   },
 ];

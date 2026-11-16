@@ -12,7 +12,7 @@ const STOPS = [
   'حساب حجم بيانات الصور 📐',
   'النقطي والمتجهات ⚖️',
   'أنظمة الألوان (RGB/CMY)',
-  'تحدي الفائز الشامل 🏁',
+  'تحدي المنهج المعتمد الشامل 🏁',
 ];
 
 const STOP_PTS: [number, number][] = [
@@ -113,7 +113,7 @@ export const intro: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>أهداف الدرس المعتمدة من كتاب الوزارة ودليل الفائز:</b></p>
+        <p><b>أهداف الدرس المعتمدة من كتاب الوزارة ودليل المنهج المعتمد:</b></p>
         <ul>
           <li>فهم المفهوم التأسيسي لرقمنة الصور ولماذا يحول الكمبيوتر الصورة إلى أرقام.</li>
           <li>تتبع مراحل الرقمنة الثلاث بالترتيب: <b>أخذ العينات (Sampling)</b>، <b>التكميم (Quantization)</b>، و <b>الترميز (Encoding)</b>.</li>
@@ -1252,12 +1252,12 @@ export const part1: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>٦ · الدقة (Resolution) ووحدة قياسها (dpi) طبقاً لكتاب الفائز (ص 130):</b></p>
+        <p><b>٦ · الدقة (Resolution) ووحدة قياسها (dpi) طبقاً لالمنهج المعتمد (ص 130):</b></p>
         <p><b>الدقة (Resolution):</b> درجة دقة ووضوح Pixels عند إجراء عملية أخذ العينات.</p>
         <p><b>يعني إيه «بوصة» (Inch) في الصورة؟</b></p>
         <p>البوصة هي وحدة قياس أبعاد فيزيائية حقيقية (1 Inch = 2.54 cm) على الورق المطبوع أو شاشة العرض.</p>
         <p><b>وحدة قياس الدقة:</b> <b>dpi = Dots Per Inch</b> (أي: عدد النقاط في كل بوصة واحدة 2.54 سم).</p>
-        <p><b>طرق التعبير عن الدقة في كتاب الفائز (ص 130):</b></p>
+        <p><b>طرق التعبير عن الدقة في المنهج المعتمد (ص 130):</b></p>
         <ol>
           <li><b>بكثافة النقاط:</b> dpi مثل (72 dpi للشاشات، 300 dpi للمطبوعات، 1200 dpi لطابعات الليزر).</li>
           <li><b>بأبعاد البكسل:</b> (Pixels أفقي × Pixels رأسي) مثل $800 \times 600$ أو $1920 \times 1080$.</li>
@@ -1277,7 +1277,7 @@ export const part1: FrameDef[] = [
         <Box x={60} y={115} w={1160} h={105} c="blue" fill="blue" at={1}>
           <div style={{ textAlign: 'center', padding: '10px 22px', whiteSpace: 'normal', display: 'flex', flexDirection: 'column', gap: '5px' }}>
             <div style={{ fontSize: 20, color: 'var(--pen-ink)' }}>
-              أثناء أخذ العينات تظهر كلمة هامة جدًا: <span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>الدقة (Resolution)</span> = <b>درجة دقة ووضوح البكسلات عند أخذ العينات</b> (كتاب الفائز ص 130).
+              أثناء أخذ العينات تظهر كلمة هامة جدًا: <span style={{ color: 'var(--pen-blue)', fontWeight: 'bold' }}>الدقة (Resolution)</span> = <b>درجة دقة ووضوح البكسلات عند أخذ العينات</b> (المنهج المعتمد ص 130).
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', flexWrap: 'wrap', fontSize: 17, color: 'var(--pen-ink)' }}>
               <div>
@@ -1308,7 +1308,7 @@ export const part1: FrameDef[] = [
                 borderRadius: '6px',
                 border: '1px solid var(--pen-purple)',
               }}>
-                كتاب الفائز ص 130
+                المنهج المعتمد ص 130
               </span>
             </div>
 
@@ -1500,11 +1500,11 @@ export const part1: FrameDef[] = [
         <Box x={60} y={550} w={1160} h={140} c="green" fill="green" at={5}>
           <div style={{ padding: '10px 24px', whiteSpace: 'normal', display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <div style={{ fontSize: 20, fontWeight: 'bold', color: 'var(--pen-green)', textAlign: 'center' }}>
-              🎯 قواعد واستنتاجات كتاب الفائز ص 130:
+              🎯 قواعد واستنتاجات المنهج المعتمد ص 130:
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
               <div style={{ flex: 1, backgroundColor: 'rgba(15, 23, 42, 0.6)', padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', fontSize: 15, lineHeight: 1.45 }}>
-                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>📌 طريقتا التعبير عن الدقة في كتاب الفائز:</span><br />
+                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>📌 طريقتا التعبير عن الدقة في المنهج المعتمد:</span><br />
                 ١) <b>بكثافة النقاط:</b> <span style={{ color: '#38bdf8', fontFamily: 'monospace' }}>dpi</span> (مثل 72 dpi أو 300 dpi أو 1200 dpi).<br />
                 ٢) <b>بأبعاد البكسل:</b> <b>(أفقي × رأسي)</b> مثل <span style={{ fontFamily: 'monospace', color: '#22c55e' }}>800 × 600</span> أو <span style={{ fontFamily: 'monospace', color: '#22c55e' }}>1920 × 1080</span>.
               </div>

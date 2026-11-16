@@ -10,7 +10,7 @@ const STOPS = [
   'المخطط الهيكلي (Wireframe)',
   'استوديو التخطيط المعماري',
   'مبادئ التصميم (CRAP)',
-  'بنك أسئلة كتاب الفائز',
+  'بنك أسئلة المنهج المعتمد',
 ];
 
 const STOP_PTS: [number, number][] = [
@@ -26,7 +26,7 @@ export const intro: FrameDef[] = [
     notes: (
       <>
         <p><b>الدرس الثاني من الوحدة الرابعة: تصميم المعلومات وتجربة المستخدم للمواقع الإلكترونية (بكالوريا 2027).</b></p>
-        <p><b>الأهداف المعتمدة في كتاب الفائز:</b></p>
+        <p><b>الأهداف المعتمدة في المنهج المعتمد:</b></p>
         <ol>
           <li>استيعاب مفهوم التصميم المتمحور حول المستخدم (User-Centered Design - UCD).</li>
           <li>بناء وفهم شخصية المستخدم (User Persona) وعناصرها الأربعة.</li>
@@ -73,7 +73,7 @@ export const intro: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>خريطة رحلتنا في الدرس الثاني (كتاب الفائز):</b> ثماني محطات أساسية تربط النظرية بالتطبيق العملي في الامتحانات.</p>
+        <p><b>خريطة رحلتنا في الدرس الثاني (المنهج المعتمد):</b> ثماني محطات أساسية تربط النظرية بالتطبيق العملي في الامتحانات.</p>
       </>
     ),
     render: () => (
@@ -421,7 +421,7 @@ export const personaIntroFrames: FrameDef[] = [
                   📖 ١ · يعني إيه شخصية المستخدم (Persona)؟
                 </span>
                 <span style={{ fontSize: 11, fontWeight: 'bold', backgroundColor: 'rgba(168, 85, 247, 0.2)', color: 'var(--pen-purple)', padding: '2px 8px', borderRadius: '6px', border: '1px solid var(--pen-purple)' }}>
-                  كتاب الفائز
+                  المنهج المعتمد
                 </span>
               </div>
 
@@ -656,7 +656,7 @@ export const personaIntroFrames: FrameDef[] = [
         {/* Bottom Banner */}
         <Box x={50} y={618} w={1180} h={68} c="purple" fill="purple" at={5}>
           <div style={{ textAlign: 'center', padding: '8px 16px', fontSize: 15, color: 'var(--pen-ink)', lineHeight: 1.45, whiteSpace: 'normal' }}>
-            📌 <b>ملاحظة منهجية حاسمة (كتاب الفائز):</b>
+            📌 <b>ملاحظة منهجية حاسمة (المنهج المعتمد):</b>
             &nbsp;
             «لاحظ إننا مش بنكتب معلومات لمجرد ملء نموذج؛ كل معلومة بنكتبها لازم تساعدنا نفهم المستخدم ونصمم الموقع بشكل صحيح!»
           </div>
@@ -1021,7 +1021,7 @@ export const personaIntroFrames: FrameDef[] = [
         {/* Bottom Synthesis Banner */}
         <Box x={50} y={618} w={1180} h={72} c="blue" fill="blue" at={6}>
           <div style={{ textAlign: 'center', padding: '8px 16px', fontSize: 15, color: 'var(--pen-ink)', lineHeight: 1.45, whiteSpace: 'normal' }}>
-            🌟 <b>الخلاصة المنهجية المعتمدة (كتاب الفائز):</b>
+            🌟 <b>الخلاصة المنهجية المعتمدة (المنهج المعتمد):</b>
             &nbsp;
             شخصية المستخدم أداة ذكية مبنية على بيانات واقعية لفهم أنماط المستخدمين، وتوجيه كل عنصر ولون وزر في الموقع لخدمة هدفهم في ثوانٍ دون حيرة!
           </div>
@@ -1038,7 +1038,7 @@ export const part1: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>١ · دراسة الحالة المعتمدة في كتاب الفائز:</b></p>
+        <p><b>١ · دراسة الحالة المعتمدة في المنهج المعتمد:</b></p>
         <p>تخيل أنك مكلف بتصميم <b>متجر إلكتروني للمنتجات الزراعية والخضار والفواكه الطازجة</b>.</p>
         <p><b>السؤال المحوري:</b> كيف نبدأ التخطيط؟ هل نبدأ باختيار الألوان والخطوط وبرمجة السيرفرات؟ أم نبدأ بدراسة الجمهور المستهدف؟</p>
         <p><b>فلسفة التصميم المتمحور حول المستخدم (User-Centered Design - UCD):</b></p>
@@ -1048,7 +1048,7 @@ export const part1: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading sub="دراسة حالة متجر المنتجات الزراعية وفلسفة التصميم المعتمدة في كتاب الفائز">
+        <Heading sub="دراسة حالة متجر المنتجات الزراعية وفلسفة التصميم المعتمدة في المنهج المعتمد">
           ١ · دراسة الحالة وفلسفة التصميم المتمحور حول المستخدم (UCD) 🥦
         </Heading>
 
@@ -1056,7 +1056,7 @@ export const part1: FrameDef[] = [
         <Box x={60} y={120} w={1160} h={110} c="green" fill="green" at={1}>
           <div style={{ textAlign: 'center', padding: '12px 24px', lineHeight: 1.5, whiteSpace: 'normal' }}>
             <span style={{ fontSize: 22, fontWeight: 'bold', color: 'var(--pen-green)' }}>
-              دراسة الحالة (كتاب الفائز):
+              دراسة الحالة (المنهج المعتمد):
             </span>
             &nbsp;
             <span style={{ fontSize: 20, color: 'var(--pen-ink)', fontWeight: 'bold' }}>
@@ -1133,7 +1133,7 @@ export const part1: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>٢ · شخصية المستخدم (User Persona) طبقاً لكتاب الفائز:</b></p>
+        <p><b>٢ · شخصية المستخدم (User Persona) طبقاً لالمنهج المعتمد:</b></p>
         <p><b>التعريف المعتمد:</b> تمثيل افتراضي للمستخدم المثالي / النموذجي مستند إلى بيانات وأبحاث واقعية عن الجمهور المستهدف.</p>
         <p><b>لماذا نبني شخصية المستخدم؟</b></p>
         <ul>
@@ -1153,7 +1153,7 @@ export const part1: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading sub="التمثيل الافتراضي للمستخدم المثالي وعناصره الأربعة المعتمدة في كتاب الفائز">
+        <Heading sub="التمثيل الافتراضي للمستخدم المثالي وعناصره الأربعة المعتمدة في المنهج المعتمد">
           ٢ · شخصية المستخدم (User Persona) ودورها في توجيه التصميم 👤
         </Heading>
 

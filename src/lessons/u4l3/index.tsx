@@ -7,6 +7,7 @@ import {
   AbTestingSimulatorDemo,
   HeuristicAuditLabDemo,
   TextbookGlossaryU4L3,
+  UsabilityTestingInterviewLab,
 } from './demos';
 import { intro, part1 } from './scenes1';
 import { part2 } from './scenes2';
@@ -52,41 +53,39 @@ const lesson: LessonDef = {
       frames: [...intro],
     },
     {
-      title: '١ · أهمية التقييم واختبارات قابلية الاستخدام',
+      title: '١ · فكرة التقييم، دراسة النشاط الرياضي، واختبارات الاستخدام',
       frames: [
-        part1[0], // evaluation-why
-        check('check-eval-basics', 'تأكد من استيعابك لأهداف تقييم المواقع', CHECKS.evalBasics),
-        part1[1], // usability-testing-method
-      ],
-    },
-    {
-      title: '٢ · التقييم الاستكشافي ومبادئ نيلسن لقابلية الاستخدام',
-      frames: [
-        part2[0], // heuristics-nielsen
+        part1[0], // bridge-and-eval (Slide 3: دراسة حالة النشاط الرياضي والحاجة للأدلة)
+        part1[1], // sports-case-numbers-and-synthesis (Slide 4: أرقام الحالة وتكامل الأدلة الثلاثة)
+        part1[2], // qual-quant-master-divide (Slide 5: الدائرتان البصريتان والتعريفات والامتداد)
+        part1[3], // usability-testing-method (Slide 6: اختبار قابلية الاستخدام وسيناريو الطالب أحمد)
+        part1[4], // interviews-method (Slide 7: المقابلات الشخصية والأسئلة الخمسة)
         {
-          id: 'heuristic-audit-lab',
-          title: '🧪 مدقق مبادئ نيلسن: تقييم تفاعلي لقابلية الاستخدام',
-          h: 860,
+          id: 'demo-usability-interview',
+          title: '🧪 معمل: محاكي اختبار قابلية الاستخدام ومقابلة الطالب (Usability & Interview Lab)',
+          h: 760,
           notes: (
             <>
-              <p><b>مدقق مبادئ نيلسن:</b> راجع معايير وضوح الحالة، التراجع Undo، ومنع الأخطاء ولاحظ مؤشر قابلية الاستخدام المحسوب.</p>
+              <p><b>معمل اختبار قابلية الاستخدام والمقابلات:</b></p>
+              <p>دع الطلاب يجربون مهمة «البحث عن نتيجة الطالب أحمد» بين الواجهة (أ) المربكة والواجهة (ب) المباشرة.</p>
+              <p>اضغط زر «عرض مقابلة الطالب» لمشاهدة كيف يكشف كلام الطالب عيب زر تحميل النتيجة ويساعد المصمم في تطوير الواجهة فوراً.</p>
             </>
           ),
           render: () => (
             <>
-              <Eyebrow>🧪 تجربة تقييم عملية</Eyebrow>
-              <Title>مدقق مبادئ نيلسن العشرة لقابلية الاستخدام (Heuristics Checklist)</Title>
-              <HeuristicAuditLabDemo />
+              <Eyebrow>🧪 تجربة تقييم نوعي حية</Eyebrow>
+              <Title>محاكي اختبار الاستخدام وسيناريو المقابلة الشخصية (Student Result Usability & Interview)</Title>
+              <UsabilityTestingInterviewLab />
             </>
           ),
         },
-        check('check-heuristics', 'تأكد من فهمك لمبادئ نيلسن الاستكشافية', CHECKS.heuristics),
+        check('check-eval-basics', 'تأكد من استيعابك للمفاهيم الأساسية للتقييم النوعي والكمي', CHECKS.evalBasics),
       ],
     },
     {
-      title: '٣ · التحليلات الرقمية واختبارات A/B ومؤشرات الأداء',
+      title: '٢ · طرق التقييم الكمي: تحليلات الويب واختبارات A/B',
       frames: [
-        part2[1], // analytics-and-heatmaps
+        part2[0], // analytics-and-heatmaps (تحليلات الويب والمؤشرات الثلاثة: PV والارتداد والتحويل)
         {
           id: 'ab-testing-simulator',
           title: '🧪 محاكي اختبارات A/B: قياس معدل التحويل والارتداد',
@@ -104,9 +103,33 @@ const lesson: LessonDef = {
             </>
           ),
         },
+        check('check-analytics', 'تأكد من فهمك لمؤشرات تحليلات الويب واختبارات A/B', CHECKS.analytics),
+      ],
+    },
+    {
+      title: '٣ · التقييم الإرشادي (مراجعة الخبراء) ومؤشرات Core Web Vitals',
+      frames: [
+        part2[1], // heuristics-nielsen (التقييم الإرشادي والقواعد الثلاث)
+        {
+          id: 'heuristic-audit-lab',
+          title: '🧪 مدقق مبادئ نيلسن: تقييم تفاعلي لقابلية الاستخدام',
+          h: 860,
+          notes: (
+            <>
+              <p><b>مدقق مبادئ نيلسن:</b> راجع معايير الاتساق، ومنع الأخطاء، ووضوح حالة النظام ولاحظ مؤشر قابلية الاستخدام المحسوب.</p>
+            </>
+          ),
+          render: () => (
+            <>
+              <Eyebrow>🧪 تجربة تقييم عملية</Eyebrow>
+              <Title>مدقق مبادئ نيلسن العشرة لقابلية الاستخدام (Heuristics Checklist)</Title>
+              <HeuristicAuditLabDemo />
+            </>
+          ),
+        },
+        check('check-heuristics', 'تأكد من فهمك لمبادئ التقييم الإرشادي وقواعده الثلاث', CHECKS.heuristics),
         part3[0], // core-web-vitals
         order('order-eval-flow', 'رتّب خطوات عملية تقييم الموقع الإلكتروني', ORDERS.evaluationFlow),
-        check('check-analytics', 'تأكد من فهمك للتحليلات الرقمية والخرائط الحرارية', CHECKS.analytics),
       ],
     },
     {
@@ -177,7 +200,7 @@ export const u4l3: LessonDef = {
   ...lesson,
   sections: lesson.sections.map(sec => ({
     ...sec,
-    frames: sec.frames.map(f => {
+    frames: sec.frames.filter(Boolean).map(f => {
       const tag = TAG[f.id];
       return {
         ...f,

@@ -455,7 +455,7 @@ export function PersonaExplorerLab() {
             <span className="pill text-[10px] font-black bg-blue-950 text-blue-300 border-blue-700">
               المفهوم الأول من المفاهيم الستة
             </span>
-            <span className="text-xs text-slate-400 font-bold">كتاب الوزارة والفائز</span>
+            <span className="text-xs text-slate-400 font-bold">كتاب الوزارة والمنهج</span>
           </div>
           <h4 className="font-extrabold text-base text-white flex items-center gap-2">
             <span>👤 مستكشف شخصية المستخدم (User Persona): معرفة الزائر قبل التصميم</span>
@@ -886,7 +886,7 @@ export function WireframeStudioLab() {
             <span className="font-extrabold text-xs text-amber-400 block mb-1">
               {mode === 'wireframe' ? '📐 مميزات المخطط الهيكلي (Wireframe)' : '🎨 مميزات الواجهة النهائية (Final UI)'}
             </span>
-            <span className="text-[11px] text-slate-400">سؤال علل في كتاب الفائز</span>
+            <span className="text-[11px] text-slate-400">سؤال علل في المنهج المعتمد</span>
           </div>
 
           <div className="space-y-2.5">
@@ -936,7 +936,7 @@ export function CrapPrinciplesLab() {
       {/* Control Switches */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-3 border-b" style={{ borderColor: '#1e293b' }}>
         <div>
-          <span className="text-xs text-slate-400 block mb-1">مبادئ التصميم البصري الأربعة (CRAP Principles) - كتاب الفائز:</span>
+          <span className="text-xs text-slate-400 block mb-1">مبادئ التصميم البصري الأربعة (CRAP Principles) - المنهج المعتمد:</span>
           <h4 className="font-extrabold text-base text-white">تحكم في مبادئ CRAP وشاهد التأثير المباشر على بطاقة المنتج 🔬</h4>
         </div>
         <div className="flex items-center gap-2">
@@ -1129,7 +1129,7 @@ export function CrapPrinciplesLab() {
         <div className="p-4 rounded-xl border bg-slate-900/80 border-slate-800 space-y-3 text-xs">
           <div className="border-b border-slate-800 pb-2">
             <span className="font-extrabold text-xs text-amber-400 block mb-1">
-              📋 تحليل كتاب الفائز لمبادئ CRAP في صفحة الويب:
+              📋 تحليل المنهج المعتمد لمبادئ CRAP في صفحة الويب:
             </span>
             <span className="text-[11px] text-slate-400">راجع كل مبدأ وكيف يؤثر على قرارات الشراء والتصفح:</span>
           </div>

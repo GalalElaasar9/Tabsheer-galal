@@ -12,8 +12,23 @@ export const SCRIPT: Record<string, string[]> = {
   'evaluation-why': [
     'التقييم مش خطوة رفاهية؛ ده ضرورة عشان نكتشف المشاكل اللي بتعطل الزوار ونرفع معدل التحويل ونحسن السرعة.',
   ],
+  'bridge-and-eval': [
+    'بعد ما صممنا الموقع، إزاي نعرف إنه فعلاً شغال كويس؟ زي استمارة النشاط الرياضي: هل الطلاب بيسجلوا بسهولة؟ لا نفترض النجاح بل نطلب أدلة، وعندنا طريقين: نوعي (ليه؟) وكمي (كم؟).',
+  ],
+  'sports-case-numbers-and-synthesis': [
+    'الأرقام تصف ما يحدث بدقة: 100 زائر، 80 شافوا الاستمارة، 50 كملوا، و 30% ارتداد. وتكامل الأرقام مع المقابلات ومراجعة الخبير يعطي الصورة الكاملة لتقييم الموقع.',
+  ],
+  'qual-quant-master-divide': [
+    'التقييم النوعي يركز على الفهم التفصيلي، والتقييم الكمي يركز على القياس بالأرقام. والاتنين مش للمواقع بس، بل يطبقوا على التطبيقات والبرامج والخدمات والمنتجات.',
+  ],
   'usability-testing-method': [
     'اختبار قابلية الاستخدام هو الأصدق: بنجيب مستخدمين حقيقيين ونراقبهم بيعملوا مهام محددة ونحسب زمن ونجاح المهمة.',
+  ],
+  'interviews-method': [
+    'في المقابلات الشخصية بنسأل المستخدم مباشرة: إيه اللي عجبك، إيه اللي كان صعب، وإيه اللي تحب يتغير، عشان نفهم احتياجاته بدقة.',
+  ],
+  'demo-usability-interview': [
+    'جرب محاكي مهمة نتيجة الطالب أحمد وقارن بين الواجهة المربكة والواجهة السلسة واكتشف أثر المقابلة الحية.',
   ],
   'heuristics-nielsen': [
     'التقييم الاستكشاري بيعمله خبراء بناء على مبادئ نيلسن العشرة: زي وضوح حالة النظام، وتوفير زر التراجع Undo، ومنع الخطأ قبل ما يحصل.',
@@ -60,7 +75,12 @@ export const TAG: Record<string, TagKind> = {
   cover: 'story',
   journey: 'journey',
   'evaluation-why': 'problem',
+  'bridge-and-eval': 'problem',
+  'sports-case-numbers-and-synthesis': 'compare',
+  'qual-quant-master-divide': 'parts',
   'usability-testing-method': 'how',
+  'interviews-method': 'how',
+  'demo-usability-interview': 'example',
   'heuristics-nielsen': 'parts',
   'heuristic-audit-lab': 'example',
   'analytics-and-heatmaps': 'compare',

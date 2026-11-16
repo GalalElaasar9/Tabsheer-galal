@@ -11,7 +11,7 @@ export const part2: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>المرحلة الثانية في رقمنة الصور طبقاً لكتاب الوزارة (ص 88) وكتاب الفائز (ص 131):</b></p>
+        <p><b>المرحلة الثانية في رقمنة الصور طبقاً لكتاب الوزارة (ص 88) والمنهج المعتمد (ص 131):</b></p>
         <p><b>التقدير الرقمي / التكميم (Quantization):</b> يحول سطوع ولون كل Pixel المستمر إلى قيم رقمية مقسمة إلى عدة مستويات محددة وفق قاعدة ثابتة.</p>
         <p><b>التدرج (Gradation):</b> هو قيمة المستوى التي تمثل كثافة اللون أو السطوع لكل بكسل.</p>
         <p>يتم تحديد عدد مستويات التدرج حسب <b>عدد البتات (Bits)</b> المخصصة لكل بكسل، بالقانون الرياضي: <b>2ⁿ</b> (حيث n هو عمق البت).</p>
@@ -378,13 +378,14 @@ export const part2: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>المقارنة الجوهرية المقررة في كتاب الوزارة (ص 88 ص 89 ص 90):</b></p>
+        <p><b>المقارنة الجوهرية المقررة في كتاب الحاسب الآلي:</b></p>
         <p><b>١) التنسيق النقطي (Bitmap / Raster format):</b></p>
         <ul>
           <li>طريقة لتمثيل الصور باستخدام <b>شبكة من النقاط (Pixels)</b>.</li>
           <li><b>ظاهرة التعرجات (Jaggies):</b> عند تكبير الصورة تظهر متكسّرة أو متعرجة ومسننة الحواف.</li>
           <li><b>البرامج:</b> تُنشأ ببرامج التلوين (Paint) مثل Adobe Photoshop.</li>
           <li><b>الاستخدام:</b> مناسبة للصور الواقعية والفوتوغرافية المعقدة ذات التدرجات الكثيرة.</li>
+          <li><b>أشهر الصيغ:</b> PNG, JPG, BMP, GIF, WebP.</li>
         </ul>
         <p><b>٢) تنسيق المتجهات (Vector format):</b></p>
         <ul>
@@ -392,43 +393,136 @@ export const part2: FrameDef[] = [
           <li><b>عند التكبير:</b> لا تفقد جودتها إطلاقاً، وتظل حادة وناعمة تماماً بدون أي تعرجات!</li>
           <li><b>البرامج:</b> تُنشأ ببرامج الرسم (Draw) مثل Adobe Illustrator.</li>
           <li><b>الاستخدام:</b> مثالية للشعارات (Logos)، والخطوط (Fonts)، والرسوم الهندسية والأيقونات.</li>
+          <li><b>أشهر الصيغ:</b> SVG, AI, EPS, PDF.</li>
         </ul>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading sub="المقارنة الكبرى بين صيغتي الصور الرقمية في الحاسوب">النقطي (Raster) مقابل المتجهات (Vector) ⚖️</Heading>
+        <Heading sub="المقارنة الكبرى بالهوية البصرية: شبكة البكسلات وظاهرة التعرجات مقابل المعادلات الرياضية والنقاء التام">
+          التنسيق النقطي (Raster) مقابل تنسيق المتجهات (Vector) ⚖️
+        </Heading>
 
-        {/* Raster Card */}
-        <Box x={660} y={150} w={560} h={390} c="red" fill="red" at={1}>
-          <div style={{ textAlign: 'right', padding: '12px 20px', lineHeight: 1.5 }}>
-            <span style={{ fontSize: 30, fontWeight: 'bold', color: 'var(--pen-red)' }}>
-              🖼️ التنسيق النقطي (Bitmap / Raster):
-            </span>
-            <br />
-            <div style={{ fontSize: 21, color: 'var(--pen-ink)', marginTop: 8, lineHeight: 1.5 }}>
-              • <b>التركيب:</b> شبكة مصفوفية من النقاط (Pixels).<br />
-              • <b>عند التكبير:</b> تظهر متكسرة ومسننة وتسمى <b>التعرجات (Jaggies)</b>.<br />
-              • <b>نوع البرامج:</b> برامج التلوين (Paint programs).<br />
-              • <b>أشهر مثال:</b> Adobe Photoshop.<br />
-              • <b>أفضل استخدام:</b> الصور الواقعية والفوتوغرافية المعقدة.
+        {/* Raster Card (Right) */}
+        <Box x={660} y={120} w={560} h={565} c="red" fill="red" at={1}>
+          <div style={{ textAlign: 'right', padding: '14px 18px', height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            {/* Header Badge */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid rgba(239, 68, 68, 0.35)', paddingBottom: 6 }}>
+                <span style={{ fontSize: 22, fontWeight: 'bold', color: 'var(--pen-red)' }}>
+                  🖼️ التنسيق النقطي (Raster / Bitmap)
+                </span>
+                <span style={{ fontSize: 12, fontWeight: 'bold', background: '#dc2626', color: '#fff', padding: '2px 8px', borderRadius: 5 }}>
+                  Photoshop · برامج التلوين
+                </span>
+              </div>
+
+              {/* Visual Identity Graphic: Pixel Grid & Jaggies */}
+              <div style={{ background: '#090d16', border: '1.5px solid rgba(239, 68, 68, 0.45)', borderRadius: 10, padding: '10px 12px', marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                {/* Visual SVG showing Jaggies */}
+                <div style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: 8, padding: 4, width: 130, height: 95, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                  {/* Stepped Pixels (Jaggies Staircase) */}
+                  <svg width="110" height="80" viewBox="0 0 110 80">
+                    {/* Grid lines */}
+                    <defs>
+                      <pattern id="rasterGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
+                      </pattern>
+                    </defs>
+                    <rect width="110" height="80" fill="url(#rasterGrid)" />
+                    {/* Stepped pixel blocks */}
+                    <rect x="10" y="50" width="20" height="20" fill="#38bdf8" stroke="#ef4444" strokeWidth="1" />
+                    <rect x="30" y="40" width="20" height="20" fill="#38bdf8" stroke="#ef4444" strokeWidth="1" />
+                    <rect x="50" y="30" width="20" height="20" fill="#38bdf8" stroke="#ef4444" strokeWidth="1" />
+                    <rect x="70" y="20" width="20" height="20" fill="#38bdf8" stroke="#ef4444" strokeWidth="1" />
+                    <rect x="90" y="10" width="20" height="20" fill="#38bdf8" stroke="#ef4444" strokeWidth="1" />
+                    {/* Red jagged outline */}
+                    <path d="M 10 70 L 10 50 L 30 50 L 30 40 L 50 40 L 50 30 L 70 30 L 70 20 L 90 20 L 90 10 L 110 10" fill="none" stroke="#f87171" strokeWidth="2.5" />
+                  </svg>
+                  <span style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, color: '#f87171', fontWeight: 'bold' }}>
+                    تكبير 8x (السلالم)
+                  </span>
+                </div>
+
+                <div style={{ flex: 1, fontSize: 13, color: '#fecaca', lineHeight: 1.5 }}>
+                  <b style={{ color: '#f87171' }}>⚠️ ظاهرة التعرجات (Jaggies):</b><br />
+                  عند تكبير الصورة، تظهر الحواف متكسّرة ومسننة في هيئة درجات سلالم مربعة؛ لأنها مكونة من شبكة بكسلات ثابتة!
+                </div>
+              </div>
+
+              {/* Core Textbook Specs */}
+              <div style={{ fontSize: 15.5, color: 'var(--pen-ink)', marginTop: 10, lineHeight: 1.6 }}>
+                • <b>أساس التكوين:</b> شبكة مصفوفية من النقاط الملونة (Pixels).<br />
+                • <b>أثر التكبير:</b> <b>تفقد حدتها ونقاءها</b> وتظهر بكسلات مشوشة ومسننة.<br />
+                • <b>نوع البرامج:</b> برامج التلوين (Paint) مثل <b>Photoshop</b>.<br />
+                • <b>الاستخدام الأمثل:</b> الصور الفوتوغرافية والواقعية وتدرجات الألوان الطبيعية.<br />
+                • <b>أشهر الصيغ:</b> <span style={{ fontFamily: 'monospace', color: '#dc2626', fontWeight: 'bold' }}>PNG, JPG, BMP, GIF, WebP</span>
+              </div>
+            </div>
+
+            {/* Bottom Summary Pill */}
+            <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid #ef4444', borderRadius: 8, padding: '6px 12px', fontSize: 13, color: '#fecaca', textAlign: 'center', fontWeight: 'bold' }}>
+              🎯 الهوية: «مربعات بكسل متراصة — تبكسل وتتشوه عند التكبير!»
             </div>
           </div>
         </Box>
 
-        {/* Vector Card */}
-        <Box x={60} y={150} w={560} h={390} c="green" fill="green" at={2}>
-          <div style={{ textAlign: 'right', padding: '12px 20px', lineHeight: 1.5 }}>
-            <span style={{ fontSize: 30, fontWeight: 'bold', color: 'var(--pen-green)' }}>
-              📐 تنسيق المتجهات (Vector format):
-            </span>
-            <br />
-            <div style={{ fontSize: 21, color: 'var(--pen-ink)', marginTop: 8, lineHeight: 1.5 }}>
-              • <b>التركيب:</b> معادلات رياضية، إحداثيات نقاط، خطوط وزوايا.<br />
-              • <b>عند التكبير:</b> <b>لا تفقد جودتها أبداً</b> وخالية من التعرجات تماماً.<br />
-              • <b>نوع البرامج:</b> برامج الرسم (Draw programs).<br />
-              • <b>أشهر مثال:</b> Adobe Illustrator.<br />
-              • <b>أفضل استخدام:</b> الشعارات (Logos)، والخطوط، والرسوم البيانية.
+        {/* Vector Card (Left) */}
+        <Box x={60} y={120} w={560} h={565} c="green" fill="green" at={2}>
+          <div style={{ textAlign: 'right', padding: '14px 18px', height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            {/* Header Badge */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid rgba(34, 197, 94, 0.35)', paddingBottom: 6 }}>
+                <span style={{ fontSize: 22, fontWeight: 'bold', color: 'var(--pen-green)' }}>
+                  📐 تنسيق المتجهات (Vector Format)
+                </span>
+                <span style={{ fontSize: 12, fontWeight: 'bold', background: '#16a34a', color: '#fff', padding: '2px 8px', borderRadius: 5 }}>
+                  Illustrator · برامج الرسم
+                </span>
+              </div>
+
+              {/* Visual Identity Graphic: Smooth Math Path & Bézier Anchor Points */}
+              <div style={{ background: '#090d16', border: '1.5px solid rgba(34, 197, 94, 0.45)', borderRadius: 10, padding: '10px 12px', marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                {/* Visual SVG showing Smooth Bézier Curve */}
+                <div style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: 8, padding: 4, width: 130, height: 95, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                  <svg width="110" height="80" viewBox="0 0 110 80">
+                    {/* Background coordinate lines */}
+                    <line x1="5" y1="75" x2="105" y2="75" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
+                    <line x1="5" y1="5" x2="5" y2="75" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
+                    {/* Smooth curve */}
+                    <path d="M 10 70 Q 55 10, 100 20" fill="none" stroke="#4ade80" strokeWidth="3" />
+                    {/* Anchor point 1 */}
+                    <rect x="7" y="67" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                    {/* Tangent handle */}
+                    <line x1="10" y1="70" x2="40" y2="30" stroke="#facc15" strokeWidth="1" strokeDasharray="2,2" />
+                    <circle cx="40" cy="30" r="3" fill="#facc15" />
+                    {/* Anchor point 2 */}
+                    <rect x="97" y="17" width="6" height="6" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
+                  </svg>
+                  <span style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, color: '#4ade80', fontWeight: 'bold' }}>
+                    معادلة رياضية (حادة)
+                  </span>
+                </div>
+
+                <div style={{ flex: 1, fontSize: 13, color: '#dcfce7', lineHeight: 1.5 }}>
+                  <b style={{ color: '#4ade80' }}>✨ نقاء تام 100% دون أي تعرج:</b><br />
+                  الحاسوب يعيد حساب المعادلات الهندسية فوراً عند كل تكبير؛ فتظل المنحنيات فائقة النعومة والحِدة مهما كبرت!
+                </div>
+              </div>
+
+              {/* Core Textbook Specs */}
+              <div style={{ fontSize: 15.5, color: 'var(--pen-ink)', marginTop: 10, lineHeight: 1.6 }}>
+                • <b>أساس التكوين:</b> معادلات رياضية (إحداثيات نقاط، خطوط، زوايا، ومنحنيات).<br />
+                • <b>أثر التكبير:</b> <b>لا تفقد جودتها إطلاقاً</b> وخالية تماماً من أي تعرجات.<br />
+                • <b>نوع البرامج:</b> برامج الرسم (Draw) مثل <b>Illustrator</b>.<br />
+                • <b>الاستخدام الأمثل:</b> الشعارات (Logos)، الخطوط (Fonts)، والأيقونات والرموز.<br />
+                • <b>أشهر الصيغ:</b> <span style={{ fontFamily: 'monospace', color: '#16a34a', fontWeight: 'bold' }}>SVG, AI, EPS, PDF</span>
+              </div>
+            </div>
+
+            {/* Bottom Summary Pill */}
+            <div style={{ background: 'rgba(34, 197, 94, 0.15)', border: '1px solid #22c55e', borderRadius: 8, padding: '6px 12px', fontSize: 13, color: '#bbf7d0', textAlign: 'center', fontWeight: 'bold' }}>
+              🎯 الهوية: «منحنيات رياضية نقية — تحتفظ بكامل جودتها في أي حجم!»
             </div>
           </div>
         </Box>
