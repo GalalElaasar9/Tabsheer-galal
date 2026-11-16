@@ -1,17 +1,14 @@
 // Unit 4 · Lesson 3 — Website Evaluation Methods
 import type { FrameDef, LessonDef } from '../../board/types';
 import { Eyebrow, Title } from '../../kit/blocks';
-import { OrderActivity, QuestionList, RevealCard, ScoredQuiz } from '../../kit/questions';
-import { APPLIED, CHECKS, DIFF, ORDERS, QUIZ } from './data';
+import { QuestionList } from '../../kit/questions';
+import { CHECKS } from './data';
 import {
   AbTestingSimulatorDemo,
-  HeuristicAuditLabDemo,
-  TextbookGlossaryU4L3,
   UsabilityTestingInterviewLab,
 } from './demos';
 import { intro, part1 } from './scenes1';
 import { part2 } from './scenes2';
-import { part3 } from './scenes3';
 import { SCRIPT, TAG } from './script';
 import { Tag } from '../../sketch/Sketch';
 
@@ -29,20 +26,6 @@ const check = (id: string, title: string, items: typeof CHECKS[string], h?: numb
   ),
 });
 
-const order = (id: string, title: string, o: { steps: string[]; done: string }, h?: number): FrameDef => ({
-  id,
-  title: `✋ ${title}`,
-  h,
-  notes: <p>دع طالباً يرتّب الخطوات بالضغط عليها. الخطوة غير المتطابقة تهتز لتصحيح المسار.</p>,
-  render: () => (
-    <>
-      <Eyebrow>✋ تأكد من فهمك</Eyebrow>
-      <Title>{title}</Title>
-      <div className="mt-4"><OrderActivity {...o} /></div>
-    </>
-  ),
-});
-
 const lesson: LessonDef = {
   id: 'u4l3',
   title: 'أساليب تقييم المواقع الإلكترونية',
@@ -53,13 +36,16 @@ const lesson: LessonDef = {
       frames: [...intro],
     },
     {
-      title: '١ · فكرة التقييم، دراسة النشاط الرياضي، واختبارات الاستخدام',
+      title: '١ · فكرة التقييم، التقييم النوعي، والتقييم الكمي والمقارنة الشاملة',
       frames: [
-        part1[0], // bridge-and-eval (Slide 3: دراسة حالة النشاط الرياضي والحاجة للأدلة)
-        part1[1], // sports-case-numbers-and-synthesis (Slide 4: أرقام الحالة وتكامل الأدلة الثلاثة)
-        part1[2], // qual-quant-master-divide (Slide 5: الدائرتان البصريتان والتعريفات والامتداد)
-        part1[3], // usability-testing-method (Slide 6: اختبار قابلية الاستخدام وسيناريو الطالب أحمد)
-        part1[4], // interviews-method (Slide 7: المقابلات الشخصية والأسئلة الخمسة)
+        part1[0], // school-website-case (Slide 3: فكرة الدرس وموقف عملي لموقع المدرسة)
+        part1[1], // qualitative-eval-concept (Slide 4: تعريف الكتاب أولاً ثم الشرح والمثال العملي)
+        part1[2], // usability-testing-method (Slide 5: طرق التقييم النوعي (1): اختبار قابلية الاستخدام)
+        part1[3], // interviews-method (Slide 6: طرق التقييم النوعي (2): أسلوب المقابلات الشخصية)
+        part1[4], // quantitative-eval-concept (Slide 7: التقييم الكمي ومثال موقع المدرسة بالأرقام)
+        part1[5], // web-analytics-method (Slide 8: تحليلات الويب ومؤشراتها ومثال المتجر)
+        part1[6], // ab-testing-method (Slide 9: اختبار A/B ومخطط التقسيم وتجربة زري الشراء)
+        part1[7], // qual-vs-quant-comparison (Slide 10: المقارنة الشاملة وتطبيقات التقييم خارج المواقع)
         {
           id: 'demo-usability-interview',
           title: '🧪 معمل: محاكي اختبار قابلية الاستخدام ومقابلة الطالب (Usability & Interview Lab)',
@@ -85,7 +71,18 @@ const lesson: LessonDef = {
     {
       title: '٢ · طرق التقييم الكمي: تحليلات الويب واختبارات A/B',
       frames: [
-        part2[0], // analytics-and-heatmaps (تحليلات الويب والمؤشرات الثلاثة: PV والارتداد والتحويل)
+        part2[0], // analytics-concept (Slide 13: مفهوم تحليلات الويب وثلاثية الوصول والتفاعل والنتائج ومثال المتجر)
+        part2[1], // metric-pv (Slide 14: مؤشر مشاهدات الصفحة PV واختصار Page Views والفرق الجوهري)
+        part2[2], // metric-bounce-rate-concept (Slide 15: أولاً: مفهوم معدل الارتداد ومثال الموقع التعليمي)
+        part2[3], // metric-bounce-rate-tools (Slide 16: ثانيًا: اختلاف طريقة الحساب بين الأدوات ومعايير GA4)
+        part2[4], // metric-bounce-rate-causes (Slide 17: ثالثًا: رصد ضعف التفاعل والتمييز بين 404 ووجد ما يبحث عنه)
+        part2[5], // metric-bounce-rate-interpretation (Slide 18: رابعًا: جدول المؤشرات الأربعة ومثال المتجر الشامل)
+        part2[6], // metric-bounce-rate-summary (Slide 19: خامسًا: اختصار الفكرة وشجرة القرار المنهجية)
+        part2[7], // metric-cvr-concept (Slide 20: أولاً: مفهوم CVR وأمثلة الأهداف)
+        part2[8], // metric-cvr-meaning (Slide 21: ثانيًا: معنى كلمة تحويل ونوعا الزوار والتنبيه على إتمام التسجيل)
+        part2[9], // metric-cvr-math (Slide 22: ثالثًا: شرح مثال الكتاب الحسابي والتصور البصري للشريط)
+        part2[10], // metric-cvr-users-vs-sessions (Slide 23: الفرق الجوهري بين إجمالي المستخدمين وإجمالي الجلسات)
+        part2[11], // metric-cvr-denominator (Slide 24: رابعًا: تحديد المقام وطريقة الحساب ومقارنة المستخدمين مقابل الجلسات)
         {
           id: 'ab-testing-simulator',
           title: '🧪 محاكي اختبارات A/B: قياس معدل التحويل والارتداد',
@@ -107,89 +104,13 @@ const lesson: LessonDef = {
       ],
     },
     {
-      title: '٣ · التقييم الإرشادي (مراجعة الخبراء) ومؤشرات Core Web Vitals',
+      title: '٣ · التقييم الإرشادي (مراجعة الخبراء)',
       frames: [
-        part2[1], // heuristics-nielsen (التقييم الإرشادي والقواعد الثلاث)
-        {
-          id: 'heuristic-audit-lab',
-          title: '🧪 مدقق مبادئ نيلسن: تقييم تفاعلي لقابلية الاستخدام',
-          h: 860,
-          notes: (
-            <>
-              <p><b>مدقق مبادئ نيلسن:</b> راجع معايير الاتساق، ومنع الأخطاء، ووضوح حالة النظام ولاحظ مؤشر قابلية الاستخدام المحسوب.</p>
-            </>
-          ),
-          render: () => (
-            <>
-              <Eyebrow>🧪 تجربة تقييم عملية</Eyebrow>
-              <Title>مدقق مبادئ نيلسن العشرة لقابلية الاستخدام (Heuristics Checklist)</Title>
-              <HeuristicAuditLabDemo />
-            </>
-          ),
-        },
-        check('check-heuristics', 'تأكد من فهمك لمبادئ التقييم الإرشادي وقواعده الثلاث', CHECKS.heuristics),
-        part3[0], // core-web-vitals
-        order('order-eval-flow', 'رتّب خطوات عملية تقييم الموقع الإلكتروني', ORDERS.evaluationFlow),
-      ],
-    },
-    {
-      title: '٤ · المعجم الوزاري والتقييم النهائي',
-      frames: [
-        {
-          id: 'textbook-definitions',
-          title: '📖 معجم مصطلحات كتاب الوزارة لتقييم المواقع',
-          h: 840,
-          notes: (
-            <>
-              <p><b>معجم المصطلحات المعتمدة:</b> التعريفات الرسمية المقررة في المنهج لدرس أساليب تقييم المواقع الإلكترونية.</p>
-            </>
-          ),
-          render: () => (
-            <>
-              <Eyebrow>📖 كتاب المدرسة المعتمد</Eyebrow>
-              <Title>معجم مصطلحات ومفاهيم تقييم المواقع الإلكترونية في البكالوريا</Title>
-              <TextbookGlossaryU4L3 />
-            </>
-          ),
-        },
-        part3[1], // concept-map-u4l3
-        {
-          id: 'quiz',
-          title: 'اختيار من متعدد',
-          h: 1400,
-          render: () => (
-            <>
-              <Eyebrow>📝 التقييم · ١</Eyebrow>
-              <ScoredQuiz title="بنك أسئلة امتحانات البكالوريا: اختر الإجابة الصحيحة" items={QUIZ} />
-            </>
-          ),
-        },
-        {
-          id: 'diff',
-          title: 'فرّق بين المفاهيم المتقاربة',
-          h: 1150,
-          render: () => (
-            <>
-              <Eyebrow>📝 التقييم · ٢</Eyebrow>
-              <ScoredQuiz title="فرّق بين المصطلحات الأساسية للامتحان" items={DIFF} />
-            </>
-          ),
-        },
-        {
-          id: 'applied',
-          title: 'أسئلة تطبيقية من الحياة',
-          h: 960,
-          render: () => (
-            <>
-              <Eyebrow>📝 التقييم · ٣</Eyebrow>
-              <Title>فكّر وجاوب، ثم اكشف الإجابة لتتأكد</Title>
-              <div className="grid grid-cols-2 gap-3 mt-4 items-start">
-                {APPLIED.map(([q, a]) => <RevealCard key={q} q={q} a={a} />)}
-              </div>
-            </>
-          ),
-        },
-        part3[2], // ending-u4l3
+        part2[12], // heuristic-concept-ui (Slide 27: التقييم الإرشادي: المفهوم وتفكيك واجهة المستخدم)
+        part2[13], // heuristic-qualitative-nature (Slide 28: التقييم الإرشادي: لماذا يعد نوعياً والتكامل مع اختبار الاستخدام)
+        part2[14], // heuristic-rule-consistency (Slide 29: التقييم الإرشادي: القاعدة 1 الاتساق وتوحيد التصميم)
+        part2[15], // heuristic-rule-error-prevention (Slide 30: التقييم الإرشادي: القاعدة 2 منع الأخطاء ونموذج إدخال العمر)
+        part2[16], // heuristic-rule-system-status (Slide 31: التقييم الإرشادي: القاعدة 3 وضوح حالة النظام وأمثلتها)
       ],
     },
   ],
@@ -210,4 +131,3 @@ export const u4l3: LessonDef = {
     }),
   })),
 };
-
