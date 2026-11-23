@@ -3,14 +3,14 @@ import type { FrameDef } from '../../board/types';
 import { Box, Doodle, Heading, Line, Num, Place, Scene, Txt, Underline } from '../../sketch/Sketch';
 
 const STOPS = [
-  'فلسفة التحسين التكراري',
+  'تمهيد وفكرة التحسين',
+  'الفكرة الأساسية للدرس',
   'دورة ديمنغ (PDCA)',
-  'تقنيات تسريع الأداء (Speed)',
-  'التحميل الكسول و WebP',
-  'التصغير والتخزين المؤقت',
-  'تحسين التحويل (CRO)',
-  'المراجعة الكبرى للترم الأول',
-  'بنك أسئلة البكالوريا',
+  'التفكير التصميمي',
+  'اختبار A/B',
+  'ترابط الأساليب الثلاثة',
+  'أهم مصطلحات الدرس',
+  'بنك الأسئلة والتقييم',
 ];
 
 const STOP_PTS: [number, number][] = [
@@ -23,8 +23,8 @@ export const intro: FrameDef[] = [
     id: 'cover', title: 'الغلاف', scene: true,
     notes: (
       <>
-        <p><b>أهلاً بكم في مسك ختام الوحدة الرابعة ومنهج الترم الأول: عملية التحسين التكراري للمواقع الإلكترونية.</b></p>
-        <p>مواقع الويب كائنات حية تتطور باستمرار. في هذا الدرس نتعلم كيف نطبق المنهجية الهندسية لتحسين سرعة وأداء وتجربة الموقع بشكل دائم بناءً على الأرقام واحتياجات المستخدمين.</p>
+        <p><b>أهلاً بكم في الدرس الرابع من الوحدة الرابعة: عملية التحسين التكراري للمواقع الإلكترونية.</b></p>
+        <p>مواقع الويب كائنات حية تتطور باستمرار. في هذا الدرس نتعلم كيف نطبق المنهجية الهندسية لتحسين الموقع وتجربة المستخدم بشكل دائم عبر دورة PDCA، التفكير التصميمي، واختبار A/B.</p>
       </>
     ),
     render: () => (
@@ -36,11 +36,11 @@ export const intro: FrameDef[] = [
         <Txt x={640} y={360} size={32} c="blue">Iterative Website Optimization Process</Txt>
 
         {[
+          ['💡', 'فكرة التحسين'],
           ['🔄', 'دورة PDCA'],
-          ['⚡', 'تسريع الأداء'],
-          ['📦', 'ضغط وتصغير'],
-          ['🎯', 'تحسين التحويل'],
-          ['🏆', 'حصاد الترم الأول'],
+          ['🧠', 'التفكير التصميمي'],
+          ['⚖️', 'اختبار A/B'],
+          ['📖', 'المعجم والتقييم'],
         ].map(([icon, label], i) => (
           <Doodle
             key={label}
@@ -62,20 +62,20 @@ export const intro: FrameDef[] = [
     id: 'journey', title: 'رحلة الدرس', scene: true,
     notes: (
       <>
-        <p><b>خريطة رحلتنا في التحسين التكراري:</b> ثماني محطات تنتهي بمراجعة ختامية كبرى لكامل منهج الترم الأول لمرحلة البكالوريا.</p>
+        <p><b>خريطة رحلتنا في التحسين التكراري:</b> ثماني محطات متكاملة تغطي تمهيد الدرس، الفكرة الأساسية، دورة PDCA، التفكير التصميمي، اختبار A/B، ترابط الأساليب الثلاثة، أهم المصطلحات، وبنك الأسئلة والتقييم الشامل.</p>
       </>
     ),
     render: () => (
       <Scene>
         <Heading>خريطة موضوعات التحسين التكراري</Heading>
-        <Box x={150} y={150} w={980} h={105} c="pink" fill="pink" size={30} tc="ink">
-          ❓ كيف نطور موقعنا باستمرار ليكون أسرع، أسهل، وأكثر جذباً للزوار؟
+        <Box x={150} y={150} w={980} h={105} c="pink" fill="pink" size={28} tc="ink">
+          ❓ كيف نطور موقعنا باستمرار ليكون أسهل وأفضل للزوار خطوة بخطوة؟
         </Box>
         <Line at={1} c="ink" sw={3} dashed pts={[...STOP_PTS.slice(0, 4), [150, 460], ...STOP_PTS.slice(4)]} />
         {STOP_PTS.map(([x, y], i) => (
           <span key={i} className="contents">
             <Num at={1} delay={i * 0.12} x={x} y={y} n={i + 1} c="purple" />
-            <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={20}>{STOPS[i]}</Txt>
+            <Txt at={1} delay={i * 0.12} x={x} y={y + 55} size={19}>{STOPS[i]}</Txt>
           </span>
         ))}
       </Scene>
@@ -208,15 +208,19 @@ export const part1: FrameDef[] = [
     ),
     render: () => (
       <Scene>
-        <Heading>ثانياً · الفكرة الأساسية: حلقات التحسين والأساليب الثلاثة 🔄</Heading>
+        <Heading sub="المواقع لا تُبنى مثالية من أول مرة.. بل تتطور عبر حلقات مستمرة من التجربة والتحسين">
+          ثانياً · الفكرة الأساسية للدرس 🔄
+        </Heading>
 
         {/* Top Principle Box */}
-        <Box x={120} y={110} w={1040} h={70} c="purple" fill="purple" size={25} tc="ink">
-          💡 المنهج يوضح: المواقع الإلكترونية لا تُبنى مثالية من أول مرة، ولكن يتم تحسينها من خلال حلقات متكررة.
+        <Box x={60} y={105} w={1160} h={65} c="purple" fill="purple" size={20} tc="ink">
+          <span className="font-bold whitespace-nowrap">
+            💡 المنهج يوضح: المواقع الإلكترونية لا تُبنى مثالية من أول مرة، ولكن يتم تحسينها من خلال حلقات متكررة.
+          </span>
         </Box>
 
         {/* Observation Loop (يعني إيه الكلام ده؟) */}
-        <Place x={120} y={190} w={1040} h={175} at={1}>
+        <Place x={60} y={180} w={1160} h={175} at={1}>
           <div className="p-4 rounded-2xl border-2 border-[var(--pen-blue)] bg-[var(--surface-2)] flex flex-col justify-between shadow-sm text-right font-sans h-full" dir="rtl">
             <div className="flex items-center justify-between border-b border-[var(--border)] pb-2">
               <span className="font-black text-sm text-[var(--pen-blue)]">
@@ -249,7 +253,7 @@ export const part1: FrameDef[] = [
         </Place>
 
         {/* The 3 Core Methods (الأساليب الثلاثة المترابطة) */}
-        <Place x={120} y={375} w={1040} h={235} at={2}>
+        <Place x={60} y={368} w={1160} h={240} at={2}>
           <div className="flex flex-col gap-2.5 text-right font-sans h-full" dir="rtl">
             <span className="font-black text-sm text-[var(--primary)]">
               📌 المنهج بيحدد ٣ أساليب مترابطة بتساعدنا على تحسين المواقع الإلكترونية:
@@ -311,7 +315,7 @@ export const part1: FrameDef[] = [
         </Place>
 
         {/* Footer Transition */}
-        <Place x={120} y={620} w={1040} h={65} at={3}>
+        <Place x={60} y={620} w={1160} h={65} at={3}>
           <div className="p-3 rounded-xl bg-[var(--safe-soft)] border border-[var(--safe)]/40 flex items-center justify-between text-xs font-bold text-[var(--text)] shadow-sm" dir="rtl">
             <span className="flex items-center gap-2">
               <span className="text-lg">🎯</span>
@@ -479,38 +483,47 @@ export const part1: FrameDef[] = [
     scene: true,
     notes: (
       <>
-        <p><b>الخطوة الأولى: خطط (Plan):</b></p>
-        <p><b>المقصود بها:</b> نحدد المشكلة ونضع خطة للتحسين.</p>
-        <p>يعني قبل ما نبدأ نغير في الموقع، لازم نفهم المشكلة الأول ونحدد إحنا عايزين نوصل لإيه.</p>
-        <p><b>مثال:</b> صاحب الموقع لاحظ أن نسبة كبيرة من العملاء تغادر عند صفحة إتمام الشراء. فقرر: يحدد المشكلة (عملية الشراء معقدة)، يحدد الهدف (زيادة نسبة العملاء الذين يكملون الشراء)، ويضع خطة (تقليل عدد خطوات إتمام الطلب وتسهيل إدخال البيانات).</p>
+        <p><b>الخطوة الأولى: خطط (Plan) - كتاب المدرسة:</b></p>
+        <ul>
+          <li><b>الخطوة:</b> 1 · خطط (Plan)</li>
+          <li><b>المهمة:</b> حدّد الأهداف وضع خطة للتحسين.</li>
+          <li><b>التطبيق والمثال:</b> حدد هدفًا واضحًا، مثال: رفع نسبة إكمال نموذج التسجيل من 40% إلى 50% وخطط لتغيير مناسب.</li>
+        </ul>
+        <p><b>المقصود بها:</b> نحدد المشكلة ونضع خطة للتحسين قبل البدء في أي كود أو تصميم جديد.</p>
+        <p><b>مثال عملي:</b> صاحب الموقع لاحظ أن نسبة كبيرة من المستخدمين تغادر عند صفحة إتمام الشراء. فقرر: يحدد المشكلة (عملية الشراء معقدة)، يحدد الهدف (زيادة نسبة المستخدمين الذين يكملون الشراء)، ويضع خطة (تقليل عدد خطوات إتمام الطلب وتسهيل إدخال البيانات).</p>
         <p><b>خد بالك من نقطة مهمة:</b> في مرحلة التخطيط نحن لم ننفذ التغيير بعد، نحن نحدد المشكلة والهدف والخطة التي سنعمل عليها.</p>
       </>
     ),
     render: () => (
       <Scene>
-        <Heading sub="نحدد المشكلة ونضع خطة للتحسين قبل كتابة أو تعديل أي سطر برمجي">
+        <Heading sub="حدّد الأهداف وضع خطة للتحسين قبل كتابة أو تعديل أي سطر برمجي">
           الخطوة الأولى: خطط (Plan) 📝
         </Heading>
 
-        {/* Top Concept Card */}
+        {/* Top Concept Card: Official Textbook Row */}
         <Place x={60} y={115} w={1160} h={95} at={1}>
-          <div className="p-3.5 rounded-2xl bg-[var(--surface-2)] border border-[var(--pen-blue)]/40 flex items-center justify-between shadow-sm text-right font-sans" dir="rtl">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)] flex items-center justify-center font-mono font-black text-xl text-[var(--primary)]">
-                P
-              </div>
-              <div>
-                <span className="font-extrabold text-sm text-[var(--pen-blue)] block">المقصود بها:</span>
-                <p className="text-xs text-[var(--text)] m-0 font-bold leading-relaxed">
-                  نحدد المشكلة ونضع خطة للتحسين.
-                </p>
-                <p className="text-[11px] text-[var(--muted)] m-0 font-medium">
-                  يعني قبل ما نبدأ نغير في الموقع، لازم نفهم المشكلة الأول ونحدد إحنا عايزين نوصل لإيه.
-                </p>
-              </div>
+          <div className="p-3 rounded-2xl bg-[var(--surface-2)] border-2 border-[var(--primary)] flex items-center gap-3 shadow-md text-right font-sans" dir="rtl">
+            {/* Column 1: Step */}
+            <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[var(--surface-1)] border border-[var(--border)] whitespace-nowrap">
+              <span className="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center">1</span>
+              <span className="font-black text-sm text-[var(--primary)]">خطط (Plan)</span>
             </div>
-            <div className="px-3 py-1.5 rounded-xl bg-[var(--board-bg)] border border-[var(--border)] text-xs text-[var(--muted)] font-mono whitespace-nowrap">
-              Analyze ➔ Goal ➔ Strategy
+
+            {/* Column 2: Definition */}
+            <div className="px-3.5 py-2 rounded-xl bg-[var(--surface-1)] border border-[var(--border)] whitespace-nowrap">
+              <span className="text-[10px] text-[var(--muted)] font-black block">المهمة الأساسية:</span>
+              <span className="font-extrabold text-xs text-[var(--pen-blue)]">حدّد الأهداف وضع خطة للتحسين</span>
+            </div>
+
+            {/* Column 3: Textbook Example */}
+            <div className="flex-1 px-3.5 py-2 rounded-xl bg-[var(--safe-soft)] border border-[var(--safe)]/40 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-[var(--safe)] font-black block">نص كتاب الوزارة:</span>
+                <span className="text-xs text-[var(--text)] font-bold">
+                  حدد هدفًا واضحًا، مثال: رفع نسبة إكمال نموذج التسجيل من 40% إلى 50% وخطط لتغيير مناسب
+                </span>
+              </div>
+              <span className="px-2 py-0.5 rounded bg-[var(--safe)] text-white text-[10px] font-black mr-2 whitespace-nowrap">كتاب المدرسة 📖</span>
             </div>
           </div>
         </Place>
@@ -522,13 +535,13 @@ export const part1: FrameDef[] = [
               <div className="flex items-center justify-between border-b border-[var(--border)] pb-2 mb-3">
                 <span className="font-extrabold text-sm text-[var(--text)] flex items-center gap-2">
                   <span>🛒</span>
-                  <span>مثال عملي: متجر السلة المهجورة</span>
+                  <span>مثال عملي: متجر السلة ونموذج التسجيل</span>
                 </span>
-                <span className="text-[11px] text-[var(--pen-blue)] font-bold">قرارات صاحب الموقع</span>
+                <span className="text-[11px] text-[var(--pen-blue)] font-bold">تطبيق خطوة التخطيط</span>
               </div>
 
               <div className="p-2.5 rounded-xl bg-[var(--board-bg)] border border-[var(--border)] text-xs text-[var(--muted)] mb-3 leading-relaxed">
-                صاحب الموقع لاحظ إن <span className="text-[var(--danger)] font-bold">نسبة كبيرة من العملاء بتسيب الموقع عند صفحة إتمام الشراء</span>.. فقرر:
+                صاحب الموقع لاحظ إن <span className="text-[var(--danger)] font-bold">نسبة كبيرة من المستخدمين بتسيب الموقع عند صفحة إتمام الشراء والتسجيل</span>.. فقرر:
               </div>
 
               {/* 3 Decisions */}
@@ -537,22 +550,22 @@ export const part1: FrameDef[] = [
                   <span className="text-sm font-black text-[var(--danger)]">١.</span>
                   <div>
                     <span className="font-black text-xs text-[var(--danger)] block">يحدد المشكلة:</span>
-                    <span className="text-xs text-[var(--text)] font-medium">عملية الشراء معقدة.</span>
+                    <span className="text-xs text-[var(--text)] font-medium">عملية الشراء أو التسجيل معقدة.</span>
                   </div>
                 </div>
 
                 <div className="p-2.5 rounded-xl bg-[var(--safe-soft)] border border-[var(--safe)]/30 flex items-start gap-2.5">
                   <span className="text-sm font-black text-[var(--safe)]">٢.</span>
                   <div>
-                    <span className="font-black text-xs text-[var(--safe)] block">يحدد الهدف:</span>
-                    <span className="text-xs text-[var(--text)] font-medium">زيادة نسبة العملاء اللي بيكملوا الشراء.</span>
+                    <span className="font-black text-xs text-[var(--safe)] block">يحدد هدفًا واضحًا (كتاب المدرسة):</span>
+                    <span className="text-xs text-[var(--text)] font-medium">رفع نسبة إكمال نموذج التسجيل من 40% إلى 50%.</span>
                   </div>
                 </div>
 
                 <div className="p-2.5 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/30 flex items-start gap-2.5">
                   <span className="text-sm font-black text-[var(--primary)]">٣.</span>
                   <div>
-                    <span className="font-black text-xs text-[var(--primary)] block">يضع خطة:</span>
+                    <span className="font-black text-xs text-[var(--primary)] block">يضع خطة لتغيير مناسب:</span>
                     <span className="text-xs text-[var(--text)] font-medium">تقليل عدد خطوات إتمام الطلب وتسهيل إدخال البيانات.</span>
                   </div>
                 </div>
@@ -560,7 +573,7 @@ export const part1: FrameDef[] = [
             </div>
 
             <div className="text-[11px] text-[var(--muted)] text-left font-mono">
-              Problem Identified ➔ Clear Target Set
+              Problem Identified ➔ Clear Target Set (40% ➔ 50%)
             </div>
           </div>
         </Place>

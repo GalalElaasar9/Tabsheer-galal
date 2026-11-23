@@ -3,14 +3,9 @@ import type { FrameDef, LessonDef } from '../../board/types';
 import { Eyebrow, Title } from '../../kit/blocks';
 import { OrderActivity, QuestionList, RevealCard, ScoredQuiz } from '../../kit/questions';
 import { APPLIED, CHECKS, DIFF, ORDERS, QUIZ } from './data';
-import {
-  IterativePdcaSimulatorDemo,
-  PerformanceOptimizationLabDemo,
-  TextbookGlossaryU4L4,
-} from './demos';
+import { IterativePdcaSimulatorDemo } from './demos';
 import { intro, part1 } from './scenes1';
-import { abTesting, designThinking, part2 } from './scenes2';
-import { part3 } from './scenes3';
+import { abTesting, designThinking } from './scenes2';
 import { SCRIPT, TAG } from './script';
 import { Tag } from '../../sketch/Sketch';
 
@@ -45,7 +40,7 @@ const order = (id: string, title: string, o: { steps: string[]; done: string }, 
 const lesson: LessonDef = {
   id: 'u4l4',
   title: 'عملية التحسين التكراري للمواقع الإلكترونية',
-  subtitle: 'فلسفة التحسين التكراري · دورة ديمنغ (PDCA) · تسريع الأداء · ضغط الوسائط · CRO · حصاد الترم الأول',
+  subtitle: 'فلسفة التحسين التكراري · دورة ديمنغ (PDCA) · التفكير التصميمي · اختبار A/B · بنك الأسئلة والتقييم الشامل',
   sections: [
     {
       title: 'المقدمة وخريطة الرحلة',
@@ -81,65 +76,20 @@ const lesson: LessonDef = {
       frames: [...designThinking],
     },
     {
-      title: '٣ · اختبار A/B (A/B Testing)',
+      title: '٣ · اختبار A/B وترابط الأساليب والمصطلحات',
       frames: [...abTesting],
     },
     {
-      title: '٤ · تسريع الأداء وتحسين معدل التحويل (CRO)',
+      title: '٤ · بنك الأسئلة والتقييم الشامل على الدرس',
       frames: [
-        part2[0], // performance-optimization-stack
-        {
-          id: 'performance-lab',
-          title: '🧪 معمل تسريع المواقع وضغط الأصول',
-          h: 900,
-          notes: (
-            <>
-              <p><b>معمل تسريع الأداء:</b> فعّل التحميل الكسول، صور WebP، وتصغير الأكواد والتخزين المؤقت، وشاهد انخفاض زمن التحميل ومؤشر الأداء الأخضر.</p>
-            </>
-          ),
-          render: () => (
-            <>
-              <Eyebrow>🧪 تجربة تطبيقية</Eyebrow>
-              <Title>معمل تحسين سرعة الموقع ومقاييس الأداء (Performance Lab)</Title>
-              <PerformanceOptimizationLabDemo />
-            </>
-          ),
-        },
-        part2[1], // cro-frictionless-ux
-        order('order-perf', 'رتّب خطوات عملية تسريع الموقع وتخفيف حمولته', ORDERS.perfWorkflow),
-        check('check-perf', 'تأكد من فهمك لتقنيات تسريع الأداء والتحسين التكراري', CHECKS.performanceTechniques),
-      ],
-    },
-    {
-      title: '٥ · حصاد المنهج والمعجم والتقييم الختامي',
-      frames: [
-        part3[0], // term-grand-summary
-        {
-          id: 'textbook-definitions',
-          title: '📖 معجم مصطلحات كتاب الوزارة للتحسين التكراري',
-          h: 860,
-          notes: (
-            <>
-              <p><b>معجم المصطلحات المعتمدة:</b> التعريفات الرسمية المقررة في المنهج لدرس عملية التحسين التكراري للمواقع الإلكترونية.</p>
-            </>
-          ),
-          render: () => (
-            <>
-              <Eyebrow>📖 كتاب المدرسة المعتمد</Eyebrow>
-              <Title>معجم مصطلحات ومفاهيم التحسين التكراري في البكالوريا</Title>
-              <TextbookGlossaryU4L4 />
-            </>
-          ),
-        },
-        part3[1], // concept-map-u4l4
         {
           id: 'quiz',
-          title: 'اختيار من متعدد',
+          title: 'اختيار من متعدد (Quiz)',
           h: 1400,
           render: () => (
             <>
               <Eyebrow>📝 التقييم · ١</Eyebrow>
-              <ScoredQuiz title="بنك أسئلة امتحانات البكالوريا: اختر الإجابة الصحيحة" items={QUIZ} />
+              <ScoredQuiz title="بنك أسئلة الدرس: اختر الإجابة الصحيحة (PDCA · التفكير التصميمي · اختبار A/B)" items={QUIZ} />
             </>
           ),
         },
@@ -150,25 +100,25 @@ const lesson: LessonDef = {
           render: () => (
             <>
               <Eyebrow>📝 التقييم · ٢</Eyebrow>
-              <ScoredQuiz title="فرّق بين المصطلحات الأساسية للامتحان" items={DIFF} />
+              <ScoredQuiz title="فرّق بين المصطلحات والمفاهيم الأساسية للدرس" items={DIFF} />
             </>
           ),
         },
+        order('order-dt', 'رتّب مراحل التفكير التصميمي الخمس بالترتيب الصحيح', ORDERS.designThinkingWorkflow),
         {
           id: 'applied',
-          title: 'أسئلة تطبيقية من الحياة',
-          h: 960,
+          title: 'أسئلة تطبيقية وسيناريوهات من الحياة',
+          h: 1050,
           render: () => (
             <>
-              <Eyebrow>📝 التقييم · ٣</Eyebrow>
-              <Title>فكّر وجاوب، ثم اكشف الإجابة لتتأكد</Title>
+              <Eyebrow>📝 التقييم · ٤</Eyebrow>
+              <Title>سيناريوهات عملية من واقع الويب: فكّر وجاوب، ثم اكشف الإجابة لتتأكد</Title>
               <div className="grid grid-cols-2 gap-3 mt-4 items-start">
                 {APPLIED.map(([q, a]) => <RevealCard key={q} q={q} a={a} />)}
               </div>
             </>
           ),
         },
-        part3[2], // ending-u4l4
       ],
     },
   ],
@@ -189,4 +139,3 @@ export const u4l4: LessonDef = {
     }),
   })),
 };
-
