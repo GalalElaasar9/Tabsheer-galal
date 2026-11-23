@@ -40,6 +40,7 @@ import { reviewLesson1Points, reviewLesson2Points } from './scenes3';
 
 // Review cover
 import { intro as rev_intro } from './scenes1';
+import { explorerFrame as qaExplorerFrame } from '../u3qa/scenes1';
 
 /** Helper to ensure all frame IDs remain 100% unique without collisions across lessons */
 const wrap = (p: string, f: FrameDef): FrameDef => {
@@ -346,6 +347,14 @@ export const u3rev: LessonDef = {
           ),
         },
       ],
+    },
+
+    /* =========================================================================
+       Section 5: بنك الأسئلة المقالية النموذجية الكاملة (سؤال وجواب)
+       ========================================================================= */
+    {
+      title: '٥ · بنك الأسئلة المقالية النموذجية (سؤال وجواب)',
+      frames: [qaExplorerFrame],
     },
   ],
 };

@@ -30,10 +30,10 @@ export const CURRICULUM_G1: UnitEntry[] = [
     ],
   },
   {
-    unit: 'الوحدة الرابعة', title: 'الكمبيوترات والبرمجيات ونظم التشغيل',
+    unit: 'الوحدة الرابعة', title: 'تكنولوجيا المعلومات والمجتمع',
     lessons: [
-      { n: 1, title: 'بنية الكمبيوتر والمكونات الخمسة الرئيسية' },
-      { n: 2, title: 'أنظمة التشغيل والبرمجيات' },
+      { n: 1, title: 'التقدم في تكنولوجيا المعلومات والمجتمع المستقبلي' },
+      { n: 2, title: 'التغيرات في الحياة التي تسببها تكنولوجيا المعلومات' },
     ],
   },
   {
@@ -55,6 +55,14 @@ export const CURRICULUM_G1: UnitEntry[] = [
       { n: 7, title: 'رقمنة الصور', en: 'Image Digitization', icon: '🖼️', board: 'u6l7', badge: 'جديد' },
       { n: 8, title: 'التمثيل الرقمي وضغط الفيديو', en: 'Video Digitization & Compression', icon: '🎬' },
       { n: 9, title: 'تصميم البيانات والمعلومات', en: 'Information & Data Design', icon: '📊', board: 'u6l9', badge: 'جديد' },
+    ],
+  },
+  {
+    unit: 'الوحدة السابعة', title: 'الكمبيوترات (Computers)',
+    lessons: [
+      { n: 1, title: 'بنية الكمبيوتر والمكونات الخمسة الرئيسية', en: 'Computer Architecture & The 5 Main Components', icon: '💻', board: 'u7l1', badge: 'جديد' },
+      { n: 2, title: 'برامج الكمبيوتر (العتاد والبرمجيات)', en: 'Computer Software & Hardware', icon: '💿', board: 'u7l2', badge: 'جديد' },
+      { n: 3, title: 'الدوائر المنطقية وبوابات الجمع', en: 'Logic Circuits & Adders', icon: '⚡' },
     ],
   },
 ];
@@ -82,6 +90,7 @@ export const CURRICULUM_G2: UnitEntry[] = [
       { n: 2, title: 'طرق الاتصال في تطبيقات الويب', en: 'Communication Methods in Web Applications', icon: '📡', board: 'u3l2' },
       { n: 3, title: 'أساسيات تكنولوجيا الواجهة الأمامية', en: 'Front-end Technology Fundamentals', icon: '💻', board: 'u3l3' },
       { n: 4, title: 'مراجعة شاملة وماراثون الامتحانات (الوحدة الثالثة)', en: 'Unit 3 Master Review & Mega Quiz', icon: '🏆', board: 'u3rev', badge: 'مراجعة شاملة' },
+      { n: 5, title: 'بنك الأسئلة المقالية (سؤال وجواب تفاعلي)', en: 'Unit 3 Essay Q&A Bank', icon: '✍️', board: 'u3qa', badge: 'سؤال وجواب' },
     ],
   },
   {
@@ -104,14 +113,14 @@ export const GRADES = [
     id: 'g2' as const,
     title: 'الصف الثاني الثانوي (بكالوريا)',
     sub: 'البرمجة والذكاء الاصطناعي · الترم الأول 2026 / 2027',
-    badge: '٨ دروس متاحة',
+    badge: '٩ دروس متاحة',
     curriculum: CURRICULUM_G2,
   },
   {
     id: 'g1' as const,
     title: 'الصف الأول الثانوي',
     sub: 'البرمجة والذكاء الاصطناعي · الترم الأول 2026 / 2027',
-    badge: 'درسان متاحان',
+    badge: '٥ دروس متاحة',
     curriculum: CURRICULUM_G1,
   },
 ];

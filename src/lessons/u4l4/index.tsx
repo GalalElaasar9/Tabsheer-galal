@@ -9,7 +9,7 @@ import {
   TextbookGlossaryU4L4,
 } from './demos';
 import { intro, part1 } from './scenes1';
-import { part2 } from './scenes2';
+import { abTesting, designThinking, part2 } from './scenes2';
 import { part3 } from './scenes3';
 import { SCRIPT, TAG } from './script';
 import { Tag } from '../../sketch/Sketch';
@@ -54,8 +54,7 @@ const lesson: LessonDef = {
     {
       title: '١ · فلسفة التحسين التكراري ودورة ديمنغ (PDCA)',
       frames: [
-        part1[0], // iterative-philosophy
-        part1[1], // pdca-cycle-scene
+        ...part1,
         {
           id: 'iterative-pdca-sim',
           title: '🧪 محاكي دورة التحسين التكراري (PDCA)',
@@ -78,7 +77,15 @@ const lesson: LessonDef = {
       ],
     },
     {
-      title: '٢ · تسريع الأداء وتحسين معدل التحويل (CRO)',
+      title: '٢ · التفكير التصميمي (Design Thinking)',
+      frames: [...designThinking],
+    },
+    {
+      title: '٣ · اختبار A/B (A/B Testing)',
+      frames: [...abTesting],
+    },
+    {
+      title: '٤ · تسريع الأداء وتحسين معدل التحويل (CRO)',
       frames: [
         part2[0], // performance-optimization-stack
         {
@@ -104,7 +111,7 @@ const lesson: LessonDef = {
       ],
     },
     {
-      title: '٣ · حصاد المنهج والمعجم والتقييم الختامي',
+      title: '٥ · حصاد المنهج والمعجم والتقييم الختامي',
       frames: [
         part3[0], // term-grand-summary
         {
